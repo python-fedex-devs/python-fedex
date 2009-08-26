@@ -1,22 +1,64 @@
+"""
+The L{base_service} module contains classes that form the low level foundations
+of the Web Service API. Things that many different kinds of requests have in
+common may be found here.
+
+In particular, the L{FedexBaseService} class handles most of the basic,
+repetetive setup work that most requests do.
+"""
 import os
 import logging
 from suds.client import Client
 
 class FedexBaseService(object):
+    """
+    This class is the master class for all Fedex request objects. It gets all
+    of the common SOAP objects created via suds and populates them with
+    values from a L{FedexConfig} object, along with keyword arguments
+    via L{__init__}.
+    
+    @note: This object should never be used directly, use one of the included
+        sub-classes.
+    """
     def __init__(self, config_obj, wsdl_name, *args, **kwargs):
+        """
+        This constructor should only be called by children of the class. As is
+        such, only the optional keyword arguments caught by C{**kwargs} will
+        be documented.
+        
+        @type customer_transaction_id: L{str}
+        @keyword customer_transaction_id: A user-specified identifier to
+            differentiate this transaction from others. This value will be
+            returned with the response from Fedex.
+        @type carrier_code: L{str}
+        @keyword carrier_code: The carrier code to use for this query. In most
+            cases, this will be FDXE (Fedex Express). Must be one of the
+            following four-letter codes:
+                - FDXC (Fedex Cargo)
+                - FDXE (Fedex Express)
+                - FDXG (Fedex Ground)
+                - FXCC (Fedex Custom Critical)
+                - FXFR (Fedex Freight)
+                - FXSP (Fedex Smartpost)
+        """
         self.config_obj = config_obj
         self.wsdl_path = os.path.join(config_obj.wsdl_path, wsdl_name)
         self.client = Client('file://%s' % self.wsdl_path)
         self.logger = logging.getLogger('fedex')
+        self.response = None
+        """@ivar: The response from Fedex. You will want to pick what you
+            want out here here. This object does have a __str__() method,
+            you'll want to print or log it to see what possible values
+            you can pull."""
         
         self.logger.debug(self.client)
-        self.set_web_authentication_detail()
-        self.set_client_detail()
-        self.set_version_id()
-        self.set_carrier_code_type(*args, **kwargs)
-        self.set_transaction_detail(*args, **kwargs)
+        self.__set_web_authentication_detail()
+        self.__set_client_detail()
+        self.__set_version_id()
+        self.__set_carrier_code_type(*args, **kwargs)
+        self.__set_transaction_detail(*args, **kwargs)
         
-    def set_web_authentication_detail(self):
+    def __set_web_authentication_detail(self):
         """
         Sets up the WebAuthenticationDetail node. This is required for all
         requests.
@@ -32,7 +74,7 @@ class FedexBaseService(object):
         self.logger.debug(WebAuthenticationDetail)
         self.WebAuthenticationDetail = WebAuthenticationDetail
         
-    def set_client_detail(self):
+    def __set_client_detail(self):
         """
         Sets up the ClientDetail node, which is required for all shipping
         related requests.
@@ -44,7 +86,7 @@ class FedexBaseService(object):
         self.logger.debug(ClientDetail)
         self.ClientDetail = ClientDetail
         
-    def set_transaction_detail(self, *args, **kwargs):
+    def __set_transaction_detail(self, *args, **kwargs):
         """
         Checks kwargs for 'customer_transaction_id' and sets it if present.
         """
@@ -57,7 +99,7 @@ class FedexBaseService(object):
         else:
             self.TransactionDetail = None
             
-    def set_carrier_code_type(self, *args, **kwargs):
+    def __set_carrier_code_type(self, *args, **kwargs):
         """
         Checks kwargs for 'carrier_code' and sets it if present. 
         """
@@ -70,15 +112,15 @@ class FedexBaseService(object):
         else:
             self.CarrierCodeType = None
     
-    def set_version_id(self):
+    def __set_version_id(self):
         """
         Pulles the versioning info for the request from the child request.
         """
         VersionId = self.client.factory.create('VersionId')
-        VersionId.ServiceId = self.version_info['service_id']
-        VersionId.Major = self.version_info['major']
-        VersionId.Intermediate = self.version_info['intermediate']
-        VersionId.Minor = self.version_info['minor']
+        VersionId.ServiceId = self._version_info['service_id']
+        VersionId.Major = self._version_info['major']
+        VersionId.Intermediate = self._version_info['intermediate']
+        VersionId.Minor = self._version_info['minor']
         self.logger.debug(VersionId)
         self.VersionId = VersionId
         
@@ -86,6 +128,6 @@ class FedexBaseService(object):
         """
         Sends the assembled request on the child object.
         """
-        self.response = self.assemble_and_send_request()
+        self.response = self._assemble_and_send_request()
         self.logger.info("== FEDEX QUERY RESULT ==")
         self.logger.info(self.response)
