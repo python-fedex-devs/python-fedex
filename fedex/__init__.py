@@ -32,3 +32,4 @@ If you have any questions, problems, ideas, or patch submissions, please visit
 our U{Google Code project<http://code.google.com/p/python-fedex/>} and enter
 an issue in the U{Issue Tracker<http://code.google.com/p/python-fedex/issues/list>}.
 """
+VERSION = '0.1'
