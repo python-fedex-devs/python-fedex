@@ -1,3 +1,7 @@
+#!/usr/bin/env python
+"""
+This example shows how to track shipments.
+"""
 import logging
 from fedex.services.ship_service import FedexTrackRequest
 from fedex.config import FedexConfig
