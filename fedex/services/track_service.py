@@ -75,9 +75,13 @@ class FedexTrackRequest(FedexBaseService):
         """
         if self.response.HighestSeverity == "ERROR":
             for notification in self.response.Notifications:
-                if "Invalid tracking number" in notification.Message:
-                    raise FedexInvalidTrackingNumber(notification.Code,
-                                                     notification.Message)
+                if notification.Severity == "ERROR":
+                    if "Invalid tracking number" in notification.Message:
+                        raise FedexInvalidTrackingNumber(notification.Code,
+                                                         notification.Message)
+                    else:
+                        raise FedexError(notification.Code,
+                                         notification.Message)
         
     def _assemble_and_send_request(self):
         """
