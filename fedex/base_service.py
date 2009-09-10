@@ -19,7 +19,7 @@ class FedexBaseServiceException(Exception):
         self.error_code = error_code
         self.value = value
     def __str__(self):
-        return repr(self.value)
+        return "%s (Error code: %s)" % (repr(self.value), self.error_code)
     
 class FedexFailure(FedexBaseServiceException):
     """
