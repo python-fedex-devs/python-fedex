@@ -1,13 +1,13 @@
 """
 Ship Service Module
 ===================
-This package contains the shipping and tracking methods defined by Fedex's 
+This package contains the shipping methods defined by Fedex's 
 ShipService WSDL file. Each is encapsulated in a class for easy access. 
 For more details on each, refer to the respective class's documentation.
 """
 from .. base_service import FedexBaseService
 
-class FedexTrackRequest(FedexBaseService):
+class FedexShipRequest(FedexBaseService):
     """
     This class allows you to track shipments by providing a tracking
     number or other identifying features. By default, you
@@ -35,31 +35,19 @@ class FedexTrackRequest(FedexBaseService):
         self._config_obj = config_obj
         
         # Holds version info for the VersionId SOAP object.
-        self._version_info = {'service_id': 'trck', 'major': '4', 
+        self._version_info = {'service_id': 'trck', 'major': '7', 
                              'intermediate': '0', 'minor': '0'}
         # Call the parent FedexBaseService class for basic setup work.
-        super(FedexTrackRequest, self).__init__(self._config_obj, 
-                                                'TrackService_v4.wsdl',
+        super(FedexShipRequest, self).__init__(self._config_obj, 
+                                                'ShipService_v7.wsdl',
                                                 *args, **kwargs)
-
-        # Important request-specific instance variables.
-        self.package_identifier = package_identifier
-        """@ivar: Determines what L{tracking_value} is, be it a tracking number,
-            purchase order, or other things."""
-        self.tracking_value = tracking_value
-        """@ivar: This is typically a Fedex tracking number, but setting 
-            L{package_identifier} to other values makes this change."""
         
-    def __set_track_package_identifier(self):
+    def __set_transactional_detail(self):
         """
-        This sets the package identifier information. This may be a tracking
-        number or a few different things as per the Fedex spec.
         """
-        TrackPackageIdentifier = self.client.factory.create('TrackPackageIdentifier')
-        TrackPackageIdentifier.Type = self.package_identifier
-        TrackPackageIdentifier.Value = self.tracking_value
-        self.logger.debug(TrackPackageIdentifier)
-        self.TrackPackageIdentifier = TrackPackageIdentifier
+        TransactionDetail = self.client.factory.create('TransactionDetail')
+        self.logger.info(TransactionDetail)
+        self.TransactionDetail = TransactionDetail
         
     def _assemble_and_send_request(self):
         """
@@ -68,13 +56,14 @@ class FedexTrackRequest(FedexBaseService):
         @warning: NEVER CALL THIS METHOD DIRECTLY. CALL send_request(), WHICH RESIDES
             ON FedexBaseService AND IS INHERITED.
         """
-        self.__set_track_package_identifier()
+        self.__set_transactional_detail()
         client = self.client
         # Fire off the query.
-        response = client.service.track(WebAuthenticationDetail=self.WebAuthenticationDetail,
-                                        ClientDetail=self.ClientDetail,
-                                        TransactionDetail=self.TransactionDetail,
-                                        Version=self.VersionId,
-                                        CarrierCodeType=self.CarrierCodeType,
-                                        PackageIdentifier=self.TrackPackageIdentifier)
-        return response
+        """
+        processShipment(WebAuthenticationDetail WebAuthenticationDetail, 
+                        ClientDetail ClientDetail, 
+                        TransactionDetail TransactionDetail, 
+                        VersionId Version, 
+                        RequestedShipment RequestedShipment)
+        """
+        #return response

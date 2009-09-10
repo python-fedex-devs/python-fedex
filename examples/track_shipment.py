@@ -3,7 +3,7 @@
 This example shows how to track shipments.
 """
 import logging
-from fedex.services.ship_service import FedexTrackRequest
+from fedex.services.track_service import FedexTrackRequest
 from fedex.config import FedexConfig
 
 # Set this to the INFO level to see the response from Fedex printed in stdout.

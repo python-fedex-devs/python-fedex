@@ -10,6 +10,24 @@ import os
 import logging
 from suds.client import Client
 
+class FedexBaseServiceException(Exception):
+    """
+    Serves as the base exception that other service-related exception objects
+    are sub-classed from.
+    """
+    def __init__(self, value):
+        self.value = value
+    def __str__(self):
+        return repr(self.value)
+    
+class FedexFailure(FedexBaseServiceException):
+    """
+    The request could not be handled at this time. This is generally a server
+    problem.
+    """
+    def __init__(self):
+        self.value = "Your request could not be handled at this time. This is likely Fedex server problems, try again later."
+
 class FedexBaseService(object):
     """
     This class is the master class for all Fedex request objects. It gets all
@@ -124,10 +142,19 @@ class FedexBaseService(object):
         self.logger.debug(VersionId)
         self.VersionId = VersionId
         
+    def __check_response_for_fedex_error(self):
+        """
+        This checks the response for general Fedex errors that aren't related
+        to any one WSDL.
+        """
+        if self.response.HighestSeverity == "FAILURE":
+            raise FedexFailure()
+        
     def send_request(self):
         """
         Sends the assembled request on the child object.
         """
         self.response = self._assemble_and_send_request()
+        self.__check_response_for_fedex_error()
         self.logger.info("== FEDEX QUERY RESULT ==")
         self.logger.info(self.response)

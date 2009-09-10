@@ -2,13 +2,13 @@
 Test module for the Fedex ShipService WSDL.
 """
 import unittest
-from fedex.services.ship_service import FedexTrackRequest
+from fedex.services.track_service import FedexTrackRequest
 import common
 
 # Common global config object for testing.
 CONFIG_OBJ = common.get_test_config()
 
-class ShipServiceTests(unittest.TestCase):
+class TrackServiceTests(unittest.TestCase):
     """
     These tests verify that the shipping service WSDL is in good shape.
     """
@@ -19,7 +19,7 @@ class ShipServiceTests(unittest.TestCase):
         """
         track_request = FedexTrackRequest(CONFIG_OBJ, '1777768882')
         track_request.send_request()
-        
+            
         for match in track_request.response.TrackDetails:
             # This should be the same tracking number on the response that we
             # asked for in the request.
