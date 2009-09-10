@@ -15,7 +15,8 @@ class FedexBaseServiceException(Exception):
     Serves as the base exception that other service-related exception objects
     are sub-classed from.
     """
-    def __init__(self, value):
+    def __init__(self, error_code, value):
+        self.error_code = error_code
         self.value = value
     def __str__(self):
         return repr(self.value)
@@ -25,8 +26,13 @@ class FedexFailure(FedexBaseServiceException):
     The request could not be handled at this time. This is generally a server
     problem.
     """
-    def __init__(self):
-        self.value = "Your request could not be handled at this time. This is likely Fedex server problems, try again later."
+    pass
+
+class FedexError(FedexBaseServiceException):
+    """
+    These are generally problems with the client-provided data.
+    """
+    pass
 
 class FedexBaseService(object):
     """
@@ -148,13 +154,31 @@ class FedexBaseService(object):
         to any one WSDL.
         """
         if self.response.HighestSeverity == "FAILURE":
-            raise FedexFailure()
+            for notification in self.response.Notifications:
+                if notification.Severity == "FAILURE":
+                    raise FedexFailure(notification.Code,
+                                       notification.Message)
+        
+    def _check_response_for_request_errors(self):
+        """
+        Override this in each service module to check for errors that are
+        specific to that module. For example, invalid tracking numbers in
+        a Tracking request.
+        """
+        pass
         
     def send_request(self):
         """
         Sends the assembled request on the child object.
         """
+        # Send the request and get the response back.
         self.response = self._assemble_and_send_request()
+        # Check the response for general Fedex errors/failures that aren't
+        # specific to any given WSDL/request.
         self.__check_response_for_fedex_error()
+        # Check the response for errors specific to the particular request.
+        # This is handled by an overridden method on the child object.
+        self._check_response_for_request_errors()
+        # Debug output.
         self.logger.info("== FEDEX QUERY RESULT ==")
         self.logger.info(self.response)

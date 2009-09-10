@@ -6,7 +6,13 @@ TrackService WSDL file. Each is encapsulated in a class for easy access.
 For more details on each, refer to the respective class's documentation.
 """
 import logging
-from .. base_service import FedexBaseService
+from .. base_service import FedexBaseService, FedexError
+
+class FedexInvalidTrackingNumber(FedexError):
+    """
+    Sent when a bad tracking number is provided.
+    """
+    pass
 
 class FedexTrackRequest(FedexBaseService):
     """
@@ -61,6 +67,17 @@ class FedexTrackRequest(FedexBaseService):
         TrackPackageIdentifier.Value = self.tracking_value
         self.logger.debug(TrackPackageIdentifier)
         self.TrackPackageIdentifier = TrackPackageIdentifier
+        
+    def _check_response_for_request_errors(self):
+        """
+        Checks the response to see if there were any errors specific to
+        this WSDL.
+        """
+        if self.response.HighestSeverity == "ERROR":
+            for notification in self.response.Notifications:
+                if "Invalid tracking number" in notification.Message:
+                    raise FedexInvalidTrackingNumber(notification.Code,
+                                                     notification.Message)
         
     def _assemble_and_send_request(self):
         """
