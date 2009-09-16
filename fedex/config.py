@@ -20,7 +20,7 @@ class FedexConfig(object):
     at a later time if you must.
     """
     def __init__(self, key, password, account_number=None, meter_number=None,
-                 integrator_id=None, wsdl_path=None):
+                 integrator_id=None, wsdl_path=None, use_test_server=False):
         """
         @type key: L{str}
         @param key: Developer test key.
@@ -39,6 +39,11 @@ class FedexConfig(object):
         @type wsdl_path: L{str}
         @keyword wsdl_path: In the event that you want to override the path to
             your WSDL directory, do so with this argument.
+        @type use_test_server: L{bool}
+        @keyword use_test_server: When this is True, test server WSDLs are used
+            instead of the production server. You will also need to make sure
+            that your L{FedexConfig} object has a production account number,
+            meter number, authentication key, and password.
         """
         self.key = key
         """@ivar: Developer test key."""
@@ -50,6 +55,8 @@ class FedexConfig(object):
         """@ivar: Web services meter number."""
         self.integrator_id = integrator_id
         """@ivar: Web services integrator ID."""
+        self.use_test_server = use_test_server
+        """@ivar: When True, point to the test server."""
         
         # Allow overriding of the WDSL path.
         if wsdl_path == None:

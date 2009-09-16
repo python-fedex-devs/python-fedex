@@ -597,7 +597,7 @@
 	</binding>
 	<service name="AddressValidationService">
 		<port name="AddressValidationServicePort" binding="ns:AddressValidationServiceSoapBinding">
-			<s1:address location="https://gateway.fedex.com:443/web-services"/>
+			<s1:address location="https://gatewaybeta.fedex.com:443/web-services"/>
 		</port>
 	</service>
 </definitions>

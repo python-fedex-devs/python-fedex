@@ -542,7 +542,7 @@
 	</binding>
 	<service name="CloseService">
 		<port name="CloseServicePort" binding="ns:CloseServiceSoapBinding">
-			<s1:address location="https://gateway.fedex.com:443/web-services/close"/>
+			<s1:address location="https://gatewaybeta.fedex.com:443/web-services/close"/>
 		</port>
 	</service>
 </definitions>

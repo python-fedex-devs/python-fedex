@@ -415,7 +415,7 @@
 	</binding>
 	<service name="ReturnTagService">
 		<port name="ReturnTagServicePort" binding="ns:ReturnTagServiceSoapBinding">
-			<s1:address location="https://gateway.fedex.com:443/web-services"/>
+			<s1:address location="https://gatewaybeta.fedex.com:443/web-services"/>
 		</port>
 	</service>
 </definitions>

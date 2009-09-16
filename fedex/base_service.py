@@ -66,7 +66,15 @@ class FedexBaseService(object):
                 - FXSP (Fedex Smartpost)
         """
         self.config_obj = config_obj
-        self.wsdl_path = os.path.join(config_obj.wsdl_path, wsdl_name)
+        
+        # If the config object is set to use the test server, point
+        # suds at the test server WSDL directory.
+        if config_obj.use_test_server:
+            self.wsdl_path = os.path.join(config_obj.wsdl_path, 
+                                          'test_server_wsdl', wsdl_name)
+        else:
+            self.wsdl_path = os.path.join(config_obj.wsdl_path, wsdl_name)
+
         self.client = Client('file://%s' % self.wsdl_path)
         self.logger = logging.getLogger('fedex')
         self.response = None
