@@ -8,7 +8,7 @@ For more details on each, refer to the respective class's documentation.
 from datetime import datetime
 from .. base_service import FedexBaseService
 
-class FedexShipRequest(FedexBaseService):
+class FedexProcessShipmentRequest(FedexBaseService):
     """
     This class allows you to track shipments by providing a tracking
     number or other identifying features. By default, you
@@ -17,21 +17,13 @@ class FedexShipRequest(FedexBaseService):
     want to read the documentation for the L{__init__} method. 
     Particularly, the tracking_value and package_identifier arguments.
     """
-    def __init__(self, config_obj, tracking_value,
-                 package_identifier='TRACKING_NUMBER_OR_DOORTAG',
-                 *args, **kwargs):
+    def __init__(self, config_obj, *args, **kwargs):
         """
         Sends a shipment tracking request. The optional keyword args
         detailed on L{FedexBaseService} apply here as well.
-        
-        @type  tracking_value: L{str} 
-        @param tracking_value: Based on the value of package_identifier, 
-            this will be anything from a tracking number to a purchase order 
-            number.
-        @type    package_identifier: L{str}
-        @keyword package_identifier: Determines what you are using to query for
-            the shipment. The default assumes that tracking_value will be a Fedex 
-            tracking number.
+
+        @type config_obj: L{FedexConfig}
+        @param config_obj: A valid FedexConfig object.        
         """
         self._config_obj = config_obj
         
@@ -39,49 +31,43 @@ class FedexShipRequest(FedexBaseService):
         self._version_info = {'service_id': 'ship', 'major': '7', 
                              'intermediate': '0', 'minor': '0'}
         # Call the parent FedexBaseService class for basic setup work.
-        super(FedexShipRequest, self).__init__(self._config_obj, 
-                                                'ShipService_v7.wsdl',
-                                                *args, **kwargs)
+        super(FedexProcessShipmentRequest, self).__init__(self._config_obj, 
+                                                         'ShipService_v7.wsdl',
+                                                         *args, **kwargs)
+        # Prepare the data structures.
+        self.__set_requested_shipment()
         
     def __set_requested_shipment(self):
         """
         This is the data that will be used to create your shipment. Create
         the data structure and get it ready for the WSDL request.
         """
-        RequestedShipment = self.client.factory.create('RequestedShipment')
-        RequestedShipment.ShipTimestamp = '2009-09-17T09:35:36-04:00'
-        RequestedShipment.DropoffType = 'REGULAR_PICKUP' # REGULAR_PICKUP, REQUEST_COURIER, DROP_BOX, BUSINESS_SERVICE_CENTER and STATION
-        RequestedShipment.ServiceType = 'PRIORITY_OVERNIGHT' # valid values STANDARD_OVERNIGHT, PRIORITY_OVERNIGHT, FEDEX_GROUND
-        RequestedShipment.PackagingType = 'FEDEX_PAK' # valid values FEDEX_BOX, FEDEX_PAK, FEDEX_TUBE, YOUR_PACKAGING
+        # This is the primary data structure for processShipment requests.
+        self.RequestedShipment = self.client.factory.create('RequestedShipment')
+        self.RequestedShipment.ShipTimestamp = datetime.now()
         
-        Weight = self.client.factory.create('Weight')
-        Weight.Value = 1.0
-        Weight.Units = 'LB' # LB or KG
-        # Assemble
-        RequestedShipment.TotalWeight = Weight
+        self.Weight = self.client.factory.create('Weight')
+        # Start at nothing.
+        self.Weight.Value = 0.0
+        # Default to pounds.
+        self.Weight.Units = 'LB'
+        # This is the total weight of the entire shipment. Shipments may
+        # contain more than one package.
+        self.RequestedShipment.TotalWeight = self.Weight
         
         """
         Begin shipper info.
         """
-        ShipperParty = self.client.factory.create('Party')
-        ShipperContact = self.client.factory.create('Contact')
-        ShipperContact.PersonName = 'Sender Name'
-        ShipperContact.CompanyName = 'Some Company'
-        ShipperContact.PhoneNumber = '9012638716'
-        # Assemble
-        ShipperParty.Contact = ShipperContact
+        self.ShipperContact = self.client.factory.create('Contact')
+        self.ShipperAddress = self.client.factory.create('Address')
         
-        ShipperAddress = self.client.factory.create('Address')
-        ShipperAddress.StreetLines = ['Address Line 1']
-        ShipperAddress.City = 'Herndon'
-        ShipperAddress.StateOrProvinceCode = 'VA'
-        ShipperAddress.PostalCode = '20171'
-        ShipperAddress.CountryCode = 'US'
-        ShipperAddress.Residential = True
-        # Assemble
-        ShipperParty.Address = ShipperAddress
-        # Assemble
-        RequestedShipment.Shipper = ShipperParty
+        # This is the top level data structure for Shipper information.
+        self.ShipperParty = self.client.factory.create('Party')
+        self.ShipperParty.Address = self.ShipperAddress
+        self.ShipperParty.Contact = self.ShipperContact
+        
+        # Link the ShipperParty to our master data structure.
+        self.RequestedShipment.Shipper = self.ShipperParty
         """
         End shipper info.
         """
@@ -89,56 +75,42 @@ class FedexShipRequest(FedexBaseService):
         """
         Begin recipient info.
         """
-        RecipientParty = self.client.factory.create('Party')
-        RecipientContact = self.client.factory.create('Contact')
-        RecipientContact.PersonName = 'Recipient Name'
-        RecipientContact.CompanyName = 'Recipient Company'
-        RecipientContact.PhoneNumber = '9012637906'
-        # Assemble
-        RecipientParty.Contact = RecipientContact
+        self.RecipientContact = self.client.factory.create('Contact')
+        self.RecipientAddress = self.client.factory.create('Address')
         
-        RecipientAddress = self.client.factory.create('Address')
-        RecipientAddress.StreetLines = ['Address Line 1']
-        RecipientAddress.City = 'Herndon'
-        RecipientAddress.StateOrProvinceCode = 'VA'
-        RecipientAddress.PostalCode = '20171'
-        RecipientAddress.CountryCode = 'US'
-        RecipientAddress.Residential = True
-        # Assemble
-        RecipientParty.Address = RecipientAddress
-        # Assemble
-        RequestedShipment.Recipient = RecipientParty
+        # This is the top level data structure for Recipient information.
+        self.RecipientParty = self.client.factory.create('Party')
+        self.RecipientParty.Contact = self.RecipientContact
+        self.RecipientParty.Address = self.RecipientAddress
+        
+        # Link the RecipientParty object to our master data structure.
+        self.RequestedShipment.Recipient = self.RecipientParty
         """
         End recipient info.
         """
-        
-        ShippingChargesPayment = self.client.factory.create('Payment')
-        ShippingChargesPayment.PaymentType = 'SENDER' # RECIPIENT, SENDER and THIRD_PARTY
-        Payor = self.client.factory.create('Payor')
-        Payor.AccountNumber = self._config_obj.account_number
-        Payor.CountryCode = 'US'
-        ShippingChargesPayment.Payor = Payor
-        # Assemble
-        RequestedShipment.ShippingChargesPayment = ShippingChargesPayment
-        
-        LabelSpecification = self.client.factory.create('LabelSpecification')
-        LabelSpecification.LabelFormatType = 'COMMON2D'
-        LabelSpecification.ImageType = 'PNG'
-        LabelSpecification.LabelStockType = 'PAPER_7X4.75'
-        RequestedShipment.LabelSpecification = LabelSpecification
-        
-        RequestedShipment.RateRequestTypes = ['ACCOUNT'] # ACCOUNT and LIST
-        RequestedShipment.PackageCount = 1
-        RequestedShipment.PackageDetail = 'INDIVIDUAL_PACKAGES'
-        
-        # One package
-        RequestedPackageLineItem = self.client.factory.create('RequestedPackageLineItem')
-        RequestedPackageLineItem.Weight = Weight
-        
-        RequestedShipment.RequestedPackageLineItems = [RequestedPackageLineItem]
                 
-        self.logger.info(RequestedShipment)
-        self.RequestedShipment = RequestedShipment
+        self.Payor = self.client.factory.create('Payor')
+        # Grab the account number from the FedexConfig object by default.
+        self.Payor.AccountNumber = self._config_obj.account_number
+        # Assume US.
+        self.Payor.CountryCode = 'US'
+        
+        self.ShippingChargesPayment = self.client.factory.create('Payment')
+        self.ShippingChargesPayment.Payor = self.Payor
+        self.RequestedShipment.ShippingChargesPayment = self.ShippingChargesPayment
+        
+        self.LabelSpecification = self.client.factory.create('LabelSpecification')
+        self.RequestedShipment.LabelSpecification = self.LabelSpecification
+        
+        self.RequestedShipment.RateRequestTypes = ['ACCOUNT'] # ACCOUNT and LIST
+        
+        # Start with no packages, user must add them.
+        self.RequestedShipment.PackageCount = 0
+        self.RequestedShipment.RequestedPackageLineItems = []
+                
+        # This is good to review if you'd like to see what the data structure
+        # looks like.
+        self.logger.info(self.RequestedShipment)
         
     def _assemble_and_send_request(self):
         """
@@ -147,19 +119,25 @@ class FedexShipRequest(FedexBaseService):
         @warning: NEVER CALL THIS METHOD DIRECTLY. CALL send_request(), WHICH RESIDES
             ON FedexBaseService AND IS INHERITED.
         """
-        self.__set_requested_shipment()
-        client = self.client
         # Fire off the query.
-        response = client.service.processShipment(WebAuthenticationDetail=self.WebAuthenticationDetail,
+        response = self.client.service.processShipment(WebAuthenticationDetail=self.WebAuthenticationDetail,
                                         ClientDetail=self.ClientDetail,
                                         TransactionDetail=self.TransactionDetail,
                                         Version=self.VersionId,
                                         RequestedShipment=self.RequestedShipment)
-        """
-        processShipment(WebAuthenticationDetail WebAuthenticationDetail, 
-                        ClientDetail ClientDetail, 
-                        TransactionDetail TransactionDetail, 
-                        VersionId Version, 
-                        RequestedShipment RequestedShipment)
-        """
         return response
+    
+    def add_package(self, package_item):
+        """
+        Adds a package to the ship request.
+        
+        @type package_item: L{RequestedPackageLineItem}
+        @keyword package_item: A L{RequestedPackageLineItem}, created by
+            calling create_wsdl_object_of_type('RequestedPackageLineItem') on
+            this ShipmentRequest object. See examples/create_shipment.py for
+            more details.
+        """
+        self.RequestedShipment.RequestedPackageLineItems.append(package_item)
+        package_weight = package_item.Weight.Value
+        self.RequestedShipment.TotalWeight.Value += package_weight
+        self.RequestedShipment.PackageCount += 1

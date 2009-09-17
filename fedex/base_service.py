@@ -175,6 +175,12 @@ class FedexBaseService(object):
         """
         pass
         
+    def create_wsdl_object_of_type(self, type_name):
+        """
+        Creates and returns a WSDL object of the specified type.
+        """
+        return self.client.factory.create(type_name)
+
     def send_request(self):
         """
         Sends the assembled request on the child object.

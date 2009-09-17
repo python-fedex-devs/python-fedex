@@ -30,6 +30,8 @@ class FedexTrackRequest(FedexBaseService):
         Sends a shipment tracking request. The optional keyword args
         detailed on L{FedexBaseService} apply here as well.
         
+        @type config_obj: L{FedexConfig}
+        @param config_obj: A valid FedexConfig object.
         @type  tracking_value: L{str} 
         @param tracking_value: Based on the value of package_identifier, 
             this will be anything from a tracking number to a purchase order 
