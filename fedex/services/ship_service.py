@@ -55,7 +55,7 @@ class FedexShipRequest(FedexBaseService):
         RequestedShipment.PackagingType = 'FEDEX_PAK' # valid values FEDEX_BOX, FEDEX_PAK, FEDEX_TUBE, YOUR_PACKAGING
         
         Weight = self.client.factory.create('Weight')
-        Weight.Value = 50.0
+        Weight.Value = 1.0
         Weight.Units = 'LB' # LB or KG
         # Assemble
         RequestedShipment.TotalWeight = Weight
@@ -130,6 +130,12 @@ class FedexShipRequest(FedexBaseService):
         RequestedShipment.RateRequestTypes = ['ACCOUNT'] # ACCOUNT and LIST
         RequestedShipment.PackageCount = 1
         RequestedShipment.PackageDetail = 'INDIVIDUAL_PACKAGES'
+        
+        # One package
+        RequestedPackageLineItem = self.client.factory.create('RequestedPackageLineItem')
+        RequestedPackageLineItem.Weight = Weight
+        
+        RequestedShipment.RequestedPackageLineItems = [RequestedPackageLineItem]
                 
         self.logger.info(RequestedShipment)
         self.RequestedShipment = RequestedShipment
