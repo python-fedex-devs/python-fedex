@@ -17,15 +17,14 @@ class TrackServiceTests(unittest.TestCase):
         Test shipment tracking. Query for a tracking number and make sure the
         first (and hopefully only) result matches up.
         """
-        tracking_num = '1777768882'
-        tracking_num = '799428562846'
-        tracking_num = '111111111111'
-        tracking_num = '012301230123'
+        #tracking_num = '1777768882'
+        #tracking_num = '799428562846'
+        #tracking_num = '111111111111'
+        #tracking_num = '012301230123'
+        tracking_num = '798114182456'
 
         track_request = FedexTrackRequest(CONFIG_OBJ, tracking_num)
         track_request.send_request()
-        
-        print track_request.response
             
         for match in track_request.response.TrackDetails:
             # This should be the same tracking number on the response that we

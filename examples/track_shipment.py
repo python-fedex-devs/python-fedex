@@ -14,10 +14,11 @@ logging.basicConfig(level=logging.INFO)
 config_obj = FedexConfig(key='ZyNQQFdcxUATOx9L',
                          password='GtngmKzs4Dk4RYmrlAjrLykwi',
                          account_number='510087780',
-                         meter_number='118501898')
+                         meter_number='118501898',
+                         use_test_server=True)
 
 # This is the object that will be handling our tracking request.
-track = FedexTrackRequest(config_obj, '1777768882')
+track = FedexTrackRequest(config_obj, '798114182456')
 # Fires off the request, sets the 'response' attribute on the object.
 track.send_request()
 
