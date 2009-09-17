@@ -49,7 +49,7 @@ class FedexShipRequest(FedexBaseService):
         the data structure and get it ready for the WSDL request.
         """
         RequestedShipment = self.client.factory.create('RequestedShipment')
-        RequestedShipment.ShipTimestamp = datetime.now()
+        RequestedShipment.ShipTimestamp = '2009-09-17T09:35:36-04:00'
         RequestedShipment.DropoffType = 'REGULAR_PICKUP' # REGULAR_PICKUP, REQUEST_COURIER, DROP_BOX, BUSINESS_SERVICE_CENTER and STATION
         RequestedShipment.ServiceType = 'PRIORITY_OVERNIGHT' # valid values STANDARD_OVERNIGHT, PRIORITY_OVERNIGHT, FEDEX_GROUND
         RequestedShipment.PackagingType = 'FEDEX_PAK' # valid values FEDEX_BOX, FEDEX_PAK, FEDEX_TUBE, YOUR_PACKAGING
@@ -121,11 +121,17 @@ class FedexShipRequest(FedexBaseService):
         # Assemble
         RequestedShipment.ShippingChargesPayment = ShippingChargesPayment
         
+        LabelSpecification = self.client.factory.create('LabelSpecification')
+        LabelSpecification.LabelFormatType = 'COMMON2D'
+        LabelSpecification.ImageType = 'PNG'
+        LabelSpecification.LabelStockType = 'PAPER_7X4.75'
+        RequestedShipment.LabelSpecification = LabelSpecification
+        
         RequestedShipment.RateRequestTypes = ['ACCOUNT'] # ACCOUNT and LIST
         RequestedShipment.PackageCount = 1
         RequestedShipment.PackageDetail = 'INDIVIDUAL_PACKAGES'
                 
-        self.logger.debug(RequestedShipment)
+        self.logger.info(RequestedShipment)
         self.RequestedShipment = RequestedShipment
         
     def _assemble_and_send_request(self):
