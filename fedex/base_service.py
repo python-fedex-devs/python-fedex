@@ -8,6 +8,7 @@ repetetive setup work that most requests do.
 """
 import os
 import logging
+import suds
 from suds.client import Client
 
 class FedexBaseServiceException(Exception):
@@ -33,6 +34,14 @@ class FedexError(FedexBaseServiceException):
     These are generally problems with the client-provided data.
     """
     pass
+
+class SchemaValidationError(FedexBaseServiceException):
+    """
+    There is probably a problem in the data you provided.
+    """
+    def __init__(self):
+        self.error_code = -1
+        self.value = "suds encountered an error validating your data against this service's WSDL schema. Please double-check for missing or invalid values, filling all required fields."
 
 class FedexBaseService(object):
     """
@@ -173,7 +182,11 @@ class FedexBaseService(object):
         specific to that module. For example, invalid tracking numbers in
         a Tracking request.
         """
-        pass
+        if self.response.HighestSeverity == "ERROR":
+            for notification in self.response.Notifications:
+                if notification.Severity == "ERROR":
+                    raise FedexError(notification.Code,
+                                     notification.Message)
         
     def create_wsdl_object_of_type(self, type_name):
         """
@@ -186,13 +199,21 @@ class FedexBaseService(object):
         Sends the assembled request on the child object.
         """
         # Send the request and get the response back.
-        self.response = self._assemble_and_send_request()
+        try:
+            self.response = self._assemble_and_send_request()
+        except suds.WebFault:
+            # When this happens, throw an informative message reminding the
+            # user to check all required variables, making sure they are
+            # populated and valid.
+            raise SchemaValidationError()
+
         # Check the response for general Fedex errors/failures that aren't
         # specific to any given WSDL/request.
         self.__check_response_for_fedex_error()
         # Check the response for errors specific to the particular request.
         # This is handled by an overridden method on the child object.
         self._check_response_for_request_errors()
+        
         # Debug output.
         self.logger.info("== FEDEX QUERY RESULT ==")
         self.logger.info(self.response)
