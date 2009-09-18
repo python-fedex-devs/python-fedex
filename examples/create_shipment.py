@@ -100,16 +100,18 @@ ship.send_request()
 # attributes through the response attribute on the request object.
 print ship.response
 
-# Get the label image in ASCII format from the reply.
+# Get the label image in ASCII format from the reply. Note the list indices
+# we're using. You'll need to adjust or iterate through these if your shipment
+# has multiple packages.
 ascii_label_data = ship.response.CompletedShipmentDetail.CompletedPackageDetails[0].Label.Parts[0].Image
 # Convert the ASCII data to binary.
 label_binary_data = binascii.a2b_base64(ascii_label_data)
-# This will be the file we write the label out to.
-png_file = open('example_shipment_label.png', 'wb')
 
 """
 This is an example of how to dump a label to a PNG file.
 """
+# This will be the file we write the label out to.
+png_file = open('example_shipment_label.png', 'wb')
 png_file.write(label_binary_data)
 png_file.close()
 
