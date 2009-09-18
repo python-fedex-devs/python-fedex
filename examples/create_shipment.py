@@ -1,6 +1,11 @@
 #!/usr/bin/env python
 """
-This example shows how to ship shipments.
+This example shows how to create shipments. The variables populated below
+represents the minimum required values. You will need to fill all of these, or
+risk seeing a SchemaValidationError exception thrown.
+
+Near the bottom of the module, you'll see some different ways to handle the
+label data that is returned with the reply.
 """
 import logging
 import binascii
