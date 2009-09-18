@@ -114,13 +114,18 @@ shipment.add_package(package1)
 # change.
 #print shipment.RequestedShipment
 
+# If you want to make sure that all of your entered details are valid, you
+# can call this and parse it just like you would via send_request(). If
+# shipment.response.HighestSeverity == "SUCCESS", your shipment is valid.
+#shipment.send_validation_request()
+
 # Fires off the request, sets the 'response' attribute on the object.
 shipment.send_request()
 
 # This will show the reply to your shipment being sent. You can access the
 # attributes through the response attribute on the request object. This is
 # good to un-comment to see the variables returned by the Fedex reply.
-print shipment.response
+#print shipment.response
 
 # Here is the overall end result of the query.
 print "HighestSeverity:", shipment.response.HighestSeverity

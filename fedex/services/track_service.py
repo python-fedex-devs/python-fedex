@@ -58,17 +58,17 @@ class FedexTrackRequest(FedexBaseService):
         self.tracking_value = tracking_value
         """@ivar: This is typically a Fedex tracking number, but setting 
             L{package_identifier} to other values makes this change."""
+        # Get the object ready for manipulation.
+        self.__set_track_package_identifier()
         
     def __set_track_package_identifier(self):
         """
         This sets the package identifier information. This may be a tracking
         number or a few different things as per the Fedex spec.
         """
-        TrackPackageIdentifier = self.client.factory.create('TrackPackageIdentifier')
-        TrackPackageIdentifier.Type = self.package_identifier
-        TrackPackageIdentifier.Value = self.tracking_value
-        self.logger.debug(TrackPackageIdentifier)
-        self.TrackPackageIdentifier = TrackPackageIdentifier
+        self.TrackPackageIdentifier = self.client.factory.create('TrackPackageIdentifier')
+        self.TrackPackageIdentifier.Type = self.package_identifier
+        self.TrackPackageIdentifier.Value = self.tracking_value
         
     def _check_response_for_request_errors(self):
         """
@@ -92,7 +92,6 @@ class FedexTrackRequest(FedexBaseService):
         @warning: NEVER CALL THIS METHOD DIRECTLY. CALL send_request(), WHICH RESIDES
             ON FedexBaseService AND IS INHERITED.
         """
-        self.__set_track_package_identifier()
         client = self.client
         # Fire off the query.
         response = client.service.track(WebAuthenticationDetail=self.WebAuthenticationDetail,
