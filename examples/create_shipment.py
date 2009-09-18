@@ -69,14 +69,27 @@ shipment.RecipientAddress.CountryCode = 'US'
 # This is needed to ensure an accurate rate quote with the response.
 shipment.RecipientAddress.Residential = True
 
+# Who pays for the shipment?
 # RECIPIENT, SENDER or THIRD_PARTY
 shipment.ShippingChargesPayment.PaymentType = 'SENDER' 
 
-# These are example label values. You'll want to adjust these to fit your
-# usage case.
+# Specifies the label type to be returned.
+# LABEL_DATA_ONLY or COMMON2D
 shipment.LabelSpecification.LabelFormatType = 'COMMON2D'
+
+# Specifies which format the label file will be sent to you in.
+# DPL, EPL2, PDF, PNG, ZPLII
 shipment.LabelSpecification.ImageType = 'PNG'
-shipment.LabelSpecification.LabelStockType = 'PAPER_7X4.75'
+
+# To use doctab stocks, you must change ImageType above to one of the
+# label printer formats (ZPLII, EPL2, DPL).
+# See documentation for paper types, there quite a few.
+shipment.LabelSpecification.LabelStockType = 'PAPER_4X6'
+
+# This indicates if the top or bottom of the label comes out of the 
+# printer first.
+# BOTTOM_EDGE_OF_TEXT_FIRST or TOP_EDGE_OF_TEXT_FIRST
+shipment.LabelSpecification.LabelPrintingOrientation = 'BOTTOM_EDGE_OF_TEXT_FIRST'
 
 package1_weight = shipment.create_wsdl_object_of_type('Weight')
 # Weight, in pounds.
@@ -85,8 +98,11 @@ package1_weight.Units = "LB"
 
 package1 = shipment.create_wsdl_object_of_type('RequestedPackageLineItem')
 package1.Weight = package1_weight
+# Un-comment this to see the other variables you may set on a package.
 #print package1
 
+# This adds the RequestedPackageLineItem WSDL object to the shipment. It
+# increments the package count and total weight of the shipment for you.
 shipment.add_package(package1)
 
 # If you'd like to see some documentation on the ship service WSDL, un-comment
@@ -104,7 +120,7 @@ shipment.send_request()
 # This will show the reply to your shipment being sent. You can access the
 # attributes through the response attribute on the request object. This is
 # good to un-comment to see the variables returned by the Fedex reply.
-#print shipment.response
+print shipment.response
 
 # Here is the overall end result of the query.
 print "HighestSeverity:", shipment.response.HighestSeverity
