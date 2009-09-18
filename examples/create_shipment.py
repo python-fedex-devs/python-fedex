@@ -3,6 +3,7 @@
 This example shows how to ship shipments.
 """
 import logging
+import binascii
 from fedex.services.ship_service import FedexProcessShipmentRequest
 from fedex.config import FedexConfig
 
@@ -98,3 +99,38 @@ ship.send_request()
 # This will show the reply to your shipment being sent. You can access the
 # attributes through the response attribute on the request object.
 print ship.response
+
+# Get the label image in ASCII format from the reply.
+ascii_label_data = ship.response.CompletedShipmentDetail.CompletedPackageDetails[0].Label.Parts[0].Image
+# Convert the ASCII data to binary.
+label_binary_data = binascii.a2b_base64(ascii_label_data)
+# This will be the file we write the label out to.
+png_file = open('example_shipment_label.png', 'wb')
+
+"""
+This is an example of how to dump a label to a PNG file.
+"""
+png_file.write(label_binary_data)
+png_file.close()
+
+"""
+This is an example of how to print the label to a serial printer. This will not
+work for all label printers, consult your printer's documentation for more
+details on what formats it can accept.
+"""
+# Pipe the binary directly to the label printer. Works under Linux
+# without requiring PySerial. This WILL NOT work on other platforms.
+#label_printer = open("/dev/ttyS0", "w")
+#label_printer.write(label_binary_data)
+#label_printer.close()
+
+"""
+This is a potential cross-platform solution using pySerial. This has not been
+tested in a long time and may or may not work. For Windows, Mac, and other
+platforms, you may want to go this route.
+"""
+#import serial
+#label_printer = serial.Serial(0)
+#print "SELECTED SERIAL PORT: "+ label_printer.portstr
+#label_printer.write(label_binary_data)
+#label_printer.close()
