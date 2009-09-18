@@ -9,22 +9,15 @@ label data that is returned with the reply.
 """
 import logging
 import binascii
+from example_config import CONFIG_OBJ
 from fedex.services.ship_service import FedexProcessShipmentRequest
-from fedex.config import FedexConfig
 
 # Set this to the INFO level to see the response from Fedex printed in stdout.
-logging.basicConfig(level=logging.ERROR)
-
-# FedexConfig objects should generally only be instantiated once and re-used
-# amongst different queries. They hold static data like account number.
-config_obj = FedexConfig(key='ZyNQQFdcxUATOx9L',
-                         password='GtngmKzs4Dk4RYmrlAjrLykwi',
-                         account_number='510087780',
-                         meter_number='118501898',
-                         use_test_server=True)
+logging.basicConfig(level=logging.INFO)
 
 # This is the object that will be handling our tracking request.
-shipment = FedexProcessShipmentRequest(config_obj)
+# We're using the FedexConfig object from example_config.py in this dir.
+shipment = FedexProcessShipmentRequest(CONFIG_OBJ)
 
 # This is very generalized, top-level information.
 # REGULAR_PICKUP, REQUEST_COURIER, DROP_BOX, BUSINESS_SERVICE_CENTER or STATION
@@ -43,53 +36,53 @@ shipment.RequestedShipment.PackagingType = 'FEDEX_PAK'
 shipment.RequestedShipment.PackageDetail = 'INDIVIDUAL_PACKAGES'
 
 # Shipper contact info.
-shipment.ShipperContact.PersonName = 'Sender Name'
-shipment.ShipperContact.CompanyName = 'Some Company'
-shipment.ShipperContact.PhoneNumber = '9012638716'
+shipment.RequestedShipment.Shipper.Contact.PersonName = 'Sender Name'
+shipment.RequestedShipment.Shipper.Contact.CompanyName = 'Some Company'
+shipment.RequestedShipment.Shipper.Contact.PhoneNumber = '9012638716'
 
 # Shipper address.
-shipment.ShipperAddress.StreetLines = ['Address Line 1']
-shipment.ShipperAddress.City = 'Herndon'
-shipment.ShipperAddress.StateOrProvinceCode = 'VA'
-shipment.ShipperAddress.PostalCode = '20171'
-shipment.ShipperAddress.CountryCode = 'US'
-shipment.ShipperAddress.Residential = True
+shipment.RequestedShipment.Shipper.Address.StreetLines = ['Address Line 1']
+shipment.RequestedShipment.Shipper.Address.City = 'Herndon'
+shipment.RequestedShipment.Shipper.Address.StateOrProvinceCode = 'VA'
+shipment.RequestedShipment.Shipper.Address.PostalCode = '20171'
+shipment.RequestedShipment.Shipper.Address.CountryCode = 'US'
+shipment.RequestedShipment.Shipper.Address.Residential = True
 
 # Recipient contact info.
-shipment.RecipientContact.PersonName = 'Recipient Name'
-shipment.RecipientContact.CompanyName = 'Recipient Company'
-shipment.RecipientContact.PhoneNumber = '9012637906'
+shipment.RequestedShipment.Recipient.Contact.PersonName = 'Recipient Name'
+shipment.RequestedShipment.Recipient.Contact.CompanyName = 'Recipient Company'
+shipment.RequestedShipment.Recipient.Contact.PhoneNumber = '9012637906'
 
 # Recipient address
-shipment.RecipientAddress.StreetLines = ['Address Line 1']
-shipment.RecipientAddress.City = 'Herndon'
-shipment.RecipientAddress.StateOrProvinceCode = 'VA'
-shipment.RecipientAddress.PostalCode = '20171'
-shipment.RecipientAddress.CountryCode = 'US'
+shipment.RequestedShipment.Recipient.Address.StreetLines = ['Address Line 1']
+shipment.RequestedShipment.Recipient.Address.City = 'Herndon'
+shipment.RequestedShipment.Recipient.Address.StateOrProvinceCode = 'VA'
+shipment.RequestedShipment.Recipient.Address.PostalCode = '20171'
+shipment.RequestedShipment.Recipient.Address.CountryCode = 'US'
 # This is needed to ensure an accurate rate quote with the response.
-shipment.RecipientAddress.Residential = True
+shipment.RequestedShipment.Recipient.Address.Residential = True
 
 # Who pays for the shipment?
 # RECIPIENT, SENDER or THIRD_PARTY
-shipment.ShippingChargesPayment.PaymentType = 'SENDER' 
+shipment.RequestedShipment.ShippingChargesPayment.PaymentType = 'SENDER' 
 
 # Specifies the label type to be returned.
 # LABEL_DATA_ONLY or COMMON2D
-shipment.LabelSpecification.LabelFormatType = 'COMMON2D'
+shipment.RequestedShipment.LabelSpecification.LabelFormatType = 'COMMON2D'
 
 # Specifies which format the label file will be sent to you in.
 # DPL, EPL2, PDF, PNG, ZPLII
-shipment.LabelSpecification.ImageType = 'PNG'
+shipment.RequestedShipment.LabelSpecification.ImageType = 'PNG'
 
 # To use doctab stocks, you must change ImageType above to one of the
 # label printer formats (ZPLII, EPL2, DPL).
 # See documentation for paper types, there quite a few.
-shipment.LabelSpecification.LabelStockType = 'PAPER_4X6'
+shipment.RequestedShipment.LabelSpecification.LabelStockType = 'PAPER_4X6'
 
 # This indicates if the top or bottom of the label comes out of the 
 # printer first.
 # BOTTOM_EDGE_OF_TEXT_FIRST or TOP_EDGE_OF_TEXT_FIRST
-shipment.LabelSpecification.LabelPrintingOrientation = 'BOTTOM_EDGE_OF_TEXT_FIRST'
+shipment.RequestedShipment.LabelSpecification.LabelPrintingOrientation = 'BOTTOM_EDGE_OF_TEXT_FIRST'
 
 package1_weight = shipment.create_wsdl_object_of_type('Weight')
 # Weight, in pounds.
@@ -125,7 +118,7 @@ shipment.send_request()
 # This will show the reply to your shipment being sent. You can access the
 # attributes through the response attribute on the request object. This is
 # good to un-comment to see the variables returned by the Fedex reply.
-#print shipment.response
+print shipment.response
 
 # Here is the overall end result of the query.
 print "HighestSeverity:", shipment.response.HighestSeverity

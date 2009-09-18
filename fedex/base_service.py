@@ -63,41 +63,43 @@ class FedexBaseService(object):
         @keyword customer_transaction_id: A user-specified identifier to
             differentiate this transaction from others. This value will be
             returned with the response from Fedex.
-        @type carrier_code: L{str}
-        @keyword carrier_code: The carrier code to use for this query. In most
-            cases, this will be FDXE (Fedex Express). Must be one of the
-            following four-letter codes:
-                - FDXC (Fedex Cargo)
-                - FDXE (Fedex Express)
-                - FDXG (Fedex Ground)
-                - FXCC (Fedex Custom Critical)
-                - FXFR (Fedex Freight)
-                - FXSP (Fedex Smartpost)
         """
+        self.logger = logging.getLogger('fedex')
+        """@ivar: Python logger instance with name 'fedex'."""
         self.config_obj = config_obj
+        """@ivar: The FedexConfig object to pull auth info from."""
         
         # If the config object is set to use the test server, point
         # suds at the test server WSDL directory.
         if config_obj.use_test_server:
+            self.logger.info("Using test server.")
             self.wsdl_path = os.path.join(config_obj.wsdl_path, 
                                           'test_server_wsdl', wsdl_name)
         else:
+            self.logger.info("Using production server.")
             self.wsdl_path = os.path.join(config_obj.wsdl_path, wsdl_name)
 
         self.client = Client('file://%s' % self.wsdl_path)
-        self.logger = logging.getLogger('fedex')
+        
+        self.VersionId = None
+        """@ivar: Holds details on the version numbers of the WSDL."""
+        self.WebAuthenticationDetail = None
+        """@ivar: WSDL object that holds authentication info."""
+        self.ClientDetail = None
+        """@ivar: WSDL object that holds client account details."""
         self.response = None
         """@ivar: The response from Fedex. You will want to pick what you
             want out here here. This object does have a __str__() method,
             you'll want to print or log it to see what possible values
             you can pull."""
+        self.TransactionDetail = None
+        """@ivar: Holds customer-specified transaction IDs."""
         
-        self.logger.debug(self.client)
         self.__set_web_authentication_detail()
         self.__set_client_detail()
         self.__set_version_id()
-        self.__set_carrier_code_type(*args, **kwargs)
         self.__set_transaction_detail(*args, **kwargs)
+        self._prepare_wsdl_objects()
         
     def __set_web_authentication_detail(self):
         """
@@ -112,7 +114,6 @@ class FedexBaseService(object):
         # Encapsulates the auth credentials.
         WebAuthenticationDetail = self.client.factory.create('WebAuthenticationDetail')
         WebAuthenticationDetail.UserCredential = WebAuthenticationCredential
-        self.logger.debug(WebAuthenticationDetail)
         self.WebAuthenticationDetail = WebAuthenticationDetail
         
     def __set_client_detail(self):
@@ -124,7 +125,6 @@ class FedexBaseService(object):
         ClientDetail.AccountNumber = self.config_obj.account_number
         ClientDetail.MeterNumber = self.config_obj.meter_number
         ClientDetail.IntegratorId = self.config_obj.integrator_id
-        self.logger.debug(ClientDetail)
         self.ClientDetail = ClientDetail
         
     def __set_transaction_detail(self, *args, **kwargs):
@@ -133,25 +133,10 @@ class FedexBaseService(object):
         """
         customer_transaction_id = kwargs.get('customer_transaction_id', False)
         if customer_transaction_id:
-            TransactionDetail = client.factory.create('TransactionDetail')
+            TransactionDetail = self.client.factory.create('TransactionDetail')
             TransactionDetail.CustomerTransactionId = customer_transaction_id
             self.logger.debug(TransactionDetail)
             self.TransactionDetail = TransactionDetail
-        else:
-            self.TransactionDetail = None
-            
-    def __set_carrier_code_type(self, *args, **kwargs):
-        """
-        Checks kwargs for 'carrier_code' and sets it if present. 
-        """
-        carrier_code = kwargs.get('carrier_code', False)
-        if carrier_code:
-            CarrierCodeType = self.client.factory.create('CarrierCodeType')
-            CarrierCodeType.Type = carrier_code
-            self.logger.debug(CarrierCodeType)
-            self.CarrierCodeType = CarrierCodeType
-        else:
-            self.CarrierCodeType = None
     
     def __set_version_id(self):
         """
@@ -164,6 +149,14 @@ class FedexBaseService(object):
         VersionId.Minor = self._version_info['minor']
         self.logger.debug(VersionId)
         self.VersionId = VersionId
+        
+    def __prepare_wsdl_objects(self):
+        """
+        This method should be over-ridden on each sub-class. It instantiates
+        any of the required WSDL objects so the user can just print their
+        __str__() methods and see what they need to fill in.
+        """
+        pass
         
     def __check_response_for_fedex_error(self):
         """

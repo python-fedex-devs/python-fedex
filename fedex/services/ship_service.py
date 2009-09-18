@@ -30,14 +30,15 @@ class FedexProcessShipmentRequest(FedexBaseService):
         # Holds version info for the VersionId SOAP object.
         self._version_info = {'service_id': 'ship', 'major': '7', 
                              'intermediate': '0', 'minor': '0'}
+        
+        self.RequestedShipment = None
+        """@ivar: Holds the RequestedShipment WSDL object."""
         # Call the parent FedexBaseService class for basic setup work.
         super(FedexProcessShipmentRequest, self).__init__(self._config_obj, 
                                                          'ShipService_v7.wsdl',
                                                          *args, **kwargs)
-        # Prepare the data structures.
-        self.__set_requested_shipment()
         
-    def __set_requested_shipment(self):
+    def _prepare_wsdl_objects(self):
         """
         This is the data that will be used to create your shipment. Create
         the data structure and get it ready for the WSDL request.
@@ -46,63 +47,44 @@ class FedexProcessShipmentRequest(FedexBaseService):
         self.RequestedShipment = self.client.factory.create('RequestedShipment')
         self.RequestedShipment.ShipTimestamp = datetime.now()
         
-        self.Weight = self.client.factory.create('Weight')
+        TotalWeight = self.client.factory.create('Weight')
         # Start at nothing.
-        self.Weight.Value = 0.0
+        TotalWeight.Value = 0.0
         # Default to pounds.
-        self.Weight.Units = 'LB'
+        TotalWeight.Units = 'LB'
         # This is the total weight of the entire shipment. Shipments may
         # contain more than one package.
-        self.RequestedShipment.TotalWeight = self.Weight
-        
-        """
-        Begin shipper info.
-        """
-        self.ShipperContact = self.client.factory.create('Contact')
-        self.ShipperAddress = self.client.factory.create('Address')
-        
+        self.RequestedShipment.TotalWeight = TotalWeight
+            
         # This is the top level data structure for Shipper information.
-        self.ShipperParty = self.client.factory.create('Party')
-        self.ShipperParty.Address = self.ShipperAddress
-        self.ShipperParty.Contact = self.ShipperContact
+        ShipperParty = self.client.factory.create('Party')
+        ShipperParty.Address = self.client.factory.create('Address')
+        ShipperParty.Contact = self.client.factory.create('Contact')
         
         # Link the ShipperParty to our master data structure.
-        self.RequestedShipment.Shipper = self.ShipperParty
-        """
-        End shipper info.
-        """
-        
-        """
-        Begin recipient info.
-        """
-        self.RecipientContact = self.client.factory.create('Contact')
-        self.RecipientAddress = self.client.factory.create('Address')
-        
+        self.RequestedShipment.Shipper = ShipperParty
+
         # This is the top level data structure for Recipient information.
-        self.RecipientParty = self.client.factory.create('Party')
-        self.RecipientParty.Contact = self.RecipientContact
-        self.RecipientParty.Address = self.RecipientAddress
+        RecipientParty = self.client.factory.create('Party')
+        RecipientParty.Contact = self.client.factory.create('Contact')
+        RecipientParty.Address = self.client.factory.create('Address')
         
         # Link the RecipientParty object to our master data structure.
-        self.RequestedShipment.Recipient = self.RecipientParty
-        """
-        End recipient info.
-        """
+        self.RequestedShipment.Recipient = RecipientParty
                 
-        self.Payor = self.client.factory.create('Payor')
+        Payor = self.client.factory.create('Payor')
         # Grab the account number from the FedexConfig object by default.
-        self.Payor.AccountNumber = self._config_obj.account_number
+        Payor.AccountNumber = self._config_obj.account_number
         # Assume US.
-        self.Payor.CountryCode = 'US'
+        Payor.CountryCode = 'US'
         
-        self.ShippingChargesPayment = self.client.factory.create('Payment')
-        self.ShippingChargesPayment.Payor = self.Payor
-        self.RequestedShipment.ShippingChargesPayment = self.ShippingChargesPayment
-        
-        self.LabelSpecification = self.client.factory.create('LabelSpecification')
-        self.RequestedShipment.LabelSpecification = self.LabelSpecification
-        
-        self.RequestedShipment.RateRequestTypes = ['ACCOUNT'] # ACCOUNT and LIST
+        ShippingChargesPayment = self.client.factory.create('Payment')
+        ShippingChargesPayment.Payor = Payor
+
+        self.RequestedShipment.ShippingChargesPayment = ShippingChargesPayment
+        self.RequestedShipment.LabelSpecification = self.client.factory.create('LabelSpecification')
+        # ACCOUNT or LIST
+        self.RequestedShipment.RateRequestTypes = ['ACCOUNT'] 
         
         # Start with no packages, user must add them.
         self.RequestedShipment.PackageCount = 0
@@ -110,7 +92,7 @@ class FedexProcessShipmentRequest(FedexBaseService):
                 
         # This is good to review if you'd like to see what the data structure
         # looks like.
-        self.logger.info(self.RequestedShipment)
+        self.logger.debug(self.RequestedShipment)
         
     def send_validation_request(self):
         """
@@ -170,67 +152,31 @@ class FedexDeleteShipmentRequest(FedexBaseService):
     """
     This class allows you to delete a shipment, given a tracking number.
     """
-    def __init__(self, config_obj, tracking_value,
-                 package_identifier='TRACKING_NUMBER_OR_DOORTAG',
-                 *args, **kwargs):
+    def __init__(self, config_obj, *args, **kwargs):
         """
-        Sends a shipment tracking request. The optional keyword args
-        detailed on L{FedexBaseService} apply here as well.
-        
-        @type config_obj: L{FedexConfig}
-        @param config_obj: A valid FedexConfig object.
-        @type  tracking_value: L{str} 
-        @param tracking_value: Based on the value of package_identifier, 
-            this will be anything from a tracking number to a purchase order 
-            number.
-        @type    package_identifier: L{str}
-        @keyword package_identifier: Determines what you are using to query for
-            the shipment. The default assumes that tracking_value will be a Fedex 
-            tracking number.
+        Deletes a shipment via a tracking number.
         """
         self._config_obj = config_obj
         
         # Holds version info for the VersionId SOAP object.
-        self._version_info = {'service_id': 'trck', 'major': '4', 
+        self._version_info = {'service_id': 'ship', 'major': '7', 
                              'intermediate': '0', 'minor': '0'}
+        self.DeletionControlType = None
+        """@ivar: Holds the DeletrionControlType WSDL object."""
+        self.TrackingId = None
+        """@ivar: Holds the TrackingId WSDL object."""
         # Call the parent FedexBaseService class for basic setup work.
-        super(FedexTrackRequest, self).__init__(self._config_obj, 
-                                                'TrackService_v4.wsdl',
+        super(FedexDeleteShipmentRequest, self).__init__(self._config_obj, 
+                                                'ShipService_v7.wsdl',
                                                 *args, **kwargs)
 
-        # Important request-specific instance variables.
-        self.package_identifier = package_identifier
-        """@ivar: Determines what L{tracking_value} is, be it a tracking number,
-            purchase order, or other things."""
-        self.tracking_value = tracking_value
-        """@ivar: This is typically a Fedex tracking number, but setting 
-            L{package_identifier} to other values makes this change."""
-        
-    def __set_track_package_identifier(self):
+    def _prepare_wsdl_objects(self):
         """
-        This sets the package identifier information. This may be a tracking
-        number or a few different things as per the Fedex spec.
+        Preps the WSDL data structures for the user.
         """
-        TrackPackageIdentifier = self.client.factory.create('TrackPackageIdentifier')
-        TrackPackageIdentifier.Type = self.package_identifier
-        TrackPackageIdentifier.Value = self.tracking_value
-        self.logger.debug(TrackPackageIdentifier)
-        self.TrackPackageIdentifier = TrackPackageIdentifier
-        
-    def _check_response_for_request_errors(self):
-        """
-        Checks the response to see if there were any errors specific to
-        this WSDL.
-        """
-        if self.response.HighestSeverity == "ERROR":
-            for notification in self.response.Notifications:
-                if notification.Severity == "ERROR":
-                    if "Invalid tracking number" in notification.Message:
-                        raise FedexInvalidTrackingNumber(notification.Code,
-                                                         notification.Message)
-                    else:
-                        raise FedexError(notification.Code,
-                                         notification.Message)
+        self.DeletionControlType = self.client.factory.create('DeletionControlType')
+        self.TrackingId = self.client.factory.create('TrackingId')
+        self.TrackingId.TrackingIdType = self.client.factory.create('TrackingIdType')
         
     def _assemble_and_send_request(self):
         """
@@ -239,14 +185,14 @@ class FedexDeleteShipmentRequest(FedexBaseService):
         @warning: NEVER CALL THIS METHOD DIRECTLY. CALL send_request(), WHICH RESIDES
             ON FedexBaseService AND IS INHERITED.
         """
-        self.__set_track_package_identifier()
         client = self.client
         # Fire off the query.
-        response = client.service.track(WebAuthenticationDetail=self.WebAuthenticationDetail,
+        response = client.service.deleteShipment(WebAuthenticationDetail=self.WebAuthenticationDetail,
                                         ClientDetail=self.ClientDetail,
                                         TransactionDetail=self.TransactionDetail,
                                         Version=self.VersionId,
-                                        CarrierCodeType=self.CarrierCodeType,
-                                        PackageIdentifier=self.TrackPackageIdentifier)
+                                        ShipTimestamp = datetime.now(), 
+                                        TrackingId=self.TrackingId,
+                                        DeletionControl=self.DeletionControlType)
 
         return response

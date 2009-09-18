@@ -3,27 +3,28 @@
 This example shows how to track shipments.
 """
 import logging
+from example_config import CONFIG_OBJ
 from fedex.services.track_service import FedexTrackRequest
-from fedex.config import FedexConfig
 
 # Set this to the INFO level to see the response from Fedex printed in stdout.
 logging.basicConfig(level=logging.INFO)
 
-# FedexConfig objects should generally only be instantiated once and re-used
-# amongst different queries. They hold static data like account number.
-config_obj = FedexConfig(key='ZyNQQFdcxUATOx9L',
-                         password='GtngmKzs4Dk4RYmrlAjrLykwi',
-                         account_number='510087780',
-                         meter_number='118501898',
-                         use_test_server=True)
+# NOTE: TRACKING IS VERY ERRATIC ON THE TEST SERVERS. YOU MAY NEED TO USE
+# PRODUCTION KEYS/PASSWORDS/ACCOUNT #.
+# We're using the FedexConfig object from example_config.py in this dir.
+track = FedexTrackRequest(CONFIG_OBJ)
+track.TrackPackageIdentifier.Type = 'TRACKING_NUMBER_OR_DOORTAG'
+track.TrackPackageIdentifier.Value = '798114182456'
 
-# This is the object that will be handling our tracking request.
-track = FedexTrackRequest(config_obj, '798114182456')
 # Fires off the request, sets the 'response' attribute on the object.
 track.send_request()
 
+# See the response printed out.
+print track.response
+
 # Look through the matches (there should only be one for a tracking number
 # query), and show a few details about each shipment.
+print "== Results =="
 for match in track.response.TrackDetails:
-    print "TRACKING #:", match.TrackingNumber
-    print "STATUS:", match.StatusDescription
+    print "Tracking #:", match.TrackingNumber
+    print "Status:", match.StatusDescription
