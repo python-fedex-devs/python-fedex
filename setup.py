@@ -17,7 +17,7 @@
  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 """
 from distutils.core import setup
-from . import fedex
+import fedex
 
 LONG_DESCRIPTION = \
 """A light wrapper around Fedex's Web Services SOAP API using suds."""
@@ -42,7 +42,9 @@ setup(name='fedex',
       author_email='gtaylor@l11solutions.com',
       url='http://code.google.com/p/python-fedex/',
       download_url='http://pypi.python.org/pypi/fedex/',
-      packages=['fedex'],
+      packages=['fedex', 'fedex.services'],
+      package_dir={'fedex': 'fedex'},
+      package_data={'fedex': ['wsdl/*.wsdl', 'wsdl/test_server_wsdl/*.wsdl']},
       platforms = ['Platform Independent'],
       license = 'GPLv3',
       classifiers = CLASSIFIERS,
