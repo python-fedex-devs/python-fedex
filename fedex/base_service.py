@@ -190,7 +190,7 @@ class FedexBaseService(object):
     def send_request(self, send_function=None):
         """
         Sends the assembled request on the child object.
-        @type send_function: L{function}
+        @type send_function: function reference
         @keyword send_function: A function reference (passed without the
             parenthesis) to a function that will send the request. This
             allows for overriding the default function in cases such as

@@ -137,8 +137,9 @@ class FedexProcessShipmentRequest(FedexBaseService):
         """
         Adds a package to the ship request.
         
-        @type package_item: L{RequestedPackageLineItem}
-        @keyword package_item: A L{RequestedPackageLineItem}, created by
+        @type package_item: WSDL object, type of RequestedPackageLineItem 
+            WSDL object.
+        @keyword package_item: A RequestedPackageLineItem, created by
             calling create_wsdl_object_of_type('RequestedPackageLineItem') on
             this ShipmentRequest object. See examples/create_shipment.py for
             more details.
