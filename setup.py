@@ -23,7 +23,7 @@ LONG_DESCRIPTION = \
 """A light wrapper around Fedex's Web Services SOAP API using suds."""
 
 CLASSIFIERS = [
-                'Development Status :: 4 - Beta',
+                'Development Status :: 5 - Production/Stable',
                 'Intended Audience :: Developers',
                 'License :: OSI Approved :: GNU General Public License (GPL)',
                 'Natural Language :: English',
