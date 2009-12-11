@@ -105,13 +105,14 @@ class FedexProcessShipmentRequest(FedexBaseService):
         
     def _assemble_and_send_validation_request(self):
         """
-        Fires off the Fedex request.
+        Fires off the Fedex shipment validation request.
         
-        @warning: NEVER CALL THIS METHOD DIRECTLY. CALL send_request(), WHICH RESIDES
-            ON FedexBaseService AND IS INHERITED.
+        @warning: NEVER CALL THIS METHOD DIRECTLY. CALL 
+            send_validation_request(), WHICH RESIDES ON FedexBaseService 
+            AND IS INHERITED.
         """
         # Fire off the query.
-        response = self.client.service.processShipment(WebAuthenticationDetail=self.WebAuthenticationDetail,
+        response = self.client.service.validateShipment(WebAuthenticationDetail=self.WebAuthenticationDetail,
                                         ClientDetail=self.ClientDetail,
                                         TransactionDetail=self.TransactionDetail,
                                         Version=self.VersionId,
@@ -122,8 +123,8 @@ class FedexProcessShipmentRequest(FedexBaseService):
         """
         Fires off the Fedex request.
         
-        @warning: NEVER CALL THIS METHOD DIRECTLY. CALL send_request(), WHICH RESIDES
-            ON FedexBaseService AND IS INHERITED.
+        @warning: NEVER CALL THIS METHOD DIRECTLY. CALL send_request(), 
+            WHICH RESIDES ON FedexBaseService AND IS INHERITED.
         """
         # Fire off the query.
         response = self.client.service.processShipment(WebAuthenticationDetail=self.WebAuthenticationDetail,
