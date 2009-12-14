@@ -81,7 +81,7 @@ class FedexBaseService(object):
 
         self.client = Client('file://%s' % self.wsdl_path)
         
-        print self.client
+        #print self.client
         
         self.VersionId = None
         """@ivar: Holds details on the version numbers of the WSDL."""

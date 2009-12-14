@@ -10,17 +10,15 @@ from .. base_service import FedexBaseService
 
 class FedexProcessShipmentRequest(FedexBaseService):
     """
-    This class allows you to track shipments by providing a tracking
-    number or other identifying features. By default, you
-    can simply pass a tracking number to the constructor. If you would like
-    to query shipments based on something other than tracking number, you will
-    want to read the documentation for the L{__init__} method. 
-    Particularly, the tracking_value and package_identifier arguments.
+    This class allows you to process (create) a new FedEx shipment. You will
+    need to populate the data structures in self.RequestedShipment, then
+    send the request. Label printing is supported and very configurable,
+    returning an ASCII representation with the response as well.
     """
     def __init__(self, config_obj, *args, **kwargs):
         """
-        Sends a shipment tracking request. The optional keyword args
-        detailed on L{FedexBaseService} apply here as well.
+        The optional keyword args detailed on L{FedexBaseService} 
+        apply here as well.
 
         @type config_obj: L{FedexConfig}
         @param config_obj: A valid FedexConfig object.        
