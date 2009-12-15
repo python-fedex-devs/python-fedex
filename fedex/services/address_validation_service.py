@@ -23,7 +23,7 @@ class FedexAddressValidationRequest(FedexBaseService):
         self._config_obj = config_obj
         
         # Holds version info for the VersionId SOAP object.
-        self._version_info = {'service_id': 'ship', 'major': '2', 
+        self._version_info = {'service_id': 'aval', 'major': '2', 
                              'intermediate': '0', 'minor': '0'}
         
         self.AddressValidationOptions = None
@@ -68,7 +68,7 @@ class FedexAddressValidationRequest(FedexBaseService):
                                         Version=self.VersionId,
                                         RequestTimestamp=datetime.now(),
                                         Options=self.AddressValidationOptions,
-                                        AddressToValidate=self.addresses_to_validate)
+                                        AddressesToValidate=self.addresses_to_validate)
         return response
 
     def add_address(self, address_item):
