@@ -1,5 +1,6 @@
 """
-This file holds various configuration options used for all of the examples.
+This file holds configuration for your test account. Make SURE to change
+the values below to your account's TESTING meter number.
 """
 import os
 import sys
