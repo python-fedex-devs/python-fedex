@@ -63,10 +63,10 @@ shipment.send_request()
 device = LabelPrinterClass(shipment)
 device.print_label()
 
-shipment.RequestedShipment.Recipient.Address.StreetLines = ['321 Ground Rd']
-shipment.RequestedShipment.Recipient.Address.City = 'New York'
-shipment.RequestedShipment.Recipient.Address.StateOrProvinceCode = 'NY'
-shipment.RequestedShipment.Recipient.Address.PostalCode = '10042'
+shipment.RequestedShipment.Recipient.Address.StreetLines = ['987 Main St']
+shipment.RequestedShipment.Recipient.Address.City = 'Boston'
+shipment.RequestedShipment.Recipient.Address.StateOrProvinceCode = 'MA'
+shipment.RequestedShipment.Recipient.Address.PostalCode = '02115'
 shipment.RequestedShipment.Recipient.Address.CountryCode = 'US'
 
 shipment.send_request()
