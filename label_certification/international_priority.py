@@ -3,7 +3,9 @@
 This module prints a label used to certify International Priority shipments.
 """
 import logging
-from cert_config import CONFIG_OBJ
+from cert_config import CONFIG_OBJ, SHIPPER_CONTACT_INFO, SHIPPER_ADDRESS, LABEL_SPECIFICATION
+from cert_config import transfer_config_dict
+from cert_config import LabelPrinterClass
 from fedex.services.ship_service import FedexProcessShipmentRequest
 from fedex.printers.unix import DirectDevicePrinter
 
@@ -16,18 +18,12 @@ shipment.RequestedShipment.PackagingType = 'YOUR_PACKAGING'
 shipment.RequestedShipment.PackageDetail = 'INDIVIDUAL_PACKAGES'
 
 # Shipper contact info.
-shipment.RequestedShipment.Shipper.Contact.PersonName = 'Gregory Taylor'
-shipment.RequestedShipment.Shipper.Contact.CompanyName = 'International Paper'
-shipment.RequestedShipment.Shipper.Contact.PhoneNumber = '8646336010'
+transfer_config_dict(shipment.RequestedShipment.Shipper.Contact, 
+                     SHIPPER_CONTACT_INFO)
 
 # Shipper address.
-shipment.RequestedShipment.Shipper.Address.StreetLines = ['155 Old Greenville Hwy',
-                                                          'Suite 103']
-shipment.RequestedShipment.Shipper.Address.City = 'Clemson'
-shipment.RequestedShipment.Shipper.Address.StateOrProvinceCode = 'SC'
-shipment.RequestedShipment.Shipper.Address.PostalCode = '29631'
-shipment.RequestedShipment.Shipper.Address.CountryCode = 'US'
-shipment.RequestedShipment.Shipper.Address.Residential = False
+transfer_config_dict(shipment.RequestedShipment.Shipper.Address, 
+                     SHIPPER_ADDRESS)
 
 # Recipient contact info.
 shipment.RequestedShipment.Recipient.Contact.PersonName = 'Some Guy'
@@ -42,23 +38,9 @@ shipment.RequestedShipment.Recipient.Address.CountryCode = 'TW'
 
 shipment.RequestedShipment.ShippingChargesPayment.PaymentType = 'SENDER' 
 
-# Specifies the label type to be returned.
-# LABEL_DATA_ONLY or COMMON2D
-shipment.RequestedShipment.LabelSpecification.LabelFormatType = 'COMMON2D'
-
-# Specifies which format the label file will be sent to you in.
-# DPL, EPL2, PDF, PNG, ZPLII
-shipment.RequestedShipment.LabelSpecification.ImageType = 'EPL2'
-
-# To use doctab stocks, you must change ImageType above to one of the
-# label printer formats (ZPLII, EPL2, DPL).
-# See documentation for paper types, there quite a few.
-shipment.RequestedShipment.LabelSpecification.LabelStockType = 'STOCK_4X6.75_LEADING_DOC_TAB'
-
-# This indicates if the top or bottom of the label comes out of the 
-# printer first.
-# BOTTOM_EDGE_OF_TEXT_FIRST or TOP_EDGE_OF_TEXT_FIRST
-shipment.RequestedShipment.LabelSpecification.LabelPrintingOrientation = 'BOTTOM_EDGE_OF_TEXT_FIRST'
+# Label config.
+transfer_config_dict(shipment.RequestedShipment.LabelSpecification, 
+                     LABEL_SPECIFICATION)
 
 package1_weight = shipment.create_wsdl_object_of_type('Weight')
 package1_weight.Value = 10.0
@@ -93,5 +75,5 @@ shipment.send_request()
 
 print shipment.response.CompletedShipmentDetail.CompletedPackageDetails[0].TrackingIds
 
-device = DirectDevicePrinter(shipment)
+device = LabelPrinterClass(shipment)
 device.print_label()
