@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 """
-This module prints three FedEx Ground shipping labels for the label
+This module prints three FedEx Express shipping labels for the label
 certification process. See your FedEx Label Developer Tool Kit documentation
 for more details.
 """
@@ -14,7 +14,7 @@ logging.basicConfig(level=logging.INFO)
 
 shipment = FedexProcessShipmentRequest(CONFIG_OBJ)
 shipment.RequestedShipment.DropoffType = 'REGULAR_PICKUP'
-shipment.RequestedShipment.ServiceType = 'FEDEX_GROUND'
+shipment.RequestedShipment.ServiceType = 'PRIORITY_OVERNIGHT'
 shipment.RequestedShipment.PackagingType = 'YOUR_PACKAGING'
 shipment.RequestedShipment.PackageDetail = 'INDIVIDUAL_PACKAGES'
 
