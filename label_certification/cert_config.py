@@ -11,21 +11,21 @@ from fedex.config import FedexConfig
 from fedex.printers.unix import DirectDevicePrinter
 
 # Change these values to match your testing account/meter number.
-CONFIG_OBJ = FedexConfig(key='ZyNQQFdcxUATOx9L',
-                         password='8irpTkULT1zjVLlL8XiVczTex',
-                         account_number='510087780',
-                         meter_number='118501898',
+CONFIG_OBJ = FedexConfig(key='xxxxxxxxxxxxxxxx',
+                         password='xxxxxxxxxxxxxxxxxxxxxxxxx',
+                         account_number='#########',
+                         meter_number='#########',
                          use_test_server=True)
 
 # Change this to whoever should be the contact person for shipments.
-SHIPPER_CONTACT_INFO = {'PersonName': 'Gregory Taylor',
-                        'CompanyName': 'International Paper',
-                        'PhoneNumber': '8646336010'}
+SHIPPER_CONTACT_INFO = {'PersonName': 'Some Person',
+                        'CompanyName': 'Your Company',
+                        'PhoneNumber': '##########'}
 
 # The dictionary below should be your office/client's address that shipping
 # will be originating from.
-SHIPPER_ADDRESS = {'StreetLines': ['155 Old Greenville Hwy', 'Suite 103'],
-                   'City': 'Clemson',
+SHIPPER_ADDRESS = {'StreetLines': ['Address Line 1'],
+                   'City': 'Some City',
                    'StateOrProvinceCode': 'SC',
                    'PostalCode': '29631',
                    'CountryCode': 'US',

@@ -16,7 +16,7 @@
   <tr valign="middle">
   <!-- Home link -->
       <th>&nbsp;&nbsp;&nbsp;<a
-        href="workspace.python-fedex.fedex-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+        href="fedex-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
 
   <!-- Tree link -->
       <th bgcolor="#70b0f0" class="navbar-select"
@@ -69,22 +69,22 @@
     <li> <strong class="uidlink">exceptions.Exception</strong>:
       <em class="summary">Common base class for all non-exit exceptions.</em>
     <ul>
-    <li> <strong class="uidlink"><a href="workspace.python-fedex.fedex.base_service.FedexBaseServiceException-class.html">workspace.python-fedex.fedex.base_service.FedexBaseServiceException</a></strong>:
+    <li> <strong class="uidlink"><a href="fedex.base_service.FedexBaseServiceException-class.html">fedex.base_service.FedexBaseServiceException</a></strong>:
       <em class="summary">Serves as the base exception that other service-related exception 
         objects are sub-classed from.</em>
     <ul>
-    <li> <strong class="uidlink"><a href="workspace.python-fedex.fedex.base_service.FedexError-class.html">workspace.python-fedex.fedex.base_service.FedexError</a></strong>:
+    <li> <strong class="uidlink"><a href="fedex.base_service.FedexError-class.html">fedex.base_service.FedexError</a></strong>:
       <em class="summary">These are generally problems with the client-provided data.</em>
     <ul>
-    <li> <strong class="uidlink"><a href="workspace.python-fedex.fedex.services.track_service.FedexInvalidTrackingNumber-class.html">workspace.python-fedex.fedex.services.track_service.FedexInvalidTrackingNumber</a></strong>:
+    <li> <strong class="uidlink"><a href="fedex.services.track_service.FedexInvalidTrackingNumber-class.html">fedex.services.track_service.FedexInvalidTrackingNumber</a></strong>:
       <em class="summary">Sent when a bad tracking number is provided.</em>
     </li>
     </ul>
     </li>
-    <li> <strong class="uidlink"><a href="workspace.python-fedex.fedex.base_service.FedexFailure-class.html">workspace.python-fedex.fedex.base_service.FedexFailure</a></strong>:
+    <li> <strong class="uidlink"><a href="fedex.base_service.FedexFailure-class.html">fedex.base_service.FedexFailure</a></strong>:
       <em class="summary">The request could not be handled at this time.</em>
     </li>
-    <li> <strong class="uidlink"><a href="workspace.python-fedex.fedex.base_service.SchemaValidationError-class.html">workspace.python-fedex.fedex.base_service.SchemaValidationError</a></strong>:
+    <li> <strong class="uidlink"><a href="fedex.base_service.SchemaValidationError-class.html">fedex.base_service.SchemaValidationError</a></strong>:
       <em class="summary">There is probably a problem in the data you provided.</em>
     </li>
     </ul>
@@ -93,24 +93,30 @@
     </li>
     </ul>
     </li>
-    <li> <strong class="uidlink"><a href="workspace.python-fedex.fedex.base_service.FedexBaseService-class.html">workspace.python-fedex.fedex.base_service.FedexBaseService</a></strong>:
+    <li> <strong class="uidlink"><a href="fedex.printers.unix.DirectDevicePrinter-class.html">fedex.printers.unix.DirectDevicePrinter</a></strong>:
+      <em class="summary">This class pipes the label data directly through a /dev/* entry.</em>
+    </li>
+    <li> <strong class="uidlink"><a href="fedex.base_service.FedexBaseService-class.html">fedex.base_service.FedexBaseService</a></strong>:
       <em class="summary">This class is the master class for all Fedex request objects.</em>
     <ul>
-    <li> <strong class="uidlink"><a href="workspace.python-fedex.fedex.services.ship_service.FedexDeleteShipmentRequest-class.html">workspace.python-fedex.fedex.services.ship_service.FedexDeleteShipmentRequest</a></strong>:
+    <li> <strong class="uidlink"><a href="fedex.services.address_validation_service.FedexAddressValidationRequest-class.html">fedex.services.address_validation_service.FedexAddressValidationRequest</a></strong>:
+      <em class="summary">This class allows you validate anywhere from one to a hundred 
+        addresses in one go.</em>
+    </li>
+    <li> <strong class="uidlink"><a href="fedex.services.ship_service.FedexDeleteShipmentRequest-class.html">fedex.services.ship_service.FedexDeleteShipmentRequest</a></strong>:
       <em class="summary">This class allows you to delete a shipment, given a tracking 
         number.</em>
     </li>
-    <li> <strong class="uidlink"><a href="workspace.python-fedex.fedex.services.ship_service.FedexProcessShipmentRequest-class.html">workspace.python-fedex.fedex.services.ship_service.FedexProcessShipmentRequest</a></strong>:
-      <em class="summary">This class allows you to track shipments by providing a tracking 
-        number or other identifying features.</em>
+    <li> <strong class="uidlink"><a href="fedex.services.ship_service.FedexProcessShipmentRequest-class.html">fedex.services.ship_service.FedexProcessShipmentRequest</a></strong>:
+      <em class="summary">This class allows you to process (create) a new FedEx shipment.</em>
     </li>
-    <li> <strong class="uidlink"><a href="workspace.python-fedex.fedex.services.track_service.FedexTrackRequest-class.html">workspace.python-fedex.fedex.services.track_service.FedexTrackRequest</a></strong>:
+    <li> <strong class="uidlink"><a href="fedex.services.track_service.FedexTrackRequest-class.html">fedex.services.track_service.FedexTrackRequest</a></strong>:
       <em class="summary">This class allows you to track shipments by providing a tracking 
         number or other identifying features.</em>
     </li>
     </ul>
     </li>
-    <li> <strong class="uidlink"><a href="workspace.python-fedex.fedex.config.FedexConfig-class.html">workspace.python-fedex.fedex.config.FedexConfig</a></strong>:
+    <li> <strong class="uidlink"><a href="fedex.config.FedexConfig-class.html">fedex.config.FedexConfig</a></strong>:
       <em class="summary">Base configuration class that is used for the different Fedex SOAP 
         calls.</em>
     </li>
@@ -123,7 +129,7 @@
   <tr valign="middle">
   <!-- Home link -->
       <th>&nbsp;&nbsp;&nbsp;<a
-        href="workspace.python-fedex.fedex-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+        href="fedex-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
 
   <!-- Tree link -->
       <th bgcolor="#70b0f0" class="navbar-select"
@@ -148,7 +154,7 @@
 <table border="0" cellpadding="0" cellspacing="0" width="100%%">
   <tr>
     <td align="left" class="footer">
-    Generated by Epydoc 3.0.1 on Wed Sep 23 15:39:17 2009
+    Generated by Epydoc 3.0.1 on Thu Mar 25 11:33:58 2010
     </td>
     <td align="right" class="footer">
       <a target="mainFrame" href="http://epydoc.sourceforge.net"

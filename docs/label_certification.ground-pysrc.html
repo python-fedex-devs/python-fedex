@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>label_certification.ground</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://code.google.com/p/python-fedex/">python-fedex</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="label_certification-module.html">Package&nbsp;label_certification</a> ::
+        Module&nbsp;ground
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="label_certification.ground-pysrc.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<h1 class="epydoc">Source Code for <a href="label_certification.ground-module.html">Module label_certification.ground</a></h1>
+<pre class="py-src">
+<a name="L1"></a><tt class="py-lineno"> 1</tt>  <tt class="py-line"><tt class="py-comment">#!/usr/bin/env python</tt> </tt>
+<a name="L2"></a><tt class="py-lineno"> 2</tt>  <tt class="py-line"><tt class="py-docstring">"""</tt> </tt>
+<a name="L3"></a><tt class="py-lineno"> 3</tt>  <tt class="py-line"><tt class="py-docstring">This module prints three FedEx Ground shipping labels for the label</tt> </tt>
+<a name="L4"></a><tt class="py-lineno"> 4</tt>  <tt class="py-line"><tt class="py-docstring">certification process. See your FedEx Label Developer Tool Kit documentation</tt> </tt>
+<a name="L5"></a><tt class="py-lineno"> 5</tt>  <tt class="py-line"><tt class="py-docstring">for more details.</tt> </tt>
+<a name="L6"></a><tt class="py-lineno"> 6</tt>  <tt class="py-line"><tt class="py-docstring">"""</tt> </tt>
+<a name="L7"></a><tt class="py-lineno"> 7</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">logging</tt> </tt>
+<a name="L8"></a><tt class="py-lineno"> 8</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-0" class="py-name" targets="Module label_certification.cert_config=label_certification.cert_config-module.html"><a title="label_certification.cert_config" class="py-name" href="#" onclick="return doclink('link-0', 'cert_config', 'link-0');">cert_config</a></tt> <tt class="py-keyword">import</tt> <tt id="link-1" class="py-name" targets="Variable label_certification.cert_config.CONFIG_OBJ=label_certification.cert_config-module.html#CONFIG_OBJ,Variable label_certification.example_config.CONFIG_OBJ=label_certification.example_config-module.html#CONFIG_OBJ"><a title="label_certification.cert_config.CONFIG_OBJ
+label_certification.example_config.CONFIG_OBJ" class="py-name" href="#" onclick="return doclink('link-1', 'CONFIG_OBJ', 'link-1');">CONFIG_OBJ</a></tt><tt class="py-op">,</tt> <tt id="link-2" class="py-name" targets="Variable label_certification.cert_config.SHIPPER_CONTACT_INFO=label_certification.cert_config-module.html#SHIPPER_CONTACT_INFO"><a title="label_certification.cert_config.SHIPPER_CONTACT_INFO" class="py-name" href="#" onclick="return doclink('link-2', 'SHIPPER_CONTACT_INFO', 'link-2');">SHIPPER_CONTACT_INFO</a></tt><tt class="py-op">,</tt> <tt id="link-3" class="py-name" targets="Variable label_certification.cert_config.SHIPPER_ADDRESS=label_certification.cert_config-module.html#SHIPPER_ADDRESS"><a title="label_certification.cert_config.SHIPPER_ADDRESS" class="py-name" href="#" onclick="return doclink('link-3', 'SHIPPER_ADDRESS', 'link-3');">SHIPPER_ADDRESS</a></tt><tt class="py-op">,</tt> <tt id="link-4" class="py-name" targets="Variable label_certification.cert_config.LABEL_SPECIFICATION=label_certification.cert_config-module.html#LABEL_SPECIFICATION"><a title="label_certification.cert_config.LABEL_SPECIFICATION" class="py-name" href="#" onclick="return doclink('link-4', 'LABEL_SPECIFICATION', 'link-4');">LABEL_SPECIFICATION</a></tt> </tt>
+<a name="L9"></a><tt class="py-lineno"> 9</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-5" class="py-name"><a title="label_certification.cert_config" class="py-name" href="#" onclick="return doclink('link-5', 'cert_config', 'link-0');">cert_config</a></tt> <tt class="py-keyword">import</tt> <tt id="link-6" class="py-name" targets="Function label_certification.cert_config.transfer_config_dict()=label_certification.cert_config-module.html#transfer_config_dict"><a title="label_certification.cert_config.transfer_config_dict" class="py-name" href="#" onclick="return doclink('link-6', 'transfer_config_dict', 'link-6');">transfer_config_dict</a></tt> </tt>
+<a name="L10"></a><tt class="py-lineno">10</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-7" class="py-name"><a title="label_certification.cert_config" class="py-name" href="#" onclick="return doclink('link-7', 'cert_config', 'link-0');">cert_config</a></tt> <tt class="py-keyword">import</tt> <tt class="py-name">LabelPrinterClass</tt> </tt>
+<a name="L11"></a><tt class="py-lineno">11</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-8" class="py-name" targets="Package fedex=fedex-module.html"><a title="fedex" class="py-name" href="#" onclick="return doclink('link-8', 'fedex', 'link-8');">fedex</a></tt><tt class="py-op">.</tt><tt id="link-9" class="py-name" targets="Package fedex.services=fedex.services-module.html"><a title="fedex.services" class="py-name" href="#" onclick="return doclink('link-9', 'services', 'link-9');">services</a></tt><tt class="py-op">.</tt><tt id="link-10" class="py-name" targets="Module fedex.services.ship_service=fedex.services.ship_service-module.html"><a title="fedex.services.ship_service" class="py-name" href="#" onclick="return doclink('link-10', 'ship_service', 'link-10');">ship_service</a></tt> <tt class="py-keyword">import</tt> <tt id="link-11" class="py-name" targets="Class fedex.services.ship_service.FedexProcessShipmentRequest=fedex.services.ship_service.FedexProcessShipmentRequest-class.html"><a title="fedex.services.ship_service.FedexProcessShipmentRequest" class="py-name" href="#" onclick="return doclink('link-11', 'FedexProcessShipmentRequest', 'link-11');">FedexProcessShipmentRequest</a></tt> </tt>
+<a name="L12"></a><tt class="py-lineno">12</tt>  <tt class="py-line"> </tt>
+<a name="L13"></a><tt class="py-lineno">13</tt>  <tt class="py-line"><tt class="py-name">logging</tt><tt class="py-op">.</tt><tt class="py-name">basicConfig</tt><tt class="py-op">(</tt><tt class="py-name">level</tt><tt class="py-op">=</tt><tt class="py-name">logging</tt><tt class="py-op">.</tt><tt class="py-name">INFO</tt><tt class="py-op">)</tt> </tt>
+<a name="L14"></a><tt class="py-lineno">14</tt>  <tt class="py-line"> </tt>
+<a name="L15"></a><tt class="py-lineno">15</tt>  <tt class="py-line"><tt id="link-12" class="py-name" targets="Variable label_certification.express.shipment=label_certification.express-module.html#shipment,Variable label_certification.ground.shipment=label_certification.ground-module.html#shipment"><a title="label_certification.express.shipment
+label_certification.ground.shipment" class="py-name" href="#" onclick="return doclink('link-12', 'shipment', 'link-12');">shipment</a></tt> <tt class="py-op">=</tt> <tt id="link-13" class="py-name"><a title="fedex.services.ship_service.FedexProcessShipmentRequest" class="py-name" href="#" onclick="return doclink('link-13', 'FedexProcessShipmentRequest', 'link-11');">FedexProcessShipmentRequest</a></tt><tt class="py-op">(</tt><tt id="link-14" class="py-name"><a title="label_certification.cert_config.CONFIG_OBJ
+label_certification.example_config.CONFIG_OBJ" class="py-name" href="#" onclick="return doclink('link-14', 'CONFIG_OBJ', 'link-1');">CONFIG_OBJ</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L16"></a><tt class="py-lineno">16</tt>  <tt class="py-line"><tt id="link-15" class="py-name"><a title="label_certification.express.shipment
+label_certification.ground.shipment" class="py-name" href="#" onclick="return doclink('link-15', 'shipment', 'link-12');">shipment</a></tt><tt class="py-op">.</tt><tt class="py-name">RequestedShipment</tt><tt class="py-op">.</tt><tt class="py-name">DropoffType</tt> <tt class="py-op">=</tt> <tt class="py-string">'REGULAR_PICKUP'</tt> </tt>
+<a name="L17"></a><tt class="py-lineno">17</tt>  <tt class="py-line"><tt id="link-16" class="py-name"><a title="label_certification.express.shipment
+label_certification.ground.shipment" class="py-name" href="#" onclick="return doclink('link-16', 'shipment', 'link-12');">shipment</a></tt><tt class="py-op">.</tt><tt class="py-name">RequestedShipment</tt><tt class="py-op">.</tt><tt class="py-name">ServiceType</tt> <tt class="py-op">=</tt> <tt class="py-string">'FEDEX_GROUND'</tt> </tt>
+<a name="L18"></a><tt class="py-lineno">18</tt>  <tt class="py-line"><tt id="link-17" class="py-name"><a title="label_certification.express.shipment
+label_certification.ground.shipment" class="py-name" href="#" onclick="return doclink('link-17', 'shipment', 'link-12');">shipment</a></tt><tt class="py-op">.</tt><tt class="py-name">RequestedShipment</tt><tt class="py-op">.</tt><tt class="py-name">PackagingType</tt> <tt class="py-op">=</tt> <tt class="py-string">'YOUR_PACKAGING'</tt> </tt>
+<a name="L19"></a><tt class="py-lineno">19</tt>  <tt class="py-line"><tt id="link-18" class="py-name"><a title="label_certification.express.shipment
+label_certification.ground.shipment" class="py-name" href="#" onclick="return doclink('link-18', 'shipment', 'link-12');">shipment</a></tt><tt class="py-op">.</tt><tt class="py-name">RequestedShipment</tt><tt class="py-op">.</tt><tt class="py-name">PackageDetail</tt> <tt class="py-op">=</tt> <tt class="py-string">'INDIVIDUAL_PACKAGES'</tt> </tt>
+<a name="L20"></a><tt class="py-lineno">20</tt>  <tt class="py-line"> </tt>
+<a name="L21"></a><tt class="py-lineno">21</tt>  <tt class="py-line"><tt class="py-comment"># Shipper contact info.</tt> </tt>
+<a name="L22"></a><tt class="py-lineno">22</tt>  <tt class="py-line"><tt id="link-19" class="py-name"><a title="label_certification.cert_config.transfer_config_dict" class="py-name" href="#" onclick="return doclink('link-19', 'transfer_config_dict', 'link-6');">transfer_config_dict</a></tt><tt class="py-op">(</tt><tt id="link-20" class="py-name"><a title="label_certification.express.shipment
+label_certification.ground.shipment" class="py-name" href="#" onclick="return doclink('link-20', 'shipment', 'link-12');">shipment</a></tt><tt class="py-op">.</tt><tt class="py-name">RequestedShipment</tt><tt class="py-op">.</tt><tt class="py-name">Shipper</tt><tt class="py-op">.</tt><tt class="py-name">Contact</tt><tt class="py-op">,</tt>  </tt>
+<a name="L23"></a><tt class="py-lineno">23</tt>  <tt class="py-line">                     <tt id="link-21" class="py-name"><a title="label_certification.cert_config.SHIPPER_CONTACT_INFO" class="py-name" href="#" onclick="return doclink('link-21', 'SHIPPER_CONTACT_INFO', 'link-2');">SHIPPER_CONTACT_INFO</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L24"></a><tt class="py-lineno">24</tt>  <tt class="py-line"> </tt>
+<a name="L25"></a><tt class="py-lineno">25</tt>  <tt class="py-line"><tt class="py-comment"># Shipper address.</tt> </tt>
+<a name="L26"></a><tt class="py-lineno">26</tt>  <tt class="py-line"><tt id="link-22" class="py-name"><a title="label_certification.cert_config.transfer_config_dict" class="py-name" href="#" onclick="return doclink('link-22', 'transfer_config_dict', 'link-6');">transfer_config_dict</a></tt><tt class="py-op">(</tt><tt id="link-23" class="py-name"><a title="label_certification.express.shipment
+label_certification.ground.shipment" class="py-name" href="#" onclick="return doclink('link-23', 'shipment', 'link-12');">shipment</a></tt><tt class="py-op">.</tt><tt class="py-name">RequestedShipment</tt><tt class="py-op">.</tt><tt class="py-name">Shipper</tt><tt class="py-op">.</tt><tt class="py-name">Address</tt><tt class="py-op">,</tt>  </tt>
+<a name="L27"></a><tt class="py-lineno">27</tt>  <tt class="py-line">                     <tt id="link-24" class="py-name"><a title="label_certification.cert_config.SHIPPER_ADDRESS" class="py-name" href="#" onclick="return doclink('link-24', 'SHIPPER_ADDRESS', 'link-3');">SHIPPER_ADDRESS</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L28"></a><tt class="py-lineno">28</tt>  <tt class="py-line"> </tt>
+<a name="L29"></a><tt class="py-lineno">29</tt>  <tt class="py-line"><tt class="py-comment"># Recipient contact info.</tt> </tt>
+<a name="L30"></a><tt class="py-lineno">30</tt>  <tt class="py-line"><tt id="link-25" class="py-name"><a title="label_certification.express.shipment
+label_certification.ground.shipment" class="py-name" href="#" onclick="return doclink('link-25', 'shipment', 'link-12');">shipment</a></tt><tt class="py-op">.</tt><tt class="py-name">RequestedShipment</tt><tt class="py-op">.</tt><tt class="py-name">Recipient</tt><tt class="py-op">.</tt><tt class="py-name">Contact</tt><tt class="py-op">.</tt><tt class="py-name">PersonName</tt> <tt class="py-op">=</tt> <tt class="py-string">'Recipient Name'</tt> </tt>
+<a name="L31"></a><tt class="py-lineno">31</tt>  <tt class="py-line"><tt id="link-26" class="py-name"><a title="label_certification.express.shipment
+label_certification.ground.shipment" class="py-name" href="#" onclick="return doclink('link-26', 'shipment', 'link-12');">shipment</a></tt><tt class="py-op">.</tt><tt class="py-name">RequestedShipment</tt><tt class="py-op">.</tt><tt class="py-name">Recipient</tt><tt class="py-op">.</tt><tt class="py-name">Contact</tt><tt class="py-op">.</tt><tt class="py-name">CompanyName</tt> <tt class="py-op">=</tt> <tt class="py-string">'Recipient Company'</tt> </tt>
+<a name="L32"></a><tt class="py-lineno">32</tt>  <tt class="py-line"><tt id="link-27" class="py-name"><a title="label_certification.express.shipment
+label_certification.ground.shipment" class="py-name" href="#" onclick="return doclink('link-27', 'shipment', 'link-12');">shipment</a></tt><tt class="py-op">.</tt><tt class="py-name">RequestedShipment</tt><tt class="py-op">.</tt><tt class="py-name">Recipient</tt><tt class="py-op">.</tt><tt class="py-name">Contact</tt><tt class="py-op">.</tt><tt class="py-name">PhoneNumber</tt> <tt class="py-op">=</tt> <tt class="py-string">'9012637906'</tt> </tt>
+<a name="L33"></a><tt class="py-lineno">33</tt>  <tt class="py-line"> </tt>
+<a name="L34"></a><tt class="py-lineno">34</tt>  <tt class="py-line"><tt class="py-comment"># Recipient address</tt> </tt>
+<a name="L35"></a><tt class="py-lineno">35</tt>  <tt class="py-line"><tt id="link-28" class="py-name"><a title="label_certification.express.shipment
+label_certification.ground.shipment" class="py-name" href="#" onclick="return doclink('link-28', 'shipment', 'link-12');">shipment</a></tt><tt class="py-op">.</tt><tt class="py-name">RequestedShipment</tt><tt class="py-op">.</tt><tt class="py-name">Recipient</tt><tt class="py-op">.</tt><tt class="py-name">Address</tt><tt class="py-op">.</tt><tt class="py-name">StreetLines</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-string">'Address Line 1'</tt><tt class="py-op">]</tt> </tt>
+<a name="L36"></a><tt class="py-lineno">36</tt>  <tt class="py-line"><tt id="link-29" class="py-name"><a title="label_certification.express.shipment
+label_certification.ground.shipment" class="py-name" href="#" onclick="return doclink('link-29', 'shipment', 'link-12');">shipment</a></tt><tt class="py-op">.</tt><tt class="py-name">RequestedShipment</tt><tt class="py-op">.</tt><tt class="py-name">Recipient</tt><tt class="py-op">.</tt><tt class="py-name">Address</tt><tt class="py-op">.</tt><tt class="py-name">City</tt> <tt class="py-op">=</tt> <tt class="py-string">'Herndon'</tt> </tt>
+<a name="L37"></a><tt class="py-lineno">37</tt>  <tt class="py-line"><tt id="link-30" class="py-name"><a title="label_certification.express.shipment
+label_certification.ground.shipment" class="py-name" href="#" onclick="return doclink('link-30', 'shipment', 'link-12');">shipment</a></tt><tt class="py-op">.</tt><tt class="py-name">RequestedShipment</tt><tt class="py-op">.</tt><tt class="py-name">Recipient</tt><tt class="py-op">.</tt><tt class="py-name">Address</tt><tt class="py-op">.</tt><tt class="py-name">StateOrProvinceCode</tt> <tt class="py-op">=</tt> <tt class="py-string">'VA'</tt> </tt>
+<a name="L38"></a><tt class="py-lineno">38</tt>  <tt class="py-line"><tt id="link-31" class="py-name"><a title="label_certification.express.shipment
+label_certification.ground.shipment" class="py-name" href="#" onclick="return doclink('link-31', 'shipment', 'link-12');">shipment</a></tt><tt class="py-op">.</tt><tt class="py-name">RequestedShipment</tt><tt class="py-op">.</tt><tt class="py-name">Recipient</tt><tt class="py-op">.</tt><tt class="py-name">Address</tt><tt class="py-op">.</tt><tt class="py-name">PostalCode</tt> <tt class="py-op">=</tt> <tt class="py-string">'20171'</tt> </tt>
+<a name="L39"></a><tt class="py-lineno">39</tt>  <tt class="py-line"><tt id="link-32" class="py-name"><a title="label_certification.express.shipment
+label_certification.ground.shipment" class="py-name" href="#" onclick="return doclink('link-32', 'shipment', 'link-12');">shipment</a></tt><tt class="py-op">.</tt><tt class="py-name">RequestedShipment</tt><tt class="py-op">.</tt><tt class="py-name">Recipient</tt><tt class="py-op">.</tt><tt class="py-name">Address</tt><tt class="py-op">.</tt><tt class="py-name">CountryCode</tt> <tt class="py-op">=</tt> <tt class="py-string">'US'</tt> </tt>
+<a name="L40"></a><tt class="py-lineno">40</tt>  <tt class="py-line"> </tt>
+<a name="L41"></a><tt class="py-lineno">41</tt>  <tt class="py-line"><tt id="link-33" class="py-name"><a title="label_certification.express.shipment
+label_certification.ground.shipment" class="py-name" href="#" onclick="return doclink('link-33', 'shipment', 'link-12');">shipment</a></tt><tt class="py-op">.</tt><tt class="py-name">RequestedShipment</tt><tt class="py-op">.</tt><tt class="py-name">ShippingChargesPayment</tt><tt class="py-op">.</tt><tt class="py-name">PaymentType</tt> <tt class="py-op">=</tt> <tt class="py-string">'SENDER'</tt>  </tt>
+<a name="L42"></a><tt class="py-lineno">42</tt>  <tt class="py-line"> </tt>
+<a name="L43"></a><tt class="py-lineno">43</tt>  <tt class="py-line"><tt class="py-comment"># Label config.</tt> </tt>
+<a name="L44"></a><tt class="py-lineno">44</tt>  <tt class="py-line"><tt id="link-34" class="py-name"><a title="label_certification.cert_config.transfer_config_dict" class="py-name" href="#" onclick="return doclink('link-34', 'transfer_config_dict', 'link-6');">transfer_config_dict</a></tt><tt class="py-op">(</tt><tt id="link-35" class="py-name"><a title="label_certification.express.shipment
+label_certification.ground.shipment" class="py-name" href="#" onclick="return doclink('link-35', 'shipment', 'link-12');">shipment</a></tt><tt class="py-op">.</tt><tt class="py-name">RequestedShipment</tt><tt class="py-op">.</tt><tt class="py-name">LabelSpecification</tt><tt class="py-op">,</tt>  </tt>
+<a name="L45"></a><tt class="py-lineno">45</tt>  <tt class="py-line">                     <tt id="link-36" class="py-name"><a title="label_certification.cert_config.LABEL_SPECIFICATION" class="py-name" href="#" onclick="return doclink('link-36', 'LABEL_SPECIFICATION', 'link-4');">LABEL_SPECIFICATION</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L46"></a><tt class="py-lineno">46</tt>  <tt class="py-line"> </tt>
+<a name="L47"></a><tt class="py-lineno">47</tt>  <tt class="py-line"><tt id="link-37" class="py-name" targets="Variable label_certification.express.package1_weight=label_certification.express-module.html#package1_weight,Variable label_certification.ground.package1_weight=label_certification.ground-module.html#package1_weight"><a title="label_certification.express.package1_weight
+label_certification.ground.package1_weight" class="py-name" href="#" onclick="return doclink('link-37', 'package1_weight', 'link-37');">package1_weight</a></tt> <tt class="py-op">=</tt> <tt id="link-38" class="py-name"><a title="label_certification.express.shipment
+label_certification.ground.shipment" class="py-name" href="#" onclick="return doclink('link-38', 'shipment', 'link-12');">shipment</a></tt><tt class="py-op">.</tt><tt id="link-39" class="py-name" targets="Method fedex.base_service.FedexBaseService.create_wsdl_object_of_type()=fedex.base_service.FedexBaseService-class.html#create_wsdl_object_of_type"><a title="fedex.base_service.FedexBaseService.create_wsdl_object_of_type" class="py-name" href="#" onclick="return doclink('link-39', 'create_wsdl_object_of_type', 'link-39');">create_wsdl_object_of_type</a></tt><tt class="py-op">(</tt><tt class="py-string">'Weight'</tt><tt class="py-op">)</tt> </tt>
+<a name="L48"></a><tt class="py-lineno">48</tt>  <tt class="py-line"><tt id="link-40" class="py-name"><a title="label_certification.express.package1_weight
+label_certification.ground.package1_weight" class="py-name" href="#" onclick="return doclink('link-40', 'package1_weight', 'link-37');">package1_weight</a></tt><tt class="py-op">.</tt><tt class="py-name">Value</tt> <tt class="py-op">=</tt> <tt class="py-number">1.0</tt> </tt>
+<a name="L49"></a><tt class="py-lineno">49</tt>  <tt class="py-line"><tt id="link-41" class="py-name"><a title="label_certification.express.package1_weight
+label_certification.ground.package1_weight" class="py-name" href="#" onclick="return doclink('link-41', 'package1_weight', 'link-37');">package1_weight</a></tt><tt class="py-op">.</tt><tt class="py-name">Units</tt> <tt class="py-op">=</tt> <tt class="py-string">"LB"</tt> </tt>
+<a name="L50"></a><tt class="py-lineno">50</tt>  <tt class="py-line"><tt id="link-42" class="py-name" targets="Variable label_certification.express.package1=label_certification.express-module.html#package1,Variable label_certification.ground.package1=label_certification.ground-module.html#package1"><a title="label_certification.express.package1
+label_certification.ground.package1" class="py-name" href="#" onclick="return doclink('link-42', 'package1', 'link-42');">package1</a></tt> <tt class="py-op">=</tt> <tt id="link-43" class="py-name"><a title="label_certification.express.shipment
+label_certification.ground.shipment" class="py-name" href="#" onclick="return doclink('link-43', 'shipment', 'link-12');">shipment</a></tt><tt class="py-op">.</tt><tt id="link-44" class="py-name"><a title="fedex.base_service.FedexBaseService.create_wsdl_object_of_type" class="py-name" href="#" onclick="return doclink('link-44', 'create_wsdl_object_of_type', 'link-39');">create_wsdl_object_of_type</a></tt><tt class="py-op">(</tt><tt class="py-string">'RequestedPackageLineItem'</tt><tt class="py-op">)</tt> </tt>
+<a name="L51"></a><tt class="py-lineno">51</tt>  <tt class="py-line"><tt id="link-45" class="py-name"><a title="label_certification.express.package1
+label_certification.ground.package1" class="py-name" href="#" onclick="return doclink('link-45', 'package1', 'link-42');">package1</a></tt><tt class="py-op">.</tt><tt class="py-name">Weight</tt> <tt class="py-op">=</tt> <tt id="link-46" class="py-name"><a title="label_certification.express.package1_weight
+label_certification.ground.package1_weight" class="py-name" href="#" onclick="return doclink('link-46', 'package1_weight', 'link-37');">package1_weight</a></tt> </tt>
+<a name="L52"></a><tt class="py-lineno">52</tt>  <tt class="py-line"><tt id="link-47" class="py-name"><a title="label_certification.express.shipment
+label_certification.ground.shipment" class="py-name" href="#" onclick="return doclink('link-47', 'shipment', 'link-12');">shipment</a></tt><tt class="py-op">.</tt><tt id="link-48" class="py-name" targets="Method fedex.services.ship_service.FedexProcessShipmentRequest.add_package()=fedex.services.ship_service.FedexProcessShipmentRequest-class.html#add_package"><a title="fedex.services.ship_service.FedexProcessShipmentRequest.add_package" class="py-name" href="#" onclick="return doclink('link-48', 'add_package', 'link-48');">add_package</a></tt><tt class="py-op">(</tt><tt id="link-49" class="py-name"><a title="label_certification.express.package1
+label_certification.ground.package1" class="py-name" href="#" onclick="return doclink('link-49', 'package1', 'link-42');">package1</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L53"></a><tt class="py-lineno">53</tt>  <tt class="py-line"> </tt>
+<a name="L54"></a><tt class="py-lineno">54</tt>  <tt class="py-line"><tt class="py-keyword">if</tt> <tt class="py-name">__name__</tt> <tt class="py-op">==</tt> <tt class="py-string">"__main__"</tt><tt class="py-op">:</tt> </tt>
+<a name="L55"></a><tt class="py-lineno">55</tt>  <tt class="py-line">    <tt id="link-50" class="py-name"><a title="label_certification.express.shipment
+label_certification.ground.shipment" class="py-name" href="#" onclick="return doclink('link-50', 'shipment', 'link-12');">shipment</a></tt><tt class="py-op">.</tt><tt id="link-51" class="py-name" targets="Method fedex.base_service.FedexBaseService.send_request()=fedex.base_service.FedexBaseService-class.html#send_request"><a title="fedex.base_service.FedexBaseService.send_request" class="py-name" href="#" onclick="return doclink('link-51', 'send_request', 'link-51');">send_request</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L56"></a><tt class="py-lineno">56</tt>  <tt class="py-line">    <tt class="py-name">device</tt> <tt class="py-op">=</tt> <tt class="py-name">LabelPrinterClass</tt><tt class="py-op">(</tt><tt id="link-52" class="py-name"><a title="label_certification.express.shipment
+label_certification.ground.shipment" class="py-name" href="#" onclick="return doclink('link-52', 'shipment', 'link-12');">shipment</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L57"></a><tt class="py-lineno">57</tt>  <tt class="py-line">    <tt class="py-name">device</tt><tt class="py-op">.</tt><tt id="link-53" class="py-name" targets="Method fedex.printers.unix.DirectDevicePrinter.print_label()=fedex.printers.unix.DirectDevicePrinter-class.html#print_label"><a title="fedex.printers.unix.DirectDevicePrinter.print_label" class="py-name" href="#" onclick="return doclink('link-53', 'print_label', 'link-53');">print_label</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L58"></a><tt class="py-lineno">58</tt>  <tt class="py-line">     </tt>
+<a name="L59"></a><tt class="py-lineno">59</tt>  <tt class="py-line">    <tt id="link-54" class="py-name"><a title="label_certification.express.shipment
+label_certification.ground.shipment" class="py-name" href="#" onclick="return doclink('link-54', 'shipment', 'link-12');">shipment</a></tt><tt class="py-op">.</tt><tt class="py-name">RequestedShipment</tt><tt class="py-op">.</tt><tt class="py-name">Recipient</tt><tt class="py-op">.</tt><tt class="py-name">Address</tt><tt class="py-op">.</tt><tt class="py-name">StreetLines</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-string">'456 Peach St'</tt><tt class="py-op">]</tt> </tt>
+<a name="L60"></a><tt class="py-lineno">60</tt>  <tt class="py-line">    <tt id="link-55" class="py-name"><a title="label_certification.express.shipment
+label_certification.ground.shipment" class="py-name" href="#" onclick="return doclink('link-55', 'shipment', 'link-12');">shipment</a></tt><tt class="py-op">.</tt><tt class="py-name">RequestedShipment</tt><tt class="py-op">.</tt><tt class="py-name">Recipient</tt><tt class="py-op">.</tt><tt class="py-name">Address</tt><tt class="py-op">.</tt><tt class="py-name">City</tt> <tt class="py-op">=</tt> <tt class="py-string">'Atlanta'</tt> </tt>
+<a name="L61"></a><tt class="py-lineno">61</tt>  <tt class="py-line">    <tt id="link-56" class="py-name"><a title="label_certification.express.shipment
+label_certification.ground.shipment" class="py-name" href="#" onclick="return doclink('link-56', 'shipment', 'link-12');">shipment</a></tt><tt class="py-op">.</tt><tt class="py-name">RequestedShipment</tt><tt class="py-op">.</tt><tt class="py-name">Recipient</tt><tt class="py-op">.</tt><tt class="py-name">Address</tt><tt class="py-op">.</tt><tt class="py-name">StateOrProvinceCode</tt> <tt class="py-op">=</tt> <tt class="py-string">'GA'</tt> </tt>
+<a name="L62"></a><tt class="py-lineno">62</tt>  <tt class="py-line">    <tt id="link-57" class="py-name"><a title="label_certification.express.shipment
+label_certification.ground.shipment" class="py-name" href="#" onclick="return doclink('link-57', 'shipment', 'link-12');">shipment</a></tt><tt class="py-op">.</tt><tt class="py-name">RequestedShipment</tt><tt class="py-op">.</tt><tt class="py-name">Recipient</tt><tt class="py-op">.</tt><tt class="py-name">Address</tt><tt class="py-op">.</tt><tt class="py-name">PostalCode</tt> <tt class="py-op">=</tt> <tt class="py-string">'30303'</tt> </tt>
+<a name="L63"></a><tt class="py-lineno">63</tt>  <tt class="py-line">    <tt id="link-58" class="py-name"><a title="label_certification.express.shipment
+label_certification.ground.shipment" class="py-name" href="#" onclick="return doclink('link-58', 'shipment', 'link-12');">shipment</a></tt><tt class="py-op">.</tt><tt class="py-name">RequestedShipment</tt><tt class="py-op">.</tt><tt class="py-name">Recipient</tt><tt class="py-op">.</tt><tt class="py-name">Address</tt><tt class="py-op">.</tt><tt class="py-name">CountryCode</tt> <tt class="py-op">=</tt> <tt class="py-string">'US'</tt> </tt>
+<a name="L64"></a><tt class="py-lineno">64</tt>  <tt class="py-line">     </tt>
+<a name="L65"></a><tt class="py-lineno">65</tt>  <tt class="py-line">    <tt id="link-59" class="py-name"><a title="label_certification.express.shipment
+label_certification.ground.shipment" class="py-name" href="#" onclick="return doclink('link-59', 'shipment', 'link-12');">shipment</a></tt><tt class="py-op">.</tt><tt id="link-60" class="py-name"><a title="fedex.base_service.FedexBaseService.send_request" class="py-name" href="#" onclick="return doclink('link-60', 'send_request', 'link-51');">send_request</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L66"></a><tt class="py-lineno">66</tt>  <tt class="py-line">    <tt class="py-name">device</tt> <tt class="py-op">=</tt> <tt class="py-name">LabelPrinterClass</tt><tt class="py-op">(</tt><tt id="link-61" class="py-name"><a title="label_certification.express.shipment
+label_certification.ground.shipment" class="py-name" href="#" onclick="return doclink('link-61', 'shipment', 'link-12');">shipment</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L67"></a><tt class="py-lineno">67</tt>  <tt class="py-line">    <tt class="py-name">device</tt><tt class="py-op">.</tt><tt id="link-62" class="py-name"><a title="fedex.printers.unix.DirectDevicePrinter.print_label" class="py-name" href="#" onclick="return doclink('link-62', 'print_label', 'link-53');">print_label</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L68"></a><tt class="py-lineno">68</tt>  <tt class="py-line">     </tt>
+<a name="L69"></a><tt class="py-lineno">69</tt>  <tt class="py-line">    <tt id="link-63" class="py-name"><a title="label_certification.express.shipment
+label_certification.ground.shipment" class="py-name" href="#" onclick="return doclink('link-63', 'shipment', 'link-12');">shipment</a></tt><tt class="py-op">.</tt><tt class="py-name">RequestedShipment</tt><tt class="py-op">.</tt><tt class="py-name">Recipient</tt><tt class="py-op">.</tt><tt class="py-name">Address</tt><tt class="py-op">.</tt><tt class="py-name">StreetLines</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-string">'987 Main St'</tt><tt class="py-op">]</tt> </tt>
+<a name="L70"></a><tt class="py-lineno">70</tt>  <tt class="py-line">    <tt id="link-64" class="py-name"><a title="label_certification.express.shipment
+label_certification.ground.shipment" class="py-name" href="#" onclick="return doclink('link-64', 'shipment', 'link-12');">shipment</a></tt><tt class="py-op">.</tt><tt class="py-name">RequestedShipment</tt><tt class="py-op">.</tt><tt class="py-name">Recipient</tt><tt class="py-op">.</tt><tt class="py-name">Address</tt><tt class="py-op">.</tt><tt class="py-name">City</tt> <tt class="py-op">=</tt> <tt class="py-string">'Boston'</tt> </tt>
+<a name="L71"></a><tt class="py-lineno">71</tt>  <tt class="py-line">    <tt id="link-65" class="py-name"><a title="label_certification.express.shipment
+label_certification.ground.shipment" class="py-name" href="#" onclick="return doclink('link-65', 'shipment', 'link-12');">shipment</a></tt><tt class="py-op">.</tt><tt class="py-name">RequestedShipment</tt><tt class="py-op">.</tt><tt class="py-name">Recipient</tt><tt class="py-op">.</tt><tt class="py-name">Address</tt><tt class="py-op">.</tt><tt class="py-name">StateOrProvinceCode</tt> <tt class="py-op">=</tt> <tt class="py-string">'MA'</tt> </tt>
+<a name="L72"></a><tt class="py-lineno">72</tt>  <tt class="py-line">    <tt id="link-66" class="py-name"><a title="label_certification.express.shipment
+label_certification.ground.shipment" class="py-name" href="#" onclick="return doclink('link-66', 'shipment', 'link-12');">shipment</a></tt><tt class="py-op">.</tt><tt class="py-name">RequestedShipment</tt><tt class="py-op">.</tt><tt class="py-name">Recipient</tt><tt class="py-op">.</tt><tt class="py-name">Address</tt><tt class="py-op">.</tt><tt class="py-name">PostalCode</tt> <tt class="py-op">=</tt> <tt class="py-string">'02115'</tt> </tt>
+<a name="L73"></a><tt class="py-lineno">73</tt>  <tt class="py-line">    <tt id="link-67" class="py-name"><a title="label_certification.express.shipment
+label_certification.ground.shipment" class="py-name" href="#" onclick="return doclink('link-67', 'shipment', 'link-12');">shipment</a></tt><tt class="py-op">.</tt><tt class="py-name">RequestedShipment</tt><tt class="py-op">.</tt><tt class="py-name">Recipient</tt><tt class="py-op">.</tt><tt class="py-name">Address</tt><tt class="py-op">.</tt><tt class="py-name">CountryCode</tt> <tt class="py-op">=</tt> <tt class="py-string">'US'</tt> </tt>
+<a name="L74"></a><tt class="py-lineno">74</tt>  <tt class="py-line">     </tt>
+<a name="L75"></a><tt class="py-lineno">75</tt>  <tt class="py-line">    <tt id="link-68" class="py-name"><a title="label_certification.express.shipment
+label_certification.ground.shipment" class="py-name" href="#" onclick="return doclink('link-68', 'shipment', 'link-12');">shipment</a></tt><tt class="py-op">.</tt><tt id="link-69" class="py-name"><a title="fedex.base_service.FedexBaseService.send_request" class="py-name" href="#" onclick="return doclink('link-69', 'send_request', 'link-51');">send_request</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L76"></a><tt class="py-lineno">76</tt>  <tt class="py-line">    <tt class="py-name">device</tt> <tt class="py-op">=</tt> <tt class="py-name">LabelPrinterClass</tt><tt class="py-op">(</tt><tt id="link-70" class="py-name"><a title="label_certification.express.shipment
+label_certification.ground.shipment" class="py-name" href="#" onclick="return doclink('link-70', 'shipment', 'link-12');">shipment</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L77"></a><tt class="py-lineno">77</tt>  <tt class="py-line">    <tt class="py-name">device</tt><tt class="py-op">.</tt><tt id="link-71" class="py-name"><a title="fedex.printers.unix.DirectDevicePrinter.print_label" class="py-name" href="#" onclick="return doclink('link-71', 'print_label', 'link-53');">print_label</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L78"></a><tt class="py-lineno">78</tt>  <tt class="py-line"> </tt><script type="text/javascript">
+<!--
+expandto(location.href);
+// -->
+</script>
+</pre>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://code.google.com/p/python-fedex/">python-fedex</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Thu Mar 25 11:01:55 2010
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>
