@@ -14,6 +14,7 @@ logging.basicConfig(level=logging.INFO)
 del_request = FedexDeleteShipmentRequest(CONFIG_OBJ)
 
 # Either delete all packages in a shipment, or delete an individual package.
+# Docs say this isn't required, but the WSDL won't validate without it.
 # DELETE_ALL_PACKAGES, DELETE_ONE_PACKAGE
 del_request.DeletionControlType = "DELETE_ALL_PACKAGES"
 
@@ -21,6 +22,7 @@ del_request.DeletionControlType = "DELETE_ALL_PACKAGES"
 del_request.TrackingId.TrackingNumber = '794798682968'
 
 # What kind of shipment the tracking number used.
+# Docs say this isn't required, but the WSDL won't validate without it.
 # EXPRESS, GROUND, or USPS
 del_request.TrackingId.TrackingIdType = 'EXPRESS'
 
