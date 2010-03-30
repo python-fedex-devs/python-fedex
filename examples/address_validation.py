@@ -4,7 +4,6 @@ This example shows how to validate addresses. Note that the validation
 class can handle up to 100 addresses for validation.
 """
 import logging
-import binascii
 from example_config import CONFIG_OBJ
 from fedex.services.address_validation_service import FedexAddressValidationRequest
 
