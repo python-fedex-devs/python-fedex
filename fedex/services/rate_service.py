@@ -1,7 +1,7 @@
 """
 Rate Service Module
 ===================
-Use the RateService WSDL to request pre-ship rating information and to
+This package contains classes to request pre-ship rating information and to
 determine estimated or courtesy billing quotes. Time in Transit can be
 returned with the rates if it is specified in the request.
 """

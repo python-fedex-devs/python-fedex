@@ -13,8 +13,8 @@ from suds.client import Client
 
 class FedexBaseServiceException(Exception):
     """
-    Serves as the base exception that other service-related exception objects
-    are sub-classed from.
+    Exception: Serves as the base exception that other service-related 
+    exception objects are sub-classed from.
     """
     def __init__(self, error_code, value):
         self.error_code = error_code
@@ -26,20 +26,20 @@ class FedexBaseServiceException(Exception):
     
 class FedexFailure(FedexBaseServiceException):
     """
-    The request could not be handled at this time. This is generally a server
-    problem.
+    Exception: The request could not be handled at this time. This is generally 
+    a server problem.
     """
     pass
 
 class FedexError(FedexBaseServiceException):
     """
-    These are generally problems with the client-provided data.
+    Exception: These are generally problems with the client-provided data.
     """
     pass
 
 class SchemaValidationError(FedexBaseServiceException):
     """
-    There is probably a problem in the data you provided.
+    Exception: There is probably a problem in the data you provided.
     """
     def __init__(self):
         self.error_code = -1

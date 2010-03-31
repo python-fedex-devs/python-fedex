@@ -9,13 +9,13 @@ from .. base_service import FedexBaseService, FedexError
 
 class FedexPostalCodeNotFound(FedexError):
     """
-    Sent when the postalcode is missing.
+    Exception: Sent when the postalcode is missing.
     """
     pass
 
 class FedexInvalidPostalCodeFormat(FedexError):
     """
-    Sent when the postal code is invalid
+    Exception: Sent when the postal code is invalid
     """
     pass
 

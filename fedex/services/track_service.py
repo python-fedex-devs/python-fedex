@@ -10,7 +10,7 @@ from .. base_service import FedexBaseService, FedexError
 
 class FedexInvalidTrackingNumber(FedexError):
     """
-    Sent when a bad tracking number is provided.
+    Exception: Sent when a bad tracking number is provided.
     """
     pass
 

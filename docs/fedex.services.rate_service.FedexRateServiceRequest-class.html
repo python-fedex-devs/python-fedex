@@ -3,7 +3,7 @@
           "DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
-  <title>fedex.services.address_validation_service.FedexAddressValidationRequest</title>
+  <title>fedex.services.rate_service.FedexRateServiceRequest</title>
   <link rel="stylesheet" href="epydoc.css" type="text/css" />
   <script type="text/javascript" src="epydoc.js"></script>
 </head>
@@ -44,8 +44,8 @@
       <span class="breadcrumbs">
         <a href="fedex-module.html">Package&nbsp;fedex</a> ::
         <a href="fedex.services-module.html">Package&nbsp;services</a> ::
-        <a href="fedex.services.address_validation_service-module.html">Module&nbsp;address_validation_service</a> ::
-        Class&nbsp;FedexAddressValidationRequest
+        <a href="fedex.services.rate_service-module.html">Module&nbsp;rate_service</a> ::
+        Class&nbsp;FedexRateServiceRequest
       </span>
     </td>
     <td>
@@ -55,39 +55,38 @@
     onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
         <tr><td align="right"><span class="options"
             >[<a href="frames.html" target="_top">frames</a
-            >]&nbsp;|&nbsp;<a href="fedex.services.address_validation_service.FedexAddressValidationRequest-class.html"
+            >]&nbsp;|&nbsp;<a href="fedex.services.rate_service.FedexRateServiceRequest-class.html"
             target="_top">no&nbsp;frames</a>]</span></td></tr>
       </table>
     </td>
   </tr>
 </table>
 <!-- ==================== CLASS DESCRIPTION ==================== -->
-<h1 class="epydoc">Class FedexAddressValidationRequest</h1><p class="nomargin-top"><span class="codelink"><a href="fedex.services.address_validation_service-pysrc.html#FedexAddressValidationRequest">source&nbsp;code</a></span></p>
+<h1 class="epydoc">Class FedexRateServiceRequest</h1><p class="nomargin-top"><span class="codelink"><a href="fedex.services.rate_service-pysrc.html#FedexRateServiceRequest">source&nbsp;code</a></span></p>
 <center>
-<center>  <map id="uml_class_diagram_for_fedex_se" name="uml_class_diagram_for_fedex_se">
-<area shape="rect" id="node33" href="fedex.services.address_validation_service.FedexAddressValidationRequest-class.html#AddressValidationOptions" title="Holds the AddressValidationOptions WSDL object." alt="" coords="32,252,316,271"/>
-<area shape="rect" id="node33" href="fedex.services.address_validation_service.FedexAddressValidationRequest-class.html#addresses_to_validate" title="Holds the AddressToValidate WSDL object." alt="" coords="32,271,316,289"/>
-<area shape="rect" id="node33" href="fedex.services.address_validation_service.FedexAddressValidationRequest-class.html#__init__" title="This constructor should only be called by children of the class." alt="" coords="32,292,316,311"/>
-<area shape="rect" id="node33" href="fedex.services.address_validation_service.FedexAddressValidationRequest-class.html#add_address" title="Adds an address to self.addresses_to_validate." alt="" coords="32,311,316,329"/>
-<area shape="rect" id="node1" href="fedex.services.address_validation_service.FedexAddressValidationRequest-class.html" title="This class allows you validate anywhere from one to a hundred addresses in one go." alt="" coords="20,227,327,335"/>
-<area shape="rect" id="node34" href="fedex.base_service.FedexBaseService-class.html#logger" title="Python logger instance with name &#39;fedex&#39;." alt="" coords="17,31,331,49"/>
-<area shape="rect" id="node34" href="fedex.base_service.FedexBaseService-class.html#config_obj" title="The FedexConfig object to pull auth info from." alt="" coords="17,49,331,68"/>
-<area shape="rect" id="node34" href="fedex.base_service.FedexBaseService-class.html#VersionId" title="Holds details on the version numbers of the WSDL." alt="" coords="17,68,331,87"/>
-<area shape="rect" id="node34" href="fedex.base_service.FedexBaseService-class.html#WebAuthenticationDetail" title="WSDL object that holds authentication info." alt="" coords="17,87,331,105"/>
-<area shape="rect" id="node34" href="fedex.base_service.FedexBaseService-class.html#ClientDetail" title="WSDL object that holds client account details." alt="" coords="17,105,331,124"/>
-<area shape="rect" id="node34" href="fedex.base_service.FedexBaseService-class.html#response" title="The response from Fedex." alt="" coords="17,124,331,143"/>
-<area shape="rect" id="node34" href="fedex.base_service.FedexBaseService-class.html#TransactionDetail" title="Holds customer&#45;specified transaction IDs." alt="" coords="17,143,331,161"/>
-<area shape="rect" id="node34" href="fedex.base_service.FedexBaseService-class.html#create_wsdl_object_of_type" title="Creates and returns a WSDL object of the specified type." alt="" coords="17,164,331,183"/>
-<area shape="rect" id="node34" href="fedex.base_service.FedexBaseService-class.html#send_request" title="Sends the assembled request on the child object." alt="" coords="17,183,331,201"/>
+<center>  <map id="uml_class_diagram_for_fedex_se_5" name="uml_class_diagram_for_fedex_se_5">
+<area shape="rect" id="node47" href="fedex.services.rate_service.FedexRateServiceRequest-class.html#RequestedShipment" title="Holds the RequestedShipment WSDL object." alt="" coords="32,252,316,271"/>
+<area shape="rect" id="node47" href="fedex.services.rate_service.FedexRateServiceRequest-class.html#__init__" title="The optional keyword args detailed on FedexBaseService apply here as well." alt="" coords="32,273,316,292"/>
+<area shape="rect" id="node47" href="fedex.services.rate_service.FedexRateServiceRequest-class.html#add_package" title="Adds a package to the ship request." alt="" coords="32,292,316,311"/>
+<area shape="rect" id="node1" href="fedex.services.rate_service.FedexRateServiceRequest-class.html" title="This class allows you to get the shipping charges for a particular address." alt="" coords="20,227,327,317"/>
+<area shape="rect" id="node48" href="fedex.base_service.FedexBaseService-class.html#logger" title="Python logger instance with name &#39;fedex&#39;." alt="" coords="17,31,331,49"/>
+<area shape="rect" id="node48" href="fedex.base_service.FedexBaseService-class.html#config_obj" title="The FedexConfig object to pull auth info from." alt="" coords="17,49,331,68"/>
+<area shape="rect" id="node48" href="fedex.base_service.FedexBaseService-class.html#VersionId" title="Holds details on the version numbers of the WSDL." alt="" coords="17,68,331,87"/>
+<area shape="rect" id="node48" href="fedex.base_service.FedexBaseService-class.html#WebAuthenticationDetail" title="WSDL object that holds authentication info." alt="" coords="17,87,331,105"/>
+<area shape="rect" id="node48" href="fedex.base_service.FedexBaseService-class.html#ClientDetail" title="WSDL object that holds client account details." alt="" coords="17,105,331,124"/>
+<area shape="rect" id="node48" href="fedex.base_service.FedexBaseService-class.html#response" title="The response from Fedex." alt="" coords="17,124,331,143"/>
+<area shape="rect" id="node48" href="fedex.base_service.FedexBaseService-class.html#TransactionDetail" title="Holds customer&#45;specified transaction IDs." alt="" coords="17,143,331,161"/>
+<area shape="rect" id="node48" href="fedex.base_service.FedexBaseService-class.html#create_wsdl_object_of_type" title="Creates and returns a WSDL object of the specified type." alt="" coords="17,164,331,183"/>
+<area shape="rect" id="node48" href="fedex.base_service.FedexBaseService-class.html#send_request" title="Sends the assembled request on the child object." alt="" coords="17,183,331,201"/>
 <area shape="rect" id="node2" href="fedex.base_service.FedexBaseService-class.html" title="This class is the master class for all Fedex request objects." alt="" coords="5,6,341,207"/>
 </map>
-  <img src="uml_class_diagram_for_fedex_se.gif" alt='' usemap="#uml_class_diagram_for_fedex_se" ismap="ismap" class="graph-without-title" />
+  <img src="uml_class_diagram_for_fedex_se_5.gif" alt='' usemap="#uml_class_diagram_for_fedex_se_5" ismap="ismap" class="graph-without-title" />
 </center>
 </center>
 <hr />
-<p>This class allows you validate anywhere from one to a hundred 
-  addresses in one go. Create AddressToValidate WSDL objects and add them 
-  to each instance of this request using add_address().</p>
+<p>This class allows you to get the shipping charges for a particular 
+  address. You will need to populate the data structures in 
+  self.RequestedShipment, then send the request.</p>
 
 <!-- ==================== INSTANCE METHODS ==================== -->
 <a name="section-InstanceMethods"></a>
@@ -112,13 +111,15 @@
     </td><td class="summary">
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
-          <td><span class="summary-sig"><a href="fedex.services.address_validation_service.FedexAddressValidationRequest-class.html#__init__" class="summary-sig-name">__init__</a>(<span class="summary-sig-arg">self</span>,
+          <td><span class="summary-sig"><a href="fedex.services.rate_service.FedexRateServiceRequest-class.html#__init__" class="summary-sig-name">__init__</a>(<span class="summary-sig-arg">self</span>,
         <span class="summary-sig-arg">config_obj</span>,
         <span class="summary-sig-arg">*args</span>,
         <span class="summary-sig-arg">**kwargs</span>)</span><br />
-      This constructor should only be called by children of the class.</td>
+      The optional keyword args detailed on <a 
+      href="fedex.base_service.FedexBaseService-class.html" 
+      class="link">FedexBaseService</a> apply here as well.</td>
           <td align="right" valign="top">
-            <span class="codelink"><a href="fedex.services.address_validation_service-pysrc.html#FedexAddressValidationRequest.__init__">source&nbsp;code</a></span>
+            <span class="codelink"><a href="fedex.services.rate_service-pysrc.html#FedexRateServiceRequest.__init__">source&nbsp;code</a></span>
             
           </td>
         </tr>
@@ -132,10 +133,10 @@
     </td><td class="summary">
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
-          <td><span class="summary-sig"><a name="_prepare_wsdl_objects"></a><span class="summary-sig-name">_prepare_wsdl_objects</span>(<span class="summary-sig-arg">self</span>)</span><br />
-      Create the data structure and get it ready for the WSDL request.</td>
+          <td><span class="summary-sig"><a href="fedex.services.rate_service.FedexRateServiceRequest-class.html#_prepare_wsdl_objects" class="summary-sig-name" onclick="show_private();">_prepare_wsdl_objects</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      This is the data that will be used to create your shipment.</td>
           <td align="right" valign="top">
-            <span class="codelink"><a href="fedex.services.address_validation_service-pysrc.html#FedexAddressValidationRequest._prepare_wsdl_objects">source&nbsp;code</a></span>
+            <span class="codelink"><a href="fedex.services.rate_service-pysrc.html#FedexRateServiceRequest._prepare_wsdl_objects">source&nbsp;code</a></span>
             
           </td>
         </tr>
@@ -149,10 +150,10 @@
     </td><td class="summary">
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
-          <td><span class="summary-sig"><a href="fedex.services.address_validation_service.FedexAddressValidationRequest-class.html#_assemble_and_send_request" class="summary-sig-name" onclick="show_private();">_assemble_and_send_request</a>(<span class="summary-sig-arg">self</span>)</span><br />
+          <td><span class="summary-sig"><a href="fedex.services.rate_service.FedexRateServiceRequest-class.html#_assemble_and_send_request" class="summary-sig-name" onclick="show_private();">_assemble_and_send_request</a>(<span class="summary-sig-arg">self</span>)</span><br />
       Fires off the Fedex request.</td>
           <td align="right" valign="top">
-            <span class="codelink"><a href="fedex.services.address_validation_service-pysrc.html#FedexAddressValidationRequest._assemble_and_send_request">source&nbsp;code</a></span>
+            <span class="codelink"><a href="fedex.services.rate_service-pysrc.html#FedexRateServiceRequest._assemble_and_send_request">source&nbsp;code</a></span>
             
           </td>
         </tr>
@@ -166,11 +167,11 @@
     </td><td class="summary">
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
-          <td><span class="summary-sig"><a href="fedex.services.address_validation_service.FedexAddressValidationRequest-class.html#add_address" class="summary-sig-name">add_address</a>(<span class="summary-sig-arg">self</span>,
-        <span class="summary-sig-arg">address_item</span>)</span><br />
-      Adds an address to self.addresses_to_validate.</td>
+          <td><span class="summary-sig"><a href="fedex.services.rate_service.FedexRateServiceRequest-class.html#add_package" class="summary-sig-name">add_package</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">package_item</span>)</span><br />
+      Adds a package to the ship request.</td>
           <td align="right" valign="top">
-            <span class="codelink"><a href="fedex.services.address_validation_service-pysrc.html#FedexAddressValidationRequest.add_address">source&nbsp;code</a></span>
+            <span class="codelink"><a href="fedex.services.rate_service-pysrc.html#FedexRateServiceRequest.add_package">source&nbsp;code</a></span>
             
           </td>
         </tr>
@@ -225,16 +226,8 @@
     <td width="15%" align="right" valign="top" class="summary">
       <span class="summary-type">&nbsp;</span>
     </td><td class="summary">
-        <a name="AddressValidationOptions"></a><span class="summary-name">AddressValidationOptions</span><br />
-      Holds the AddressValidationOptions WSDL object.
-    </td>
-  </tr>
-<tr>
-    <td width="15%" align="right" valign="top" class="summary">
-      <span class="summary-type">&nbsp;</span>
-    </td><td class="summary">
-        <a name="addresses_to_validate"></a><span class="summary-name">addresses_to_validate</span><br />
-      Holds the AddressToValidate WSDL object.
+        <a name="RequestedShipment"></a><span class="summary-name">RequestedShipment</span><br />
+      Holds the RequestedShipment WSDL object.
     </td>
   </tr>
   <tr>
@@ -308,13 +301,13 @@
     <br /><em class="fname">(Constructor)</em>
   </h3>
   </td><td align="right" valign="top"
-    ><span class="codelink"><a href="fedex.services.address_validation_service-pysrc.html#FedexAddressValidationRequest.__init__">source&nbsp;code</a></span>&nbsp;
+    ><span class="codelink"><a href="fedex.services.rate_service-pysrc.html#FedexRateServiceRequest.__init__">source&nbsp;code</a></span>&nbsp;
     </td>
   </tr></table>
   
-  <p>This constructor should only be called by children of the class. As is
-  such, only the optional keyword arguments caught by <code>**kwargs</code>
-  will be documented.</p>
+  <p>The optional keyword args detailed on <a 
+  href="fedex.base_service.FedexBaseService-class.html" 
+  class="link">FedexBaseService</a> apply here as well.</p>
   <dl class="fields">
     <dt>Parameters:</dt>
     <dd><ul class="nomargin-top">
@@ -324,6 +317,26 @@
     <dt>Overrides:
         object.__init__
     </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="_prepare_wsdl_objects"></a>
+<div class="private">
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">_prepare_wsdl_objects</span>(<span class="sig-arg">self</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="fedex.services.rate_service-pysrc.html#FedexRateServiceRequest._prepare_wsdl_objects">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>This is the data that will be used to create your shipment. Create the
+  data structure and get it ready for the WSDL request.</p>
+  <dl class="fields">
   </dl>
 </td></tr></table>
 </div>
@@ -337,7 +350,7 @@
   <h3 class="epydoc"><span class="sig"><span class="sig-name">_assemble_and_send_request</span>(<span class="sig-arg">self</span>)</span>
   </h3>
   </td><td align="right" valign="top"
-    ><span class="codelink"><a href="fedex.services.address_validation_service-pysrc.html#FedexAddressValidationRequest._assemble_and_send_request">source&nbsp;code</a></span>&nbsp;
+    ><span class="codelink"><a href="fedex.services.rate_service-pysrc.html#FedexRateServiceRequest._assemble_and_send_request">source&nbsp;code</a></span>&nbsp;
     </td>
   </tr></table>
   
@@ -350,29 +363,29 @@
       </p>
 </div></td></tr></table>
 </div>
-<a name="add_address"></a>
+<a name="add_package"></a>
 <div>
 <table class="details" border="1" cellpadding="3"
        cellspacing="0" width="100%" bgcolor="white">
 <tr><td>
   <table width="100%" cellpadding="0" cellspacing="0" border="0">
   <tr valign="top"><td>
-  <h3 class="epydoc"><span class="sig"><span class="sig-name">add_address</span>(<span class="sig-arg">self</span>,
-        <span class="sig-arg">address_item</span>)</span>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">add_package</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">package_item</span>)</span>
   </h3>
   </td><td align="right" valign="top"
-    ><span class="codelink"><a href="fedex.services.address_validation_service-pysrc.html#FedexAddressValidationRequest.add_address">source&nbsp;code</a></span>&nbsp;
+    ><span class="codelink"><a href="fedex.services.rate_service-pysrc.html#FedexRateServiceRequest.add_package">source&nbsp;code</a></span>&nbsp;
     </td>
   </tr></table>
   
-  <p>Adds an address to self.addresses_to_validate.</p>
+  <p>Adds a package to the ship request.</p>
   <dl class="fields">
     <dt>Parameters:</dt>
     <dd><ul class="nomargin-top">
-        <li><strong class="pname"><code>address_item</code></strong> (WSDL object, type of AddressToValidate WSDL object.) - A AddressToValidate, created by calling 
-          create_wsdl_object_of_type('AddressToValidate') on this 
-          FedexAddressValidationRequest object. See 
-          examples/create_shipment.py for more details.</li>
+        <li><strong class="pname"><code>package_item</code></strong> (WSDL object, type of RequestedPackageLineItem WSDL object.) - A RequestedPackageLineItem, created by calling 
+          create_wsdl_object_of_type('RequestedPackageLineItem') on this 
+          ShipmentRequest object. See examples/create_shipment.py for more 
+          details.</li>
     </ul></dd>
   </dl>
 </td></tr></table>

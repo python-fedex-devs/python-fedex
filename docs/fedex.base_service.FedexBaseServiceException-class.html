@@ -64,34 +64,36 @@
 <h1 class="epydoc">Class FedexBaseServiceException</h1><p class="nomargin-top"><span class="codelink"><a href="fedex.base_service-pysrc.html#FedexBaseServiceException">source&nbsp;code</a></span></p>
 <center>
 <center>  <map id="uml_class_diagram_for_fedex_ba_2" name="uml_class_diagram_for_fedex_ba_2">
-<area shape="rect" id="node6" href="javascript:void(0);" title="exceptions.Exception.__new__" alt="" coords="311,297,457,316"/>
-<area shape="rect" id="node1" href="javascript:void(0);" title="Common base class for all non&#45;exit exceptions." alt="" coords="299,265,469,322"/>
-<area shape="rect" id="node5" href="fedex.base_service.FedexBaseServiceException-class.html#__init__" title="x.__init__(...) initializes x; see x.__class__.__doc__ for signature" alt="" coords="273,375,493,393"/>
-<area shape="rect" id="node5" href="fedex.base_service.FedexBaseServiceException-class.html#__str__" title="str(x)" alt="" coords="273,393,493,412"/>
-<area shape="rect" id="node5" href="fedex.base_service.FedexBaseServiceException-class.html" title="Serves as the base exception that other service&#45;related exception objects are sub&#45;classed from." alt="" coords="261,342,504,418"/>
-<area shape="rect" id="node7" href="javascript:void(0);" title="exceptions.BaseException.args" alt="" coords="293,31,475,49"/>
-<area shape="rect" id="node7" href="javascript:void(0);" title="exceptions.BaseException.message" alt="" coords="293,49,475,68"/>
-<area shape="rect" id="node7" href="javascript:void(0);" title="x.__delattr__(&#39;name&#39;) &lt;==&gt; del x.name" alt="" coords="293,71,475,89"/>
-<area shape="rect" id="node7" href="javascript:void(0);" title="x.__getattribute__(&#39;name&#39;) &lt;==&gt; x.name" alt="" coords="293,89,475,108"/>
-<area shape="rect" id="node7" href="javascript:void(0);" title="x[y]" alt="" coords="293,108,475,127"/>
-<area shape="rect" id="node7" href="javascript:void(0);" title="x[i:j]" alt="" coords="293,127,475,145"/>
-<area shape="rect" id="node7" href="javascript:void(0);" title="helper for pickle" alt="" coords="293,145,475,164"/>
-<area shape="rect" id="node7" href="javascript:void(0);" title="repr(x)" alt="" coords="293,164,475,183"/>
-<area shape="rect" id="node7" href="javascript:void(0);" title="x.__setattr__(&#39;name&#39;, value) &lt;==&gt; x.name = value" alt="" coords="293,183,475,201"/>
-<area shape="rect" id="node7" href="javascript:void(0);" title="exceptions.BaseException.__setstate__" alt="" coords="293,201,475,220"/>
-<area shape="rect" id="node7" href="javascript:void(0);" title="exceptions.BaseException.__unicode__" alt="" coords="293,220,475,239"/>
-<area shape="rect" id="node2" href="javascript:void(0);" title="Common base class for all exceptions" alt="" coords="281,6,487,245"/>
-<area shape="rect" id="node3" href="fedex.services.track_service.FedexInvalidTrackingNumber-class.html" title="Sent when a bad tracking number is provided." alt="" coords="5,497,397,535"/>
-<area shape="rect" id="node4" href="fedex.base_service.FedexError-class.html" title="These are generally problems with the client&#45;provided data." alt="" coords="145,438,257,477"/>
-<area shape="rect" id="node6" href="fedex.base_service.SchemaValidationError-class.html" title="There is probably a problem in the data you provided." alt="" coords="287,438,481,477"/>
-<area shape="rect" id="node7" href="fedex.base_service.FedexFailure-class.html" title="The request could not be handled at this time." alt="" coords="511,438,636,477"/>
+<area shape="rect" id="node1" href="fedex.services.package_movement.FedexPostalCodeNotFound-class.html" title="Exception: Sent when the postalcode is missing." alt="" coords="5,497,429,535"/>
+<area shape="rect" id="node8" href="javascript:void(0);" title="exceptions.Exception.__new__" alt="" coords="463,279,609,297"/>
+<area shape="rect" id="node2" href="javascript:void(0);" title="Common base class for all non&#45;exit exceptions." alt="" coords="451,246,621,303"/>
+<area shape="rect" id="node7" href="fedex.base_service.FedexBaseServiceException-class.html#__init__" title="x.__init__(...) initializes x; see x.__class__.__doc__ for signature" alt="" coords="425,356,645,375"/>
+<area shape="rect" id="node7" href="fedex.base_service.FedexBaseServiceException-class.html#__str__" title="str(x)" alt="" coords="425,375,645,393"/>
+<area shape="rect" id="node7" href="fedex.base_service.FedexBaseServiceException-class.html#__unicode__" title="fedex.base_service.FedexBaseServiceException.__unicode__" alt="" coords="425,393,645,412"/>
+<area shape="rect" id="node4" href="fedex.base_service.FedexBaseServiceException-class.html" title="Exception: Serves as the base exception that other service&#45;related exception objects are sub&#45;classed from." alt="" coords="413,323,656,418"/>
+<area shape="rect" id="node3" href="fedex.services.package_movement.FedexInvalidPostalCodeFormat-class.html" title="Exception: Sent when the postal code is invalid" alt="" coords="459,497,909,535"/>
+<area shape="rect" id="node5" href="fedex.base_service.SchemaValidationError-class.html" title="Exception: There is probably a problem in the data you provided." alt="" coords="249,438,444,477"/>
+<area shape="rect" id="node6" href="fedex.base_service.FedexFailure-class.html" title="Exception: The request could not be handled at this time." alt="" coords="473,438,599,477"/>
+<area shape="rect" id="node8" href="fedex.base_service.FedexError-class.html" title="Exception: These are generally problems with the client&#45;provided data." alt="" coords="628,438,740,477"/>
+<area shape="rect" id="node7" href="fedex.services.track_service.FedexInvalidTrackingNumber-class.html" title="Exception: Sent when a bad tracking number is provided." alt="" coords="939,497,1331,535"/>
+<area shape="rect" id="node9" href="javascript:void(0);" title="exceptions.BaseException.args" alt="" coords="445,31,627,49"/>
+<area shape="rect" id="node9" href="javascript:void(0);" title="exceptions.BaseException.message" alt="" coords="445,49,627,68"/>
+<area shape="rect" id="node9" href="javascript:void(0);" title="x.__delattr__(&#39;name&#39;) &lt;==&gt; del x.name" alt="" coords="445,71,627,89"/>
+<area shape="rect" id="node9" href="javascript:void(0);" title="x.__getattribute__(&#39;name&#39;) &lt;==&gt; x.name" alt="" coords="445,89,627,108"/>
+<area shape="rect" id="node9" href="javascript:void(0);" title="x[y]" alt="" coords="445,108,627,127"/>
+<area shape="rect" id="node9" href="javascript:void(0);" title="x[i:j]" alt="" coords="445,127,627,145"/>
+<area shape="rect" id="node9" href="javascript:void(0);" title="helper for pickle" alt="" coords="445,145,627,164"/>
+<area shape="rect" id="node9" href="javascript:void(0);" title="repr(x)" alt="" coords="445,164,627,183"/>
+<area shape="rect" id="node9" href="javascript:void(0);" title="x.__setattr__(&#39;name&#39;, value) &lt;==&gt; x.name = value" alt="" coords="445,183,627,201"/>
+<area shape="rect" id="node9" href="javascript:void(0);" title="exceptions.BaseException.__setstate__" alt="" coords="445,201,627,220"/>
+<area shape="rect" id="node9" href="javascript:void(0);" title="Common base class for all exceptions" alt="" coords="433,6,639,226"/>
 </map>
   <img src="uml_class_diagram_for_fedex_ba_2.gif" alt='' usemap="#uml_class_diagram_for_fedex_ba_2" ismap="ismap" class="graph-without-title" />
 </center>
 </center>
 <hr />
-<p>Serves as the base exception that other service-related exception 
-  objects are sub-classed from.</p>
+<p>Exception: Serves as the base exception that other service-related 
+  exception objects are sub-classed from.</p>
 
 <!-- ==================== INSTANCE METHODS ==================== -->
 <a name="section-InstanceMethods"></a>
@@ -146,6 +148,22 @@
       
     </td>
   </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="fedex.base_service.FedexBaseServiceException-class.html#__unicode__" class="summary-sig-name">__unicode__</a>(<span class="summary-sig-arg">self</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fedex.base_service-pysrc.html#FedexBaseServiceException.__unicode__">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
   <tr>
     <td colspan="2" class="summary">
     <p class="indent-wrapped-lines"><b>Inherited from <code>exceptions.Exception</code></b>:
@@ -159,8 +177,7 @@
       <code>__reduce__</code>,
       <code>__repr__</code>,
       <code>__setattr__</code>,
-      <code>__setstate__</code>,
-      <code>__unicode__</code>
+      <code>__setstate__</code>
       </p>
     <p class="indent-wrapped-lines"><b>Inherited from <code>object</code></b>:
       <code>__format__</code>,
@@ -270,6 +287,28 @@
   </dl>
 </td></tr></table>
 </div>
+<a name="__unicode__"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">__unicode__</span>(<span class="sig-arg">self</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="fedex.base_service-pysrc.html#FedexBaseServiceException.__unicode__">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  
+  <dl class="fields">
+    <dt>Overrides:
+        exceptions.BaseException.__unicode__
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
 <br />
 <!-- ==================== NAVIGATION BAR ==================== -->
 <table class="navbar" border="0" width="100%" cellpadding="0"
@@ -302,7 +341,7 @@
 <table border="0" cellpadding="0" cellspacing="0" width="100%%">
   <tr>
     <td align="left" class="footer">
-    Generated by Epydoc 3.0.1 on Thu Mar 25 14:56:28 2010
+    Generated by Epydoc 3.0.1 on Wed Mar 31 09:46:46 2010
     </td>
     <td align="right" class="footer">
       <a target="mainFrame" href="http://epydoc.sourceforge.net"
