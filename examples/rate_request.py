@@ -25,7 +25,7 @@ rate_request.RequestedShipment.DropoffType = 'REGULAR_PICKUP'
 
 # See page 355 in WS_ShipService.pdf for a full list. Here are the common ones:
 # STANDARD_OVERNIGHT, PRIORITY_OVERNIGHT, FEDEX_GROUND, FEDEX_EXPRESS_SAVER
-rate_request.RequestedShipment.ServiceType = 'INTERNATIONAL_PRIORITY'
+rate_request.RequestedShipment.ServiceType = 'FEDEX_GROUND'
 
 # What kind of package this will be shipped in.
 # FEDEX_BOX, FEDEX_PAK, FEDEX_TUBE, YOUR_PACKAGING
