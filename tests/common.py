@@ -8,16 +8,9 @@ def get_test_config():
     """
     Returns a basic FedexConfig to test with.
     """
-    """
-    # Production server
+    # Test server (Enter your credentials here)
     return FedexConfig(key='xxxxxxxxxxxxxxxxx',
                        password='xxxxxxxxxxxxxxxxxxxxxxxxx',
                        account_number='xxxxxxxxx',
-                       meter_number='xxxxxxxxxx')
-    """
-    # Test server
-    return FedexConfig(key='ZyNQQFdcxUATOx9L',
-                       password='GtngmKzs4Dk4RYmrlAjrLykwi',
-                       account_number='510087780',
-                       meter_number='118501898',
+                       meter_number='xxxxxxxxxx',
                        use_test_server=True)
