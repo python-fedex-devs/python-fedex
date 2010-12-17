@@ -57,6 +57,8 @@ package1_weight.Units = "LB"
 
 package1 = rate_request.create_wsdl_object_of_type('RequestedPackageLineItem')
 package1.Weight = package1_weight
+#can be other values this is probably the most common
+package1.PhysicalPackaging = 'BOX'
 # Un-comment this to see the other variables you may set on a package.
 #print package1
 
