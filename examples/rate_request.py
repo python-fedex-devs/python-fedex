@@ -45,6 +45,8 @@ rate_request.RequestedShipment.Recipient.Address.PostalCode = '27577'
 rate_request.RequestedShipment.Recipient.Address.CountryCode = 'US'
 # This is needed to ensure an accurate rate quote with the response.
 #rate_request.RequestedShipment.Recipient.Address.Residential = True
+#include estimated duties and taxes in rate quote, can be ALL or NONE
+rate_request.RequestedShipment.EdtRequestType = 'NONE'
 
 # Who pays for the rate_request?
 # RECIPIENT, SENDER or THIRD_PARTY
