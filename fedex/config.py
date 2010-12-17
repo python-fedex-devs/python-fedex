@@ -55,6 +55,8 @@ class FedexConfig(object):
         """@ivar: Web services meter number."""
         self.integrator_id = integrator_id
         """@ivar: Web services integrator ID."""
+        self.express_region_code = express_region_code
+        """@icar: Web services ExpressRegionCode"""
         self.use_test_server = use_test_server
         """@ivar: When True, point to the test server."""
         
