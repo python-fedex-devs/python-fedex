@@ -34,6 +34,7 @@ class FedexRateServiceRequest(FedexBaseService):
         super(FedexRateServiceRequest, self).__init__(self._config_obj, 
                                                          'RateService_v8.wsdl',
                                                          *args, **kwargs)
+        self.ClientDetail.Region = config_obj.express_region_code
         
     def _prepare_wsdl_objects(self):
         """
