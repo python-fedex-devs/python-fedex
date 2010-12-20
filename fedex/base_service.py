@@ -129,7 +129,6 @@ class FedexBaseService(object):
         ClientDetail.AccountNumber = self.config_obj.account_number
         ClientDetail.MeterNumber = self.config_obj.meter_number
         ClientDetail.IntegratorId = self.config_obj.integrator_id
-        ClientDetail.Region = self.config_obj.express_region_code
         self.ClientDetail = ClientDetail
         
     def __set_transaction_detail(self, *args, **kwargs):
