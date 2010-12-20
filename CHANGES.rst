@@ -2,6 +2,12 @@
 Change Log
 ==========
 
+------
+1.0.10
+------
+
+* Bug fix regarding regions and when they are sent. (jcartmell)
+
 -----
 1.0.9
 -----
