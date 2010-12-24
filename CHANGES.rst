@@ -3,6 +3,12 @@ Change Log
 ==========
 
 ------
+1.0.11
+------
+
+* Bug fix of a bug fix for regions config. (jcartmell)
+
+------
 1.0.10
 ------
 
