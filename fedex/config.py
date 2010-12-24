@@ -20,7 +20,7 @@ class FedexConfig(object):
     at a later time if you must.
     """
     def __init__(self, key, password, account_number=None, meter_number=None,
-                 integrator_id=None, wsdl_path=None, use_test_server=False):
+                 integrator_id=None, wsdl_path=None, express_region_code=None, use_test_server=False):
         """
         @type key: L{str}
         @param key: Developer test key.
