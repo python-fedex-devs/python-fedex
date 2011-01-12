@@ -14,6 +14,16 @@ logging.basicConfig(level=logging.INFO)
 # We're using the FedexConfig object from example_config.py in this dir.
 address = FedexAddressValidationRequest(CONFIG_OBJ)
 
+address.AddressValidationOptions.CheckResidentialStatus = True
+address.AddressValidationOptions.VerifyAddresses = True
+address.AddressValidationOptions.MaximumNumberOfMatches = 3
+address.AddressValidationOptions.StreetAccuracy = 'LOOSE'
+del address.AddressValidationOptions.DirectionalAccuracy
+del address.AddressValidationOptions.CompanyNameAccuracy
+del address.AddressValidationOptions.ConvertToUpperCase
+address.AddressValidationOptions.RecognizeAlternateCityNames = True
+del address.AddressValidationOptions.ReturnParsedElements
+
 address1 = address.create_wsdl_object_of_type('AddressToValidate')
 address1.CompanyName = 'International Paper'
 address1.Address.StreetLines = ['155 Old Greenville Hwy', 'Suite 103']
