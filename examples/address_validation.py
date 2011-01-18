@@ -12,19 +12,29 @@ logging.basicConfig(level=logging.INFO)
 
 # This is the object that will be handling our tracking request.
 # We're using the FedexConfig object from example_config.py in this dir.
-address = FedexAddressValidationRequest(CONFIG_OBJ)
+connection = FedexAddressValidationRequest(CONFIG_OBJ)
 
-address.AddressValidationOptions.CheckResidentialStatus = True
-address.AddressValidationOptions.VerifyAddresses = True
-address.AddressValidationOptions.MaximumNumberOfMatches = 3
-address.AddressValidationOptions.StreetAccuracy = 'LOOSE'
-del address.AddressValidationOptions.DirectionalAccuracy
-del address.AddressValidationOptions.CompanyNameAccuracy
-del address.AddressValidationOptions.ConvertToUpperCase
-address.AddressValidationOptions.RecognizeAlternateCityNames = True
-del address.AddressValidationOptions.ReturnParsedElements
+# The AddressValidationOptions are created with default values of None, which
+# will cause WSDL validation errors. To make things work, each option needs to
+# be explicitly set or deleted.
 
-address1 = address.create_wsdl_object_of_type('AddressToValidate')
+## Set the flags we want to True (or a value).
+connection.AddressValidationOptions.CheckResidentialStatus = True
+connection.AddressValidationOptions.VerifyAddresses = True
+connection.AddressValidationOptions.RecognizeAlternateCityNames = True
+connection.AddressValidationOptions.MaximumNumberOfMatches = 3
+
+## Delete the flags we don't want.
+del connection.AddressValidationOptions.ConvertToUpperCase
+del connection.AddressValidationOptions.ReturnParsedElements
+
+## *Accuracy fields can be TIGHT, EXACT, MEDIUM, or LOOSE. Or deleted.
+connection.AddressValidationOptions.StreetAccuracy = 'LOOSE'
+del connection.AddressValidationOptions.DirectionalAccuracy
+del connection.AddressValidationOptions.CompanyNameAccuracy
+
+## Create some addresses to validate
+address1 = connection.create_wsdl_object_of_type('AddressToValidate')
 address1.CompanyName = 'International Paper'
 address1.Address.StreetLines = ['155 Old Greenville Hwy', 'Suite 103']
 address1.Address.City = 'Clemson'
@@ -32,7 +42,16 @@ address1.Address.StateOrProvinceCode = 'SC'
 address1.Address.PostalCode = 29631
 address1.Address.CountryCode = 'US'
 address1.Address.Residential = False
+connection.add_address(address1)
 
-address.add_address(address1)
-address.send_request()
-print address.response
+address2 = connection.create_wsdl_object_of_type('AddressToValidate')
+address2.Address.StreetLines = ['320 S Cedros', '#200']
+address2.Address.City = 'Solana Beach'
+address2.Address.StateOrProvinceCode = 'CA'
+address2.Address.PostalCode = 92075
+address2.Address.CountryCode = 'US'
+connection.add_address(address2)
+
+## Send the request and print the response
+connection.send_request()
+print connection.response
