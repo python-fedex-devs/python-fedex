@@ -13,7 +13,7 @@ from suds.client import Client
 
 class FedexBaseServiceException(Exception):
     """
-    Exception: Serves as the base exception that other service-related 
+    Exception: Serves as the base exception that other service-related
     exception objects are sub-classed from.
     """
     def __init__(self, error_code, value):
@@ -23,10 +23,10 @@ class FedexBaseServiceException(Exception):
         return "%s (Error code: %s)" % (repr(self.value), self.error_code)
     def __str__(self):
         return self.__unicode__()
-    
+
 class FedexFailure(FedexBaseServiceException):
     """
-    Exception: The request could not be handled at this time. This is generally 
+    Exception: The request could not be handled at this time. This is generally
     a server problem.
     """
     pass
@@ -51,7 +51,7 @@ class FedexBaseService(object):
     of the common SOAP objects created via suds and populates them with
     values from a L{FedexConfig} object, along with keyword arguments
     via L{__init__}.
-    
+
     @note: This object should never be used directly, use one of the included
         sub-classes.
     """
@@ -60,7 +60,7 @@ class FedexBaseService(object):
         This constructor should only be called by children of the class. As is
         such, only the optional keyword arguments caught by C{**kwargs} will
         be documented.
-        
+
         @type customer_transaction_id: L{str}
         @keyword customer_transaction_id: A user-specified identifier to
             differentiate this transaction from others. This value will be
@@ -70,21 +70,21 @@ class FedexBaseService(object):
         """@ivar: Python logger instance with name 'fedex'."""
         self.config_obj = config_obj
         """@ivar: The FedexConfig object to pull auth info from."""
-        
+
         # If the config object is set to use the test server, point
         # suds at the test server WSDL directory.
         if config_obj.use_test_server:
             self.logger.info("Using test server.")
-            self.wsdl_path = os.path.join(config_obj.wsdl_path, 
+            self.wsdl_path = os.path.join(config_obj.wsdl_path,
                                           'test_server_wsdl', wsdl_name)
         else:
             self.logger.info("Using production server.")
             self.wsdl_path = os.path.join(config_obj.wsdl_path, wsdl_name)
 
         self.client = Client('file://%s' % self.wsdl_path)
-        
+
         #print self.client
-        
+
         self.VersionId = None
         """@ivar: Holds details on the version numbers of the WSDL."""
         self.WebAuthenticationDetail = None
@@ -98,13 +98,13 @@ class FedexBaseService(object):
             you can pull."""
         self.TransactionDetail = None
         """@ivar: Holds customer-specified transaction IDs."""
-        
+
         self.__set_web_authentication_detail()
         self.__set_client_detail()
         self.__set_version_id()
         self.__set_transaction_detail(*args, **kwargs)
         self._prepare_wsdl_objects()
-        
+
     def __set_web_authentication_detail(self):
         """
         Sets up the WebAuthenticationDetail node. This is required for all
@@ -114,12 +114,12 @@ class FedexBaseService(object):
         WebAuthenticationCredential = self.client.factory.create('WebAuthenticationCredential')
         WebAuthenticationCredential.Key = self.config_obj.key
         WebAuthenticationCredential.Password = self.config_obj.password
-        
+
         # Encapsulates the auth credentials.
         WebAuthenticationDetail = self.client.factory.create('WebAuthenticationDetail')
         WebAuthenticationDetail.UserCredential = WebAuthenticationCredential
         self.WebAuthenticationDetail = WebAuthenticationDetail
-        
+
     def __set_client_detail(self):
         """
         Sets up the ClientDetail node, which is required for all shipping
@@ -129,9 +129,10 @@ class FedexBaseService(object):
         ClientDetail.AccountNumber = self.config_obj.account_number
         ClientDetail.MeterNumber = self.config_obj.meter_number
         ClientDetail.IntegratorId = self.config_obj.integrator_id
-        ClientDetail.Region = self.config_obj.express_region_code
+        if hasattr(ClientDetail, 'Region'):
+            ClientDetail.Region = self.config_obj.express_region_code
         self.ClientDetail = ClientDetail
-        
+
     def __set_transaction_detail(self, *args, **kwargs):
         """
         Checks kwargs for 'customer_transaction_id' and sets it if present.
@@ -142,7 +143,7 @@ class FedexBaseService(object):
             TransactionDetail.CustomerTransactionId = customer_transaction_id
             self.logger.debug(TransactionDetail)
             self.TransactionDetail = TransactionDetail
-    
+
     def __set_version_id(self):
         """
         Pulles the versioning info for the request from the child request.
@@ -154,7 +155,7 @@ class FedexBaseService(object):
         VersionId.Minor = self._version_info['minor']
         self.logger.debug(VersionId)
         self.VersionId = VersionId
-        
+
     def __prepare_wsdl_objects(self):
         """
         This method should be over-ridden on each sub-class. It instantiates
@@ -162,7 +163,7 @@ class FedexBaseService(object):
         __str__() methods and see what they need to fill in.
         """
         pass
-        
+
     def __check_response_for_fedex_error(self):
         """
         This checks the response for general Fedex errors that aren't related
@@ -173,7 +174,7 @@ class FedexBaseService(object):
                 if notification.Severity == "FAILURE":
                     raise FedexFailure(notification.Code,
                                        notification.Message)
-        
+
     def _check_response_for_request_errors(self):
         """
         Override this in each service module to check for errors that are
@@ -185,7 +186,7 @@ class FedexBaseService(object):
                 if notification.Severity == "ERROR":
                     raise FedexError(notification.Code,
                                      notification.Message)
-        
+
     def create_wsdl_object_of_type(self, type_name):
         """
         Creates and returns a WSDL object of the specified type.
@@ -223,7 +224,7 @@ class FedexBaseService(object):
         # Check the response for errors specific to the particular request.
         # This is handled by an overridden method on the child object.
         self._check_response_for_request_errors()
-        
+
         # Debug output.
         self.logger.debug("== FEDEX QUERY RESULT ==")
         self.logger.debug(self.response)
