@@ -31,7 +31,7 @@ CLASSIFIERS = [
                 'Natural Language :: English',
                 'Operating System :: OS Independent',
                 'Programming Language :: Python',
-                'Topic :: Software Development :: Libraries :: Python Modules' 
+                'Topic :: Software Development :: Libraries :: Python Modules'
               ]
 
 KEYWORDS = 'fedex soap suds wrapper'
@@ -39,40 +39,40 @@ KEYWORDS = 'fedex soap suds wrapper'
 class zip_docs(Command):
     description = "Zip the docs directory in preparation for uploading to PyPi."
     user_options = []
-    
+
     def initialize_options(self):
         pass
-    
+
     def finalize_options(self):
         pass
-    
+
     def run(self):
         filename = "python-fedex-docs-%s.zip" % fedex.VERSION
         file = open(filename, 'w')
         zfile = ZipFile(file, 'w', ZIP_STORED)
-        
+
         for file in os.listdir('docs'):
             if file != '.svn':
                 zfile.write(os.path.join('docs', file),
-                            arcname=file)                
+                            arcname=file)
         zfile.close()
-        
 
-setup(name = 'fedex',
-      version = fedex.VERSION,
-      description = 'Fedex Web Services API wrapper.',
-      long_description = LONG_DESCRIPTION,
-      author = 'Gregory Taylor',
-      author_email = 'gtaylor@l11solutions.com',
-      url = 'http://code.google.com/p/python-fedex/',
-      download_url = 'http://pypi.python.org/pypi/fedex/',
-      packages = ['fedex', 'fedex.services'],
-      package_dir= {'fedex': 'fedex'},
-      package_data = {'fedex': ['wsdl/*.wsdl', 'wsdl/test_server_wsdl/*.wsdl']},
-      platforms = ['Platform Independent'],
-      license = 'GPLv3',
-      classifiers = CLASSIFIERS,
-      keywords = KEYWORDS,
-      requires = ['suds'],
-      cmdclass = {'zip_docs': zip_docs},
+
+setup(name='fedex',
+      version=fedex.VERSION,
+      description='Fedex Web Services API wrapper.',
+      long_description=LONG_DESCRIPTION,
+      author='Gregory Taylor',
+      author_email='snagglepants@gmail.com.com',
+      url='http://code.google.com/p/python-fedex/',
+      download_url='http://pypi.python.org/pypi/fedex/',
+      packages=['fedex', 'fedex.services', 'fedex.printers'],
+      package_dir={'fedex': 'fedex'},
+      package_data={'fedex': ['wsdl/*.wsdl', 'wsdl/test_server_wsdl/*.wsdl']},
+      platforms=['Platform Independent'],
+      license='GPLv3',
+      classifiers=CLASSIFIERS,
+      keywords=KEYWORDS,
+      requires=['suds'],
+      cmdclass={'zip_docs': zip_docs},
      )
