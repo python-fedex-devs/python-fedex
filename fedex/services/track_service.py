@@ -42,6 +42,7 @@ class FedexTrackRequest(FedexBaseService):
         super(FedexTrackRequest, self).__init__(self._config_obj, 
                                                 'TrackService_v4.wsdl',
                                                 *args, **kwargs)
+        self.IncludeDetailedScans = False
         
     def _prepare_wsdl_objects(self):
         """
@@ -80,6 +81,7 @@ class FedexTrackRequest(FedexBaseService):
                                         ClientDetail=self.ClientDetail,
                                         TransactionDetail=self.TransactionDetail,
                                         Version=self.VersionId,
+                                        IncludeDetailedScans=self.IncludeDetailedScans,
                                         PackageIdentifier=self.TrackPackageIdentifier)
 
         return response
