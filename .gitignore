@@ -6,3 +6,4 @@
 .pydevproject
 MANIFEST
 dist
+build
