@@ -74,5 +74,6 @@ setup(name='fedex',
       classifiers=CLASSIFIERS,
       keywords=KEYWORDS,
       requires=['suds'],
+      install_requires=['suds'],
       cmdclass={'zip_docs': zip_docs},
      )
