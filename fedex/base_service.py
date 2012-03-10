@@ -81,7 +81,7 @@ class FedexBaseService(object):
             self.logger.info("Using production server.")
             self.wsdl_path = os.path.join(config_obj.wsdl_path, wsdl_name)
 
-        self.client = Client('file://%s' % self.wsdl_path)
+        self.client = Client('file:///%s' % self.wsdl_path.lstrip('/'))
 
         #print self.client
 
