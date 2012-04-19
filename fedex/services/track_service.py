@@ -34,13 +34,13 @@ class FedexTrackRequest(FedexBaseService):
         self._config_obj = config_obj
         
         # Holds version info for the VersionId SOAP object.
-        self._version_info = {'service_id': 'trck', 'major': '4', 
+        self._version_info = {'service_id': 'trck', 'major': '5', 
                              'intermediate': '0', 'minor': '0'}
         self.TrackPackageIdentifier = None
         """@ivar: Holds the TrackPackageIdentifier WSDL object."""
         # Call the parent FedexBaseService class for basic setup work.
         super(FedexTrackRequest, self).__init__(self._config_obj, 
-                                                'TrackService_v4.wsdl',
+                                                'TrackService_v5.wsdl',
                                                 *args, **kwargs)
         self.IncludeDetailedScans = False
         
