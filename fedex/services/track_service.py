@@ -42,8 +42,7 @@ class FedexTrackRequest(FedexBaseService):
         self.TrackPackageIdentifier = None
         """@ivar: Holds the TrackPackageIdentifier WSDL object."""
         
-        self.TrackingNumberUniqueIdentifier = None
-        self.tracking_number_unique_id = kwargs.pop('tracking_number_unique_id', None)
+        self.TrackingNumberUniqueIdentifier = kwargs.pop('tracking_number_unique_id', None)
         
         """@ivar: Holds the TrackingNumberUniqueIdentifier WSDL object."""
         # Call the parent FedexBaseService class for basic setup work.
@@ -60,10 +59,6 @@ class FedexTrackRequest(FedexBaseService):
         self.TrackPackageIdentifier = self.client.factory.create('TrackPackageIdentifier')
         # Default to tracking number.
         self.TrackPackageIdentifier.Type = 'TRACKING_NUMBER_OR_DOORTAG'
-        
-        if self.tracking_number_unique_id:
-	        self.TrackingNumberUniqueIdentifier = self.client.factory.create('TrackDetail')
-    		self.TrackingNumberUniqueIdentifier = self.tracking_number_unique_id
         
     def _check_response_for_request_errors(self):
         """
@@ -95,6 +90,6 @@ class FedexTrackRequest(FedexBaseService):
                                         Version=self.VersionId,
                                         IncludeDetailedScans=self.IncludeDetailedScans,
                                         PackageIdentifier=self.TrackPackageIdentifier,
-                                        TrackingNumberUniqueIdentifier = self.TrackingNumberUniqueIdentifier )
+                                        TrackingNumberUniqueIdentifier = self.TrackingNumberUniqueIdentifier)
 
         return response
