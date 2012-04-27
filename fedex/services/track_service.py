@@ -30,6 +30,9 @@ class FedexTrackRequest(FedexBaseService):
         
         @type config_obj: L{FedexConfig}
         @param config_obj: A valid FedexConfig object.
+        
+        @type tracking_number_unique_id: str
+        @param tracking_number_unique_id: Used to distinguish duplicate FedEx tracking numbers.
         """
         self._config_obj = config_obj
         
@@ -38,6 +41,10 @@ class FedexTrackRequest(FedexBaseService):
                              'intermediate': '0', 'minor': '0'}
         self.TrackPackageIdentifier = None
         """@ivar: Holds the TrackPackageIdentifier WSDL object."""
+        
+        self.TrackingNumberUniqueIdentifier = kwargs.pop('tracking_number_unique_id', None)
+        
+        """@ivar: Holds the TrackingNumberUniqueIdentifier WSDL object."""
         # Call the parent FedexBaseService class for basic setup work.
         super(FedexTrackRequest, self).__init__(self._config_obj, 
                                                 'TrackService_v5.wsdl',
@@ -82,6 +89,7 @@ class FedexTrackRequest(FedexBaseService):
                                         TransactionDetail=self.TransactionDetail,
                                         Version=self.VersionId,
                                         IncludeDetailedScans=self.IncludeDetailedScans,
-                                        PackageIdentifier=self.TrackPackageIdentifier)
+                                        PackageIdentifier=self.TrackPackageIdentifier,
+                                        TrackingNumberUniqueIdentifier = self.TrackingNumberUniqueIdentifier)
 
         return response
