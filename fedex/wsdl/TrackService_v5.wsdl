@@ -1504,7 +1504,7 @@
   </binding>
   <service name="TrackService">
     <port name="TrackServicePort" binding="ns:TrackServiceSoapBinding">
-      <s1:address location="https://ws.fedex.com:443/web-services/track"/>
+      <s1:address location="https://ws.fedex.com:443/web-services/track/"/>
     </port>
   </service>
 </definitions>
