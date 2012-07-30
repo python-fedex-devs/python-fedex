@@ -33,7 +33,7 @@ shipment.RequestedShipment.PackagingType = 'FEDEX_PAK'
 
 # No idea what this is.
 # INDIVIDUAL_PACKAGES, PACKAGE_GROUPS, PACKAGE_SUMMARY 
-shipment.RequestedShipment.PackageDetail = 'INDIVIDUAL_PACKAGES'
+# shipment.RequestedShipment.PackageDetail = 'INDIVIDUAL_PACKAGES'
 
 # Shipper contact info.
 shipment.RequestedShipment.Shipper.Contact.PersonName = 'Sender Name'
@@ -93,6 +93,12 @@ package1 = shipment.create_wsdl_object_of_type('RequestedPackageLineItem')
 package1.Weight = package1_weight
 # Un-comment this to see the other variables you may set on a package.
 #print package1
+
+#Adding extra lines for issue (https://github.com/gtaylor/python-fedex/issues/13#issuecomment-4686777)
+del shipment.RequestedShipment.ErrorLabelBehavior
+del shipment.RequestedShipment.EdtRequestType
+del package1.PhysicalPackaging
+
 
 # This adds the RequestedPackageLineItem WSDL object to the shipment. It
 # increments the package count and total weight of the shipment for you.
