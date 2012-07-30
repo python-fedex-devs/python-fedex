@@ -1,12 +1,13 @@
 """
 Ship Service Module
 ===================
-This package contains the shipping methods defined by Fedex's 
-ShipService WSDL file. Each is encapsulated in a class for easy access. 
+This package contains the shipping methods defined by Fedex's
+ShipService WSDL file. Each is encapsulated in a class for easy access.
 For more details on each, refer to the respective class's documentation.
 """
 from datetime import datetime
 from .. base_service import FedexBaseService
+
 
 class FedexProcessShipmentRequest(FedexBaseService):
     """
@@ -17,25 +18,25 @@ class FedexProcessShipmentRequest(FedexBaseService):
     """
     def __init__(self, config_obj, *args, **kwargs):
         """
-        The optional keyword args detailed on L{FedexBaseService} 
+        The optional keyword args detailed on L{FedexBaseService}
         apply here as well.
 
         @type config_obj: L{FedexConfig}
-        @param config_obj: A valid FedexConfig object.        
+        @param config_obj: A valid FedexConfig object.
         """
         self._config_obj = config_obj
-        
+
         # Holds version info for the VersionId SOAP object.
-        self._version_info = {'service_id': 'ship', 'major': '7', 
+        self._version_info = {'service_id': 'ship', 'major': '10',
                              'intermediate': '0', 'minor': '0'}
-        
+
         self.RequestedShipment = None
         """@ivar: Holds the RequestedShipment WSDL object."""
         # Call the parent FedexBaseService class for basic setup work.
-        super(FedexProcessShipmentRequest, self).__init__(self._config_obj, 
-                                                         'ShipService_v7.wsdl',
+        super(FedexProcessShipmentRequest, self).__init__(self._config_obj,
+                                                         'ShipService_v10.wsdl',
                                                          *args, **kwargs)
-        
+
     def _prepare_wsdl_objects(self):
         """
         This is the data that will be used to create your shipment. Create
@@ -159,7 +160,7 @@ class FedexDeleteShipmentRequest(FedexBaseService):
         self._config_obj = config_obj
         
         # Holds version info for the VersionId SOAP object.
-        self._version_info = {'service_id': 'ship', 'major': '7', 
+        self._version_info = {'service_id': 'ship', 'major': '10', 
                              'intermediate': '0', 'minor': '0'}
         self.DeletionControlType = None
         """@ivar: Holds the DeletrionControlType WSDL object."""
@@ -167,7 +168,7 @@ class FedexDeleteShipmentRequest(FedexBaseService):
         """@ivar: Holds the TrackingId WSDL object."""
         # Call the parent FedexBaseService class for basic setup work.
         super(FedexDeleteShipmentRequest, self).__init__(self._config_obj, 
-                                                'ShipService_v7.wsdl',
+                                                'ShipService_v10.wsdl',
                                                 *args, **kwargs)
 
     def _prepare_wsdl_objects(self):
