@@ -32,8 +32,9 @@ shipment.RequestedShipment.ServiceType = 'PRIORITY_OVERNIGHT'
 shipment.RequestedShipment.PackagingType = 'FEDEX_PAK'
 
 # No idea what this is.
-# INDIVIDUAL_PACKAGES, PACKAGE_GROUPS, PACKAGE_SUMMARY 
-shipment.RequestedShipment.PackageDetail = 'INDIVIDUAL_PACKAGES'
+# INDIVIDUAL_PACKAGES, PACKAGE_GROUPS, PACKAGE_SUMMARY
+
+#shipment.RequestedShipment.PackageDetail = 'INDIVIDUAL_PACKAGES'
 
 # Shipper contact info.
 shipment.RequestedShipment.Shipper.Contact.PersonName = 'Sender Name'
@@ -96,6 +97,10 @@ package1.Weight = package1_weight
 
 # This adds the RequestedPackageLineItem WSDL object to the shipment. It
 # increments the package count and total weight of the shipment for you.
+del shipment.RequestedShipment.ErrorLabelBehavior
+del shipment.RequestedShipment.EdtRequestType
+del package1.PhysicalPackaging
+
 shipment.add_package(package1)
 
 # If you'd like to see some documentation on the ship service WSDL, un-comment

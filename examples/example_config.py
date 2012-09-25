@@ -10,9 +10,13 @@ import sys
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from fedex.config import FedexConfig
 
-# Change these values to match your testing account/meter number.
-CONFIG_OBJ = FedexConfig(key='xxxxxxxxxxxxxxxx',
-                         password='xxxxxxxxxxxxxxxxxxxxxxxxx',
-                         account_number='#########',
-                         meter_number='#########',
-                         use_test_server=True)
+try:
+    # Change these values to match your testing account/meter number.
+    CONFIG_OBJ = FedexConfig(key='',
+                             password='x',
+                             account_number='x',
+                             meter_number='x',
+                             use_test_server=True)
+
+except:
+    print "Error de Login"

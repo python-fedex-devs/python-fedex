@@ -2,10 +2,11 @@
 Package Movement Information Service
 ====================================
 This package contains classes to check service availability, route, and postal
-codes. Defined by the PackageMovementInformationService WSDL file. 
+codes. Defined by the PackageMovementInformationService WSDL file.
 """
 import logging
 from .. base_service import FedexBaseService, FedexError
+
 
 class FedexPostalCodeNotFound(FedexError):
     """
@@ -13,11 +14,13 @@ class FedexPostalCodeNotFound(FedexError):
     """
     pass
 
+
 class FedexInvalidPostalCodeFormat(FedexError):
     """
     Exception: Sent when the postal code is invalid
     """
     pass
+
 
 class PostalCodeInquiryRequest(FedexBaseService):
     """
@@ -28,26 +31,24 @@ class PostalCodeInquiryRequest(FedexBaseService):
         """
         Sets up an inquiry request. The optional keyword args
         detailed on L{FedexBaseService} apply here as well.
-        
+
         @type config_obj: L{FedexConfig}
         @param config_obj: A valid FedexConfig object
         @param postal_code: a valid postal code
         @param country_code: ISO country code to which the postal code belongs to.
         """
         self._config_obj = config_obj
-        
+
         # Holds version info for the VersionId SOAP object.
         self._version_info = {'service_id': 'pmis', 'major': '4',
                              'intermediate': '0', 'minor': '0'}
         self.PostalCode = postal_code
         self.CountryCode = country_code
-       
-       
+
         # Call the parent FedexBaseService class for basic setup work.
         super(PostalCodeInquiryRequest, self).__init__(self._config_obj,
                                                 'PackageMovementInformationService_v4.wsdl',
                                                 *args, **kwargs)
-        
 
     def _check_response_for_request_errors(self):
         """
@@ -67,34 +68,31 @@ class PostalCodeInquiryRequest(FedexBaseService):
                     else:
                         raise FedexError(notification.Code,
                                          notification.Message)
-                                         
+
     def _prepare_wsdl_objects(self):
         pass
- 
-        
+
     def _assemble_and_send_request(self):
         """
         Fires off the Fedex request.
-        
+
         @warning: NEVER CALL THIS METHOD DIRECTLY. CALL send_request(), WHICH RESIDES
             ON FedexBaseService AND IS INHERITED.
         """
         client = self.client
-        
-       
+
         # We get an exception like this when specifying an IntegratorId:
         # suds.TypeNotFound: Type not found: 'IntegratorId'
         # Setting it to None does not seem to appease it.
-        
+
         del self.ClientDetail.IntegratorId
-        
+
         # Fire off the query.
         response = client.service.postalCodeInquiry(WebAuthenticationDetail=self.WebAuthenticationDetail,
                                         ClientDetail=self.ClientDetail,
                                         TransactionDetail=self.TransactionDetail,
                                         Version=self.VersionId,
-                                        PostalCode = self.PostalCode,
-                                        CountryCode = self.CountryCode)
+                                        PostalCode=self.PostalCode,
+                                        CountryCode=self.CountryCode)
 
         return response
-        
