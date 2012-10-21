@@ -1,4 +1,5 @@
-LICENSE.txt
+include LICENSE.txt
+include README.rst
 recursive-include examples *.txt *.py
 recursive-include docs *
 recursive-include fedex/wsdl *
