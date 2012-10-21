@@ -16,47 +16,22 @@
  You should have received a copy of the GNU General Public License
  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 """
-from distutils.core import setup, Command
-from zipfile import ZipFile, ZIP_STORED
-import os
+from distutils.core import setup
 import fedex
 
-LONG_DESCRIPTION = \
-"""A light wrapper around Fedex's Web Services SOAP API using suds."""
+LONG_DESCRIPTION = open('README.rst').read()
 
 CLASSIFIERS = [
-                'Development Status :: 5 - Production/Stable',
-                'Intended Audience :: Developers',
-                'License :: OSI Approved :: GNU General Public License (GPL)',
-                'Natural Language :: English',
-                'Operating System :: OS Independent',
-                'Programming Language :: Python',
-                'Topic :: Software Development :: Libraries :: Python Modules'
-              ]
+    'Development Status :: 5 - Production/Stable',
+    'Intended Audience :: Developers',
+    'License :: OSI Approved :: BSD License',
+    'Natural Language :: English',
+    'Operating System :: OS Independent',
+    'Programming Language :: Python',
+    'Topic :: Software Development :: Libraries :: Python Modules'
+]
 
 KEYWORDS = 'fedex soap suds wrapper'
-
-class zip_docs(Command):
-    description = "Zip the docs directory in preparation for uploading to PyPi."
-    user_options = []
-
-    def initialize_options(self):
-        pass
-
-    def finalize_options(self):
-        pass
-
-    def run(self):
-        filename = "python-fedex-docs-%s.zip" % fedex.VERSION
-        file = open(filename, 'w')
-        zfile = ZipFile(file, 'w', ZIP_STORED)
-
-        for file in os.listdir('docs'):
-            if file != '.svn':
-                zfile.write(os.path.join('docs', file),
-                            arcname=file)
-        zfile.close()
-
 
 setup(name='fedex',
       version=fedex.VERSION,
@@ -75,5 +50,4 @@ setup(name='fedex',
       keywords=KEYWORDS,
       requires=['suds'],
       install_requires=['suds'],
-      cmdclass={'zip_docs': zip_docs},
-     )
+)
