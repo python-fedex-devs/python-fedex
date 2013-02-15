@@ -2,7 +2,7 @@
 """
 This example shows how to use the FedEx RateRequest service. 
 The variables populated below represents the minimum required values. 
-You will need to fill all of these, orrisk seeing a SchemaValidationError 
+You will need to fill all of these, or risk seeing a SchemaValidationError 
 exception thrown by suds.
 
 TIP: Near the bottom of the module, see how to check the if the destination 
