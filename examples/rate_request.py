@@ -25,6 +25,7 @@ rate_request.RequestedShipment.DropoffType = 'REGULAR_PICKUP'
 
 # See page 355 in WS_ShipService.pdf for a full list. Here are the common ones:
 # STANDARD_OVERNIGHT, PRIORITY_OVERNIGHT, FEDEX_GROUND, FEDEX_EXPRESS_SAVER
+# To receive rates for multiple ServiceTypes set to None.
 rate_request.RequestedShipment.ServiceType = 'FEDEX_GROUND'
 
 # What kind of package this will be shipped in.
@@ -88,12 +89,14 @@ rate_request.send_request()
 # Here is the overall end result of the query.
 print "HighestSeverity:", rate_request.response.HighestSeverity
 
-for detail in rate_request.response.RateReplyDetails[0].RatedShipmentDetails:
-    for surcharge in detail.ShipmentRateDetail.Surcharges:
-        if surcharge.SurchargeType == 'OUT_OF_DELIVERY_AREA':
-            print "ODA rate_request charge %s" % surcharge.Amount.Amount
+# RateReplyDetails can contain rates for multiple ServiceTypes if ServiceType was set to None
+for service in rate_request.response.RateReplyDetails:
+    for detail in service.RatedShipmentDetails:
+        for surcharge in detail.ShipmentRateDetail.Surcharges:
+            if surcharge.SurchargeType == 'OUT_OF_DELIVERY_AREA':
+                print "%s: ODA rate_request charge %s" % (service.ServiceType, surcharge.Amount.Amount)
             
-for rate_detail in rate_request.response.RateReplyDetails[0].RatedShipmentDetails:
-    print "Net FedEx Charge %s %s" % (rate_detail.ShipmentRateDetail.TotalNetFedExCharge.Currency,
-            rate_detail.ShipmentRateDetail.TotalNetFedExCharge.Amount)
+    for rate_detail in service.RatedShipmentDetails:
+        print "%s: Net FedEx Charge %s %s" % (service.ServiceType, rate_detail.ShipmentRateDetail.TotalNetFedExCharge.Currency,
+                rate_detail.ShipmentRateDetail.TotalNetFedExCharge.Amount)
 
