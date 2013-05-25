@@ -41,6 +41,10 @@ class FedexRateServiceRequest(FedexBaseService):
         This is the data that will be used to create your shipment. Create
         the data structure and get it ready for the WSDL request.
         """
+
+	# Default behavior is to not request transit information
+	self.ReturnTransitAndCommit = False
+
         # This is the primary data structure for processShipment requests.
         self.RequestedShipment = self.client.factory.create('RequestedShipment')
         self.RequestedShipment.ShipTimestamp = datetime.now()
@@ -107,7 +111,8 @@ class FedexRateServiceRequest(FedexBaseService):
                                         ClientDetail=self.ClientDetail,
                                         TransactionDetail=self.TransactionDetail,
                                         Version=self.VersionId,
-                                        RequestedShipment=self.RequestedShipment)
+                                        RequestedShipment=self.RequestedShipment,
+					ReturnTransitAndCommit=self.ReturnTransitAndCommit)
         return response
     
     def add_package(self, package_item):
