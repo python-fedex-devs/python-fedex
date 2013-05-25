@@ -19,6 +19,10 @@ logging.basicConfig(level=logging.INFO)
 # We're using the FedexConfig object from example_config.py in this dir.
 rate_request = FedexRateServiceRequest(CONFIG_OBJ)
 
+# If you wish to have transit data returned with your request you
+# need to uncomment the following
+# rate_request.ReturnTransitAndCommit = True
+
 # This is very generalized, top-level information.
 # REGULAR_PICKUP, REQUEST_COURIER, DROP_BOX, BUSINESS_SERVICE_CENTER or STATION
 rate_request.RequestedShipment.DropoffType = 'REGULAR_PICKUP'
