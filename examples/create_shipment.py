@@ -31,10 +31,6 @@ shipment.RequestedShipment.ServiceType = 'PRIORITY_OVERNIGHT'
 # FEDEX_BOX, FEDEX_PAK, FEDEX_TUBE, YOUR_PACKAGING
 shipment.RequestedShipment.PackagingType = 'FEDEX_PAK'
 
-# No idea what this is.
-# INDIVIDUAL_PACKAGES, PACKAGE_GROUPS, PACKAGE_SUMMARY 
-shipment.RequestedShipment.PackageDetail = 'INDIVIDUAL_PACKAGES'
-
 # Shipper contact info.
 shipment.RequestedShipment.Shipper.Contact.PersonName = 'Sender Name'
 shipment.RequestedShipment.Shipper.Contact.CompanyName = 'Some Company'
@@ -61,6 +57,7 @@ shipment.RequestedShipment.Recipient.Address.PostalCode = '20171'
 shipment.RequestedShipment.Recipient.Address.CountryCode = 'US'
 # This is needed to ensure an accurate rate quote with the response.
 shipment.RequestedShipment.Recipient.Address.Residential = True
+shipment.RequestedShipment.EdtRequestType = 'NONE'
 
 # Who pays for the shipment?
 # RECIPIENT, SENDER or THIRD_PARTY
@@ -90,6 +87,7 @@ package1_weight.Value = 1.0
 package1_weight.Units = "LB"
 
 package1 = shipment.create_wsdl_object_of_type('RequestedPackageLineItem')
+package1.PhysicalPackaging = 'BOX'
 package1.Weight = package1_weight
 # Un-comment this to see the other variables you may set on a package.
 #print package1

@@ -80,11 +80,6 @@ class FedexRateServiceRequest(FedexBaseService):
         # Assume US.
         Payor.CountryCode = 'US'
         
-        ShippingChargesPayment = self.client.factory.create('Payment')
-        ShippingChargesPayment.Payor = Payor
-
-        self.RequestedShipment.ShippingChargesPayment = ShippingChargesPayment
-        
         # ACCOUNT or LIST
         self.RequestedShipment.RateRequestTypes = ['ACCOUNT'] 
         
