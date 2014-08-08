@@ -27,7 +27,7 @@ rate_request.RequestedShipment.PackagingType = 'YOUR_PACKAGING'
 
 rate_request.RequestedShipment.FreightShipmentDetail.TotalHandlingUnits = 1
 
-rate_request.RequestedShipment.FreightShipmentDetail.FedExFreightAccountNumber = 'xxxxxxxx' #freight account number
+rate_request.RequestedShipment.FreightShipmentDetail.FedExFreightAccountNumber = CONFIG_OBJ.freight_account_number
 
 rate_request.RequestedShipment.Shipper.Address.PostalCode = '72601'
 rate_request.RequestedShipment.Shipper.Address.CountryCode = 'US'

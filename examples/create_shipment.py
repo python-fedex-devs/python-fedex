@@ -59,6 +59,7 @@ shipment.RequestedShipment.Recipient.Address.CountryCode = 'US'
 shipment.RequestedShipment.Recipient.Address.Residential = True
 shipment.RequestedShipment.EdtRequestType = 'NONE'
 
+shipment.RequestedShipment.ShippingChargesPayment.Payor.ResponsibleParty.AccountNumber = CONFIG_OBJ.account_number
 # Who pays for the shipment?
 # RECIPIENT, SENDER or THIRD_PARTY
 shipment.RequestedShipment.ShippingChargesPayment.PaymentType = 'SENDER' 

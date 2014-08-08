@@ -72,7 +72,6 @@ class FedexProcessShipmentRequest(FedexBaseService):
                 
         Payor = self.client.factory.create('Payor')
         # Grab the account number from the FedexConfig object by default.
-        Payor.ResponsibleParty.AccountNumber = 'xxxxxxxx' #freight account number!
         # Assume US.
         Payor.ResponsibleParty.Address.CountryCode = 'US'
         

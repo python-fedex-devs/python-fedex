@@ -19,7 +19,7 @@ class FedexConfig(object):
     C{password} arguments and set the instance variables documented below
     at a later time if you must.
     """
-    def __init__(self, key, password, account_number=None, meter_number=None,
+    def __init__(self, key, password, account_number=None, meter_number=None, freight_account_number=None,
                  integrator_id=None, wsdl_path=None, express_region_code=None, use_test_server=False):
         """
         @type key: L{str}
@@ -33,6 +33,9 @@ class FedexConfig(object):
         @type meter_number: L{str}
         @keyword meter_number: The meter number sent to you by Fedex after
             registering for Web Services.
+        @type freight_account_number: L{str}
+        @keyword freight_account_number: The freight account number sent to you
+            by Fedex after registering for Web Services.
         @type integrator_id: L{str}
         @keyword integrator_id: The integrator string sent to you by Fedex after
             registering for Web Services.
@@ -53,6 +56,8 @@ class FedexConfig(object):
         """@ivar: Web Services account number."""
         self.meter_number = meter_number
         """@ivar: Web services meter number."""
+        self.freight_account_number = freight_account_number
+        """@ivar: Web Services freight accountnumber."""
         self.integrator_id = integrator_id
         """@ivar: Web services integrator ID."""
         self.express_region_code = express_region_code

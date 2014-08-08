@@ -56,7 +56,7 @@ rate_request.RequestedShipment.EdtRequestType = 'NONE'
 # Who pays for the rate_request?
 # RECIPIENT, SENDER or THIRD_PARTY
 rate_request.RequestedShipment.ShippingChargesPayment.PaymentType = 'SENDER' 
-
+rate_request.RequestedShipment.ShippingChargesPayment.Payor.AccountNumber = CONFIG_OBJ.account_number
 package1_weight = rate_request.create_wsdl_object_of_type('Weight')
 # Weight, in LB.
 package1_weight.Value = 1.0

@@ -22,7 +22,7 @@ shipment.RequestedShipment.DropoffType = 'REGULAR_PICKUP'
 shipment.RequestedShipment.ServiceType = 'FEDEX_FREIGHT_ECONOMY'
 shipment.RequestedShipment.PackagingType = 'YOUR_PACKAGING'
 
-shipment.RequestedShipment.FreightShipmentDetail.FedExFreightAccountNumber = 'xxxxxxxxx' #freight account number
+shipment.RequestedShipment.FreightShipmentDetail.FedExFreightAccountNumber = CONFIG_OBJ.freight_account_number
 
 # Shipper contact info.
 shipment.RequestedShipment.Shipper.Contact.PersonName = 'Sender Name'
@@ -48,9 +48,11 @@ shipment.RequestedShipment.Recipient.Address.City = 'Harrison'
 shipment.RequestedShipment.Recipient.Address.StateOrProvinceCode = 'AR'
 shipment.RequestedShipment.Recipient.Address.PostalCode = '72601'
 shipment.RequestedShipment.Recipient.Address.CountryCode = 'US'
+
 # This is needed to ensure an accurate rate quote with the response.
 shipment.RequestedShipment.Recipient.Address.Residential = False
 shipment.RequestedShipment.FreightShipmentDetail.TotalHandlingUnits = 1  
+shipment.RequestedShipment.ShippingChargesPayment.Payor.ResponsibleParty.AccountNumber = CONFIG_OBJ.freight_account_number
 
 shipment.RequestedShipment.FreightShipmentDetail.FedExFreightBillingContactAndAddress.Contact.PersonName = 'Sender Name'
 shipment.RequestedShipment.FreightShipmentDetail.FedExFreightBillingContactAndAddress.Contact.CompanyName = 'Some Company'
