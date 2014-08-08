@@ -31,10 +31,6 @@ shipment.RequestedShipment.ServiceType = 'PRIORITY_OVERNIGHT'
 # FEDEX_BOX, FEDEX_PAK, FEDEX_TUBE, YOUR_PACKAGING
 shipment.RequestedShipment.PackagingType = 'FEDEX_PAK'
 
-# No idea what this is.
-# INDIVIDUAL_PACKAGES, PACKAGE_GROUPS, PACKAGE_SUMMARY 
-# shipment.RequestedShipment.PackageDetail = 'INDIVIDUAL_PACKAGES'
-
 # Shipper contact info.
 shipment.RequestedShipment.Shipper.Contact.PersonName = 'Sender Name'
 shipment.RequestedShipment.Shipper.Contact.CompanyName = 'Some Company'
