@@ -26,14 +26,14 @@ class FedexProcessShipmentRequest(FedexBaseService):
         self._config_obj = config_obj
         
         # Holds version info for the VersionId SOAP object.
-        self._version_info = {'service_id': 'ship', 'major': '7', 
+        self._version_info = {'service_id': 'ship', 'major': '13', 
                              'intermediate': '0', 'minor': '0'}
         
         self.RequestedShipment = None
         """@ivar: Holds the RequestedShipment WSDL object."""
         # Call the parent FedexBaseService class for basic setup work.
         super(FedexProcessShipmentRequest, self).__init__(self._config_obj, 
-                                                         'ShipService_v7.wsdl',
+                                                         'ShipService_v13.wsdl',
                                                          *args, **kwargs)
         
     def _prepare_wsdl_objects(self):
@@ -72,12 +72,12 @@ class FedexProcessShipmentRequest(FedexBaseService):
                 
         Payor = self.client.factory.create('Payor')
         # Grab the account number from the FedexConfig object by default.
-        Payor.AccountNumber = self._config_obj.account_number
         # Assume US.
-        Payor.CountryCode = 'US'
+        Payor.ResponsibleParty.Address.CountryCode = 'US'
         
         ShippingChargesPayment = self.client.factory.create('Payment')
         ShippingChargesPayment.Payor = Payor
+        ShippingChargesPayment.PaymentType = 'SENDER'
 
         self.RequestedShipment.ShippingChargesPayment = ShippingChargesPayment
         self.RequestedShipment.LabelSpecification = self.client.factory.create('LabelSpecification')
