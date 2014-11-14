@@ -1,11 +1,11 @@
 #!/usr/bin/env python
 """
-This example shows how to use the FedEx RateRequest service. 
-The variables populated below represents the minimum required values. 
-You will need to fill all of these, or risk seeing a SchemaValidationError 
+This example shows how to use the FedEx RateRequest service.
+The variables populated below represents the minimum required values.
+You will need to fill all of these, or risk seeing a SchemaValidationError
 exception thrown by suds.
 
-TIP: Near the bottom of the module, see how to check the if the destination 
+TIP: Near the bottom of the module, see how to check the if the destination
      is Out of Delivery Area (ODA).
 """
 import logging
@@ -19,7 +19,7 @@ logging.basicConfig(level=logging.INFO)
 # We're using the FedexConfig object from example_config.py in this dir.
 rate_request = FedexRateServiceRequest(CONFIG_OBJ)
 
-rate_request.RequestedShipment.ServiceType = 'FEDEX_FREIGHT'
+rate_request.RequestedShipment.ServiceType = 'FEDEX_FREIGHT_ECONOMY'
 
 rate_request.RequestedShipment.DropoffType = 'REGULAR_PICKUP'
 
@@ -42,11 +42,7 @@ rate_request.RequestedShipment.Recipient.Address.City = 'Harrison'
 #include estimated duties and taxes in rate quote, can be ALL or NONE
 rate_request.RequestedShipment.EdtRequestType = 'NONE'
 
-rate_request.RequestedShipment.PackageDetail = 'PACKAGE_SUMMARY'
-
-rate_request.RequestedShipment.FreightShipmentDetail.PaymentType = 'PREPAID'  
-
-# note: in order for this to work in test, you may need to use the 
+# note: in order for this to work in test, you may need to use the
 # specially provided LTL addresses emailed to you when signing up.
 rate_request.RequestedShipment.FreightShipmentDetail.FedExFreightBillingContactAndAddress.Contact.PersonName = 'Sender Name'
 rate_request.RequestedShipment.FreightShipmentDetail.FedExFreightBillingContactAndAddress.Contact.CompanyName = 'Some Company'
@@ -65,8 +61,11 @@ spec.ShippingDocumentTypes = [spec.CertificateOfOrigin]
 rate_request.RequestedShipment.ShippingDocumentSpecification = spec
 
 role = rate_request.create_wsdl_object_of_type('FreightShipmentRoleType')
-
 rate_request.RequestedShipment.FreightShipmentDetail.Role = role.SHIPPER
+
+# Designates the terms of the "collect" payment for a Freight
+#Shipment. Can be NON_RECOURSE_SHIPPER_SIGNED or STANDARD
+rate_request.RequestedShipment.FreightShipmentDetail.CollectTermsType = 'STANDARD'
 
 package1_weight = rate_request.create_wsdl_object_of_type('Weight')
 package1_weight.Value = 500.0
@@ -108,7 +107,7 @@ for service in rate_request.response.RateReplyDetails:
         for surcharge in detail.ShipmentRateDetail.Surcharges:
             if surcharge.SurchargeType == 'OUT_OF_DELIVERY_AREA':
                 print "%s: ODA rate_request charge %s" % (service.ServiceType, surcharge.Amount.Amount)
-            
+
     for rate_detail in service.RatedShipmentDetails:
         print "%s: Net FedEx Charge %s %s" % (service.ServiceType, rate_detail.ShipmentRateDetail.TotalNetFedExCharge.Currency,
                 rate_detail.ShipmentRateDetail.TotalNetFedExCharge.Amount)

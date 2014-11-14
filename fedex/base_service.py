@@ -41,9 +41,13 @@ class SchemaValidationError(FedexBaseServiceException):
     """
     Exception: There is probably a problem in the data you provided.
     """
-    def __init__(self):
+    def __init__(self, fault):
         self.error_code = -1
         self.value = "suds encountered an error validating your data against this service's WSDL schema. Please double-check for missing or invalid values, filling all required fields."
+        try:
+            self.value += ' Details: {}'.format(fault.detail.desc)
+        except AttributeError:
+            pass
 
 class FedexBaseService(object):
     """
@@ -212,11 +216,11 @@ class FedexBaseService(object):
             else:
                 # Default scenario, business as usual.
                 self.response = self._assemble_and_send_request()
-        except suds.WebFault:
+        except suds.WebFault as fault:
             # When this happens, throw an informative message reminding the
             # user to check all required variables, making sure they are
-            # populated and valid.
-            raise SchemaValidationError()
+            # populated and valid
+            raise SchemaValidationError(fault.fault)
 
         # Check the response for general Fedex errors/failures that aren't
         # specific to any given WSDL/request.

@@ -1,11 +1,11 @@
 #!/usr/bin/env python
 """
-This example shows how to use the FedEx RateRequest service. 
-The variables populated below represents the minimum required values. 
-You will need to fill all of these, or risk seeing a SchemaValidationError 
+This example shows how to use the FedEx RateRequest service.
+The variables populated below represents the minimum required values.
+You will need to fill all of these, or risk seeing a SchemaValidationError
 exception thrown by suds.
 
-TIP: Near the bottom of the module, see how to check the if the destination 
+TIP: Near the bottom of the module, see how to check the if the destination
      is Out of Delivery Area (ODA).
 """
 import logging
@@ -36,10 +36,6 @@ rate_request.RequestedShipment.ServiceType = 'FEDEX_GROUND'
 # FEDEX_BOX, FEDEX_PAK, FEDEX_TUBE, YOUR_PACKAGING
 rate_request.RequestedShipment.PackagingType = 'YOUR_PACKAGING'
 
-# No idea what this is.
-# INDIVIDUAL_PACKAGES, PACKAGE_GROUPS, PACKAGE_SUMMARY 
-rate_request.RequestedShipment.PackageDetail = 'INDIVIDUAL_PACKAGES'
-
 # Shipper's address
 rate_request.RequestedShipment.Shipper.Address.PostalCode = '29631'
 rate_request.RequestedShipment.Shipper.Address.CountryCode = 'US'
@@ -55,8 +51,8 @@ rate_request.RequestedShipment.EdtRequestType = 'NONE'
 
 # Who pays for the rate_request?
 # RECIPIENT, SENDER or THIRD_PARTY
-rate_request.RequestedShipment.ShippingChargesPayment.PaymentType = 'SENDER' 
-rate_request.RequestedShipment.ShippingChargesPayment.Payor.AccountNumber = CONFIG_OBJ.account_number
+rate_request.RequestedShipment.ShippingChargesPayment.PaymentType = 'SENDER'
+
 package1_weight = rate_request.create_wsdl_object_of_type('Weight')
 # Weight, in LB.
 package1_weight.Value = 1.0
@@ -66,6 +62,10 @@ package1 = rate_request.create_wsdl_object_of_type('RequestedPackageLineItem')
 package1.Weight = package1_weight
 #can be other values this is probably the most common
 package1.PhysicalPackaging = 'BOX'
+# Required, but according to FedEx docs:
+# "Used only with PACKAGE_GROUPS, as a count of packages within a
+# group of identical packages" whatever that means
+package1.GroupPackageCount = 1
 # Un-comment this to see the other variables you may set on a package.
 #print package1
 
@@ -99,7 +99,7 @@ for service in rate_request.response.RateReplyDetails:
         for surcharge in detail.ShipmentRateDetail.Surcharges:
             if surcharge.SurchargeType == 'OUT_OF_DELIVERY_AREA':
                 print "%s: ODA rate_request charge %s" % (service.ServiceType, surcharge.Amount.Amount)
-            
+
     for rate_detail in service.RatedShipmentDetails:
         print "%s: Net FedEx Charge %s %s" % (service.ServiceType, rate_detail.ShipmentRateDetail.TotalNetFedExCharge.Currency,
                 rate_detail.ShipmentRateDetail.TotalNetFedExCharge.Amount)
