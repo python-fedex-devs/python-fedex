@@ -29,7 +29,7 @@ As root/admin on your machine::
  
 Pip install, bringing in all dependencies::
 
-    pip install git+https://github.com/gtaylor/python-fedex.git
+    pip install fedex
     
 Documentation
 -------------
