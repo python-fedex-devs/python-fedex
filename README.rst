@@ -26,7 +26,11 @@ Installation
 As root/admin on your machine::
 
     python setup.py install
-  
+ 
+Pip install, bringing in all dependencies::
+
+    pip install fedex
+    
 Documentation
 -------------
 
