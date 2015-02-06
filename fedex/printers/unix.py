@@ -3,13 +3,16 @@ This module provides a label printing wrapper class for Unix-based
 installations. By "Unix", we mean Linux, Mac OS, BSD, and various flavors
 of Unix.
 """
+
 import binascii
+
 
 class DirectDevicePrinter(object):
     """
     This class pipes the label data directly through a /dev/* entry.
     Consequently, this is very Unix/Linux specific. It *MAY* work on Mac too.
     """
+
     def __init__(self, shipment, device="/dev/ttyS0"):
         """
         Instantiates from a shipment object. You may optionally specify
@@ -19,6 +22,7 @@ class DirectDevicePrinter(object):
         @param shipment: A Fedex ProcessShipmentRequest object to pull the
                          printed label data from.
         """
+
         self.device = device
         """@ivar: A string with the path to the device to print to."""
         self.shipment = shipment
@@ -32,8 +36,11 @@ class DirectDevicePrinter(object):
         @param package_num: 0-based index of the package to print. This is
                             only useful for shipments with more than one package.
         """
+
         if package_num:
-            packages = [self.shipment.response.CompletedShipmentDetail.CompletedPackageDetails[package_num]]
+            packages = [
+                self.shipment.response.CompletedShipmentDetail.CompletedPackageDetails[package_num]
+            ]
         else:
             packages = self.shipment.response.CompletedShipmentDetail.CompletedPackageDetails
 
@@ -50,6 +57,7 @@ class DirectDevicePrinter(object):
         @type base64_data: L{str}
         @param base64_data: The base64 encoded string for the label to print.
         """
+
         label_file = open(self.device, "w")
         label_file.write(base64_data)
         label_file.close()

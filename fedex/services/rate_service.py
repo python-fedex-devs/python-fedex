@@ -5,8 +5,10 @@ This package contains classes to request pre-ship rating information and to
 determine estimated or courtesy billing quotes. Time in Transit can be
 returned with the rates if it is specified in the request.
 """
+
 from datetime import datetime
 from .. base_service import FedexBaseService
+
 
 class FedexRateServiceRequest(FedexBaseService):
     """
@@ -14,6 +16,7 @@ class FedexRateServiceRequest(FedexBaseService):
     You will need to populate the data structures in self.RequestedShipment, 
     then send the request.
     """
+
     def __init__(self, config_obj, *args, **kwargs):
         """
         The optional keyword args detailed on L{FedexBaseService} 
@@ -22,6 +25,7 @@ class FedexRateServiceRequest(FedexBaseService):
         @type config_obj: L{FedexConfig}
         @param config_obj: A valid FedexConfig object.        
         """
+
         self._config_obj = config_obj
         
         # Holds version info for the VersionId SOAP object.
@@ -42,8 +46,8 @@ class FedexRateServiceRequest(FedexBaseService):
         the data structure and get it ready for the WSDL request.
         """
 
-	# Default behavior is to not request transit information
-	self.ReturnTransitAndCommit = False
+        # Default behavior is to not request transit information
+        self.ReturnTransitAndCommit = False
 
         # This is the primary data structure for processShipment requests.
         self.RequestedShipment = self.client.factory.create('RequestedShipment')
@@ -87,10 +91,7 @@ class FedexRateServiceRequest(FedexBaseService):
         # This is good to review if you'd like to see what the data structure
         # looks like.
         self.logger.debug(self.RequestedShipment)
-        
 
-        
-    
     def _assemble_and_send_request(self):
         """
         Fires off the Fedex request.
@@ -98,14 +99,15 @@ class FedexRateServiceRequest(FedexBaseService):
         @warning: NEVER CALL THIS METHOD DIRECTLY. CALL send_request(), 
             WHICH RESIDES ON FedexBaseService AND IS INHERITED.
         """
+
         # Fire off the query.
-        response = self.client.service.getRates(WebAuthenticationDetail=self.WebAuthenticationDetail,
-                                        ClientDetail=self.ClientDetail,
-                                        TransactionDetail=self.TransactionDetail,
-                                        Version=self.VersionId,
-                                        RequestedShipment=self.RequestedShipment,
-					ReturnTransitAndCommit=self.ReturnTransitAndCommit)
-        return response
+        return self.client.service.getRates(
+            WebAuthenticationDetail=self.WebAuthenticationDetail,
+            ClientDetail=self.ClientDetail,
+            TransactionDetail=self.TransactionDetail,
+            Version=self.VersionId,
+            RequestedShipment=self.RequestedShipment,
+            ReturnTransitAndCommit=self.ReturnTransitAndCommit)
     
     def add_package(self, package_item):
         """
@@ -118,8 +120,8 @@ class FedexRateServiceRequest(FedexBaseService):
             this ShipmentRequest object. See examples/create_shipment.py for
             more details.
         """
+
         self.RequestedShipment.RequestedPackageLineItems.append(package_item)
         package_weight = package_item.Weight.Value
         self.RequestedShipment.TotalWeight.Value += package_weight
         self.RequestedShipment.PackageCount += 1
-        

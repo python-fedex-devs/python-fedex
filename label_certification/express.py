@@ -4,6 +4,7 @@ This module prints three FedEx Express shipping labels for the label
 certification process. See your FedEx Label Developer Tool Kit documentation
 for more details.
 """
+
 import logging
 from cert_config import CONFIG_OBJ, SHIPPER_CONTACT_INFO, SHIPPER_ADDRESS, LABEL_SPECIFICATION
 from cert_config import transfer_config_dict

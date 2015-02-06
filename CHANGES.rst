@@ -1,9 +1,10 @@
 Change Log
 ==========
 
-1.0.15
-------
+1.1.0
+-----
 
+* A quick PEP8 pass on most of the codebase. Yucky. (gtaylor)
 * Changing recommended install method to use pip + PyPi. (radlws)
 * Updated rate_request and freight_rate_request examples for WSDL v16
   compatibility. (foxxyz)

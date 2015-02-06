@@ -4,43 +4,55 @@ of the Web Service API. Things that many different kinds of requests have in
 common may be found here.
 
 In particular, the L{FedexBaseService} class handles most of the basic,
-repetetive setup work that most requests do.
+repetitive setup work that most requests do.
 """
+
 import os
 import logging
+
 import suds
 from suds.client import Client
+
 
 class FedexBaseServiceException(Exception):
     """
     Exception: Serves as the base exception that other service-related
     exception objects are sub-classed from.
     """
+
     def __init__(self, error_code, value):
         self.error_code = error_code
         self.value = value
+
     def __unicode__(self):
         return "%s (Error code: %s)" % (repr(self.value), self.error_code)
+
     def __str__(self):
         return self.__unicode__()
+
 
 class FedexFailure(FedexBaseServiceException):
     """
     Exception: The request could not be handled at this time. This is generally
     a server problem.
     """
+
     pass
+
 
 class FedexError(FedexBaseServiceException):
     """
     Exception: These are generally problems with the client-provided data.
     """
+
     pass
+
 
 class SchemaValidationError(FedexBaseServiceException):
     """
     Exception: There is probably a problem in the data you provided.
     """
+
     def __init__(self, fault):
         self.error_code = -1
         self.value = "suds encountered an error validating your data against this service's WSDL schema. Please double-check for missing or invalid values, filling all required fields."
@@ -48,6 +60,7 @@ class SchemaValidationError(FedexBaseServiceException):
             self.value += ' Details: {}'.format(fault.detail.desc)
         except AttributeError:
             pass
+
 
 class FedexBaseService(object):
     """
@@ -59,6 +72,7 @@ class FedexBaseService(object):
     @note: This object should never be used directly, use one of the included
         sub-classes.
     """
+
     def __init__(self, config_obj, wsdl_name, *args, **kwargs):
         """
         This constructor should only be called by children of the class. As is
@@ -70,6 +84,7 @@ class FedexBaseService(object):
             differentiate this transaction from others. This value will be
             returned with the response from Fedex.
         """
+
         self.logger = logging.getLogger('fedex')
         """@ivar: Python logger instance with name 'fedex'."""
         self.config_obj = config_obj
@@ -86,8 +101,6 @@ class FedexBaseService(object):
             self.wsdl_path = os.path.join(config_obj.wsdl_path, wsdl_name)
 
         self.client = Client('file:///%s' % self.wsdl_path.lstrip('/'))
-
-        #print self.client
 
         self.VersionId = None
         """@ivar: Holds details on the version numbers of the WSDL."""
@@ -114,6 +127,7 @@ class FedexBaseService(object):
         Sets up the WebAuthenticationDetail node. This is required for all
         requests.
         """
+
         # Start of the authentication stuff.
         WebAuthenticationCredential = self.client.factory.create('WebAuthenticationCredential')
         WebAuthenticationCredential.Key = self.config_obj.key
@@ -129,6 +143,7 @@ class FedexBaseService(object):
         Sets up the ClientDetail node, which is required for all shipping
         related requests.
         """
+
         ClientDetail = self.client.factory.create('ClientDetail')
         ClientDetail.AccountNumber = self.config_obj.account_number
         ClientDetail.MeterNumber = self.config_obj.meter_number
@@ -141,6 +156,7 @@ class FedexBaseService(object):
         """
         Checks kwargs for 'customer_transaction_id' and sets it if present.
         """
+
         customer_transaction_id = kwargs.get('customer_transaction_id', False)
         if customer_transaction_id:
             TransactionDetail = self.client.factory.create('TransactionDetail')
@@ -152,6 +168,7 @@ class FedexBaseService(object):
         """
         Pulles the versioning info for the request from the child request.
         """
+
         VersionId = self.client.factory.create('VersionId')
         VersionId.ServiceId = self._version_info['service_id']
         VersionId.Major = self._version_info['major']
@@ -166,6 +183,7 @@ class FedexBaseService(object):
         any of the required WSDL objects so the user can just print their
         __str__() methods and see what they need to fill in.
         """
+
         pass
 
     def __check_response_for_fedex_error(self):
@@ -173,6 +191,7 @@ class FedexBaseService(object):
         This checks the response for general Fedex errors that aren't related
         to any one WSDL.
         """
+
         if self.response.HighestSeverity == "FAILURE":
             for notification in self.response.Notifications:
                 if notification.Severity == "FAILURE":
@@ -185,6 +204,7 @@ class FedexBaseService(object):
         specific to that module. For example, invalid tracking numbers in
         a Tracking request.
         """
+
         if self.response.HighestSeverity == "ERROR":
             for notification in self.response.Notifications:
                 if notification.Severity == "ERROR":
@@ -195,6 +215,7 @@ class FedexBaseService(object):
         """
         Creates and returns a WSDL object of the specified type.
         """
+
         return self.client.factory.create(type_name)
 
     def send_request(self, send_function=None):
@@ -206,6 +227,7 @@ class FedexBaseService(object):
             allows for overriding the default function in cases such as
             validation requests.
         """
+
         # Send the request and get the response back.
         try:
             # If the user has overridden the send function, use theirs
