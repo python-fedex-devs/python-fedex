@@ -1,6 +1,17 @@
 Change Log
 ==========
 
+1.0.15
+------
+
+* Changing recommended install method to use pip + PyPi. (radlws)
+* Updated rate_request and freight_rate_request examples for WSDL v16
+  compatibility. (foxxyz)
+* Updated rate service WSDL from v8 to v16. (foxxyz)
+* Added a freight rate request example (mwcbrent)
+* Bump ShipService WSDL to v13. (mwcbrent)
+* Update rate example to show multiple ServiceTypes. (danielatdattrixdotcom)
+
 1.0.14
 ------
 

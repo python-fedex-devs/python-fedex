@@ -9,7 +9,7 @@ L{FedexConfig} objects haphazardly. This is merely a design suggestion,
 treat it as such.
 """
 import os
-import sys
+
 
 class FedexConfig(object):
     """
