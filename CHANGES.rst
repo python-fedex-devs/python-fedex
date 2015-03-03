@@ -1,6 +1,12 @@
 Change Log
 ==========
 
+1.1.1
+-----
+
+* Made RateService_v16.wsdl point at ws.fedex.com instead of
+  wsbeta.fedex.com. Fixes issues in production. (ikks)
+
 1.1.0
 -----
 
