@@ -64,7 +64,12 @@ package1.Weight = package1_weight
 package1.PhysicalPackaging = 'BOX'
 # Required, but according to FedEx docs:
 # "Used only with PACKAGE_GROUPS, as a count of packages within a
-# group of identical packages" whatever that means
+# group of identical packages". In practice you can use this to get rates
+# for a shipment with multiple packages of an identical package size/weight
+# on rate request without creating multiple RequestedPackageLineItem elements.
+# You can OPTIONALLY specify a package group:
+# package1.GroupNumber = 0  # default is 0
+# The result will be found in RatedPackageDetail, with specified GroupNumber.
 package1.GroupPackageCount = 1
 # Un-comment this to see the other variables you may set on a package.
 #print package1
