@@ -451,7 +451,7 @@
   </binding>
   <service name="AddressValidationService">
     <port name="AddressValidationServicePort" binding="ns:AddressValidationServiceSoapBinding">
-      <s1:address location="https://wsbeta.fedex.com:443/web-services/addressvalidation"/>
+      <s1:address location="https://ws.fedex.com:443/web-services/addressvalidation"/>
     </port>
   </service>
 </definitions>

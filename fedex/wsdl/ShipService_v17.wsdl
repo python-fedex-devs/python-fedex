@@ -6425,7 +6425,7 @@
   </binding>
   <service name="ShipService">
     <port name="ShipServicePort" binding="ns:ShipServiceSoapBinding">
-      <s1:address location="https://wsbeta.fedex.com:443/web-services/ship"/>
+      <s1:address location="https://ws.fedex.com:443/web-services/ship"/>
     </port>
   </service>
 </definitions>
