@@ -4,6 +4,7 @@ Python FedEx SOAP API Module
 :Author: Greg Taylor
 :License: BSD
 :Status: Stable
+:Maintained: Quasi-maintained, looking for new maintainer
 
 What is it?
 -----------
@@ -31,7 +32,10 @@ Support
 -------
 
 Head over to https://github.com/gtaylor/python-fedex/issues
-and submit an issue if you have any problems or questions.
+and submit an issue if you have any problems or questions. Due to this 
+package's quasi-maintained state, most problems are going to require
+investigation or a submitted pull request by someone other than
+Greg Taylor.
 
 Legal Mumbo Jumbo
 -----------------
