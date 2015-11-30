@@ -7,8 +7,8 @@ import logging
 from example_config import CONFIG_OBJ
 from fedex.services.address_validation_service import FedexAddressValidationRequest
 
-# NOTE: To use address validation services, you need to request fedex to enable this service for your account.
-# By default, the service is disabled and you will receive Authentication Failed, 1000 Response.
+# NOTE: TO USE ADDRESS VALIDATION SERVICES, YOU NEED TO REQUEST FEDEX TO ENABLE THIS SERVICE FOR YOUR ACCOUNT.
+# BY DEFAULT, THE SERVICE IS DISABLED AND YOU WILL RECEIVE AUTHENTICATION FAILED, 1000 RESPONSE.
 
 # Set this to the INFO level to see the response from Fedex printed in stdout.
 logging.basicConfig(level=logging.INFO)
@@ -64,9 +64,12 @@ avs_request.send_request()
 
 # good to un-comment to see the variables returned by the Fedex reply.
 print avs_request.response
+#print avs_request.client.last_received()
 
-# Below is the overall end result of the query
+# See the request printed out.
+#print avs_request.client.last_sent()
 
+# Overall end result of the query
 for i in range(len(avs_request.response.AddressResults)):
 
     print "Details for Address", i + 1

@@ -28,30 +28,24 @@ class FedexAddressValidationRequest(FedexBaseService):
         # Holds version info for the VersionId SOAP object.
         self._version_info = {
             'service_id': 'aval',
-            'major': '2',
+            'major': '4',
             'intermediate': '0',
             'minor': '0'
         }
         
-        self.AddressValidationOptions = None
+        # self.AddressValidationOptions = None
         """@ivar: Holds the AddressValidationOptions WSDL object."""
-        self.addresses_to_validate = []
+        self.AddressesToValidate = []
         """@ivar: Holds the AddressToValidate WSDL object."""
         # Call the parent FedexBaseService class for basic setup work.
         super(FedexAddressValidationRequest, self).__init__(
-            self._config_obj, 'AddressValidationService_v2.wsdl', *args, **kwargs)
+            self._config_obj, 'AddressValidationService_v4.wsdl', *args, **kwargs)
         
     def _prepare_wsdl_objects(self):
         """
         Create the data structure and get it ready for the WSDL request.
         """
-
-        # This holds some optional options for the request..
-        self.AddressValidationOptions = self.client.factory.create('AddressValidationOptions')
-                               
-        # This is good to review if you'd like to see what the data structure
-        # looks like.
-        self.logger.debug(self.AddressValidationOptions)
+        pass
     
     def _assemble_and_send_request(self):
         """
@@ -75,13 +69,12 @@ class FedexAddressValidationRequest(FedexBaseService):
             ClientDetail=self.ClientDetail,
             TransactionDetail=self.TransactionDetail,
             Version=self.VersionId,
-            RequestTimestamp=datetime.now(),
-            Options=self.AddressValidationOptions,
-            AddressesToValidate=self.addresses_to_validate)
+            InEffectAsOfTimestamp=datetime.now(),
+            AddressesToValidate=self.AddressesToValidate)
 
     def add_address(self, address_item):
         """
-        Adds an address to self.addresses_to_validate.
+        Adds an address to self.AddressesToValidate.
         
         @type address_item: WSDL object, type of AddressToValidate WSDL object.
         @keyword address_item: A AddressToValidate, created by
@@ -90,4 +83,4 @@ class FedexAddressValidationRequest(FedexBaseService):
             See examples/create_shipment.py for more details.
         """
 
-        self.addresses_to_validate.append(address_item)
+        self.AddressesToValidate.append(address_item)

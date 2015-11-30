@@ -10,7 +10,8 @@ from fedex.services.track_service import FedexTrackRequest
 logging.basicConfig(level=logging.INFO)
 
 # NOTE: TRACKING IS VERY ERRATIC ON THE TEST SERVERS. YOU MAY NEED TO USE
-# PRODUCTION KEYS/PASSWORDS/ACCOUNT #.
+# PRODUCTION KEYS/PASSWORDS/ACCOUNT #. THE TEST SERVERS OFTEN RETURN A NOT FOUND ERROR.
+
 # We're using the FedexConfig object from example_config.py in this dir.
 track = FedexTrackRequest(CONFIG_OBJ)
 track.TrackPackageIdentifier.Type = 'TRACKING_NUMBER_OR_DOORTAG'

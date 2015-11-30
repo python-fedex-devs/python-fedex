@@ -12,9 +12,18 @@ import binascii
 from example_config import CONFIG_OBJ
 from fedex.services.ship_service import FedexProcessShipmentRequest
 
+# What kind of file do you want this example to generate?
+# Valid choices for this example are PDF, PNG
+GENERATE_IMAGE_TYPE = 'PDF'
+
+
 # Set this to the INFO level to see the response from Fedex printed in stdout.
 #logging.basicConfig(filename="suds.log", level=logging.DEBUG)
 logging.basicConfig(level=logging.INFO)
+
+# NOTE: A VALID 'freight_account_number' REQUIRED IN YOUR 'CONFIB_OBJ' FOR THIS SERVICE TO WORK.
+# OTHERWISE YOU WILL GET FEDEX FREIGHT OR ASSOCIATED ADDRESS IS REQUIRED, ERROR 3619.
+
 # This is the object that will be handling our tracking request.
 # We're using the FedexConfig object from example_config.py in this dir.
 shipment = FedexProcessShipmentRequest(CONFIG_OBJ)
@@ -52,18 +61,21 @@ shipment.RequestedShipment.Recipient.Address.CountryCode = 'US'
 # This is needed to ensure an accurate rate quote with the response.
 shipment.RequestedShipment.Recipient.Address.Residential = False
 shipment.RequestedShipment.FreightShipmentDetail.TotalHandlingUnits = 1  
-shipment.RequestedShipment.ShippingChargesPayment.Payor.ResponsibleParty.AccountNumber = CONFIG_OBJ.freight_account_number
+shipment.RequestedShipment.ShippingChargesPayment.Payor.ResponsibleParty.AccountNumber = \
+    CONFIG_OBJ.freight_account_number
 
-shipment.RequestedShipment.FreightShipmentDetail.FedExFreightBillingContactAndAddress.Contact.PersonName = 'Sender Name'
-shipment.RequestedShipment.FreightShipmentDetail.FedExFreightBillingContactAndAddress.Contact.CompanyName = 'Some Company'
-shipment.RequestedShipment.FreightShipmentDetail.FedExFreightBillingContactAndAddress.Contact.PhoneNumber = '9012638716'
+billing_contact_address = shipment.RequestedShipment.FreightShipmentDetail.FedExFreightBillingContactAndAddress
 
-shipment.RequestedShipment.FreightShipmentDetail.FedExFreightBillingContactAndAddress.Address.StreetLines = ['2000 Freight LTL Testing']
-shipment.RequestedShipment.FreightShipmentDetail.FedExFreightBillingContactAndAddress.Address.City = 'Harrison'
-shipment.RequestedShipment.FreightShipmentDetail.FedExFreightBillingContactAndAddress.Address.StateOrProvinceCode = 'AR'
-shipment.RequestedShipment.FreightShipmentDetail.FedExFreightBillingContactAndAddress.Address.PostalCode = '72601'
-shipment.RequestedShipment.FreightShipmentDetail.FedExFreightBillingContactAndAddress.Address.CountryCode = 'US'
-shipment.RequestedShipment.FreightShipmentDetail.FedExFreightBillingContactAndAddress.Address.Residential = False
+billing_contact_address.Contact.PersonName = 'Sender Name'
+billing_contact_address.Contact.CompanyName = 'Some Company'
+billing_contact_address.Contact.PhoneNumber = '9012638716'
+
+billing_contact_address.Address.StreetLines = ['2000 Freight LTL Testing']
+billing_contact_address.Address.City = 'Harrison'
+billing_contact_address.Address.StateOrProvinceCode = 'AR'
+billing_contact_address.Address.PostalCode = '72601'
+billing_contact_address.Address.CountryCode = 'US'
+billing_contact_address.Address.Residential = False
 spec = shipment.create_wsdl_object_of_type('ShippingDocumentSpecification')
 
 spec.ShippingDocumentTypes = [spec.CertificateOfOrigin]
@@ -92,6 +104,11 @@ shipment.RequestedShipment.LabelSpecification.LabelStockType = 'PAPER_LETTER'
 # BOTTOM_EDGE_OF_TEXT_FIRST or TOP_EDGE_OF_TEXT_FIRST
 shipment.RequestedShipment.LabelSpecification.LabelPrintingOrientation = 'BOTTOM_EDGE_OF_TEXT_FIRST'
 shipment.RequestedShipment.EdtRequestType = 'NONE'
+
+# Delete the flags we don't want.
+# Can be SHIPPING_LABEL_FIRST, SHIPPING_LABEL_LAST or delete
+if hasattr(shipment.RequestedShipment.LabelSpecification, 'LabelOrder'):
+    del shipment.RequestedShipment.LabelSpecification.LabelOrder  # Delete, not using.
 
 package1_weight = shipment.create_wsdl_object_of_type('Weight')
 package1_weight.Value = 500.0
@@ -131,12 +148,16 @@ shipment.send_request()
 # attributes through the response attribute on the request object. This is
 # good to un-comment to see the variables returned by the Fedex reply.
 print shipment.response
+#print shipment.client.last_received()
 # Here is the overall end result of the query.
 # print "HighestSeverity:", shipment.response.HighestSeverity
 # # Getting the tracking number from the new shipment.
 # print "Tracking #:", shipment.response.CompletedShipmentDetail.CompletedPackageDetails[0].TrackingIds[0].TrackingNumber
 # # Net shipping costs.
 # print "Net Shipping Cost (US$):", shipment.response.CompletedShipmentDetail.CompletedPackageDetails[0].PackageRating.PackageRateDetails[0].NetCharge.Amount
+
+# See the request printed out.
+#print shipment.client.last_sent()
 
 # # Get the label image in ASCII format from the reply. Note the list indices
 # we're using. You'll need to adjust or iterate through these if your shipment
@@ -148,12 +169,14 @@ ascii_label_data = shipment.response.CompletedShipmentDetail.ShipmentDocuments[0
 label_binary_data = binascii.a2b_base64(ascii_label_data)
 
 """
-This is an example of how to dump a label to a PNG file.
+This is an example of how to dump a label to a local file.
 """
 # This will be the file we write the label out to.
-pdf_file = open('example_shipment_label.pdf', 'wb')
-pdf_file.write(label_binary_data)
-pdf_file.close()
+out_path = 'example_freight_shipment_label.%s' % GENERATE_IMAGE_TYPE.lower()
+print "Writing to file", out_path
+out_file = open(out_path, 'wb')
+out_file.write(label_binary_data)
+out_file.close()
 
 """
 This is an example of how to print the label to a serial printer. This will not
