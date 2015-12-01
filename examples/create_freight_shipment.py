@@ -61,22 +61,21 @@ shipment.RequestedShipment.Recipient.Address.CountryCode = 'US'
 # This is needed to ensure an accurate rate quote with the response.
 shipment.RequestedShipment.Recipient.Address.Residential = False
 shipment.RequestedShipment.FreightShipmentDetail.TotalHandlingUnits = 1  
-shipment.RequestedShipment.ShippingChargesPayment.Payor.ResponsibleParty.AccountNumber = CONFIG_OBJ.freight_account_number
+shipment.RequestedShipment.ShippingChargesPayment.Payor.ResponsibleParty.AccountNumber = \
+    CONFIG_OBJ.freight_account_number
 
 billing_contact_address = shipment.RequestedShipment.FreightShipmentDetail.FedExFreightBillingContactAndAddress
 
 billing_contact_address.Contact.PersonName = 'Sender Name'
+billing_contact_address.Contact.CompanyName = 'Some Company'
+billing_contact_address.Contact.PhoneNumber = '9012638716'
 
-# TODO: Refactor below
-shipment.RequestedShipment.FreightShipmentDetail.FedExFreightBillingContactAndAddress.Contact.CompanyName = 'Some Company'
-shipment.RequestedShipment.FreightShipmentDetail.FedExFreightBillingContactAndAddress.Contact.PhoneNumber = '9012638716'
-
-shipment.RequestedShipment.FreightShipmentDetail.FedExFreightBillingContactAndAddress.Address.StreetLines = ['2000 Freight LTL Testing']
-shipment.RequestedShipment.FreightShipmentDetail.FedExFreightBillingContactAndAddress.Address.City = 'Harrison'
-shipment.RequestedShipment.FreightShipmentDetail.FedExFreightBillingContactAndAddress.Address.StateOrProvinceCode = 'AR'
-shipment.RequestedShipment.FreightShipmentDetail.FedExFreightBillingContactAndAddress.Address.PostalCode = '72601'
-shipment.RequestedShipment.FreightShipmentDetail.FedExFreightBillingContactAndAddress.Address.CountryCode = 'US'
-shipment.RequestedShipment.FreightShipmentDetail.FedExFreightBillingContactAndAddress.Address.Residential = False
+billing_contact_address.Address.StreetLines = ['2000 Freight LTL Testing']
+billing_contact_address.Address.City = 'Harrison'
+billing_contact_address.Address.StateOrProvinceCode = 'AR'
+billing_contact_address.Address.PostalCode = '72601'
+billing_contact_address.Address.CountryCode = 'US'
+billing_contact_address.Address.Residential = False
 spec = shipment.create_wsdl_object_of_type('ShippingDocumentSpecification')
 
 spec.ShippingDocumentTypes = [spec.CertificateOfOrigin]
