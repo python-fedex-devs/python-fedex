@@ -89,6 +89,7 @@ class FedexProcessShipmentRequest(FedexBaseService):
 
         self.RequestedShipment.ShippingChargesPayment = ShippingChargesPayment
         self.RequestedShipment.LabelSpecification = self.client.factory.create('LabelSpecification')
+
         # NONE, PREFERRED or LIST
         self.RequestedShipment.RateRequestTypes = ['PREFERRED']
 
