@@ -141,6 +141,10 @@ shipment.send_request()
 # attributes through the response attribute on the request object. This is
 # good to un-comment to see the variables returned by the Fedex reply.
 print shipment.response
+#print shipment.client.last_received()
+
+# See the request printed out.
+#print shipment.client.last_sent()
 
 # Here is the overall end result of the query.
 print "HighestSeverity:", shipment.response.HighestSeverity
