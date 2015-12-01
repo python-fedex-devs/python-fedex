@@ -71,6 +71,10 @@ class PostalCodeInquiryRequest(FedexBaseService):
                                          notification.Message)
 
     def _prepare_wsdl_objects(self):
+        """
+        Preps the WSDL data structures for the user.
+        """
+
         self.CarrierCode = 'FDXE'
 
     def _assemble_and_send_request(self):
