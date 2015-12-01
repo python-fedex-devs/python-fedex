@@ -51,10 +51,7 @@ class FedexTrackRequest(FedexBaseService):
         }
         self.SelectionDetails = None
         """@ivar: Holds the TrackPackageIdentifier WSDL object."""
-        
-        self.TrackingNumberUniqueIdentifier = kwargs.pop('tracking_number_unique_id', None)
-        
-        """@ivar: Holds the TrackingNumberUniqueIdentifier WSDL object."""
+
         # Call the parent FedexBaseService class for basic setup work.
         super(FedexTrackRequest, self).__init__(
             self._config_obj, 'TrackService_v10.wsdl', *args, **kwargs)
@@ -78,9 +75,7 @@ class FedexTrackRequest(FedexBaseService):
 
         self.SelectionDetails.PackageIdentifier = TrackPackageIdentifier
 
-        self.SelectionDetails.TrackingNumberUniqueIdentifier = self.TrackingNumberUniqueIdentifier
-
-        # 'INCLUDE_DETAILED_SCANS' or None
+        # Set Default as None. 'INCLUDE_DETAILED_SCANS' or None
         self.TrackRequestProcessingOptionType = None
 
     def _check_response_for_request_errors(self):
