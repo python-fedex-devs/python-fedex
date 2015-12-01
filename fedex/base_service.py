@@ -102,7 +102,7 @@ class FedexBaseService(object):
             self.wsdl_path = os.path.join(config_obj.wsdl_path, wsdl_name)
 
         self.client = Client('file:///%s' % self.wsdl_path.lstrip('/'), faults=True)
-        # self.client.options.cache.clear()  # Clear the cache, then re-init client.
+        #self.client.options.cache.clear()  # Clear the cache, then re-init client when changing wsdl file.
 
         self.VersionId = None
         """@ivar: Holds details on the version numbers of the WSDL."""
