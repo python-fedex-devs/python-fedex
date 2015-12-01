@@ -59,7 +59,7 @@ class SchemaValidationError(FedexBaseServiceException):
                      "Please double-check for missing or invalid values, filling all required fields."
         try:
             self.value += ' Details: {}'.format(fault)
-        except AttributeError as e:
+        except AttributeError:
             pass
 
 
@@ -243,6 +243,11 @@ class FedexBaseService(object):
         return self.client.factory.create(type_name)
 
     def _assemble_and_send_request(self):
+        """
+        This method should be over-ridden on each sub-class. It assembles all required objects
+        into the specific request object and calls send_request.
+        """
+
         pass
 
     def send_request(self, send_function=None):
