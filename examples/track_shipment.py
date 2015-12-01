@@ -19,7 +19,10 @@ track.SelectionDetails.PackageIdentifier.Type = 'TRACKING_NUMBER_OR_DOORTAG'
 track.SelectionDetails.PackageIdentifier.Value = '781820562774'
 
 
+# FedEx operating company or delete
 del track.SelectionDetails.OperatingCompany
+
+# Can optionally set the TrackingNumberUniqueIdentifier
 # del track.SelectionDetails.TrackingNumberUniqueIdentifier
 
 # If you'd like to see some documentation on the ship service WSDL, un-comment
