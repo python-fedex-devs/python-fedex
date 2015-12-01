@@ -45,19 +45,16 @@ class FedexTrackRequest(FedexBaseService):
         # Holds version info for the VersionId SOAP object.
         self._version_info = {
             'service_id': 'trck',
-            'major': '5',
+            'major': '10',
             'intermediate': '0',
             'minor': '0'
         }
-        self.TrackPackageIdentifier = None
+        self.SelectionDetails = None
         """@ivar: Holds the TrackPackageIdentifier WSDL object."""
-        
-        self.TrackingNumberUniqueIdentifier = kwargs.pop('tracking_number_unique_id', None)
-        
-        """@ivar: Holds the TrackingNumberUniqueIdentifier WSDL object."""
+
         # Call the parent FedexBaseService class for basic setup work.
         super(FedexTrackRequest, self).__init__(
-            self._config_obj, 'TrackService_v5.wsdl', *args, **kwargs)
+            self._config_obj, 'TrackService_v10.wsdl', *args, **kwargs)
         self.IncludeDetailedScans = False
         
     def _prepare_wsdl_objects(self):
@@ -66,10 +63,21 @@ class FedexTrackRequest(FedexBaseService):
         number or a few different things as per the Fedex spec.
         """
 
-        self.TrackPackageIdentifier = self.client.factory.create('TrackPackageIdentifier')
+        self.SelectionDetails = self.client.factory.create('TrackSelectionDetail')
+
+        # Default to Fedex
+        self.SelectionDetails.CarrierCode = 'FDXE'
+
+        TrackPackageIdentifier = self.client.factory.create('TrackPackageIdentifier')
+
         # Default to tracking number.
-        self.TrackPackageIdentifier.Type = 'TRACKING_NUMBER_OR_DOORTAG'
-        
+        TrackPackageIdentifier.Type = 'TRACKING_NUMBER_OR_DOORTAG'
+
+        self.SelectionDetails.PackageIdentifier = TrackPackageIdentifier
+
+        # Set Default as None. 'INCLUDE_DETAILED_SCANS' or None
+        self.TrackRequestProcessingOptionType = None
+
     def _check_response_for_request_errors(self):
         """
         Checks the response to see if there were any errors specific to
@@ -99,6 +107,6 @@ class FedexTrackRequest(FedexBaseService):
             ClientDetail=self.ClientDetail,
             TransactionDetail=self.TransactionDetail,
             Version=self.VersionId,
-            IncludeDetailedScans=self.IncludeDetailedScans,
-            PackageIdentifier=self.TrackPackageIdentifier,
-            TrackingNumberUniqueIdentifier = self.TrackingNumberUniqueIdentifier)
+            SelectionDetails=self.SelectionDetails,
+            TrackRequestProcessingOptionType=self.TrackRequestProcessingOptionType)
+

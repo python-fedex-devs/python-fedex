@@ -1,6 +1,6 @@
-<definitions xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:ns="http://fedex.com/ws/rate/v16" xmlns:s1="http://schemas.xmlsoap.org/wsdl/soap/" targetNamespace="http://fedex.com/ws/rate/v16" name="RateServiceDefinitions">
+<definitions xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:ns="http://fedex.com/ws/rate/v18" xmlns:s1="http://schemas.xmlsoap.org/wsdl/soap/" targetNamespace="http://fedex.com/ws/rate/v18" name="RateServiceDefinitions">
   <types>
-    <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://fedex.com/ws/rate/v16">
+    <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://fedex.com/ws/rate/v18">
       <xs:element name="RateReply" type="ns:RateReply"/>
       <xs:element name="RateRequest" type="ns:RateRequest"/>
       <xs:simpleType name="AccessorRoleType">
@@ -415,6 +415,8 @@
               <xs:documentation>Supporting detail for applied options identified in preceding field.</xs:documentation>
             </xs:annotation>
           </xs:element>
+          <xs:element name="DerivedShipmentSignatureOption" type="ns:SignatureOptionDetail" minOccurs="0"/>
+          <xs:element name="DerivedPackageSignatureOptions" type="ns:SignatureOptionDetail" minOccurs="0" maxOccurs="unbounded"/>
           <xs:element name="CommitTimestamp" type="xs:dateTime" minOccurs="0">
             <xs:annotation>
               <xs:documentation>THe delivery commitment date/time. Express Only.</xs:documentation>
@@ -745,6 +747,7 @@
               <xs:documentation>Identifies the formatting specification used to construct this custom document.</xs:documentation>
             </xs:annotation>
           </xs:element>
+          <xs:element name="CustomContent" type="ns:CustomLabelDetail" minOccurs="0"/>
         </xs:sequence>
       </xs:complexType>
       <xs:complexType name="CustomLabelBarcodeEntry">
@@ -785,6 +788,7 @@
           <xs:element name="TextEntries" type="ns:CustomLabelTextEntry" minOccurs="0" maxOccurs="unbounded"/>
           <xs:element name="GraphicEntries" type="ns:CustomLabelGraphicEntry" minOccurs="0" maxOccurs="unbounded"/>
           <xs:element name="BoxEntries" type="ns:CustomLabelBoxEntry" minOccurs="0" maxOccurs="unbounded"/>
+          <xs:element name="TextBoxEntries" type="ns:CustomLabelTextBoxEntry" minOccurs="0" maxOccurs="unbounded"/>
           <xs:element name="BarcodeEntries" type="ns:CustomLabelBarcodeEntry" minOccurs="0" maxOccurs="unbounded"/>
         </xs:sequence>
       </xs:complexType>
@@ -818,6 +822,34 @@
               <xs:documentation>Vertical position, relative to top edge of custom area.</xs:documentation>
             </xs:annotation>
           </xs:element>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="CustomLabelTextBoxEntry">
+        <xs:annotation>
+          <xs:documentation>Constructed string, based on format and zero or more data fields, printed in specified printer font (for thermal labels) or generic font/size (for plain paper labels).</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+          <xs:element name="TopLeftCorner" type="ns:CustomLabelPosition" minOccurs="0"/>
+          <xs:element name="BottomRightCorner" type="ns:CustomLabelPosition" minOccurs="0"/>
+          <xs:element name="Position" type="ns:CustomLabelPosition" minOccurs="0"/>
+          <xs:element name="Format" type="xs:string" minOccurs="0"/>
+          <xs:element name="DataFields" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+          <xs:element name="ThermalFontId" type="xs:string" minOccurs="0">
+            <xs:annotation>
+              <xs:documentation>Printer-specific font name for use with thermal printer labels.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name="FontName" type="xs:string" minOccurs="0">
+            <xs:annotation>
+              <xs:documentation>Generic font name for use with plain paper labels.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name="FontSize" type="xs:positiveInteger" minOccurs="0">
+            <xs:annotation>
+              <xs:documentation>Generic font size for use with plain paper labels.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name="Rotation" type="ns:RotationType" minOccurs="0"/>
         </xs:sequence>
       </xs:complexType>
       <xs:complexType name="CustomLabelTextEntry">
@@ -1283,6 +1315,7 @@
       <xs:simpleType name="DocTabContentType">
         <xs:restriction base="xs:string">
           <xs:enumeration value="BARCODED"/>
+          <xs:enumeration value="CUSTOM"/>
           <xs:enumeration value="MINIMUM"/>
           <xs:enumeration value="STANDARD"/>
           <xs:enumeration value="ZONE001"/>
@@ -1515,7 +1548,6 @@
               <xs:documentation>Indicates the types of shipping documents produced for the shipper by FedEx (see ShippingDocumentSpecification) which should be copied back to the shipper in the shipment result data.</xs:documentation>
             </xs:annotation>
           </xs:element>
-          <xs:element name="Documents" type="ns:UploadDocumentDetail" minOccurs="0" maxOccurs="unbounded"/>
           <xs:element name="DocumentReferences" type="ns:UploadDocumentReferenceDetail" minOccurs="0" maxOccurs="unbounded"/>
         </xs:sequence>
       </xs:complexType>
@@ -2004,6 +2036,11 @@
               <xs:documentation>Specification of handling-unit packaging for this commodity or class line.</xs:documentation>
             </xs:annotation>
           </xs:element>
+          <xs:element name="Pieces" type="xs:nonNegativeInteger" minOccurs="0">
+            <xs:annotation>
+              <xs:documentation>Number of pieces for this commodity or class line.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
           <xs:element name="Description" type="xs:string" minOccurs="0">
             <xs:annotation>
               <xs:documentation>Customer-provided description for this commodity or class line.</xs:documentation>
@@ -2084,6 +2121,11 @@
           <xs:element name="RadionuclideDetail" type="ns:RadionuclideDetail" minOccurs="0">
             <xs:annotation>
               <xs:documentation>Specifies the details of any radio active materials within the commodity.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name="NetExplosiveDetail" type="ns:NetExplosiveDetail" minOccurs="0">
+            <xs:annotation>
+              <xs:documentation>The total mass of the contained explosive substances, without the mass of any casings, bullets, shells, etc.</xs:documentation>
             </xs:annotation>
           </xs:element>
         </xs:sequence>
@@ -2379,6 +2421,7 @@
           <xs:enumeration value="DUTIES_AND_TAXES_PAYOR_ACCOUNT_NUMBER"/>
           <xs:enumeration value="FREIGHT_PAYOR_ACCOUNT_NUMBER"/>
           <xs:enumeration value="PACKAGE_SEQUENCE_AND_COUNT"/>
+          <xs:enumeration value="SECONDARY_BARCODE"/>
           <xs:enumeration value="SHIPPER_ACCOUNT_NUMBER"/>
           <xs:enumeration value="SUPPLEMENTAL_LABEL_DOC_TAB"/>
           <xs:enumeration value="TERMS_AND_CONDITIONS"/>
@@ -2621,6 +2664,21 @@
           <xs:enumeration value="UNKNOWN"/>
         </xs:restriction>
       </xs:simpleType>
+      <xs:simpleType name="NetExplosiveClassificationType">
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="NET_EXPLOSIVE_CONTENT"/>
+          <xs:enumeration value="NET_EXPLOSIVE_MASS"/>
+          <xs:enumeration value="NET_EXPLOSIVE_QUANTITY"/>
+          <xs:enumeration value="NET_EXPLOSIVE_WEIGHT"/>
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:complexType name="NetExplosiveDetail">
+        <xs:sequence>
+          <xs:element name="Type" type="ns:NetExplosiveClassificationType" minOccurs="0"/>
+          <xs:element name="Amount" type="xs:decimal" minOccurs="0"/>
+          <xs:element name="Units" type="xs:string" minOccurs="0"/>
+        </xs:sequence>
+      </xs:complexType>
       <xs:complexType name="Notification">
         <xs:annotation>
           <xs:documentation>The descriptive data regarding the result of the submitted transaction.</xs:documentation>
@@ -3506,6 +3564,11 @@
           <xs:element name="DropoffType" type="ns:DropoffType" minOccurs="0"/>
           <xs:element name="ServiceType" type="ns:ServiceType" minOccurs="0"/>
           <xs:element name="PackagingType" type="ns:PackagingType" minOccurs="0"/>
+          <xs:element name="VariationOptions" type="ns:ShipmentVariationOptionDetail" minOccurs="0" maxOccurs="unbounded">
+            <xs:annotation>
+              <xs:documentation>The shipment variations for the current shipment expressed in key-value pairs.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
           <xs:element name="TotalWeight" type="ns:Weight" minOccurs="0"/>
           <xs:element name="TotalInsuredValue" type="ns:Money" minOccurs="0">
             <xs:annotation>
@@ -4179,6 +4242,20 @@
           </xs:element>
         </xs:sequence>
       </xs:complexType>
+      <xs:complexType name="ShipmentVariationOptionDetail">
+        <xs:sequence>
+          <xs:element name="Id" type="xs:string" minOccurs="0">
+            <xs:annotation>
+              <xs:documentation>Specifies the name or the key for the shipment variation.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name="Values" type="xs:string" minOccurs="0" maxOccurs="unbounded">
+            <xs:annotation>
+              <xs:documentation>The values that are valid for the specified shipment variation in the context of the current shipment.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:complexType>
       <xs:complexType name="ShippingDocumentDispositionDetail">
         <xs:annotation>
           <xs:documentation>Each occurrence of this class specifies a particular way in which a kind of shipping document is to be produced and provided.</xs:documentation>
@@ -4434,10 +4511,21 @@
           <xs:documentation>Data required for shipments handled under the SMART_POST and GROUND_SMART_POST service types.</xs:documentation>
         </xs:annotation>
         <xs:sequence>
+          <xs:element name="ProcessingOptionsRequested" type="ns:SmartPostShipmentProcessingOptionsRequested" minOccurs="0"/>
           <xs:element name="Indicia" type="ns:SmartPostIndiciaType" minOccurs="0"/>
           <xs:element name="AncillaryEndorsement" type="ns:SmartPostAncillaryEndorsementType" minOccurs="0"/>
           <xs:element name="HubId" type="xs:string" minOccurs="0"/>
           <xs:element name="CustomerManifestId" type="xs:string" minOccurs="0"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:simpleType name="SmartPostShipmentProcessingOptionType">
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="GROUND_TRACKING_NUMBER_REQUESTED"/>
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:complexType name="SmartPostShipmentProcessingOptionsRequested">
+        <xs:sequence>
+          <xs:element name="Options" type="ns:SmartPostShipmentProcessingOptionType" minOccurs="0" maxOccurs="unbounded"/>
         </xs:sequence>
       </xs:complexType>
       <xs:simpleType name="SpecialRatingAppliedType">
@@ -4638,21 +4726,6 @@
           <xs:enumeration value="UNKNOWN"/>
         </xs:restriction>
       </xs:simpleType>
-      <xs:complexType name="UploadDocumentDetail">
-        <xs:sequence>
-          <xs:element name="LineNumber" type="xs:nonNegativeInteger" minOccurs="0"/>
-          <xs:element name="CustomerReference" type="xs:string" minOccurs="0"/>
-          <xs:element name="DocumentProducer" type="ns:UploadDocumentProducerType" minOccurs="0"/>
-          <xs:element name="DocumentType" type="ns:UploadDocumentType" minOccurs="0"/>
-          <xs:element name="FileName" type="xs:string" minOccurs="0"/>
-          <xs:element name="DocumentContent" type="xs:base64Binary" minOccurs="0"/>
-          <xs:element name="ExpirationDate" type="xs:date" minOccurs="0">
-            <xs:annotation>
-              <xs:documentation>Specifies the date until which the document is available</xs:documentation>
-            </xs:annotation>
-          </xs:element>
-        </xs:sequence>
-      </xs:complexType>
       <xs:simpleType name="UploadDocumentIdProducer">
         <xs:annotation>
           <xs:documentation>Specifies the application that is responsible for managing the document id.</xs:documentation>
@@ -4781,6 +4854,11 @@
           <xs:documentation>Used in authentication of the sender's identity.</xs:documentation>
         </xs:annotation>
         <xs:sequence>
+          <xs:element name="ParentCredential" type="ns:WebAuthenticationCredential" minOccurs="0">
+            <xs:annotation>
+              <xs:documentation>This was renamed from cspCredential.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
           <xs:element name="UserCredential" type="ns:WebAuthenticationCredential" minOccurs="1">
             <xs:annotation>
               <xs:documentation>Credential used to authenticate a specific software application. This value is provided by FedEx after registration.</xs:documentation>
@@ -4815,7 +4893,7 @@
               <xs:documentation>Identifies a system or sub-system which performs an operation.</xs:documentation>
             </xs:annotation>
           </xs:element>
-          <xs:element name="Major" type="xs:int" fixed="16" minOccurs="1">
+          <xs:element name="Major" type="xs:int" fixed="18" minOccurs="1">
             <xs:annotation>
               <xs:documentation>Identifies the service business level.</xs:documentation>
             </xs:annotation>
@@ -4849,7 +4927,7 @@
   <binding name="RateServiceSoapBinding" type="ns:RatePortType">
     <s1:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
     <operation name="getRates">
-      <s1:operation soapAction="http://fedex.com/ws/rate/v16/getRates" style="document"/>
+      <s1:operation soapAction="http://fedex.com/ws/rate/v18/getRates" style="document"/>
       <input>
         <s1:body use="literal"/>
       </input>

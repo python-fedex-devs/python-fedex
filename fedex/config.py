@@ -66,7 +66,7 @@ class FedexConfig(object):
         """@ivar: When True, point to the test server."""
         
         # Allow overriding of the WDSL path.
-        if wsdl_path == None:
+        if wsdl_path is None:
             self.wsdl_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 
                                           'wsdl')
         else:

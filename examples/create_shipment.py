@@ -9,26 +9,34 @@ label data that is returned with the reply.
 """
 import logging
 import binascii
+import datetime
+
 from example_config import CONFIG_OBJ
 from fedex.services.ship_service import FedexProcessShipmentRequest
+
+# What kind of file do you want this example to generate?
+# Valid choices for this example are PDF, PNG
+GENERATE_IMAGE_TYPE = 'PDF'
+
 
 # Set this to the INFO level to see the response from Fedex printed in stdout.
 logging.basicConfig(level=logging.INFO)
 
 # This is the object that will be handling our tracking request.
 # We're using the FedexConfig object from example_config.py in this dir.
-shipment = FedexProcessShipmentRequest(CONFIG_OBJ)
+customer_transaction_id = "*** ShipService Request v17 using Python ***"  # Optional transaction_id
+shipment = FedexProcessShipmentRequest(CONFIG_OBJ, customer_transaction_id=customer_transaction_id)
 
 # This is very generalized, top-level information.
 # REGULAR_PICKUP, REQUEST_COURIER, DROP_BOX, BUSINESS_SERVICE_CENTER or STATION
-shipment.RequestedShipment.DropoffType = 'REGULAR_PICKUP'
+shipment.RequestedShipment.DropoffType = 'BUSINESS_SERVICE_CENTER'
 
 # See page 355 in WS_ShipService.pdf for a full list. Here are the common ones:
 # STANDARD_OVERNIGHT, PRIORITY_OVERNIGHT, FEDEX_GROUND, FEDEX_EXPRESS_SAVER
 shipment.RequestedShipment.ServiceType = 'PRIORITY_OVERNIGHT'
 
 # What kind of package this will be shipped in.
-# FEDEX_BOX, FEDEX_PAK, FEDEX_TUBE, YOUR_PACKAGING
+# FEDEX_BOX, FEDEX_PAK, FEDEX_TUBE, YOUR_PACKAGING, FEDEX_ENVELOPE
 shipment.RequestedShipment.PackagingType = 'FEDEX_PAK'
 
 # Shipper contact info.
@@ -55,11 +63,13 @@ shipment.RequestedShipment.Recipient.Address.City = 'Herndon'
 shipment.RequestedShipment.Recipient.Address.StateOrProvinceCode = 'VA'
 shipment.RequestedShipment.Recipient.Address.PostalCode = '20171'
 shipment.RequestedShipment.Recipient.Address.CountryCode = 'US'
-# This is needed to ensure an accurate rate quote with the response.
+# This is needed to ensure an accurate rate quote with the response. Use AddressValidation to get ResidentialStatus
 shipment.RequestedShipment.Recipient.Address.Residential = True
 shipment.RequestedShipment.EdtRequestType = 'NONE'
 
+# Senders account information
 shipment.RequestedShipment.ShippingChargesPayment.Payor.ResponsibleParty.AccountNumber = CONFIG_OBJ.account_number
+
 # Who pays for the shipment?
 # RECIPIENT, SENDER or THIRD_PARTY
 shipment.RequestedShipment.ShippingChargesPayment.PaymentType = 'SENDER' 
@@ -70,25 +80,36 @@ shipment.RequestedShipment.LabelSpecification.LabelFormatType = 'COMMON2D'
 
 # Specifies which format the label file will be sent to you in.
 # DPL, EPL2, PDF, PNG, ZPLII
-shipment.RequestedShipment.LabelSpecification.ImageType = 'PNG'
+shipment.RequestedShipment.LabelSpecification.ImageType = GENERATE_IMAGE_TYPE
 
 # To use doctab stocks, you must change ImageType above to one of the
 # label printer formats (ZPLII, EPL2, DPL).
 # See documentation for paper types, there quite a few.
-shipment.RequestedShipment.LabelSpecification.LabelStockType = 'PAPER_4X6'
+shipment.RequestedShipment.LabelSpecification.LabelStockType = 'PAPER_7X4.75'
 
 # This indicates if the top or bottom of the label comes out of the 
 # printer first.
 # BOTTOM_EDGE_OF_TEXT_FIRST or TOP_EDGE_OF_TEXT_FIRST
-shipment.RequestedShipment.LabelSpecification.LabelPrintingOrientation = 'BOTTOM_EDGE_OF_TEXT_FIRST'
+# Timestamp in YYYY-MM-DDThh:mm:ss format, e.g. 2002-05-30T09:00:00
+shipment.RequestedShipment.ShipTimestamp = datetime.datetime.now().replace(microsecond=0).isoformat()
 
+# BOTTOM_EDGE_OF_TEXT_FIRST, TOP_EDGE_OF_TEXT_FIRST
+shipment.RequestedShipment.LabelSpecification.LabelPrintingOrientation = 'TOP_EDGE_OF_TEXT_FIRST'
+
+# Delete the flags we don't want.
+# Can be SHIPPING_LABEL_FIRST, SHIPPING_LABEL_LAST or delete
+if hasattr(shipment.RequestedShipment.LabelSpecification, 'LabelOrder'):
+    del shipment.RequestedShipment.LabelSpecification.LabelOrder  # Delete, not using.
+
+# Create Weight, in pounds.
 package1_weight = shipment.create_wsdl_object_of_type('Weight')
-# Weight, in pounds.
 package1_weight.Value = 1.0
 package1_weight.Units = "LB"
 
+# Create PackageLineItem
 package1 = shipment.create_wsdl_object_of_type('RequestedPackageLineItem')
-package1.PhysicalPackaging = 'BOX'
+# BAG, BARREL, BASKET, BOX, BUCKET, BUNDLE, CARTON, CASE, CONTAINER, ENVELOPE etc..
+package1.PhysicalPackaging = 'ENVELOPE'
 package1.Weight = package1_weight
 # Un-comment this to see the other variables you may set on a package.
 #print package1
@@ -99,17 +120,19 @@ shipment.add_package(package1)
 
 # If you'd like to see some documentation on the ship service WSDL, un-comment
 # this line. (Spammy).
-#print shipment.client
+# print shipment.client
 
 # Un-comment this to see your complete, ready-to-send request as it stands
 # before it is actually sent. This is useful for seeing what values you can
 # change.
 #print shipment.RequestedShipment
+#print shipment.ClientDetail
+#print shipment.TransactionDetail
 
 # If you want to make sure that all of your entered details are valid, you
 # can call this and parse it just like you would via send_request(). If
 # shipment.response.HighestSeverity == "SUCCESS", your shipment is valid.
-#shipment.send_validation_request()
+#print shipment.send_validation_request()
 
 # Fires off the request, sets the 'response' attribute on the object.
 shipment.send_request()
@@ -118,28 +141,42 @@ shipment.send_request()
 # attributes through the response attribute on the request object. This is
 # good to un-comment to see the variables returned by the Fedex reply.
 print shipment.response
+#print shipment.client.last_received()
+
+# See the request printed out.
+#print shipment.client.last_sent()
 
 # Here is the overall end result of the query.
 print "HighestSeverity:", shipment.response.HighestSeverity
+
 # Getting the tracking number from the new shipment.
 print "Tracking #:", shipment.response.CompletedShipmentDetail.CompletedPackageDetails[0].TrackingIds[0].TrackingNumber
-# Net shipping costs.
-print "Net Shipping Cost (US$):", shipment.response.CompletedShipmentDetail.CompletedPackageDetails[0].PackageRating.PackageRateDetails[0].NetCharge.Amount
+
+# Net shipping costs. Only show if available. Sometimes sandbox will not include this in the response.
+CompletedPackageDetails = shipment.response.CompletedShipmentDetail.CompletedPackageDetails[0]
+if hasattr(CompletedPackageDetails, 'PackageRating'):
+    print "Net Shipping Cost (US$):", CompletedPackageDetails.PackageRating.PackageRateDetails[0].NetCharge.Amount
+else:
+    print 'WARNING: Unable to get rate.'
 
 # Get the label image in ASCII format from the reply. Note the list indices
 # we're using. You'll need to adjust or iterate through these if your shipment
 # has multiple packages.
+
 ascii_label_data = shipment.response.CompletedShipmentDetail.CompletedPackageDetails[0].Label.Parts[0].Image
+
 # Convert the ASCII data to binary.
 label_binary_data = binascii.a2b_base64(ascii_label_data)
 
 """
-This is an example of how to dump a label to a PNG file.
+This is an example of how to dump a label to a local file.
 """
 # This will be the file we write the label out to.
-png_file = open('example_shipment_label.png', 'wb')
-png_file.write(label_binary_data)
-png_file.close()
+out_path = 'example_shipment_label.%s' % GENERATE_IMAGE_TYPE.lower()
+print "Writing to file", out_path
+out_file = open(out_path, 'wb')
+out_file.write(label_binary_data)
+out_file.close()
 
 """
 This is an example of how to print the label to a serial printer. This will not
@@ -162,3 +199,4 @@ platforms, you may want to go this route.
 #print "SELECTED SERIAL PORT: "+ label_printer.portstr
 #label_printer.write(label_binary_data)
 #label_printer.close()
+

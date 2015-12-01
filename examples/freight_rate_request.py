@@ -29,15 +29,31 @@ rate_request.RequestedShipment.FreightShipmentDetail.TotalHandlingUnits = 1
 
 rate_request.RequestedShipment.FreightShipmentDetail.FedExFreightAccountNumber = CONFIG_OBJ.freight_account_number
 
-rate_request.RequestedShipment.Shipper.Address.PostalCode = '72601'
-rate_request.RequestedShipment.Shipper.Address.CountryCode = 'US'
+
+# Shipper
+rate_request.RequestedShipment.Shipper.AccountNumber = CONFIG_OBJ.freight_account_number
+rate_request.RequestedShipment.Shipper.Contact.PersonName = 'Sender Name'
+rate_request.RequestedShipment.Shipper.Contact.CompanyName = 'Some Company'
+rate_request.RequestedShipment.Shipper.Contact.PhoneNumber = '9012638716'
+rate_request.RequestedShipment.Shipper.Address.StreetLines = ['2000 Freight LTL Testing']
 rate_request.RequestedShipment.Shipper.Address.City = 'Harrison'
 rate_request.RequestedShipment.Shipper.Address.StateOrProvinceCode = 'AR'
+rate_request.RequestedShipment.Shipper.Address.PostalCode = '72601'
+rate_request.RequestedShipment.Shipper.Address.CountryCode = 'US'
 rate_request.RequestedShipment.Shipper.Address.Residential = False
+
+# Recipient
+rate_request.RequestedShipment.Recipient.Address.City = 'Harrison'
+rate_request.RequestedShipment.Recipient.Address.StateOrProvinceCode = 'AR'
 rate_request.RequestedShipment.Recipient.Address.PostalCode = '72601'
 rate_request.RequestedShipment.Recipient.Address.CountryCode = 'US'
-rate_request.RequestedShipment.Recipient.Address.StateOrProvinceCode = 'AR'
-rate_request.RequestedShipment.Recipient.Address.City = 'Harrison'
+rate_request.RequestedShipment.Shipper.Address.Residential = False
+
+# Payment
+payment = rate_request.create_wsdl_object_of_type('Payment')
+payment.PaymentType = "SENDER"
+payment.Payor.ResponsibleParty = rate_request.RequestedShipment.Shipper
+rate_request.RequestedShipment.ShippingChargesPayment = payment
 
 #include estimated duties and taxes in rate quote, can be ALL or NONE
 rate_request.RequestedShipment.EdtRequestType = 'NONE'
@@ -92,11 +108,13 @@ rate_request.RequestedShipment.FreightShipmentDetail.LineItems = package1
 
 # Fires off the request, sets the 'response' attribute on the object.
 rate_request.send_request()
+#print rate_request.client.last_received()
 
 # This will show the reply to your rate_request being sent. You can access the
 # attributes through the response attribute on the request object. This is
 # good to un-comment to see the variables returned by the FedEx reply.
-#print rate_request.response
+print rate_request.response
+#print rate_request.client.last_sent()
 
 # Here is the overall end result of the query.
 print "HighestSeverity:", rate_request.response.HighestSeverity
