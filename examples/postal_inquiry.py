@@ -31,4 +31,8 @@ inquiry.send_request()
 
 # See the response printed out.
 print inquiry.response
+#print inquiry.client.last_received()
+
+# See the response printed out.
+#print inquiry.client.last_sent()
 

@@ -94,6 +94,11 @@ rate_request.send_request()
 # attributes through the response attribute on the request object. This is
 # good to un-comment to see the variables returned by the FedEx reply.
 #print rate_request.response
+#print rate_request.client.last_received()
+
+# See the response printed out.
+#print rate_request.client.last_sent()
+
 
 # Here is the overall end result of the query.
 print "HighestSeverity:", rate_request.response.HighestSeverity
@@ -107,5 +112,5 @@ for service in rate_request.response.RateReplyDetails:
 
     for rate_detail in service.RatedShipmentDetails:
         print "%s: Net FedEx Charge %s %s" % (service.ServiceType, rate_detail.ShipmentRateDetail.TotalNetFedExCharge.Currency,
-                rate_detail.ShipmentRateDetail.TotalNetFedExCharge.Amount)
+                                              rate_detail.ShipmentRateDetail.TotalNetFedExCharge.Amount)
 
