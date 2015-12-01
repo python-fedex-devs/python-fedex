@@ -148,12 +148,16 @@ shipment.send_request()
 # attributes through the response attribute on the request object. This is
 # good to un-comment to see the variables returned by the Fedex reply.
 print shipment.response
+#print shipment.client.last_received()
 # Here is the overall end result of the query.
 # print "HighestSeverity:", shipment.response.HighestSeverity
 # # Getting the tracking number from the new shipment.
 # print "Tracking #:", shipment.response.CompletedShipmentDetail.CompletedPackageDetails[0].TrackingIds[0].TrackingNumber
 # # Net shipping costs.
 # print "Net Shipping Cost (US$):", shipment.response.CompletedShipmentDetail.CompletedPackageDetails[0].PackageRating.PackageRateDetails[0].NetCharge.Amount
+
+# See the request printed out.
+#print shipment.client.last_sent()
 
 # # Get the label image in ASCII format from the reply. Note the list indices
 # we're using. You'll need to adjust or iterate through these if your shipment
