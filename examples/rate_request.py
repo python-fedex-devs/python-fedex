@@ -15,9 +15,11 @@ from fedex.services.rate_service import FedexRateServiceRequest
 # Set this to the INFO level to see the response from Fedex printed in stdout.
 logging.basicConfig(level=logging.INFO)
 
+
 # This is the object that will be handling our tracking request.
 # We're using the FedexConfig object from example_config.py in this dir.
-rate_request = FedexRateServiceRequest(CONFIG_OBJ)
+customer_transaction_id = "*** RateService Request v18 using Python ***"  # Optional transaction_id
+rate_request = FedexRateServiceRequest(CONFIG_OBJ, customer_transaction_id=customer_transaction_id)
 
 # If you wish to have transit data returned with your request you
 # need to uncomment the following
