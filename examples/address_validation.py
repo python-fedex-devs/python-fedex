@@ -64,9 +64,12 @@ avs_request.send_request()
 
 # good to un-comment to see the variables returned by the Fedex reply.
 print avs_request.response
+#print avs_request.client.last_received()
 
-# Below is the overall end result of the query
+# See the request printed out.
+#print avs_request.client.last_sent()
 
+# Overall end result of the query
 for i in range(len(avs_request.response.AddressResults)):
 
     print "Details for Address", i + 1
