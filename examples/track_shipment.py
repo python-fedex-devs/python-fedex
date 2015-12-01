@@ -13,11 +13,14 @@ logging.basicConfig(level=logging.INFO)
 # PRODUCTION KEYS/PASSWORDS/ACCOUNT #. THE TEST SERVERS OFTEN RETURN A NOT FOUND ERROR.
 # WHEN TESTING IN PRODUCTION, GIVE SOME TIME FOR THE TRACKING TO PROPAGATE.
 
+
 # We're using the FedexConfig object from example_config.py in this dir.
+customer_transaction_id = "*** TrackService Request v10 using Python ***"  # Optional transaction_id
 track = FedexTrackRequest(CONFIG_OBJ)
+
+# Track by Tracking Number
 track.SelectionDetails.PackageIdentifier.Type = 'TRACKING_NUMBER_OR_DOORTAG'
 track.SelectionDetails.PackageIdentifier.Value = '781820562774'
-
 
 # FedEx operating company or delete
 del track.SelectionDetails.OperatingCompany
