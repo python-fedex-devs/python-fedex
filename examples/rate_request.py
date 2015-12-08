@@ -15,9 +15,11 @@ from fedex.services.rate_service import FedexRateServiceRequest
 # Set this to the INFO level to see the response from Fedex printed in stdout.
 logging.basicConfig(level=logging.INFO)
 
+
 # This is the object that will be handling our tracking request.
 # We're using the FedexConfig object from example_config.py in this dir.
-rate_request = FedexRateServiceRequest(CONFIG_OBJ)
+customer_transaction_id = "*** RateService Request v18 using Python ***"  # Optional transaction_id
+rate_request = FedexRateServiceRequest(CONFIG_OBJ, customer_transaction_id=customer_transaction_id)
 
 # If you wish to have transit data returned with your request you
 # need to uncomment the following
@@ -94,6 +96,11 @@ rate_request.send_request()
 # attributes through the response attribute on the request object. This is
 # good to un-comment to see the variables returned by the FedEx reply.
 #print rate_request.response
+#print rate_request.client.last_received()
+
+# See the response printed out.
+#print rate_request.client.last_sent()
+
 
 # Here is the overall end result of the query.
 print "HighestSeverity:", rate_request.response.HighestSeverity
@@ -107,5 +114,5 @@ for service in rate_request.response.RateReplyDetails:
 
     for rate_detail in service.RatedShipmentDetails:
         print "%s: Net FedEx Charge %s %s" % (service.ServiceType, rate_detail.ShipmentRateDetail.TotalNetFedExCharge.Currency,
-                rate_detail.ShipmentRateDetail.TotalNetFedExCharge.Amount)
+                                              rate_detail.ShipmentRateDetail.TotalNetFedExCharge.Amount)
 
