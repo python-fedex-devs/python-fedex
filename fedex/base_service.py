@@ -55,9 +55,10 @@ class SchemaValidationError(FedexBaseServiceException):
 
     def __init__(self, fault):
         self.error_code = -1
-        self.value = "suds encountered an error validating your data against this service's WSDL schema. Please double-check for missing or invalid values, filling all required fields."
+        self.value = "suds encountered an error validating your data against this service's WSDL schema. " \
+                     "Please double-check for missing or invalid values, filling all required fields."
         try:
-            self.value += ' Details: {}'.format(fault.detail.desc)
+            self.value += ' Details: {}'.format(fault)
         except AttributeError:
             pass
 
@@ -100,7 +101,8 @@ class FedexBaseService(object):
             self.logger.info("Using production server.")
             self.wsdl_path = os.path.join(config_obj.wsdl_path, wsdl_name)
 
-        self.client = Client('file:///%s' % self.wsdl_path.lstrip('/'))
+        self.client = Client('file:///%s' % self.wsdl_path.lstrip('/'), faults=True)
+        #self.client.options.cache.clear()  # Clear the cache, then re-init client when changing wsdl file.
 
         self.VersionId = None
         """@ivar: Holds details on the version numbers of the WSDL."""
@@ -117,7 +119,7 @@ class FedexBaseService(object):
         """@ivar: Holds customer-specified transaction IDs."""
 
         self.__set_web_authentication_detail()
-        self.__set_client_detail()
+        self.__set_client_detail(*args, **kwargs)
         self.__set_version_id()
         self.__set_transaction_detail(*args, **kwargs)
         self._prepare_wsdl_objects()
@@ -136,9 +138,14 @@ class FedexBaseService(object):
         # Encapsulates the auth credentials.
         WebAuthenticationDetail = self.client.factory.create('WebAuthenticationDetail')
         WebAuthenticationDetail.UserCredential = WebAuthenticationCredential
+
+        # Set Default ParentCredential
+        if hasattr(WebAuthenticationDetail, 'ParentCredential'):
+            WebAuthenticationDetail.ParentCredential = WebAuthenticationCredential
+
         self.WebAuthenticationDetail = WebAuthenticationDetail
 
-    def __set_client_detail(self):
+    def __set_client_detail(self, *args, **kwargs):
         """
         Sets up the ClientDetail node, which is required for all shipping
         related requests.
@@ -150,6 +157,21 @@ class FedexBaseService(object):
         ClientDetail.IntegratorId = self.config_obj.integrator_id
         if hasattr(ClientDetail, 'Region'):
             ClientDetail.Region = self.config_obj.express_region_code
+
+        client_language_code = kwargs.get('client_language_code', None)
+        client_locale_code = kwargs.get('client_locale_code', None)
+
+        if hasattr(ClientDetail, 'Localization') and (client_language_code or client_locale_code):
+            Localization = self.client.factory.create('Localization')
+
+            if client_language_code:
+                Localization.LanguageCode = client_language_code
+
+            if client_locale_code:
+                Localization.LocaleCode = client_locale_code
+
+            ClientDetail.Localization = Localization
+
         self.ClientDetail = ClientDetail
 
     def __set_transaction_detail(self, *args, **kwargs):
@@ -157,7 +179,7 @@ class FedexBaseService(object):
         Checks kwargs for 'customer_transaction_id' and sets it if present.
         """
 
-        customer_transaction_id = kwargs.get('customer_transaction_id', False)
+        customer_transaction_id = kwargs.get('customer_transaction_id', None)
         if customer_transaction_id:
             TransactionDetail = self.client.factory.create('TransactionDetail')
             TransactionDetail.CustomerTransactionId = customer_transaction_id
@@ -177,7 +199,7 @@ class FedexBaseService(object):
         self.logger.debug(VersionId)
         self.VersionId = VersionId
 
-    def __prepare_wsdl_objects(self):
+    def _prepare_wsdl_objects(self):
         """
         This method should be over-ridden on each sub-class. It instantiates
         any of the required WSDL objects so the user can just print their
@@ -217,6 +239,14 @@ class FedexBaseService(object):
         """
 
         return self.client.factory.create(type_name)
+
+    def _assemble_and_send_request(self):
+        """
+        This method should be over-ridden on each sub-class. It assembles all required objects
+        into the specific request object and calls send_request.
+        """
+
+        pass
 
     def send_request(self, send_function=None):
         """
