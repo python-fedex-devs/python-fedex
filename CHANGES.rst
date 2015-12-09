@@ -1,6 +1,18 @@
 Change Log
 ==========
 
+TODO: next release
+------------------
+
+* Bump ShipService WSDL to v17 for create and delete shipment. (radlws)
+* Bump AddressValidation WSDL to v4. (radlws)
+* Bump RateService WSDL to v18. (radlws)
+* Bump TrackService WSDL to v10. (radlws)
+* General improvements to base class. (radlws)
+* Refactoring and updates to examples. (radlws)
+* Added test classes. (radlws)
+* Remove old and unused WSDLs. (radlws)
+
 1.1.1
 -----
 
