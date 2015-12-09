@@ -20,12 +20,6 @@ The easiest way is via pip or easy_install::
 
     pip install fedex
 
-Quick Start
------------
-
-Edit the example_config.py file in examples with your fedex credentials
-and run any of the provided examples.
-
 Documentation
 -------------
 
@@ -42,13 +36,6 @@ and submit an issue if you have any problems or questions. Due to this
 package's quasi-maintained state, most problems are going to require
 investigation or a submitted pull request by someone other than
 Greg Taylor.
-
-
-Fedex Support and Documentation
--------------------------------
-
-Fedex Support Email: websupport@fedex.com
-Developer Portal: http://www.fedex.com/us/developer/
 
 Legal Mumbo Jumbo
 -----------------

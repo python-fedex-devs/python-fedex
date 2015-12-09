@@ -124,8 +124,6 @@ class FedexBaseService(object):
         self.__set_transaction_detail(*args, **kwargs)
         self._prepare_wsdl_objects()
 
-        self._version_info = {}
-
     def __set_web_authentication_detail(self):
         """
         Sets up the WebAuthenticationDetail node. This is required for all
@@ -141,7 +139,7 @@ class FedexBaseService(object):
         WebAuthenticationDetail = self.client.factory.create('WebAuthenticationDetail')
         WebAuthenticationDetail.UserCredential = WebAuthenticationCredential
 
-        # Added for ShipService V17, ParentCredential
+        # Set Default ParentCredential
         if hasattr(WebAuthenticationDetail, 'ParentCredential'):
             WebAuthenticationDetail.ParentCredential = WebAuthenticationCredential
 

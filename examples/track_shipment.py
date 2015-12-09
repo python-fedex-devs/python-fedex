@@ -16,7 +16,7 @@ logging.basicConfig(level=logging.INFO)
 
 # We're using the FedexConfig object from example_config.py in this dir.
 customer_transaction_id = "*** TrackService Request v10 using Python ***"  # Optional transaction_id
-track = FedexTrackRequest(CONFIG_OBJ)
+track = FedexTrackRequest(CONFIG_OBJ, customer_transaction_id=customer_transaction_id)
 
 # Track by Tracking Number
 track.SelectionDetails.PackageIdentifier.Type = 'TRACKING_NUMBER_OR_DOORTAG'
