@@ -108,5 +108,5 @@ class FedexTrackRequest(FedexBaseService):
             TransactionDetail=self.TransactionDetail,
             Version=self.VersionId,
             SelectionDetails=self.SelectionDetails,
-            TrackRequestProcessingOptionType=self.TrackRequestProcessingOptionType)
+            ProcessingOptions=self.TrackRequestProcessingOptionType)
 

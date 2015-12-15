@@ -55,6 +55,7 @@ class ShipServiceTests(unittest.TestCase):
         shipment.RequestedShipment.LabelSpecification.LabelStockType = 'PAPER_7X4.75'
         shipment.RequestedShipment.LabelSpecification.LabelPrintingOrientation = 'BOTTOM_EDGE_OF_TEXT_FIRST'
 
+        # Use order if setting multiple labels or delete
         del shipment.RequestedShipment.LabelSpecification.LabelOrder
 
         package1_weight = shipment.create_wsdl_object_of_type('Weight')
