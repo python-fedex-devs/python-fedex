@@ -50,49 +50,45 @@ avs_request.add_address(address2)
 
 # If you'd like to see some documentation on the ship service WSDL, un-comment
 # this line. (Spammy).
-#print avs_request.client
+#print(avs_request.client)
 
 # Un-comment this to see your complete, ready-to-send request as it stands
 # before it is actually sent. This is useful for seeing what values you can
 # change.
-#print avs_request.AddressesToValidate
-#print avs_request.ClientDetail
-#print avs_request.TransactionDetail
+#print(avs_request.AddressesToValidate)
+#print(avs_request.ClientDetail)
+#print(avs_request.TransactionDetail)
 
 # Fires off the request, sets the 'response' attribute on the object.
 avs_request.send_request()
 
 # good to un-comment to see the variables returned by the Fedex reply.
-print avs_request.response
-#print avs_request.client.last_received()
-
-# See the request printed out.
-#print avs_request.client.last_sent()
+print(avs_request.response)
 
 # Overall end result of the query
 for i in range(len(avs_request.response.AddressResults)):
 
-    print "Details for Address", i + 1
-    print "The validated street is:", avs_request.response.AddressResults[i].EffectiveAddress.StreetLines
-    print "The validated city is:", avs_request.response.AddressResults[i].EffectiveAddress.City
-    print "The validated state code is:", avs_request.response.AddressResults[i].EffectiveAddress.StateOrProvinceCode
-    print "The validated postal code is:", avs_request.response.AddressResults[i].EffectiveAddress.PostalCode
-    print "The validated country code is:", avs_request.response.AddressResults[i].EffectiveAddress.CountryCode
+    print("Details for Address", i + 1)
+    print("The validated street is:", avs_request.response.AddressResults[i].EffectiveAddress.StreetLines)
+    print("The validated city is:", avs_request.response.AddressResults[i].EffectiveAddress.City)
+    print("The validated state code is:", avs_request.response.AddressResults[i].EffectiveAddress.StateOrProvinceCode)
+    print("The validated postal code is:", avs_request.response.AddressResults[i].EffectiveAddress.PostalCode)
+    print("The validated country code is:", avs_request.response.AddressResults[i].EffectiveAddress.CountryCode)
 
     # Can be used to determine the address classification to figure out if Residential fee should apply.
     # MIXED, RESIDENTIAL, UNKNOWN, BUSINESS
-    print "The validated address is residential:", avs_request.response.AddressResults[i].Classification != 'BUSINESS'
+    print("The validated address is residential:", avs_request.response.AddressResults[i].Classification != 'BUSINESS')
 
     # Getting the optional attributes if available
     for j in range(len(avs_request.response.AddressResults[i].Attributes)):
         cur_attribute = avs_request.response.AddressResults[i].Attributes[j]
         if cur_attribute.Name == "CountrySupported":
-            print "Supported Country:", cur_attribute.Value == 'true'
+            print("Supported Country:", cur_attribute.Value == 'true')
         if cur_attribute.Name == "SuiteRequiredButMissing":
-            print "Missing Suite:", cur_attribute.Value == 'true'
+            print("Missing Suite:", cur_attribute.Value == 'true')
         if cur_attribute.Name == "CountrySupported":
-            print "Invalid Suite:", cur_attribute.Value == 'true'
+            print("Invalid Suite:", cur_attribute.Value == 'true')
         if cur_attribute.Name == "MultipleMatches":
-            print "Multiple Matches:", cur_attribute.Value == 'true'
+            print("Multiple Matches:", cur_attribute.Value == 'true')
         if cur_attribute.Name == "POBox":
-            print "Is POBox:", cur_attribute.Value == 'true'
+            print("Is POBox:", cur_attribute.Value == 'true')

@@ -30,4 +30,4 @@ del_request.TrackingId.TrackingIdType = 'EXPRESS'
 del_request.send_request()
 
 # See the response printed out.
-print del_request.response
+print(del_request.response)

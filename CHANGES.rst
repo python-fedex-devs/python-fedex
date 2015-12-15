@@ -2,7 +2,7 @@ Change Log
 ==========
 
 1.1.2
-------------------
+-----
 
 * Bump ShipService WSDL to v17 for create and delete shipment. (radlws)
 * Bump AddressValidation WSDL to v4. (radlws)
