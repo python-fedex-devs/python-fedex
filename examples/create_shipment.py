@@ -112,7 +112,7 @@ package1 = shipment.create_wsdl_object_of_type('RequestedPackageLineItem')
 package1.PhysicalPackaging = 'ENVELOPE'
 package1.Weight = package1_weight
 # Un-comment this to see the other variables you may set on a package.
-#print package1
+#print(package1)
 
 # This adds the RequestedPackageLineItem WSDL object to the shipment. It
 # increments the package count and total weight of the shipment for you.
@@ -120,19 +120,19 @@ shipment.add_package(package1)
 
 # If you'd like to see some documentation on the ship service WSDL, un-comment
 # this line. (Spammy).
-# print shipment.client
+#print(shipment.client)
 
 # Un-comment this to see your complete, ready-to-send request as it stands
 # before it is actually sent. This is useful for seeing what values you can
 # change.
-#print shipment.RequestedShipment
-#print shipment.ClientDetail
-#print shipment.TransactionDetail
+#print(shipment.RequestedShipment)
+#print(shipment.ClientDetail)
+#print(shipment.TransactionDetail)
 
 # If you want to make sure that all of your entered details are valid, you
 # can call this and parse it just like you would via send_request(). If
 # shipment.response.HighestSeverity == "SUCCESS", your shipment is valid.
-#print shipment.send_validation_request()
+#print(shipment.send_validation_request())
 
 # Fires off the request, sets the 'response' attribute on the object.
 shipment.send_request()
@@ -140,24 +140,20 @@ shipment.send_request()
 # This will show the reply to your shipment being sent. You can access the
 # attributes through the response attribute on the request object. This is
 # good to un-comment to see the variables returned by the Fedex reply.
-print shipment.response
-#print shipment.client.last_received()
-
-# See the request printed out.
-#print shipment.client.last_sent()
+print(shipment.response)
 
 # Here is the overall end result of the query.
-print "HighestSeverity:", shipment.response.HighestSeverity
+print("HighestSeverity:", shipment.response.HighestSeverity)
 
 # Getting the tracking number from the new shipment.
-print "Tracking #:", shipment.response.CompletedShipmentDetail.CompletedPackageDetails[0].TrackingIds[0].TrackingNumber
+print("Tracking #:", shipment.response.CompletedShipmentDetail.CompletedPackageDetails[0].TrackingIds[0].TrackingNumber)
 
 # Net shipping costs. Only show if available. Sometimes sandbox will not include this in the response.
 CompletedPackageDetails = shipment.response.CompletedShipmentDetail.CompletedPackageDetails[0]
 if hasattr(CompletedPackageDetails, 'PackageRating'):
-    print "Net Shipping Cost (US$):", CompletedPackageDetails.PackageRating.PackageRateDetails[0].NetCharge.Amount
+    print("Net Shipping Cost (US$):", CompletedPackageDetails.PackageRating.PackageRateDetails[0].NetCharge.Amount)
 else:
-    print 'WARNING: Unable to get rate.'
+    print('WARNING: Unable to get rate.')
 
 # Get the label image in ASCII format from the reply. Note the list indices
 # we're using. You'll need to adjust or iterate through these if your shipment
@@ -173,7 +169,7 @@ This is an example of how to dump a label to a local file.
 """
 # This will be the file we write the label out to.
 out_path = 'example_shipment_label.%s' % GENERATE_IMAGE_TYPE.lower()
-print "Writing to file", out_path
+print("Writing to file", out_path)
 out_file = open(out_path, 'wb')
 out_file.write(label_binary_data)
 out_file.close()
@@ -196,7 +192,7 @@ platforms, you may want to go this route.
 """
 #import serial
 #label_printer = serial.Serial(0)
-#print "SELECTED SERIAL PORT: "+ label_printer.portstr
+#print("SELECTED SERIAL PORT: "+ label_printer.portstr)
 #label_printer.write(label_binary_data)
 #label_printer.close()
 

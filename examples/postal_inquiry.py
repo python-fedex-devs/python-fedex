@@ -17,22 +17,17 @@ inquiry.CountryCode = 'US'
 
 # If you'd like to see some documentation on the ship service WSDL, un-comment
 # this line. (Spammy).
-#print inquiry.client
+#print(inquiry.client)
 
 # Un-comment this to see your complete, ready-to-send request as it stands
 # before it is actually sent. This is useful for seeing what values you can
 # change.
-#print inquiry.CarrierCode
-#print inquiry.ClientDetail
-#print inquiry.TransactionDetail
+#print(inquiry.CarrierCode)
+#print(inquiry.ClientDetail)
+#print(inquiry.TransactionDetail)
 
 # Fires off the request, sets the 'response' attribute on the object.
 inquiry.send_request()
 
 # See the response printed out.
-print inquiry.response
-#print inquiry.client.last_received()
-
-# See the response printed out.
-#print inquiry.client.last_sent()
-
+print(inquiry.response)

@@ -12,6 +12,22 @@ import logging
 
 import suds
 from suds.client import Client
+from suds.plugin import MessagePlugin
+
+
+class GeneralSudsPlugin(MessagePlugin):
+
+    def __init__(self, **kwargs):
+        self.kwargs = kwargs
+
+    def marshalled(self, context):
+        context.envelope = context.envelope.prune()
+
+    def sending(self, context):
+        logging.info("FedEx Request {}".format(context.envelope))
+
+    def received(self, context):
+        logging.info("FedEx Response {}".format(context.reply))
 
 
 class FedexBaseServiceException(Exception):
@@ -101,7 +117,7 @@ class FedexBaseService(object):
             self.logger.info("Using production server.")
             self.wsdl_path = os.path.join(config_obj.wsdl_path, wsdl_name)
 
-        self.client = Client('file:///%s' % self.wsdl_path.lstrip('/'), faults=True)
+        self.client = Client('file:///%s' % self.wsdl_path.lstrip('/'),  plugins=[GeneralSudsPlugin()])
         #self.client.options.cache.clear()  # Clear the cache, then re-init client when changing wsdl file.
 
         self.VersionId = None

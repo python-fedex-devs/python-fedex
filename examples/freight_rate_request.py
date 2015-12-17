@@ -99,34 +99,33 @@ rate_request.RequestedShipment.FreightShipmentDetail.LineItems = package1
 
 # If you'd like to see some documentation on the ship service WSDL, un-comment
 # this line. (Spammy).
-#print rate_request.client
+#print(rate_request.client)
 
 # Un-comment this to see your complete, ready-to-send request as it stands
 # before it is actually sent. This is useful for seeing what values you can
 # change.
-#print rate_request.RequestedShipment
+#print(rate_request.RequestedShipment)
 
 # Fires off the request, sets the 'response' attribute on the object.
 rate_request.send_request()
-#print rate_request.client.last_received()
 
 # This will show the reply to your rate_request being sent. You can access the
 # attributes through the response attribute on the request object. This is
 # good to un-comment to see the variables returned by the FedEx reply.
-print rate_request.response
-#print rate_request.client.last_sent()
+print(rate_request.response)
 
 # Here is the overall end result of the query.
-print "HighestSeverity:", rate_request.response.HighestSeverity
+print("HighestSeverity:", rate_request.response.HighestSeverity)
 
 # RateReplyDetails can contain rates for multiple ServiceTypes if ServiceType was set to None
 for service in rate_request.response.RateReplyDetails:
     for detail in service.RatedShipmentDetails:
         for surcharge in detail.ShipmentRateDetail.Surcharges:
             if surcharge.SurchargeType == 'OUT_OF_DELIVERY_AREA':
-                print "%s: ODA rate_request charge %s" % (service.ServiceType, surcharge.Amount.Amount)
+                print("%s: ODA rate_request charge {}".format(service.ServiceType, surcharge.Amount.Amount))
 
     for rate_detail in service.RatedShipmentDetails:
-        print "%s: Net FedEx Charge %s %s" % (service.ServiceType, rate_detail.ShipmentRateDetail.TotalNetFedExCharge.Currency,
-                rate_detail.ShipmentRateDetail.TotalNetFedExCharge.Amount)
+        print("{}: Net FedEx Charge {} {}".format(service.ServiceType,
+                                                  rate_detail.ShipmentRateDetail.TotalNetFedExCharge.Currency,
+                                                  rate_detail.ShipmentRateDetail.TotalNetFedExCharge.Amount))
 

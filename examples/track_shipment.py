@@ -30,34 +30,30 @@ del track.SelectionDetails.OperatingCompany
 
 # If you'd like to see some documentation on the ship service WSDL, un-comment
 # this line. (Spammy).
-#print track.client
+#print(track.client)
 
 # Un-comment this to see your complete, ready-to-send request as it stands
 # before it is actually sent. This is useful for seeing what values you can
 # change.
-#print track.SelectionDetails
-#print track.ClientDetail
-#print track.TransactionDetail
+#print(track.SelectionDetails)
+#print(track.ClientDetail)
+#print(track.TransactionDetail)
 
 
 # Fires off the request, sets the 'response' attribute on the object.
 track.send_request()
 
 # See the response printed out.
-print track.response
-#print rate_request.client.last_received()
-
-# See the request printed out.
-#print track.client.last_sent()
+print(track.response)
 
 # Look through the matches (there should only be one for a tracking number
 # query), and show a few details about each shipment.
-print "== Results =="
-#print track.response
+print("== Results ==")
+#print(track.response)
 for match in track.response.CompletedTrackDetails[0].TrackDetails:
-    print "Tracking #:", match.TrackingNumber
-    print "Tracking # UniqueID:", match.TrackingNumberUniqueIdentifier
-    print "Status:", match.StatusDetail.Description
-    print "Status AncillaryDetails Reason:", match.StatusDetail.AncillaryDetails[-1].Reason
-    print "Status AncillaryDetails Description:", match.StatusDetail.AncillaryDetails[-1].ReasonDescription
-    print "Commit Message:", match.ServiceCommitMessage
+    print("Tracking #:", match.TrackingNumber)
+    print("Tracking # UniqueID:", match.TrackingNumberUniqueIdentifier)
+    print("Status:", match.StatusDetail.Description)
+    print("Status AncillaryDetails Reason:", match.StatusDetail.AncillaryDetails[-1].Reason)
+    print("Status AncillaryDetails Description:", match.StatusDetail.AncillaryDetails[-1].ReasonDescription)
+    print("Commit Message:", match.ServiceCommitMessage)

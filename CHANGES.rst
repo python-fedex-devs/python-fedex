@@ -1,8 +1,8 @@
 Change Log
 ==========
 
-TODO: next release
-------------------
+1.2.0
+-----
 
 * Bump ShipService WSDL to v17 for create and delete shipment. (radlws)
 * Bump AddressValidation WSDL to v4. (radlws)
@@ -12,6 +12,7 @@ TODO: next release
 * Refactoring and updates to examples. (radlws)
 * Added test classes. (radlws)
 * Remove old and unused WSDLs. (radlws)
+* Change dependency to suds-jurko to include python 3 support. (radlws)
 
 1.1.1
 -----
