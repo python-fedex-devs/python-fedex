@@ -82,7 +82,7 @@ class FedexTrackRequest(FedexBaseService):
         Checks the response to see if there were any errors specific to
         this WSDL.
         """
-        if self.response.HighestSeverity == "ERROR":
+        if self.response.HighestSeverity == "ERROR":  # pragma: no cover
             for notification in self.response.Notifications:
                 if notification.Severity == "ERROR":
                     if "Invalid tracking number" in notification.Message:

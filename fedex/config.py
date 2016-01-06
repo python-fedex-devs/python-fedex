@@ -70,5 +70,5 @@ class FedexConfig(object):
         if wsdl_path is None:
             self.wsdl_path = os.path.join(os.path.dirname(os.path.abspath(__file__)),
                                           'wsdl')
-        else:
+        else:  # pragma: no cover
             self.wsdl_path = wsdl_path
