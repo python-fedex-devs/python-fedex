@@ -68,6 +68,7 @@ class ShipServiceTests(unittest.TestCase):
         package1.Weight = package1_weight
         shipment.add_package(package1)
 
+        shipment.send_validation_request()
         shipment.send_request()
 
         assert shipment.response

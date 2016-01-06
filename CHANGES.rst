@@ -8,6 +8,8 @@ Change Log
 * Added [Validation]AvailabilityAndCommitmentService_v4.wsdl for AVC service. (radzhome)
 * Added examples and unit tests for AVC service.
 * Refactored examples and documentation. (radzhome)
+* A quick PEP8 pass using pycharm on most of the codebase (radzhome)
+* Add travis yml (radzhome)
 
 
 2.0.0

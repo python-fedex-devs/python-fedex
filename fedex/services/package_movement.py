@@ -57,7 +57,7 @@ class PostalCodeInquiryRequest(FedexBaseService):
         this WSDL.
         """
         if self.response.HighestSeverity == "ERROR":
-            for notification in self.response.Notifications:
+            for notification in self.response.Notifications:  # pragma: no cover
                 if notification.Severity == "ERROR":
                     if "Postal Code Not Found" in notification.Message:
                         raise FedexPostalCodeNotFound(notification.Code,
