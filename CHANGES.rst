@@ -1,18 +1,27 @@
 Change Log
 ==========
 
+2.1.0
+-----
+
+* Added Validation, Availability and Commitment (AVC) service. (radzhome)
+* Added [Validation]AvailabilityAndCommitmentService_v4.wsdl for AVC service. (radzhome)
+* Added examples and unit tests for AVC service.
+* Refactored examples and documentation. (radzhome)
+
+
 2.0.0
 -----
 
-* Bump ShipService WSDL to v17 for create and delete shipment. (radlws)
-* Bump AddressValidation WSDL to v4. (radlws)
-* Bump RateService WSDL to v18. (radlws)
-* Bump TrackService WSDL to v10. (radlws)
-* General improvements to base class. (radlws)
-* Refactoring and updates to examples. (radlws)
-* Added test classes. (radlws)
-* Remove old and unused WSDLs. (radlws)
-* Change dependency to suds-jurko to include python 3 support. (radlws)
+* Bump ShipService WSDL to v17 for create and delete shipment. (radzhome)
+* Bump AddressValidation WSDL to v4. (radzhome)
+* Bump RateService WSDL to v18. (radzhome)
+* Bump TrackService WSDL to v10. (radzhome)
+* General improvements to base class. (radzhome)
+* Refactoring and updates to examples. (radzhome)
+* Added test classes. (radzhome)
+* Remove old and unused WSDLs. (radzhome)
+* Change dependency to suds-jurko to include python 3 support. (radzhome)
 
 1.1.1
 -----
@@ -24,7 +33,7 @@ Change Log
 -----
 
 * A quick PEP8 pass on most of the codebase. Yucky. (gtaylor)
-* Changing recommended install method to use pip + PyPi. (radlws)
+* Changing recommended install method to use pip + PyPi. (radzhome)
 * Updated rate_request and freight_rate_request examples for WSDL v16
   compatibility. (foxxyz)
 * Updated rate service WSDL from v8 to v16. (foxxyz)

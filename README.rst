@@ -4,7 +4,6 @@ Python FedEx SOAP API Module
 :Author: Greg Taylor
 :License: BSD
 :Status: Stable
-:Maintained: Quasi-maintained, looking for new maintainer
 
 What is it?
 -----------
@@ -49,8 +48,8 @@ Fedex Support and Documentation
 Fedex Support Email: websupport@fedex.com
 Developer Portal: http://www.fedex.com/us/developer/
 
-Legal Mumbo Jumbo
------------------
+Legal
+-----
 
 Copyright (C) 2015 Gregory Taylor
 
