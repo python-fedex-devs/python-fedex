@@ -1,21 +1,19 @@
 """
-Address Validation Service Module
+Service Availability and Commitment Module
 =================================
 This package contains the shipping methods defined by Fedex's 
-AddressValidationService WSDL file. Each is encapsulated in a class for 
+ValidationAvailabilityAndCommitmentService WSDL file. Each is encapsulated in a class for
 easy access. For more details on each, refer to the respective class's 
 documentation.
 """
 
-from datetime import datetime
+import datetime
 from .. base_service import FedexBaseService
 
 
-class FedexAddressValidationRequest(FedexBaseService):
+class FedexAvailabilityCommitmentRequest(FedexBaseService):
     """
-    This class allows you validate anywhere from one to a hundred addresses
-    in one go. Create AddressToValidate WSDL objects and add them to each
-    instance of this request using add_address().
+    This class allows you validate service availability
     """
 
     def __init__(self, config_obj, *args, **kwargs):
@@ -27,26 +25,41 @@ class FedexAddressValidationRequest(FedexBaseService):
         self._config_obj = config_obj
         # Holds version info for the VersionId SOAP object.
         self._version_info = {
-            'service_id': 'aval',
+            'service_id': 'vacs',
             'major': '4',
             'intermediate': '0',
             'minor': '0'
         }
-        
-        # self.AddressValidationOptions = None
-        """@ivar: Holds the AddressValidationOptions WSDL object."""
-        self.AddressesToValidate = []
-        """@ivar: Holds the AddressToValidate WSDL object."""
+
+        """ivar: Carrier Code Default to Fedex (FDXE), or can bbe FDXG."""
+        self.CarrierCode = None
+
+        """@ivar: Holds Addresses and Ship Date objects."""
+        self.Origin = self.Destination = None
+        self.ShipDate = None
+
+        """@ivar: Holds the ValidationAvailabilityAndCommitmentService WSDL object."""
         # Call the parent FedexBaseService class for basic setup work.
-        super(FedexAddressValidationRequest, self).__init__(
-            self._config_obj, 'AddressValidationService_v4.wsdl', *args, **kwargs)
+        # Shortened the name of the wsdl, otherwise suds did not load it properly.
+        # Suds throws the following error when using the long file name from FedEx:
+        #
+        #   File "/Library/Python/2.7/site-packages/suds/wsdl.py", line 878, in resolve
+        # raise Exception("binding '%s', not-found" % p.binding)
+        # Exception: binding 'ns:ValidationAvailabilityAndCommitmentServiceSoapBinding', not-found
+
+        super(FedexAvailabilityCommitmentRequest, self).__init__(
+            self._config_obj, 'AvailabilityAndCommitmentService_v4.wsdl', *args, **kwargs)
         
     def _prepare_wsdl_objects(self):
         """
         Create the data structure and get it ready for the WSDL request.
         """
-        pass
-    
+        self.CarrierCode = 'FDXE'
+        self.Origin = self.Destination = self.client.factory.create('Address')
+        self.ShipDate = datetime.date.today().isoformat()
+        self.Service = None
+        self.Packaging = 'YOUR_PACKAGING'
+
     def _assemble_and_send_request(self):
         """
         Fires off the Fedex request.
@@ -64,23 +77,14 @@ class FedexAddressValidationRequest(FedexBaseService):
         self.logger.debug(self.TransactionDetail)
         self.logger.debug(self.VersionId)
         # Fire off the query.
-        return self.client.service.addressValidation(
+        return self.client.service.serviceAvailability(
             WebAuthenticationDetail=self.WebAuthenticationDetail,
             ClientDetail=self.ClientDetail,
             TransactionDetail=self.TransactionDetail,
             Version=self.VersionId,
-            InEffectAsOfTimestamp=datetime.now(),
-            AddressesToValidate=self.AddressesToValidate)
-
-    def add_address(self, address_item):
-        """
-        Adds an address to self.AddressesToValidate.
-        
-        @type address_item: WSDL object, type of AddressToValidate WSDL object.
-        @keyword address_item: A AddressToValidate, created by
-            calling create_wsdl_object_of_type('AddressToValidate') on
-            this FedexAddressValidationRequest object. 
-            See examples/create_shipment.py for more details.
-        """
-
-        self.AddressesToValidate.append(address_item)
+            Origin=self.Origin,
+            Destination=self.Destination,
+            ShipDate=self.ShipDate,
+            CarrierCode=self.CarrierCode,
+            Service=self.Service,
+            Packaging=self.Packaging)

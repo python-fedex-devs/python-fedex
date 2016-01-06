@@ -6,14 +6,14 @@ import unittest
 
 import sys
 sys.path.insert(0, '..')
-from fedex.services.track_service import FedexTrackRequest
+from fedex.services.availability_commitment_service import FedexAvailabilityCommitmentRequest
 
 # Common global config object for testing.
 from common import get_test_config
 CONFIG_OBJ = get_test_config()
 
 
-class TrackServiceTests(unittest.TestCase):
+class AvailabilityCommitmentServiceTests(unittest.TestCase):
     """
     These tests verify that the shipping service WSDL is in good shape.
     """
@@ -21,26 +21,17 @@ class TrackServiceTests(unittest.TestCase):
         # Test shipment tracking. Query for a tracking number and make sure the
         # first (and hopefully only) result matches up.
 
-        tracking_num = '781820562774'
+        avc_request = FedexAvailabilityCommitmentRequest(CONFIG_OBJ)
 
-        track = FedexTrackRequest(CONFIG_OBJ)
+        avc_request.Origin.PostalCode = 'M5V 3A4'
+        avc_request.Origin.CountryCode = 'CA'
 
-        # Track by Tracking Number
-        track.SelectionDetails.PackageIdentifier.Type = 'TRACKING_NUMBER_OR_DOORTAG'
-        track.SelectionDetails.PackageIdentifier.Value = tracking_num
+        avc_request.Origin.PostalCode = '27577'  # 29631
+        avc_request.Origin.CountryCode = 'US'
 
-        # FedEx operating company or delete
-        del track.SelectionDetails.OperatingCompany
+        avc_request.send_request()
+        assert avc_request.response
 
-        track.send_request()
-
-        assert track.response
-
-        # Uncomment below if testing in production with a valid tracking number
-        # for match in track.response.CompletedTrackDetails[0].TrackDetails:
-        #     # This should be the same tracking number on the response that we
-        #     # asked for in the request.
-        #     assert match.TrackingNumber == tracking_num
 
 
 if __name__ == "__main__":
