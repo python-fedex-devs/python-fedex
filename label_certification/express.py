@@ -20,11 +20,11 @@ shipment.RequestedShipment.PackagingType = 'YOUR_PACKAGING'
 shipment.RequestedShipment.PackageDetail = 'INDIVIDUAL_PACKAGES'
 
 # Shipper contact info.
-transfer_config_dict(shipment.RequestedShipment.Shipper.Contact, 
+transfer_config_dict(shipment.RequestedShipment.Shipper.Contact,
                      SHIPPER_CONTACT_INFO)
 
 # Shipper address.
-transfer_config_dict(shipment.RequestedShipment.Shipper.Address, 
+transfer_config_dict(shipment.RequestedShipment.Shipper.Address,
                      SHIPPER_ADDRESS)
 
 # Recipient contact info.
@@ -39,10 +39,10 @@ shipment.RequestedShipment.Recipient.Address.StateOrProvinceCode = 'VA'
 shipment.RequestedShipment.Recipient.Address.PostalCode = '20171'
 shipment.RequestedShipment.Recipient.Address.CountryCode = 'US'
 
-shipment.RequestedShipment.ShippingChargesPayment.PaymentType = 'SENDER' 
+shipment.RequestedShipment.ShippingChargesPayment.PaymentType = 'SENDER'
 
 # Label config.
-transfer_config_dict(shipment.RequestedShipment.LabelSpecification, 
+transfer_config_dict(shipment.RequestedShipment.LabelSpecification,
                      LABEL_SPECIFICATION)
 
 package1_weight = shipment.create_wsdl_object_of_type('Weight')
@@ -56,23 +56,23 @@ if __name__ == "__main__":
     shipment.send_request()
     device = LabelPrinterClass(shipment)
     device.print_label()
-    
+
     shipment.RequestedShipment.Recipient.Address.StreetLines = ['456 Peach St']
     shipment.RequestedShipment.Recipient.Address.City = 'Atlanta'
     shipment.RequestedShipment.Recipient.Address.StateOrProvinceCode = 'GA'
     shipment.RequestedShipment.Recipient.Address.PostalCode = '30303'
     shipment.RequestedShipment.Recipient.Address.CountryCode = 'US'
-    
+
     shipment.send_request()
     device = LabelPrinterClass(shipment)
     device.print_label()
-    
+
     shipment.RequestedShipment.Recipient.Address.StreetLines = ['987 Main St']
     shipment.RequestedShipment.Recipient.Address.City = 'Boston'
     shipment.RequestedShipment.Recipient.Address.StateOrProvinceCode = 'MA'
     shipment.RequestedShipment.Recipient.Address.PostalCode = '02115'
     shipment.RequestedShipment.Recipient.Address.CountryCode = 'US'
-    
+
     shipment.send_request()
     device = LabelPrinterClass(shipment)
     device.print_label()

@@ -5,12 +5,14 @@ Test module for the Fedex ShipService WSDL.
 import unittest
 
 import sys
+
 sys.path.insert(0, '..')
 from fedex.services.ship_service import FedexProcessShipmentRequest
 from fedex.services.ship_service import FedexDeleteShipmentRequest
 
 # Common global config object for testing.
 from common import get_test_config
+
 CONFIG_OBJ = get_test_config()
 
 
@@ -18,8 +20,8 @@ class ShipServiceTests(unittest.TestCase):
     """
     These tests verify that the ship service WSDL is in good shape.
     """
-    def test_create_delete_shipment(self):
 
+    def test_create_delete_shipment(self):
         shipment = FedexProcessShipmentRequest(CONFIG_OBJ)
 
         shipment.RequestedShipment.DropoffType = 'REGULAR_PICKUP'
@@ -84,5 +86,4 @@ class ShipServiceTests(unittest.TestCase):
 
 
 if __name__ == "__main__":
-
     unittest.main()

@@ -33,4 +33,4 @@ setup(name='fedex',
       keywords=KEYWORDS,
       requires=['suds'],
       install_requires=['suds-jurko'],
-)
+      )

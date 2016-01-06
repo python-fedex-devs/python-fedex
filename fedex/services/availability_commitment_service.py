@@ -8,7 +8,7 @@ documentation.
 """
 
 import datetime
-from .. base_service import FedexBaseService
+from ..base_service import FedexBaseService
 
 
 class FedexAvailabilityCommitmentRequest(FedexBaseService):
@@ -51,7 +51,7 @@ class FedexAvailabilityCommitmentRequest(FedexBaseService):
 
         super(FedexAvailabilityCommitmentRequest, self).__init__(
             self._config_obj, 'AvailabilityAndCommitmentService_v4.wsdl', *args, **kwargs)
-        
+
     def _prepare_wsdl_objects(self):
         """
         Create the data structure and get it ready for the WSDL request.
