@@ -27,7 +27,7 @@ class DirectDevicePrinter(object):
         """@ivar: A string with the path to the device to print to."""
         self.shipment = shipment
         """@ivar: A reference to the L{FedexProcessShipmentRequest} to print."""
-        
+
     def print_label(self, package_num=None):
         """
         Prints all of a shipment's labels, or optionally just one.
@@ -47,7 +47,7 @@ class DirectDevicePrinter(object):
         for package in packages:
             label_binary = binascii.a2b_base64(package.Label.Parts[0].Image)
             self._print_base64(label_binary)
-    
+
     def _print_base64(self, base64_data):
         """
         Pipe the binary directly to the label printer. Works under Linux

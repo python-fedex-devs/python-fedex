@@ -29,13 +29,13 @@ avc_request.Destination.PostalCode = '27577'
 avc_request.Destination.CountryCode = 'US'
 
 # Can be set to FEDEX_TUBE, YOUR_PACKAGING, FEDEX_BOX etc.. Defaults to YOUR_PACKAGING if not set.
-#avc_request.Packaging = 'FEDEX_ENVELOPE'
+# avc_request.Packaging = 'FEDEX_ENVELOPE'
 
 # Can be set to the expected date. Defaults to today if not set.
-#avc_request.ShipDate = datetime.date.today().isoformat()
+# avc_request.ShipDate = datetime.date.today().isoformat()
 
 # Can be set to PRIORITY_OVERNIGHT, FEDEX_2_DAY, STANDARD_OVERNIGHT etc.. Defaults to showing all options if not set.
-#avc_request.Service = 'FEDEX_2_DAY'
+# avc_request.Service = 'FEDEX_2_DAY'
 
 # Fires off the request, sets the 'response' attribute on the object.
 avc_request.send_request()
@@ -45,12 +45,12 @@ print(avc_request.client)
 
 # Un-comment this to see your complete, ready-to-send request as it stands
 # before it is actually sent. This is useful for seeing what values you can change.
-#print(avc_request.Origin)
-#print(avc_request.Destination)
-#print(avc_request.ShipDate)
-#print(avc_request.CarrierCode)
-#print(avc_request.Service)
-#print(avc_request.Packaging)
+# print(avc_request.Origin)
+# print(avc_request.Destination)
+# print(avc_request.ShipDate)
+# print(avc_request.CarrierCode)
+# print(avc_request.Service)
+# print(avc_request.Packaging)
 
 # This will show the reply to your avc_request being sent. You can access the
 # attributes through the response attribute on the request object. This is

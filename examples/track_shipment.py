@@ -30,14 +30,14 @@ del track.SelectionDetails.OperatingCompany
 
 # If you'd like to see some documentation on the ship service WSDL, un-comment
 # this line. (Spammy).
-#print(track.client)
+# print(track.client)
 
 # Un-comment this to see your complete, ready-to-send request as it stands
 # before it is actually sent. This is useful for seeing what values you can
 # change.
-#print(track.SelectionDetails)
-#print(track.ClientDetail)
-#print(track.TransactionDetail)
+# print(track.SelectionDetails)
+# print(track.ClientDetail)
+# print(track.TransactionDetail)
 
 
 # Fires off the request, sets the 'response' attribute on the object.
@@ -65,9 +65,9 @@ for match in track.response.CompletedTrackDetails[0].TrackDetails:
         for j in range(len(match.Events)):
             event_match = match.Events[j]
             event_details.append({'created': event_match.Timestamp, 'type': event_match.EventType,
-                                            'description': event_match.EventDescription})
+                                  'description': event_match.EventDescription})
 
             if hasattr(event_match, 'StatusExceptionDescription'):
                 event_details[j]['exception_description'] = event_match.StatusExceptionDescription
 
-            print("Event {}: {}".format(j+1, event_details[j]))
+            print("Event {}: {}".format(j + 1, event_details[j]))

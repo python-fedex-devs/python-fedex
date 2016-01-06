@@ -50,14 +50,14 @@ avs_request.add_address(address2)
 
 # If you'd like to see some documentation on the ship service WSDL, un-comment
 # this line. (Spammy).
-#print(avs_request.client)
+# print(avs_request.client)
 
 # Un-comment this to see your complete, ready-to-send request as it stands
 # before it is actually sent. This is useful for seeing what values you can
 # change.
-#print(avs_request.AddressesToValidate)
-#print(avs_request.ClientDetail)
-#print(avs_request.TransactionDetail)
+# print(avs_request.AddressesToValidate)
+# print(avs_request.ClientDetail)
+# print(avs_request.TransactionDetail)
 
 # Fires off the request, sets the 'response' attribute on the object.
 avs_request.send_request()
@@ -99,4 +99,3 @@ for i in range(len(avs_request.response.AddressResults)):
         if cur_attribute.Name == "POBox":
             print("Is POBox: {}".format(cur_attribute.Value == 'true'))
     print("")
-

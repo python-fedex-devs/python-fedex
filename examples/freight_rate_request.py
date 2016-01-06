@@ -55,7 +55,7 @@ payment.PaymentType = "SENDER"
 payment.Payor.ResponsibleParty = rate_request.RequestedShipment.Shipper
 rate_request.RequestedShipment.ShippingChargesPayment = payment
 
-#include estimated duties and taxes in rate quote, can be ALL or NONE
+# include estimated duties and taxes in rate quote, can be ALL or NONE
 rate_request.RequestedShipment.EdtRequestType = 'NONE'
 
 # note: in order for this to work in test, you may need to use the
@@ -63,7 +63,8 @@ rate_request.RequestedShipment.EdtRequestType = 'NONE'
 rate_request.RequestedShipment.FreightShipmentDetail.FedExFreightBillingContactAndAddress.Contact.PersonName = 'Sender Name'
 rate_request.RequestedShipment.FreightShipmentDetail.FedExFreightBillingContactAndAddress.Contact.CompanyName = 'Some Company'
 rate_request.RequestedShipment.FreightShipmentDetail.FedExFreightBillingContactAndAddress.Contact.PhoneNumber = '9012638716'
-rate_request.RequestedShipment.FreightShipmentDetail.FedExFreightBillingContactAndAddress.Address.StreetLines = ['2000 Freight LTL Testing']
+rate_request.RequestedShipment.FreightShipmentDetail.FedExFreightBillingContactAndAddress.Address.StreetLines = [
+    '2000 Freight LTL Testing']
 rate_request.RequestedShipment.FreightShipmentDetail.FedExFreightBillingContactAndAddress.Address.City = 'Harrison'
 rate_request.RequestedShipment.FreightShipmentDetail.FedExFreightBillingContactAndAddress.Address.StateOrProvinceCode = 'AR'
 rate_request.RequestedShipment.FreightShipmentDetail.FedExFreightBillingContactAndAddress.Address.PostalCode = '72601'
@@ -80,7 +81,7 @@ role = rate_request.create_wsdl_object_of_type('FreightShipmentRoleType')
 rate_request.RequestedShipment.FreightShipmentDetail.Role = role.SHIPPER
 
 # Designates the terms of the "collect" payment for a Freight
-#Shipment. Can be NON_RECOURSE_SHIPPER_SIGNED or STANDARD
+# Shipment. Can be NON_RECOURSE_SHIPPER_SIGNED or STANDARD
 rate_request.RequestedShipment.FreightShipmentDetail.CollectTermsType = 'STANDARD'
 
 package1_weight = rate_request.create_wsdl_object_of_type('Weight')
@@ -99,12 +100,12 @@ rate_request.RequestedShipment.FreightShipmentDetail.LineItems = package1
 
 # If you'd like to see some documentation on the ship service WSDL, un-comment
 # this line. (Spammy).
-#print(rate_request.client)
+# print(rate_request.client)
 
 # Un-comment this to see your complete, ready-to-send request as it stands
 # before it is actually sent. This is useful for seeing what values you can
 # change.
-#print(rate_request.RequestedShipment)
+# print(rate_request.RequestedShipment)
 
 # Fires off the request, sets the 'response' attribute on the object.
 rate_request.send_request()
@@ -128,4 +129,3 @@ for service in rate_request.response.RateReplyDetails:
         print("{}: Net FedEx Charge {} {}".format(service.ServiceType,
                                                   rate_detail.ShipmentRateDetail.TotalNetFedExCharge.Currency,
                                                   rate_detail.ShipmentRateDetail.TotalNetFedExCharge.Amount))
-
