@@ -43,17 +43,31 @@ del track.SelectionDetails.OperatingCompany
 # Fires off the request, sets the 'response' attribute on the object.
 track.send_request()
 
-# See the response printed out.
+# This will show the reply to your track request being sent. You can access the
+# attributes through the response attribute on the request object. This is
+# good to un-comment to see the variables returned by the FedEx reply.
 print(track.response)
 
 # Look through the matches (there should only be one for a tracking number
 # query), and show a few details about each shipment.
 print("== Results ==")
-#print(track.response)
 for match in track.response.CompletedTrackDetails[0].TrackDetails:
-    print("Tracking #:", match.TrackingNumber)
-    print("Tracking # UniqueID:", match.TrackingNumberUniqueIdentifier)
-    print("Status:", match.StatusDetail.Description)
-    print("Status AncillaryDetails Reason:", match.StatusDetail.AncillaryDetails[-1].Reason)
-    print("Status AncillaryDetails Description:", match.StatusDetail.AncillaryDetails[-1].ReasonDescription)
-    print("Commit Message:", match.ServiceCommitMessage)
+    print("Tracking #: {}".format(match.TrackingNumber))
+    print("Tracking # UniqueID: {}".format(match.TrackingNumberUniqueIdentifier))
+    print("Status: {}".format(match.StatusDetail.Description))
+    print("Status AncillaryDetails Reason: {}".format(match.StatusDetail.AncillaryDetails[-1].Reason))
+    print("Status AncillaryDetails Description:{}".format(match.StatusDetail.AncillaryDetails[-1].ReasonDescription))
+    print("Commit Message:{}".format(match.ServiceCommitMessage))
+    print("")
+
+    event_details = []
+    if hasattr(match, 'Events'):
+        for j in range(len(match.Events)):
+            event_match = match.Events[j]
+            event_details.append({'created': event_match.Timestamp, 'type': event_match.EventType,
+                                            'description': event_match.EventDescription})
+
+            if hasattr(event_match, 'StatusExceptionDescription'):
+                event_details[j]['exception_description'] = event_match.StatusExceptionDescription
+
+            print("Event {}: {}".format(j+1, event_details[j]))

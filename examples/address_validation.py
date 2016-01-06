@@ -13,7 +13,7 @@ from fedex.services.address_validation_service import FedexAddressValidationRequ
 # Set this to the INFO level to see the response from Fedex printed in stdout.
 logging.basicConfig(level=logging.INFO)
 
-# This is the object that will be handling our tracking request.
+# This is the object that will be handling our avs request.
 # We're using the FedexConfig object from example_config.py in this dir.
 customer_transaction_id = "*** AddressValidation Request v4 using Python ***"  # Optional transaction_id
 # Optional locale & language client data
@@ -68,27 +68,35 @@ print(avs_request.response)
 # Overall end result of the query
 for i in range(len(avs_request.response.AddressResults)):
 
-    print("Details for Address", i + 1)
-    print("The validated street is:", avs_request.response.AddressResults[i].EffectiveAddress.StreetLines)
-    print("The validated city is:", avs_request.response.AddressResults[i].EffectiveAddress.City)
-    print("The validated state code is:", avs_request.response.AddressResults[i].EffectiveAddress.StateOrProvinceCode)
-    print("The validated postal code is:", avs_request.response.AddressResults[i].EffectiveAddress.PostalCode)
-    print("The validated country code is:", avs_request.response.AddressResults[i].EffectiveAddress.CountryCode)
+    print("Details for Address {}".format(i + 1))
+    print("The validated street is: {}"
+          "".format(avs_request.response.AddressResults[i].EffectiveAddress.StreetLines))
+    print("The validated city is: {}"
+          "".format(avs_request.response.AddressResults[i].EffectiveAddress.City))
+    print("The validated state code is: {}"
+          "".format(avs_request.response.AddressResults[i].EffectiveAddress.StateOrProvinceCode))
+    print("The validated postal code is: {}"
+          "".format(avs_request.response.AddressResults[i].EffectiveAddress.PostalCode))
+    print("The validated country code is: {}"
+          "".format(avs_request.response.AddressResults[i].EffectiveAddress.CountryCode))
 
     # Can be used to determine the address classification to figure out if Residential fee should apply.
     # MIXED, RESIDENTIAL, UNKNOWN, BUSINESS
-    print("The validated address is residential:", avs_request.response.AddressResults[i].Classification != 'BUSINESS')
+    print("The validated address is residential: {}"
+          "".format(avs_request.response.AddressResults[i].Classification != 'BUSINESS'))
 
     # Getting the optional attributes if available
     for j in range(len(avs_request.response.AddressResults[i].Attributes)):
         cur_attribute = avs_request.response.AddressResults[i].Attributes[j]
         if cur_attribute.Name == "CountrySupported":
-            print("Supported Country:", cur_attribute.Value == 'true')
+            print("Supported Country: {}".format(cur_attribute.Value == 'true'))
         if cur_attribute.Name == "SuiteRequiredButMissing":
-            print("Missing Suite:", cur_attribute.Value == 'true')
+            print("Missing Suite: {}".format(cur_attribute.Value == 'true'))
         if cur_attribute.Name == "CountrySupported":
-            print("Invalid Suite:", cur_attribute.Value == 'true')
+            print("Invalid Suite: {}".format(cur_attribute.Value == 'true'))
         if cur_attribute.Name == "MultipleMatches":
-            print("Multiple Matches:", cur_attribute.Value == 'true')
+            print("Multiple Matches: {}".format(cur_attribute.Value == 'true'))
         if cur_attribute.Name == "POBox":
-            print("Is POBox:", cur_attribute.Value == 'true')
+            print("Is POBox: {}".format(cur_attribute.Value == 'true'))
+    print("")
+

@@ -34,9 +34,11 @@ class FedexAvailabilityCommitmentRequest(FedexBaseService):
         """ivar: Carrier Code Default to Fedex (FDXE), or can bbe FDXG."""
         self.CarrierCode = None
 
-        """@ivar: Holds Addresses and Ship Date objects."""
+        """@ivar: Holds Addresses, Ship Date, Service and Packaging objects."""
         self.Origin = self.Destination = None
         self.ShipDate = None
+        self.Service = None
+        self.Packaging = None
 
         """@ivar: Holds the ValidationAvailabilityAndCommitmentService WSDL object."""
         # Call the parent FedexBaseService class for basic setup work.

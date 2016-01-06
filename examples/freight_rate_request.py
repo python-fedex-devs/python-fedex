@@ -15,7 +15,7 @@ from fedex.services.rate_service import FedexRateServiceRequest
 # Set this to the INFO level to see the response from Fedex printed in stdout.
 logging.basicConfig(level=logging.INFO)
 
-# This is the object that will be handling our tracking request.
+# This is the object that will be handling our request.
 # We're using the FedexConfig object from example_config.py in this dir.
 rate_request = FedexRateServiceRequest(CONFIG_OBJ)
 

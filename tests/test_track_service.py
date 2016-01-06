@@ -1,5 +1,5 @@
 """
-Test module for the Fedex ShipService WSDL.
+Test module for the Fedex TrackService WSDL.
 """
 
 import unittest

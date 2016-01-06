@@ -55,7 +55,7 @@ print(avc_request.client)
 # This will show the reply to your avc_request being sent. You can access the
 # attributes through the response attribute on the request object. This is
 # good to un-comment to see the variables returned by the FedEx reply.
-#print(avc_request.response)
+print(avc_request.response)
 
 # Here is the overall end result of the query.
 print("HighestSeverity: {}".format(avc_request.response.HighestSeverity))

@@ -24,7 +24,7 @@ logging.basicConfig(level=logging.INFO)
 # NOTE: A VALID 'freight_account_number' REQUIRED IN YOUR 'CONFIB_OBJ' FOR THIS SERVICE TO WORK.
 # OTHERWISE YOU WILL GET FEDEX FREIGHT OR ASSOCIATED ADDRESS IS REQUIRED, ERROR 3619.
 
-# This is the object that will be handling our tracking request.
+# This is the object that will be handling our freight shipment request.
 # We're using the FedexConfig object from example_config.py in this dir.
 shipment = FedexProcessShipmentRequest(CONFIG_OBJ)
 shipment.RequestedShipment.DropoffType = 'REGULAR_PICKUP'
@@ -148,12 +148,17 @@ shipment.send_request()
 # attributes through the response attribute on the request object. This is
 # good to un-comment to see the variables returned by the Fedex reply.
 print(shipment.response)
+
 # Here is the overall end result of the query.
-# print("HighestSeverity:", shipment.response.HighestSeverity)
-# # Getting the tracking number from the new shipment.
-# print("Tracking #:", shipment.response.CompletedShipmentDetail.CompletedPackageDetails[0].TrackingIds[0].TrackingNumber)
-# # Net shipping costs.
-# print("Net Shipping Cost (US$):", shipment.response.CompletedShipmentDetail.CompletedPackageDetails[0].PackageRating.PackageRateDetails[0].NetCharge.Amount)
+print("HighestSeverity: {}".format(shipment.response.HighestSeverity))
+
+# Getting the tracking number from the new shipment.
+print("Tracking #: {}"
+     "".format(shipment.response.CompletedShipmentDetail.MasterTrackingId.TrackingNumber))
+
+# Net shipping costs.
+amount = shipment.response.CompletedShipmentDetail.ShipmentRating.ShipmentRateDetails[0].TotalNetCharge.Amount
+print("Net Shipping Cost (US$): {}".format(amount))
 
 
 # # Get the label image in ASCII format from the reply. Note the list indices
@@ -170,7 +175,7 @@ This is an example of how to dump a label to a local file.
 """
 # This will be the file we write the label out to.
 out_path = 'example_freight_shipment_label.%s' % GENERATE_IMAGE_TYPE.lower()
-print("Writing to file", out_path)
+print("Writing to file {}".format(out_path))
 out_file = open(out_path, 'wb')
 out_file.write(label_binary_data)
 out_file.close()

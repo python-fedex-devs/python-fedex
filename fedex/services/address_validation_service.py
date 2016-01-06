@@ -7,7 +7,7 @@ easy access. For more details on each, refer to the respective class's
 documentation.
 """
 
-from datetime import datetime
+import datetime
 from .. base_service import FedexBaseService
 
 
@@ -33,7 +33,6 @@ class FedexAddressValidationRequest(FedexBaseService):
             'minor': '0'
         }
         
-        # self.AddressValidationOptions = None
         """@ivar: Holds the AddressValidationOptions WSDL object."""
         self.AddressesToValidate = []
         """@ivar: Holds the AddressToValidate WSDL object."""
@@ -69,7 +68,7 @@ class FedexAddressValidationRequest(FedexBaseService):
             ClientDetail=self.ClientDetail,
             TransactionDetail=self.TransactionDetail,
             Version=self.VersionId,
-            InEffectAsOfTimestamp=datetime.now(),
+            InEffectAsOfTimestamp=datetime.datetime.now(),
             AddressesToValidate=self.AddressesToValidate)
 
     def add_address(self, address_item):

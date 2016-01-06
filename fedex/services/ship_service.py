@@ -6,7 +6,7 @@ ShipService WSDL file. Each is encapsulated in a class for easy access.
 For more details on each, refer to the respective class's documentation.
 """
 
-from datetime import datetime
+import datetime
 from ..base_service import FedexBaseService
 
 
@@ -49,7 +49,7 @@ class FedexProcessShipmentRequest(FedexBaseService):
 
         # This is the primary data structure for processShipment requests.
         self.RequestedShipment = self.client.factory.create('RequestedShipment')
-        self.RequestedShipment.ShipTimestamp = datetime.now()
+        self.RequestedShipment.ShipTimestamp = datetime.datetime.now()
 
         TotalWeight = self.client.factory.create('Weight')
         # Start at nothing.
