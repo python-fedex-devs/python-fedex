@@ -6,7 +6,7 @@ determine estimated or courtesy billing quotes. Time in Transit can be
 returned with the rates if it is specified in the request.
 """
 
-from datetime import datetime
+import datetime
 from ..base_service import FedexBaseService
 
 
@@ -51,7 +51,7 @@ class FedexRateServiceRequest(FedexBaseService):
 
         # This is the primary data structure for processShipment requests.
         self.RequestedShipment = self.client.factory.create('RequestedShipment')
-        self.RequestedShipment.ShipTimestamp = datetime.now()
+        self.RequestedShipment.ShipTimestamp = datetime.datetime.now()
 
         TotalWeight = self.client.factory.create('Weight')
         # Start at nothing.

@@ -9,7 +9,7 @@ from fedex.services.ship_service import FedexDeleteShipmentRequest
 # Set this to the INFO level to see the response from Fedex printed in stdout.
 logging.basicConfig(level=logging.INFO)
 
-# This is the object that will be handling our tracking request.
+# This is the object that will be handling our request.
 # We're using the FedexConfig object from example_config.py in this dir.
 del_request = FedexDeleteShipmentRequest(CONFIG_OBJ)
 

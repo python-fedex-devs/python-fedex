@@ -22,7 +22,7 @@ GENERATE_IMAGE_TYPE = 'PDF'
 # Set this to the INFO level to see the response from Fedex printed in stdout.
 logging.basicConfig(level=logging.INFO)
 
-# This is the object that will be handling our tracking request.
+# This is the object that will be handling our shipment request.
 # We're using the FedexConfig object from example_config.py in this dir.
 customer_transaction_id = "*** ShipService Request v17 using Python ***"  # Optional transaction_id
 shipment = FedexProcessShipmentRequest(CONFIG_OBJ, customer_transaction_id=customer_transaction_id)
@@ -143,17 +143,19 @@ shipment.send_request()
 print(shipment.response)
 
 # Here is the overall end result of the query.
-print("HighestSeverity:", shipment.response.HighestSeverity)
+print("HighestSeverity: {}".format(shipment.response.HighestSeverity))
 
 # Getting the tracking number from the new shipment.
-print("Tracking #:", shipment.response.CompletedShipmentDetail.CompletedPackageDetails[0].TrackingIds[0].TrackingNumber)
+print("Tracking #: {}"
+      "".format(shipment.response.CompletedShipmentDetail.CompletedPackageDetails[0].TrackingIds[0].TrackingNumber))
 
 # Net shipping costs. Only show if available. Sometimes sandbox will not include this in the response.
 CompletedPackageDetails = shipment.response.CompletedShipmentDetail.CompletedPackageDetails[0]
 if hasattr(CompletedPackageDetails, 'PackageRating'):
-    print("Net Shipping Cost (US$):", CompletedPackageDetails.PackageRating.PackageRateDetails[0].NetCharge.Amount)
+    print("Net Shipping Cost (US$): {}"
+          "".format(CompletedPackageDetails.PackageRating.PackageRateDetails[0].NetCharge.Amount))
 else:
-    print('WARNING: Unable to get rate.')
+    print('WARNING: Unable to get shipping rate.')
 
 # Get the label image in ASCII format from the reply. Note the list indices
 # we're using. You'll need to adjust or iterate through these if your shipment
@@ -169,7 +171,7 @@ This is an example of how to dump a label to a local file.
 """
 # This will be the file we write the label out to.
 out_path = 'example_shipment_label.%s' % GENERATE_IMAGE_TYPE.lower()
-print("Writing to file", out_path)
+print("Writing to file {}".format(out_path))
 out_file = open(out_path, 'wb')
 out_file.write(label_binary_data)
 out_file.close()
