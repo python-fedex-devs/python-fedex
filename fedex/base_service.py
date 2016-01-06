@@ -16,7 +16,6 @@ from suds.plugin import MessagePlugin
 
 
 class GeneralSudsPlugin(MessagePlugin):
-
     def __init__(self, **kwargs):
         self.kwargs = kwargs
 
@@ -117,8 +116,8 @@ class FedexBaseService(object):
             self.logger.info("Using production server.")
             self.wsdl_path = os.path.join(config_obj.wsdl_path, wsdl_name)
 
-        self.client = Client('file:///%s' % self.wsdl_path.lstrip('/'),  plugins=[GeneralSudsPlugin()])
-        #self.client.options.cache.clear()  # Clear the cache, then re-init client when changing wsdl file.
+        self.client = Client('file:///%s' % self.wsdl_path.lstrip('/'), plugins=[GeneralSudsPlugin()])
+        # self.client.options.cache.clear()  # Clear the cache, then re-init client when changing wsdl file.
 
         self.VersionId = None
         """@ivar: Holds details on the version numbers of the WSDL."""

@@ -5,11 +5,13 @@ Test module for the Fedex ShipService WSDL.
 import unittest
 
 import sys
+
 sys.path.insert(0, '..')
 from fedex.services.availability_commitment_service import FedexAvailabilityCommitmentRequest
 
 # Common global config object for testing.
 from common import get_test_config
+
 CONFIG_OBJ = get_test_config()
 
 
@@ -17,6 +19,7 @@ class AvailabilityCommitmentServiceTests(unittest.TestCase):
     """
     These tests verify that the shipping service WSDL is in good shape.
     """
+
     def test_track(self):
         # Test shipment tracking. Query for a tracking number and make sure the
         # first (and hopefully only) result matches up.
@@ -33,7 +36,5 @@ class AvailabilityCommitmentServiceTests(unittest.TestCase):
         assert avc_request.response
 
 
-
 if __name__ == "__main__":
-
     unittest.main()

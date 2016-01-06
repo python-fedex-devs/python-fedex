@@ -6,8 +6,7 @@ TrackService WSDL file. Each is encapsulated in a class for easy access.
 For more details on each, refer to the respective class's documentation.
 """
 
-
-from .. base_service import FedexBaseService, FedexError
+from ..base_service import FedexBaseService, FedexError
 
 
 class FedexInvalidTrackingNumber(FedexError):
@@ -41,7 +40,7 @@ class FedexTrackRequest(FedexBaseService):
         """
 
         self._config_obj = config_obj
-        
+
         # Holds version info for the VersionId SOAP object.
         self._version_info = {
             'service_id': 'trck',
@@ -56,7 +55,7 @@ class FedexTrackRequest(FedexBaseService):
         super(FedexTrackRequest, self).__init__(
             self._config_obj, 'TrackService_v10.wsdl', *args, **kwargs)
         self.IncludeDetailedScans = False
-        
+
     def _prepare_wsdl_objects(self):
         """
         This sets the package identifier information. This may be a tracking
@@ -91,7 +90,7 @@ class FedexTrackRequest(FedexBaseService):
                             notification.Code, notification.Message)
                     else:
                         raise FedexError(notification.Code, notification.Message)
-        
+
     def _assemble_and_send_request(self):
         """
         Fires off the Fedex request.
@@ -109,4 +108,3 @@ class FedexTrackRequest(FedexBaseService):
             Version=self.VersionId,
             SelectionDetails=self.SelectionDetails,
             ProcessingOptions=self.TrackRequestProcessingOptionType)
-

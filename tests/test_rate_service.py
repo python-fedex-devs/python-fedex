@@ -5,11 +5,13 @@ Test module for the Fedex RateService WSDL.
 import unittest
 
 import sys
+
 sys.path.insert(0, '..')
 from fedex.services.rate_service import FedexRateServiceRequest
 
 # Common global config object for testing.
 from common import get_test_config
+
 CONFIG_OBJ = get_test_config()
 
 
@@ -17,8 +19,8 @@ class RateServiceTests(unittest.TestCase):
     """
     These tests verify that the rate service WSDL is in good shape.
     """
-    def test_rate(self):
 
+    def test_rate(self):
         rate = FedexRateServiceRequest(CONFIG_OBJ)
 
         rate.RequestedShipment.DropoffType = 'REGULAR_PICKUP'
@@ -49,6 +51,6 @@ class RateServiceTests(unittest.TestCase):
 
         assert rate.response.HighestSeverity == 'SUCCESS'
 
-if __name__ == "__main__":
 
+if __name__ == "__main__":
     unittest.main()

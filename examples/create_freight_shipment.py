@@ -18,7 +18,7 @@ GENERATE_IMAGE_TYPE = 'PDF'
 
 
 # Set this to the INFO level to see the response from Fedex printed in stdout.
-#logging.basicConfig(filename="suds.log", level=logging.DEBUG)
+# logging.basicConfig(filename="suds.log", level=logging.DEBUG)
 logging.basicConfig(level=logging.INFO)
 
 # NOTE: A VALID 'freight_account_number' REQUIRED IN YOUR 'CONFIB_OBJ' FOR THIS SERVICE TO WORK.
@@ -60,7 +60,7 @@ shipment.RequestedShipment.Recipient.Address.CountryCode = 'US'
 
 # This is needed to ensure an accurate rate quote with the response.
 shipment.RequestedShipment.Recipient.Address.Residential = False
-shipment.RequestedShipment.FreightShipmentDetail.TotalHandlingUnits = 1  
+shipment.RequestedShipment.FreightShipmentDetail.TotalHandlingUnits = 1
 shipment.RequestedShipment.ShippingChargesPayment.Payor.ResponsibleParty.AccountNumber = \
     CONFIG_OBJ.freight_account_number
 
@@ -124,22 +124,21 @@ package1.FreightClass = 'CLASS_500'
 package1.HazardousMaterials = None
 package1.Pieces = 12
 
-
 shipment.RequestedShipment.FreightShipmentDetail.LineItems = package1
 
 # If you'd like to see some documentation on the ship service WSDL, un-comment
 # this line. (Spammy).
-#print(shipment.client)
+# print(shipment.client)
 
 # Un-comment this to see your complete, ready-to-send request as it stands
 # before it is actually sent. This is useful for seeing what values you can
 # change.
-#print(shipment.RequestedShipment)
+# print(shipment.RequestedShipment)
 
 # If you want to make sure that all of your entered details are valid, you
 # can call this and parse it just like you would via send_request(). If
 # shipment.response.HighestSeverity == "SUCCESS", your shipment is valid.
-#shipment.send_validation_request()
+# shipment.send_validation_request()
 
 # Fires off the request, sets the 'response' attribute on the object.
 shipment.send_request()
@@ -154,7 +153,7 @@ print("HighestSeverity: {}".format(shipment.response.HighestSeverity))
 
 # Getting the tracking number from the new shipment.
 print("Tracking #: {}"
-     "".format(shipment.response.CompletedShipmentDetail.MasterTrackingId.TrackingNumber))
+      "".format(shipment.response.CompletedShipmentDetail.MasterTrackingId.TrackingNumber))
 
 # Net shipping costs.
 amount = shipment.response.CompletedShipmentDetail.ShipmentRating.ShipmentRateDetails[0].TotalNetCharge.Amount
@@ -187,17 +186,17 @@ details on what formats it can accept.
 """
 # Pipe the binary directly to the label printer. Works under Linux
 # without requiring PySerial. This WILL NOT work on other platforms.
-#label_printer = open("/dev/ttyS0", "w")
-#label_printer.write(label_binary_data)
-#label_printer.close()
+# label_printer = open("/dev/ttyS0", "w")
+# label_printer.write(label_binary_data)
+# label_printer.close()
 
 """
 This is a potential cross-platform solution using pySerial. This has not been
 tested in a long time and may or may not work. For Windows, Mac, and other
 platforms, you may want to go this route.
 """
-#import serial
-#label_printer = serial.Serial(0)
-#print("SELECTED SERIAL PORT: "+ label_printer.portstr)
-#label_printer.write(label_binary_data)
-#label_printer.close()
+# import serial
+# label_printer = serial.Serial(0)
+# print("SELECTED SERIAL PORT: "+ label_printer.portstr)
+# label_printer.write(label_binary_data)
+# label_printer.close()

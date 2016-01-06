@@ -72,7 +72,7 @@ shipment.RequestedShipment.ShippingChargesPayment.Payor.ResponsibleParty.Account
 
 # Who pays for the shipment?
 # RECIPIENT, SENDER or THIRD_PARTY
-shipment.RequestedShipment.ShippingChargesPayment.PaymentType = 'SENDER' 
+shipment.RequestedShipment.ShippingChargesPayment.PaymentType = 'SENDER'
 
 # Specifies the label type to be returned.
 # LABEL_DATA_ONLY or COMMON2D
@@ -112,7 +112,7 @@ package1 = shipment.create_wsdl_object_of_type('RequestedPackageLineItem')
 package1.PhysicalPackaging = 'ENVELOPE'
 package1.Weight = package1_weight
 # Un-comment this to see the other variables you may set on a package.
-#print(package1)
+# print(package1)
 
 # This adds the RequestedPackageLineItem WSDL object to the shipment. It
 # increments the package count and total weight of the shipment for you.
@@ -120,19 +120,19 @@ shipment.add_package(package1)
 
 # If you'd like to see some documentation on the ship service WSDL, un-comment
 # this line. (Spammy).
-#print(shipment.client)
+# print(shipment.client)
 
 # Un-comment this to see your complete, ready-to-send request as it stands
 # before it is actually sent. This is useful for seeing what values you can
 # change.
-#print(shipment.RequestedShipment)
-#print(shipment.ClientDetail)
-#print(shipment.TransactionDetail)
+# print(shipment.RequestedShipment)
+# print(shipment.ClientDetail)
+# print(shipment.TransactionDetail)
 
 # If you want to make sure that all of your entered details are valid, you
 # can call this and parse it just like you would via send_request(). If
 # shipment.response.HighestSeverity == "SUCCESS", your shipment is valid.
-#print(shipment.send_validation_request())
+# print(shipment.send_validation_request())
 
 # Fires off the request, sets the 'response' attribute on the object.
 shipment.send_request()
@@ -183,18 +183,17 @@ details on what formats it can accept.
 """
 # Pipe the binary directly to the label printer. Works under Linux
 # without requiring PySerial. This WILL NOT work on other platforms.
-#label_printer = open("/dev/ttyS0", "w")
-#label_printer.write(label_binary_data)
-#label_printer.close()
+# label_printer = open("/dev/ttyS0", "w")
+# label_printer.write(label_binary_data)
+# label_printer.close()
 
 """
 This is a potential cross-platform solution using pySerial. This has not been
 tested in a long time and may or may not work. For Windows, Mac, and other
 platforms, you may want to go this route.
 """
-#import serial
-#label_printer = serial.Serial(0)
-#print("SELECTED SERIAL PORT: "+ label_printer.portstr)
-#label_printer.write(label_binary_data)
-#label_printer.close()
-
+# import serial
+# label_printer = serial.Serial(0)
+# print("SELECTED SERIAL PORT: "+ label_printer.portstr)
+# label_printer.write(label_binary_data)
+# label_printer.close()

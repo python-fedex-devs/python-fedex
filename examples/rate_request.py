@@ -47,8 +47,8 @@ rate_request.RequestedShipment.Shipper.Address.Residential = False
 rate_request.RequestedShipment.Recipient.Address.PostalCode = '27577'
 rate_request.RequestedShipment.Recipient.Address.CountryCode = 'US'
 # This is needed to ensure an accurate rate quote with the response.
-#rate_request.RequestedShipment.Recipient.Address.Residential = True
-#include estimated duties and taxes in rate quote, can be ALL or NONE
+# rate_request.RequestedShipment.Recipient.Address.Residential = True
+# include estimated duties and taxes in rate quote, can be ALL or NONE
 rate_request.RequestedShipment.EdtRequestType = 'NONE'
 
 # Who pays for the rate_request?
@@ -62,7 +62,7 @@ package1_weight.Units = "LB"
 
 package1 = rate_request.create_wsdl_object_of_type('RequestedPackageLineItem')
 package1.Weight = package1_weight
-#can be other values this is probably the most common
+# can be other values this is probably the most common
 package1.PhysicalPackaging = 'BOX'
 # Required, but according to FedEx docs:
 # "Used only with PACKAGE_GROUPS, as a count of packages within a
@@ -74,7 +74,7 @@ package1.PhysicalPackaging = 'BOX'
 # The result will be found in RatedPackageDetail, with specified GroupNumber.
 package1.GroupPackageCount = 1
 # Un-comment this to see the other variables you may set on a package.
-#print(package1)
+# print(package1)
 
 # This adds the RequestedPackageLineItem WSDL object to the rate_request. It
 # increments the package count and total weight of the rate_request for you.
@@ -82,12 +82,12 @@ rate_request.add_package(package1)
 
 # If you'd like to see some documentation on the ship service WSDL, un-comment
 # this line. (Spammy).
-#print(rate_request.client)
+# print(rate_request.client)
 
 # Un-comment this to see your complete, ready-to-send request as it stands
 # before it is actually sent. This is useful for seeing what values you can
 # change.
-#print(rate_request.RequestedShipment)
+# print(rate_request.RequestedShipment)
 
 # Fires off the request, sets the 'response' attribute on the object.
 rate_request.send_request()
@@ -95,7 +95,7 @@ rate_request.send_request()
 # This will show the reply to your rate_request being sent. You can access the
 # attributes through the response attribute on the request object. This is
 # good to un-comment to see the variables returned by the FedEx reply.
-#print(rate_request.response)
+# print(rate_request.response)
 
 # Here is the overall end result of the query.
 print("HighestSeverity:", rate_request.response.HighestSeverity)
@@ -111,4 +111,3 @@ for service in rate_request.response.RateReplyDetails:
         print("%s: Net FedEx Charge %s %s" % (service.ServiceType,
                                               rate_detail.ShipmentRateDetail.TotalNetFedExCharge.Currency,
                                               rate_detail.ShipmentRateDetail.TotalNetFedExCharge.Amount))
-

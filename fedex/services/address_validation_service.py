@@ -8,7 +8,7 @@ documentation.
 """
 
 import datetime
-from .. base_service import FedexBaseService
+from ..base_service import FedexBaseService
 
 
 class FedexAddressValidationRequest(FedexBaseService):
@@ -32,20 +32,20 @@ class FedexAddressValidationRequest(FedexBaseService):
             'intermediate': '0',
             'minor': '0'
         }
-        
+
         """@ivar: Holds the AddressValidationOptions WSDL object."""
         self.AddressesToValidate = []
         """@ivar: Holds the AddressToValidate WSDL object."""
         # Call the parent FedexBaseService class for basic setup work.
         super(FedexAddressValidationRequest, self).__init__(
             self._config_obj, 'AddressValidationService_v4.wsdl', *args, **kwargs)
-        
+
     def _prepare_wsdl_objects(self):
         """
         Create the data structure and get it ready for the WSDL request.
         """
         pass
-    
+
     def _assemble_and_send_request(self):
         """
         Fires off the Fedex request.
