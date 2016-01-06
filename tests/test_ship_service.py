@@ -16,6 +16,7 @@ from common import get_test_config
 CONFIG_OBJ = get_test_config()
 
 
+@unittest.skipIf(not CONFIG_OBJ.account_number, "No credentials provided.")
 class ShipServiceTests(unittest.TestCase):
     """
     These tests verify that the ship service WSDL is in good shape.
@@ -68,6 +69,7 @@ class ShipServiceTests(unittest.TestCase):
         package1.Weight = package1_weight
         shipment.add_package(package1)
 
+        shipment.send_validation_request()
         shipment.send_request()
 
         assert shipment.response

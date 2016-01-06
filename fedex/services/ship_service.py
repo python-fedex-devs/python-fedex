@@ -210,6 +210,6 @@ class FedexDeleteShipmentRequest(FedexBaseService):
             ClientDetail=self.ClientDetail,
             TransactionDetail=self.TransactionDetail,
             Version=self.VersionId,
-            ShipTimestamp=datetime.now(),
+            ShipTimestamp=datetime.datetime.now(),
             TrackingId=self.TrackingId,
             DeletionControl=self.DeletionControlType)

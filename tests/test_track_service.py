@@ -15,6 +15,7 @@ from common import get_test_config
 CONFIG_OBJ = get_test_config()
 
 
+@unittest.skipIf(not CONFIG_OBJ.account_number, "No credentials provided.")
 class TrackServiceTests(unittest.TestCase):
     """
     These tests verify that the shipping service WSDL is in good shape.
