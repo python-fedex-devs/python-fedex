@@ -111,6 +111,13 @@ package1 = shipment.create_wsdl_object_of_type('RequestedPackageLineItem')
 # BAG, BARREL, BASKET, BOX, BUCKET, BUNDLE, CARTON, CASE, CONTAINER, ENVELOPE etc..
 package1.PhysicalPackaging = 'ENVELOPE'
 package1.Weight = package1_weight
+
+# Add a signature option for the package using SpecialServicesRequested or comment out.
+# SpecialServiceTypes can be APPOINTMENT_DELIVERY, COD, DANGEROUS_GOODS, DRY_ICE, SIGNATURE_OPTION etc..
+package1.SpecialServicesRequested.SpecialServiceTypes = 'SIGNATURE_OPTION'
+# SignatureOptionType can be ADULT, DIRECT, INDIRECT, NO_SIGNATURE_REQUIRED, SERVICE_DEFAULT
+package1.SpecialServicesRequested.SignatureOptionDetail.OptionType = 'SERVICE_DEFAULT'
+
 # Un-comment this to see the other variables you may set on a package.
 # print(package1)
 
