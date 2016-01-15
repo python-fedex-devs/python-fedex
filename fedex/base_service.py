@@ -17,16 +17,19 @@ from suds.plugin import MessagePlugin
 
 class GeneralSudsPlugin(MessagePlugin):
     def __init__(self, **kwargs):
+        
+        self.request_logger = logging.getLogger('fedex.request')
+        self.response_logger = logging.getLogger('fedex.response')
         self.kwargs = kwargs
 
     def marshalled(self, context):
         context.envelope = context.envelope.prune()
 
     def sending(self, context):
-        logging.info("FedEx Request {}".format(context.envelope))
+        self.request_logger.info("FedEx Request {}".format(context.envelope))
 
     def received(self, context):
-        logging.info("FedEx Response {}".format(context.reply))
+        self.response_logger.info("FedEx Response {}".format(context.reply))
 
 
 class FedexBaseServiceException(Exception):
