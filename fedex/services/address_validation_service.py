@@ -1,6 +1,6 @@
 """
 Address Validation Service Module
-=================================
+
 This package contains the shipping methods defined by Fedex's 
 AddressValidationService WSDL file. Each is encapsulated in a class for 
 easy access. For more details on each, refer to the respective class's 
@@ -33,7 +33,6 @@ class FedexAddressValidationRequest(FedexBaseService):
             'minor': '0'
         }
 
-        """@ivar: Holds the AddressValidationOptions WSDL object."""
         self.AddressesToValidate = []
         """@ivar: Holds the AddressToValidate WSDL object."""
         # Call the parent FedexBaseService class for basic setup work.

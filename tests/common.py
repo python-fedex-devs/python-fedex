@@ -5,7 +5,7 @@ test suite.
 from fedex.config import FedexConfig
 
 
-def get_test_config():
+def get_fedex_config():
     """
     Returns a basic FedexConfig to test with.
     """

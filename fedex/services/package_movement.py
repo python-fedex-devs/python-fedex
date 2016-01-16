@@ -1,6 +1,6 @@
 """
 Package Movement Information Service
-====================================
+
 This package contains classes to check service availability, route, and postal
 codes. Defined by the PackageMovementInformationService WSDL file. 
 """

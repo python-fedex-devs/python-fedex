@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 """
-This example shows how to create shipments. The variables populated below
+This example shows how to create a freight shipment and generate
+a waybill as output. The variables populated below
 represents the minimum required values. You will need to fill all of these, or
 risk seeing a SchemaValidationError exception thrown.
 

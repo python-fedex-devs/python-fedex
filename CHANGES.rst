@@ -1,6 +1,15 @@
 Change Log
 ==========
 
+2.2.0
+-----
+
+* Added Country Service / Postal Code Validation service. (radzhome)
+* Added CountryService_v4.wsdl for Postal Code Validation. (radzhome)
+* Added unit tests and examples for Country service. (radzhome)
+* Added Signature Option to ship example. (radzhome)
+* Fix base service logging request and response. (radzhome)
+
 2.1.0
 -----
 

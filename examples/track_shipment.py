@@ -53,11 +53,19 @@ print(track.response)
 print("== Results ==")
 for match in track.response.CompletedTrackDetails[0].TrackDetails:
     print("Tracking #: {}".format(match.TrackingNumber))
-    print("Tracking # UniqueID: {}".format(match.TrackingNumberUniqueIdentifier))
-    print("Status: {}".format(match.StatusDetail.Description))
-    print("Status AncillaryDetails Reason: {}".format(match.StatusDetail.AncillaryDetails[-1].Reason))
-    print("Status AncillaryDetails Description:{}".format(match.StatusDetail.AncillaryDetails[-1].ReasonDescription))
-    print("Commit Message:{}".format(match.ServiceCommitMessage))
+    if hasattr(match, 'TrackingNumberUniqueIdentifier'):
+        print("Tracking # UniqueID: {}".format(match.TrackingNumberUniqueIdentifier))
+    if hasattr(match, 'StatusDetail.Description'):
+        print("Status Description: {}".format(match.StatusDetail.Description))
+    if hasattr(match, 'StatusDetail.AncillaryDetails'):
+        print("Status AncillaryDetails Reason: {}".format(match.StatusDetail.AncillaryDetails[-1].Reason))
+        print("Status AncillaryDetails Description: {}".format(match.StatusDetail.AncillaryDetails[-1].ReasonDescription))
+    if hasattr(match, 'ServiceCommitMessage'):
+        print("Commit Message: {}".format(match.ServiceCommitMessage))
+    if hasattr(match, 'Notification'):
+        print("Notification Severity: {}".format(match.Notification.Severity))
+        print("Notification Code: {}".format(match.Notification.Code))
+        print("Notification Message: {}".format(match.Notification.Message))
     print("")
 
     event_details = []
