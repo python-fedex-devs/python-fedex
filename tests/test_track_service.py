@@ -3,16 +3,18 @@ Test module for the Fedex TrackService WSDL.
 """
 
 import unittest
-
+import logging
 import sys
 
 sys.path.insert(0, '..')
 from fedex.services.track_service import FedexTrackRequest
 
 # Common global config object for testing.
-from common import get_test_config
+from common import get_fedex_config
 
-CONFIG_OBJ = get_test_config()
+CONFIG_OBJ = get_fedex_config()
+
+logging.getLogger('suds').setLevel(logging.ERROR)
 
 
 @unittest.skipIf(not CONFIG_OBJ.account_number, "No credentials provided.")
@@ -42,9 +44,9 @@ class TrackServiceTests(unittest.TestCase):
 
         # Uncomment below if testing in production with a valid tracking number
         # for match in track.response.CompletedTrackDetails[0].TrackDetails:
-        #     # This should be the same tracking number on the response that we
-        #     # asked for in the request.
-        #     assert match.TrackingNumber == tracking_num
+        # This should be the same tracking number on the response that we
+        # asked for in the request.
+        # assert match.TrackingNumber == tracking_num
 
 
 if __name__ == "__main__":

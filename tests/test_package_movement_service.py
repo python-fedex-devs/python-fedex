@@ -3,16 +3,18 @@ Test module for the Fedex PackageMovementInformationService WSDL.
 """
 
 import unittest
-
+import logging
 import sys
 
 sys.path.insert(0, '..')
 from fedex.services.package_movement import PostalCodeInquiryRequest
 
 # Common global config object for testing.
-from common import get_test_config
+from common import get_fedex_config
 
-CONFIG_OBJ = get_test_config()
+CONFIG_OBJ = get_fedex_config()
+
+logging.getLogger('suds').setLevel(logging.ERROR)
 
 
 @unittest.skipIf(not CONFIG_OBJ.account_number, "No credentials provided.")

@@ -10,8 +10,6 @@ sys.path.insert(0, '..')
 from fedex.config import FedexConfig
 
 
-
-
 class FedexConfigObjectTests(unittest.TestCase):
     """
     These tests verify that the fedex config object is working properly.
@@ -28,12 +26,13 @@ class FedexConfigObjectTests(unittest.TestCase):
         assert config.password
 
         # Test with all parameters, including overwrite wsdl path
-        config = FedexConfig(key='', password='', account_number=None, meter_number=None,
-                             freight_account_number=None,
-                             integrator_id=None, wsdl_path='/wsdls',
+        config = FedexConfig(key='', password='', account_number='', meter_number='',
+                             freight_account_number='',
+                             integrator_id='', wsdl_path='/wsdls',
                              express_region_code=None, use_test_server=False)
 
         assert config.wsdl_path
+
 
 if __name__ == "__main__":
     unittest.main()
