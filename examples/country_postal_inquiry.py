@@ -19,7 +19,7 @@ inquiry.Address.StreetLines = ['104 Knox Road']
 inquiry.Address.City = 'Clemson'
 inquiry.Address.StateOrProvinceCode = 'SC'
 
-# If you'd like to see some documentation on the ship service WSDL, un-comment
+# If you'd like to see some documentation on the country service WSDL, un-comment
 # this line. (Spammy).
 # print(inquiry.client)
 
