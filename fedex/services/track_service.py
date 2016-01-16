@@ -1,6 +1,6 @@
 """
 Tracking Service Module
-=======================
+
 This package contains the shipment tracking methods defined by Fedex's 
 TrackService WSDL file. Each is encapsulated in a class for easy access. 
 For more details on each, refer to the respective class's documentation.
@@ -34,9 +34,6 @@ class FedexTrackRequest(FedexBaseService):
         
         @type config_obj: L{FedexConfig}
         @param config_obj: A valid FedexConfig object.
-        
-        @type tracking_number_unique_id: str
-        @param tracking_number_unique_id: Used to distinguish duplicate FedEx tracking numbers.
         """
 
         self._config_obj = config_obj
@@ -49,7 +46,11 @@ class FedexTrackRequest(FedexBaseService):
             'minor': '0'
         }
         self.SelectionDetails = None
-        """@ivar: Holds the TrackPackageIdentifier WSDL object."""
+        """@ivar: Holds the SelectionDetails WSDL object that includes tracking type and value."""
+
+        # Set Default as None. 'INCLUDE_DETAILED_SCANS' or None
+        self.ProcessingOptions = None
+        """@ivar: Holds the TrackRequestProcessingOptionType WSDL object that defaults no None."""
 
         # Call the parent FedexBaseService class for basic setup work.
         super(FedexTrackRequest, self).__init__(
@@ -67,15 +68,12 @@ class FedexTrackRequest(FedexBaseService):
         # Default to Fedex
         self.SelectionDetails.CarrierCode = 'FDXE'
 
-        TrackPackageIdentifier = self.client.factory.create('TrackPackageIdentifier')
+        track_package_id = self.client.factory.create('TrackPackageIdentifier')
 
         # Default to tracking number.
-        TrackPackageIdentifier.Type = 'TRACKING_NUMBER_OR_DOORTAG'
+        track_package_id.Type = 'TRACKING_NUMBER_OR_DOORTAG'
 
-        self.SelectionDetails.PackageIdentifier = TrackPackageIdentifier
-
-        # Set Default as None. 'INCLUDE_DETAILED_SCANS' or None
-        self.TrackRequestProcessingOptionType = None
+        self.SelectionDetails.PackageIdentifier = track_package_id
 
     def _check_response_for_request_errors(self):
         """
@@ -107,4 +105,4 @@ class FedexTrackRequest(FedexBaseService):
             TransactionDetail=self.TransactionDetail,
             Version=self.VersionId,
             SelectionDetails=self.SelectionDetails,
-            ProcessingOptions=self.TrackRequestProcessingOptionType)
+            ProcessingOptions=self.ProcessingOptions)

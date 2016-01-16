@@ -1,6 +1,6 @@
 """
 Ship Service Module
-===================
+
 This package contains the shipping methods defined by Fedex's 
 ShipService WSDL file. Each is encapsulated in a class for easy access. 
 For more details on each, refer to the respective class's documentation.
@@ -51,43 +51,45 @@ class FedexProcessShipmentRequest(FedexBaseService):
         self.RequestedShipment = self.client.factory.create('RequestedShipment')
         self.RequestedShipment.ShipTimestamp = datetime.datetime.now()
 
-        TotalWeight = self.client.factory.create('Weight')
+        # Defaults for TotalWeight wsdl object.
+        total_weight = self.client.factory.create('Weight')
         # Start at nothing.
-        TotalWeight.Value = 0.0
+        total_weight.Value = 0.0
         # Default to pounds.
-        TotalWeight.Units = 'LB'
+        total_weight.Units = 'LB'
         # This is the total weight of the entire shipment. Shipments may
         # contain more than one package.
-        self.RequestedShipment.TotalWeight = TotalWeight
+        self.RequestedShipment.TotalWeight = total_weight
 
-        # This is the top level data structure for Shipper information.
-        ShipperParty = self.client.factory.create('Party')
-        ShipperParty.Address = self.client.factory.create('Address')
-        ShipperParty.Contact = self.client.factory.create('Contact')
+        # This is the top level data structure Shipper Party information.
+        shipper_party = self.client.factory.create('Party')
+        shipper_party.Address = self.client.factory.create('Address')
+        shipper_party.Contact = self.client.factory.create('Contact')
 
-        # Link the ShipperParty to our master data structure.
-        self.RequestedShipment.Shipper = ShipperParty
+        # Link the Shipper Party to our master data structure.
+        self.RequestedShipment.Shipper = shipper_party
 
-        # This is the top level data structure for Recipient information.
-        RecipientParty = self.client.factory.create('Party')
-        RecipientParty.Contact = self.client.factory.create('Contact')
-        RecipientParty.Address = self.client.factory.create('Address')
+        # This is the top level data structure for RecipientParty information.
+        recipient_party = self.client.factory.create('Party')
+        recipient_party.Contact = self.client.factory.create('Contact')
+        recipient_party.Address = self.client.factory.create('Address')
 
         # Link the RecipientParty object to our master data structure.
-        self.RequestedShipment.Recipient = RecipientParty
+        self.RequestedShipment.Recipient = recipient_party
 
-        Payor = self.client.factory.create('Payor')
+        payor = self.client.factory.create('Payor')
         # Grab the account number from the FedexConfig object by default.
         # Assume US.
-        Payor.ResponsibleParty = self.client.factory.create('Party')
-        Payor.ResponsibleParty.Address = self.client.factory.create('Address')
-        Payor.ResponsibleParty.Address.CountryCode = 'US'
+        payor.ResponsibleParty = self.client.factory.create('Party')
+        payor.ResponsibleParty.Address = self.client.factory.create('Address')
+        payor.ResponsibleParty.Address.CountryCode = 'US'
 
-        ShippingChargesPayment = self.client.factory.create('Payment')
-        ShippingChargesPayment.Payor = Payor
-        ShippingChargesPayment.PaymentType = 'SENDER'
+        # ShippingChargesPayment WSDL object default values.
+        shipping_charges_payment = self.client.factory.create('Payment')
+        shipping_charges_payment.Payor = payor
+        shipping_charges_payment.PaymentType = 'SENDER'
+        self.RequestedShipment.ShippingChargesPayment = shipping_charges_payment
 
-        self.RequestedShipment.ShippingChargesPayment = ShippingChargesPayment
         self.RequestedShipment.LabelSpecification = self.client.factory.create('LabelSpecification')
 
         # NONE, PREFERRED or LIST

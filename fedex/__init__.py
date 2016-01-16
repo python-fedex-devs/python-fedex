@@ -20,11 +20,11 @@ What python-fedex is not
     
 A note on completeness
 ----------------------
-python-fedex was created for use with some of my internal projects. For the
-initial release, only the things that I needed at the time were implemented.
+python-fedex was created for use with various internal projects over the years.
+Not all services are implemented but only those needed at the time were implemented.
 If there is missing functionality, please report an U{issue<http://code.google.com/p/python-fedex/issues/list>}
-so that I may make this module more useful to others. Likewise, feel free to
-submit patches as well if you would like to help.
+so that this module can be made more useful to others. Likewise, feel free to
+submit patches and service implementations as well if you would like to help.
 
 Getting Started
 ---------------
@@ -49,7 +49,7 @@ what you'll be able to do with python-fedex.
 Getting Support
 ---------------
 If you have any questions, problems, ideas, or patch submissions, please visit
-our U{Google Code project<http://code.google.com/p/python-fedex/>} and enter
-an issue in the U{Issue Tracker<http://code.google.com/p/python-fedex/issues/list>}.
+our U{Github project<http://github.com/gtaylor/python-fedex/>} and enter
+an issue in the U{Issue Tracker<http://github.com/gtaylor/python-fedex/issues>}.
 """
-VERSION = __version__ = '2.1.0'
+VERSION = __version__ = '2.2.0'

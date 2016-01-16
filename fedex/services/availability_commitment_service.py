@@ -1,6 +1,6 @@
 """
 Service Availability and Commitment Module
-=================================
+
 This package contains the shipping methods defined by Fedex's 
 ValidationAvailabilityAndCommitmentService WSDL file. Each is encapsulated in a class for
 easy access. For more details on each, refer to the respective class's 
@@ -31,21 +31,29 @@ class FedexAvailabilityCommitmentRequest(FedexBaseService):
             'minor': '0'
         }
 
-        """ivar: Carrier Code Default to Fedex (FDXE), or can bbe FDXG."""
         self.CarrierCode = None
+        """ivar: Carrier Code Default to Fedex (FDXE), or can bbe FDXG."""
 
-        """@ivar: Holds Addresses, Ship Date, Service and Packaging objects."""
-        self.Origin = self.Destination = None
+        self.Origin = None
+        """@ivar: Holds Origin Address WSDL object."""
+
+        self.Destination = None
+        """@ivar: Holds Destination Address WSDL object."""
+
         self.ShipDate = None
-        self.Service = None
-        self.Packaging = None
+        """@ivar: Ship Date date WSDL object."""
 
-        """@ivar: Holds the ValidationAvailabilityAndCommitmentService WSDL object."""
+        self.Service = None
+        """@ivar: Service type, if set to None will get all available service information."""
+
+        self.Packaging = None
+        """@ivar: Type of packaging to narrow down available shipping options or defaults to YOUR_PACKAGING."""
+
         # Call the parent FedexBaseService class for basic setup work.
         # Shortened the name of the wsdl, otherwise suds did not load it properly.
         # Suds throws the following error when using the long file name from FedEx:
         #
-        #   File "/Library/Python/2.7/site-packages/suds/wsdl.py", line 878, in resolve
+        # File "/Library/Python/2.7/site-packages/suds/wsdl.py", line 878, in resolve
         # raise Exception("binding '%s', not-found" % p.binding)
         # Exception: binding 'ns:ValidationAvailabilityAndCommitmentServiceSoapBinding', not-found
 

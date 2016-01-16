@@ -1,6 +1,6 @@
 """
 Country Service Module
-=================================
+
 This package contains the shipping methods defined by Fedex's 
 CountryService WSDL file. Each is encapsulated in a class for
 easy access. For more details on each, refer to the respective class's 
@@ -13,7 +13,8 @@ from ..base_service import FedexBaseService
 
 class FedexValidatePostalRequest(FedexBaseService):
     """
-    This class allows you validate service availability
+    This class allows you validate an address.
+    https://www.fedex.com/us/developer/WebHelp/ws/2015/html/WebServicesHelp/WSDVG/47_Country_Service.htm
     """
 
     def __init__(self, config_obj, *args, **kwargs):
@@ -31,18 +32,21 @@ class FedexValidatePostalRequest(FedexBaseService):
             'minor': '0'
         }
 
-        """ivar: Carrier Code Default to Fedex (FDXE), or can bbe FDXG."""
         self.CarrierCode = None
+        """ivar: Carrier Code Default to Fedex (FDXE), or can bbe FDXG."""
 
-        """ivar: Routing Code Default to FDSD"""
         self.RoutingCode = None
+        """ivar: Routing Code Default to FDSD."""
 
-        """@ivar: Holds Addresses, Ship Date, Service and Packaging objects."""
         self.Address = None
-        self.ShipDateTime = None
-        self.CheckForMismatch = 1
+        """@ivar: Holds Address WSDL objects."""
 
-        """@ivar: Holds the ValidationAvailabilityAndCommitmentService WSDL object."""
+        self.ShipDateTime = None
+        """@ivar: Holds the ShipDateTime date time objects."""
+
+        self.CheckForMismatch = 1
+        """@ivar: Holds the CheckForMismatch boolean objects."""
+
         super(FedexValidatePostalRequest, self).__init__(
             self._config_obj, 'CountryService_v4.wsdl', *args, **kwargs)
 
