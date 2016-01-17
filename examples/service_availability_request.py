@@ -7,13 +7,14 @@ You will need to fill out the required values or risk seeing a SchemaValidationE
 exception thrown by suds.
 """
 import logging
+import sys
 import datetime
+
 from example_config import CONFIG_OBJ
 from fedex.services.availability_commitment_service import FedexAvailabilityCommitmentRequest
 
 # Set this to the INFO level to see the response from Fedex printed in stdout.
-logging.basicConfig(level=logging.INFO)
-
+logging.basicConfig(stream=sys.stdout, level=logging.INFO)
 
 # This is the object that will be handling our service availability request.
 # We're using the FedexConfig object from example_config.py in this dir.
@@ -32,7 +33,7 @@ avc_request.Destination.CountryCode = 'US'
 # avc_request.Packaging = 'FEDEX_ENVELOPE'
 
 # Can be set to the expected date. Defaults to today if not set.
-# avc_request.ShipDate = datetime.date.today().isoformat()
+avc_request.ShipDate = datetime.date.today().isoformat()
 
 # Can be set to PRIORITY_OVERNIGHT, FEDEX_2_DAY, STANDARD_OVERNIGHT etc.. Defaults to showing all options if not set.
 # avc_request.Service = 'FEDEX_2_DAY'

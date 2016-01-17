@@ -7,12 +7,13 @@ exception thrown by suds.
 
 """
 import logging
+import sys
+
 from example_config import CONFIG_OBJ
 from fedex.services.location_service import FedexSearchLocationRequest
 
 # Set this to the INFO level to see the response from Fedex printed in stdout.
-logging.basicConfig(level=logging.INFO)
-
+logging.basicConfig(stream=sys.stdout, level=logging.INFO)
 
 # This is the object that will be handling our request.
 # We're using the FedexConfig object from example_config.py in this dir.
@@ -50,4 +51,3 @@ location_request.send_request()
 
 # Here is the overall end result of the query.
 print("HighestSeverity:", location_request.response.HighestSeverity)
-

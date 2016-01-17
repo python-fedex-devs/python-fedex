@@ -3,11 +3,13 @@
 This example shows how to track shipments.
 """
 import logging
+import sys
+
 from example_config import CONFIG_OBJ
 from fedex.services.track_service import FedexTrackRequest
 
 # Set this to the INFO level to see the response from Fedex printed in stdout.
-logging.basicConfig(level=logging.INFO)
+logging.basicConfig(stream=sys.stdout, level=logging.INFO)
 
 # NOTE: TRACKING IS VERY ERRATIC ON THE TEST SERVERS. YOU MAY NEED TO USE
 # PRODUCTION KEYS/PASSWORDS/ACCOUNT #. THE TEST SERVERS OFTEN RETURN A NOT FOUND ERROR.

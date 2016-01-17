@@ -9,7 +9,9 @@ Near the bottom of the module, you'll see some different ways to handle the
 label data that is returned with the reply.
 """
 import logging
+import sys
 import binascii
+
 from example_config import CONFIG_OBJ
 from fedex.services.ship_service import FedexProcessShipmentRequest
 
@@ -17,10 +19,9 @@ from fedex.services.ship_service import FedexProcessShipmentRequest
 # Valid choices for this example are PDF, PNG
 GENERATE_IMAGE_TYPE = 'PDF'
 
-
 # Set this to the INFO level to see the response from Fedex printed in stdout.
 # logging.basicConfig(filename="suds.log", level=logging.DEBUG)
-logging.basicConfig(level=logging.INFO)
+logging.basicConfig(stream=sys.stdout, level=logging.INFO)
 
 # NOTE: A VALID 'freight_account_number' REQUIRED IN YOUR 'CONFIB_OBJ' FOR THIS SERVICE TO WORK.
 # OTHERWISE YOU WILL GET FEDEX FREIGHT OR ASSOCIATED ADDRESS IS REQUIRED, ERROR 3619.
@@ -86,7 +87,6 @@ role = shipment.create_wsdl_object_of_type('FreightShipmentRoleType')
 
 shipment.RequestedShipment.FreightShipmentDetail.Role = role.SHIPPER
 shipment.RequestedShipment.FreightShipmentDetail.CollectTermsType = 'STANDARD'
-
 
 # Specifies the label type to be returned.
 shipment.RequestedShipment.LabelSpecification.LabelFormatType = 'FEDEX_FREIGHT_STRAIGHT_BILL_OF_LADING'
@@ -159,7 +159,6 @@ print("Tracking #: {}"
 # Net shipping costs.
 amount = shipment.response.CompletedShipmentDetail.ShipmentRating.ShipmentRateDetails[0].TotalNetCharge.Amount
 print("Net Shipping Cost (US$): {}".format(amount))
-
 
 # # Get the label image in ASCII format from the reply. Note the list indices
 # we're using. You'll need to adjust or iterate through these if your shipment

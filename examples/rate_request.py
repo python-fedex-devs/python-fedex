@@ -9,12 +9,13 @@ TIP: Near the bottom of the module, see how to check the if the destination
      is Out of Delivery Area (ODA).
 """
 import logging
+import sys
+
 from example_config import CONFIG_OBJ
 from fedex.services.rate_service import FedexRateServiceRequest
 
 # Set this to the INFO level to see the response from Fedex printed in stdout.
-logging.basicConfig(level=logging.INFO)
-
+logging.basicConfig(stream=sys.stdout, level=logging.INFO)
 
 # This is the object that will be handling our request.
 # We're using the FedexConfig object from example_config.py in this dir.

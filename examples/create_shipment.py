@@ -10,6 +10,7 @@ label data that is returned with the reply.
 import logging
 import binascii
 import datetime
+import sys
 
 from example_config import CONFIG_OBJ
 from fedex.services.ship_service import FedexProcessShipmentRequest
@@ -18,9 +19,8 @@ from fedex.services.ship_service import FedexProcessShipmentRequest
 # Valid choices for this example are PDF, PNG
 GENERATE_IMAGE_TYPE = 'PDF'
 
-
 # Set this to the INFO level to see the response from Fedex printed in stdout.
-logging.basicConfig(level=logging.INFO)
+logging.basicConfig(stream=sys.stdout, level=logging.INFO)
 
 # This is the object that will be handling our shipment request.
 # We're using the FedexConfig object from example_config.py in this dir.
