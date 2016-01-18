@@ -12,7 +12,9 @@ from ..base_service import FedexBaseService
 
 class FedexSearchLocationRequest(FedexBaseService):
     """
-    This class allows you validate service availability
+    This class allows you to figure out a FedEx location closest
+    to a specified location, based on location type. The response includes
+    location details like operating times, directions and a map link.
     """
 
     def __init__(self, config_obj, *args, **kwargs):

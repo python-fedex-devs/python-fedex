@@ -11,6 +11,7 @@ import sys
 
 from example_config import CONFIG_OBJ
 from fedex.services.location_service import FedexSearchLocationRequest
+from fedex.tools.response_tools import sobject_to_dict
 
 # Set this to the INFO level to see the response from Fedex printed in stdout.
 logging.basicConfig(stream=sys.stdout, level=logging.INFO)
@@ -26,6 +27,7 @@ location_request.PhoneNumber = '4169297819'
 location_request.MultipleMatchesAction = 'RETURN_ALL'
 
 # Set constraints, see SearchLocationConstraints definition.
+# For LocationTypesToInclude, see FedExLocationType definition.
 location_request.Constraints.LocationTypesToInclude = ['FEDEX_SELF_SERVICE_LOCATION',
                                                        'FEDEX_AUTHORIZED_SHIP_CENTER']
 
@@ -49,5 +51,54 @@ location_request.send_request()
 # good to un-comment to see the variables returned by the FedEx reply.
 # print(location_request.response)
 
+# This will convert the response to a python dict object. To
+# make it easier to work with.
+print(sobject_to_dict(location_request.response))
+
 # Here is the overall end result of the query.
-print("HighestSeverity:", location_request.response.HighestSeverity)
+print("HighestSeverity: {}".format(location_request.response.HighestSeverity))
+print("TotalResultsAvailable: {}".format(location_request.response.TotalResultsAvailable))
+print("ResultsReturned: {}".format(location_request.response.ResultsReturned))
+
+result = location_request.response.AddressToLocationRelationships[0]
+print("MatchedAddress: {}, {} Residential: {}".format(result.MatchedAddress.PostalCode,
+                                                      result.MatchedAddress.CountryCode,
+                                                      result.MatchedAddress.Residential))
+print("MatchedAddressGeographicCoordinates: {}".format(result.MatchedAddressGeographicCoordinates.strip("/")))
+
+# Locations sorted by closest found to furthest.
+locations = result.DistanceAndLocationDetails
+for location in locations:
+    print("Distance: {}{}".format(location.Distance.Value, location.Distance.Units))
+
+    location_detail = location.LocationDetail
+    print("LocationID: {}".format(location_detail.LocationId))
+    print("StoreNumber: {}".format(location_detail.StoreNumber))
+
+    if hasattr(location_detail, 'LocationContactAndAddress'):
+        contact_and_address = location_detail.LocationContactAndAddress
+        contact_and_address = sobject_to_dict(contact_and_address)
+        print("LocationContactAndAddress Dict: {}".format(contact_and_address))
+
+    print("GeographicCoordinates {}".format(getattr(location_detail, 'GeographicCoordinates')))
+    print("LocationType {}".format(getattr(location_detail, 'LocationType')))
+
+    if hasattr(location_detail, 'Attributes'):
+        for attribute in location_detail.Attributes:
+            print "Attribute: {}".format(attribute)
+
+    print("MapUrl {}".format(getattr(location_detail, 'MapUrl')))
+
+    if hasattr(location_detail, 'NormalHours'):
+        for open_time in location_detail.NormalHours:
+            print("NormalHours Dict: {}".format(sobject_to_dict(open_time)))
+
+    if hasattr(location_detail, 'HoursForEffectiveDate'):
+        for effective_open_time in location_detail.HoursForEffectiveDate:
+            print("HoursForEffectiveDate Dict: {}".format(sobject_to_dict(effective_open_time)))
+
+    if hasattr(location_detail, 'CarrierDetails'):
+        for carrier_detail in location_detail.CarrierDetails:
+            print("CarrierDetails Dict: {}".format(sobject_to_dict(carrier_detail)))
+
+    print("")
