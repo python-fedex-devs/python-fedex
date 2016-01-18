@@ -10,9 +10,9 @@ sys.path.insert(0, '..')
 from fedex.services.location_service import FedexSearchLocationRequest
 
 # Common global config object for testing.
-from common import get_test_config
+from common import get_fedex_config
 
-CONFIG_OBJ = get_test_config()
+CONFIG_OBJ = get_fedex_config()
 
 
 @unittest.skipIf(not CONFIG_OBJ.account_number, "No credentials provided.")
