@@ -7,8 +7,9 @@ import sys
 
 from example_config import CONFIG_OBJ
 from fedex.services.ship_service import FedexDeleteShipmentRequest
+from fedex.base_service import FedexError
 
-# Set this to the INFO level to see the response from Fedex printed in stdout.
+# Un-comment to see the response from Fedex printed in stdout.
 logging.basicConfig(stream=sys.stdout, level=logging.INFO)
 
 # This is the object that will be handling our request.
@@ -21,7 +22,7 @@ del_request = FedexDeleteShipmentRequest(CONFIG_OBJ)
 del_request.DeletionControlType = "DELETE_ALL_PACKAGES"
 
 # The tracking number of the shipment to delete.
-del_request.TrackingId.TrackingNumber = '794798682968'
+del_request.TrackingId.TrackingNumber = '794798682968'  # '111111111111' will also not delete
 
 # What kind of shipment the tracking number used.
 # Docs say this isn't required, but the WSDL won't validate without it.
@@ -29,7 +30,25 @@ del_request.TrackingId.TrackingNumber = '794798682968'
 del_request.TrackingId.TrackingIdType = 'EXPRESS'
 
 # Fires off the request, sets the 'response' attribute on the object.
-del_request.send_request()
+try:
+    del_request.send_request()
+except FedexError as e:
+    if 'Unable to retrieve record' in str(e):
+        print "WARNING: Unable to delete the shipment with the provided tracking number."
+    else:
+        print(e)
 
 # See the response printed out.
-print(del_request.response)
+# print(del_request.response)
+
+# This will convert the response to a python dict object. To
+# make it easier to work with.
+# from fedex.tools.response_tools import basic_sobject_to_dict
+# print(basic_sobject_to_dict(del_request.response))
+
+# This will dump the response data dict to json.
+# from fedex.tools.response_tools import sobject_to_json
+# print(sobject_to_json(del_request.response))
+
+# Here is the overall end result of the query.
+print("HighestSeverity: {}".format(del_request.response.HighestSeverity))

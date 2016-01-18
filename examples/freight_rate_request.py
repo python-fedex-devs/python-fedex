@@ -14,7 +14,7 @@ import sys
 from example_config import CONFIG_OBJ
 from fedex.services.rate_service import FedexRateServiceRequest
 
-# Set this to the INFO level to see the response from Fedex printed in stdout.
+# Un-comment to see the response from Fedex printed in stdout.
 logging.basicConfig(stream=sys.stdout, level=logging.INFO)
 
 # This is the object that will be handling our request.
@@ -114,17 +114,26 @@ rate_request.send_request()
 # This will show the reply to your rate_request being sent. You can access the
 # attributes through the response attribute on the request object. This is
 # good to un-comment to see the variables returned by the FedEx reply.
-print(rate_request.response)
+# print(rate_request.response)
+
+# This will convert the response to a python dict object. To
+# make it easier to work with.
+# from fedex.tools.response_tools import basic_sobject_to_dict
+# print(basic_sobject_to_dict(rate_request.response))
+
+# This will dump the response data dict to json.
+# from fedex.tools.response_tools import sobject_to_json
+# print(sobject_to_json(rate_request.response))
 
 # Here is the overall end result of the query.
-print("HighestSeverity:", rate_request.response.HighestSeverity)
+print("HighestSeverity: {}".format(rate_request.response.HighestSeverity))
 
 # RateReplyDetails can contain rates for multiple ServiceTypes if ServiceType was set to None
 for service in rate_request.response.RateReplyDetails:
     for detail in service.RatedShipmentDetails:
         for surcharge in detail.ShipmentRateDetail.Surcharges:
             if surcharge.SurchargeType == 'OUT_OF_DELIVERY_AREA':
-                print("%s: ODA rate_request charge {}".format(service.ServiceType, surcharge.Amount.Amount))
+                print("{}: ODA rate_request charge {}".format(service.ServiceType, surcharge.Amount.Amount))
 
     for rate_detail in service.RatedShipmentDetails:
         print("{}: Net FedEx Charge {} {}".format(service.ServiceType,

@@ -8,7 +8,7 @@ import sys
 from example_config import CONFIG_OBJ
 from fedex.services.track_service import FedexTrackRequest
 
-# Set this to the INFO level to see the response from Fedex printed in stdout.
+# Un-comment to see the response from Fedex printed in stdout.
 logging.basicConfig(stream=sys.stdout, level=logging.INFO)
 
 # NOTE: TRACKING IS VERY ERRATIC ON THE TEST SERVERS. YOU MAY NEED TO USE
@@ -49,6 +49,15 @@ track.send_request()
 # attributes through the response attribute on the request object. This is
 # good to un-comment to see the variables returned by the FedEx reply.
 print(track.response)
+
+# This will convert the response to a python dict object. To
+# make it easier to work with.
+# from fedex.tools.conversion import basic_sobject_to_dict
+# print(basic_sobject_to_dict(track.response))
+
+# This will dump the response data dict to json.
+# from fedex.tools.conversion import sobject_to_json
+# print(basic_sobject_to_dict(track.response))
 
 # Look through the matches (there should only be one for a tracking number
 # query), and show a few details about each shipment.

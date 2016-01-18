@@ -8,8 +8,9 @@ import sys
 
 from example_config import CONFIG_OBJ
 from fedex.services.package_movement import PostalCodeInquiryRequest
+from fedex.tools.conversion import sobject_to_dict
 
-# Set this to the INFO level to see the response from Fedex printed in stdout.
+# Un-comment to see the response from Fedex printed in stdout.
 logging.basicConfig(stream=sys.stdout, level=logging.INFO)
 
 # We're using the FedexConfig object from example_config.py in this dir.
@@ -32,4 +33,18 @@ inquiry.CountryCode = 'US'
 inquiry.send_request()
 
 # See the response printed out.
-print(inquiry.response)
+# print(inquiry.response)
+
+# This will convert the response to a python dict object. To
+# make it easier to work with.
+# from fedex.tools.conversion import basic_sobject_to_dict
+# print(basic_sobject_to_dict(inquiry.response))
+
+# This will dump the response data dict to json.
+# from fedex.tools.conversion import sobject_to_json
+# print(sobject_to_json(inquiry.response))
+
+# Here is the overall end result of the query.
+print("HighestSeverity: {}".format(inquiry.response.HighestSeverity))
+print("ExpressFreightContractorDeliveryArea: {}".format(sobject_to_dict(inquiry.response.ExpressDescription)))
+print("ExpressDescription: {}".format(sobject_to_dict(inquiry.response.ExpressFreightDescription)))

@@ -13,7 +13,7 @@ import datetime
 from example_config import CONFIG_OBJ
 from fedex.services.availability_commitment_service import FedexAvailabilityCommitmentRequest
 
-# Set this to the INFO level to see the response from Fedex printed in stdout.
+# Un-comment to see the response from Fedex printed in stdout.
 logging.basicConfig(stream=sys.stdout, level=logging.INFO)
 
 # This is the object that will be handling our service availability request.
@@ -56,7 +56,16 @@ print(avc_request.client)
 # This will show the reply to your avc_request being sent. You can access the
 # attributes through the response attribute on the request object. This is
 # good to un-comment to see the variables returned by the FedEx reply.
-print(avc_request.response)
+# print(avc_request.response)
+
+# This will convert the response to a python dict object. To
+# make it easier to work with.
+# from fedex.tools.conversion import basic_sobject_to_dict
+# print(basic_sobject_to_dict(avc_request.response))
+
+# This will dump the response data dict to json.
+# from fedex.tools.conversion import sobject_to_json
+# print(basic_sobject_to_dict(avc_request.response))
 
 # Here is the overall end result of the query.
 print("HighestSeverity: {}".format(avc_request.response.HighestSeverity))
