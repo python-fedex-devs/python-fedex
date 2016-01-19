@@ -10,7 +10,7 @@ sys.path.insert(0, '..')
 from fedex.services.country_service import FedexValidatePostalRequest
 
 # Common global config object for testing.
-from common import get_fedex_config
+from tests.common import get_fedex_config
 
 CONFIG_OBJ = get_fedex_config()
 
@@ -35,4 +35,5 @@ class PackageMovementServiceTests(unittest.TestCase):
 
 
 if __name__ == "__main__":
+    logging.basicConfig(stream=sys.stdout, level=logging.INFO)
     unittest.main()

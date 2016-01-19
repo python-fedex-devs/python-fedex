@@ -3,7 +3,7 @@ Test module for the Fedex Tools.
 """
 
 import unittest
-
+import logging
 import sys
 
 sys.path.insert(0, '..')
@@ -41,4 +41,5 @@ class FedexToolsTests(unittest.TestCase):
         assert dict_obj, "Expecting a JSON string object."
 
 if __name__ == "__main__":
+    logging.basicConfig(stream=sys.stdout, level=logging.INFO)
     unittest.main()
