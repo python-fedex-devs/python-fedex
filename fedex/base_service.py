@@ -23,6 +23,7 @@ class GeneralSudsPlugin(MessagePlugin):
         self.kwargs = kwargs
 
     def marshalled(self, context):
+        # Removes the WSDL objects that do not have a value before sending.
         context.envelope = context.envelope.prune()
 
     def sending(self, context):
@@ -106,8 +107,13 @@ class FedexBaseService(object):
 
         self.logger = logging.getLogger('fedex')
         """@ivar: Python logger instance with name 'fedex'."""
+
         self.config_obj = config_obj
         """@ivar: The FedexConfig object to pull auth info from."""
+
+        if not self._version_info:
+            self._version_info = {}
+        """#ivar: Set in each service class. Holds version info for the VersionId SOAP object."""
 
         # If the config object is set to use the test server, point
         # suds at the test server WSDL directory.
@@ -149,19 +155,19 @@ class FedexBaseService(object):
         """
 
         # Start of the authentication stuff.
-        WebAuthenticationCredential = self.client.factory.create('WebAuthenticationCredential')
-        WebAuthenticationCredential.Key = self.config_obj.key
-        WebAuthenticationCredential.Password = self.config_obj.password
+        web_authentication_credential = self.client.factory.create('WebAuthenticationCredential')
+        web_authentication_credential.Key = self.config_obj.key
+        web_authentication_credential.Password = self.config_obj.password
 
         # Encapsulates the auth credentials.
-        WebAuthenticationDetail = self.client.factory.create('WebAuthenticationDetail')
-        WebAuthenticationDetail.UserCredential = WebAuthenticationCredential
+        web_authentication_detail = self.client.factory.create('WebAuthenticationDetail')
+        web_authentication_detail.UserCredential = web_authentication_credential
 
         # Set Default ParentCredential
-        if hasattr(WebAuthenticationDetail, 'ParentCredential'):
-            WebAuthenticationDetail.ParentCredential = WebAuthenticationCredential
+        if hasattr(web_authentication_detail, 'ParentCredential'):
+            web_authentication_detail.ParentCredential = web_authentication_credential
 
-        self.WebAuthenticationDetail = WebAuthenticationDetail
+        self.WebAuthenticationDetail = web_authentication_detail
 
     def __set_client_detail(self, *args, **kwargs):
         """
@@ -169,28 +175,28 @@ class FedexBaseService(object):
         related requests.
         """
 
-        ClientDetail = self.client.factory.create('ClientDetail')
-        ClientDetail.AccountNumber = self.config_obj.account_number
-        ClientDetail.MeterNumber = self.config_obj.meter_number
-        ClientDetail.IntegratorId = self.config_obj.integrator_id
-        if hasattr(ClientDetail, 'Region'):
-            ClientDetail.Region = self.config_obj.express_region_code
+        client_detail = self.client.factory.create('ClientDetail')
+        client_detail.AccountNumber = self.config_obj.account_number
+        client_detail.MeterNumber = self.config_obj.meter_number
+        client_detail.IntegratorId = self.config_obj.integrator_id
+        if hasattr(client_detail, 'Region'):
+            client_detail.Region = self.config_obj.express_region_code
 
         client_language_code = kwargs.get('client_language_code', None)
         client_locale_code = kwargs.get('client_locale_code', None)
 
-        if hasattr(ClientDetail, 'Localization') and (client_language_code or client_locale_code):
-            Localization = self.client.factory.create('Localization')
+        if hasattr(client_detail, 'Localization') and (client_language_code or client_locale_code):
+            localization = self.client.factory.create('Localization')
 
             if client_language_code:
-                Localization.LanguageCode = client_language_code
+                localization.LanguageCode = client_language_code
 
             if client_locale_code:
-                Localization.LocaleCode = client_locale_code
+                localization.LocaleCode = client_locale_code
 
-            ClientDetail.Localization = Localization
+            client_detail.Localization = localization
 
-        self.ClientDetail = ClientDetail
+        self.ClientDetail = client_detail
 
     def __set_transaction_detail(self, *args, **kwargs):
         """
@@ -199,23 +205,23 @@ class FedexBaseService(object):
 
         customer_transaction_id = kwargs.get('customer_transaction_id', None)
         if customer_transaction_id:
-            TransactionDetail = self.client.factory.create('TransactionDetail')
-            TransactionDetail.CustomerTransactionId = customer_transaction_id
-            self.logger.debug(TransactionDetail)
-            self.TransactionDetail = TransactionDetail
+            transaction_detail = self.client.factory.create('TransactionDetail')
+            transaction_detail.CustomerTransactionId = customer_transaction_id
+            self.logger.debug(transaction_detail)
+            self.TransactionDetail = transaction_detail
 
     def __set_version_id(self):
         """
         Pulles the versioning info for the request from the child request.
         """
 
-        VersionId = self.client.factory.create('VersionId')
-        VersionId.ServiceId = self._version_info['service_id']
-        VersionId.Major = self._version_info['major']
-        VersionId.Intermediate = self._version_info['intermediate']
-        VersionId.Minor = self._version_info['minor']
-        self.logger.debug(VersionId)
-        self.VersionId = VersionId
+        version_id = self.client.factory.create('VersionId')
+        version_id.ServiceId = self._version_info['service_id']
+        version_id.Major = self._version_info['major']
+        version_id.Intermediate = self._version_info['intermediate']
+        version_id.Minor = self._version_info['minor']
+        self.logger.debug(version_id)
+        self.VersionId = version_id
 
     def _prepare_wsdl_objects(self):
         """
@@ -251,17 +257,34 @@ class FedexBaseService(object):
                     raise FedexError(notification.Code,
                                      notification.Message)
 
+    def _check_response_for_request_warnings(self):
+        """
+        Override this in a service module to check for errors that are
+        specific to that module. For example, changing state/province based
+        on postal code in a Rate Service request.
+        """
+
+        if self.response.HighestSeverity == "NOTE":
+            for notification in self.response.Notifications:
+                if notification.Severity == "NOTE":
+                    self.logger.warning(FedexFailure(notification.Code,
+                                                     notification.Message))
+
     def create_wsdl_object_of_type(self, type_name):
         """
         Creates and returns a WSDL object of the specified type.
+        :param type_name: specifies the object's type name from WSDL.
         """
 
         return self.client.factory.create(type_name)
 
     def _assemble_and_send_request(self):
         """
-        This method should be over-ridden on each sub-class. It assembles all required objects
+        This method should be over-ridden on each sub-class.
+        It assembles all required objects
         into the specific request object and calls send_request.
+        Objects that are not set will be pruned before sending
+        via GeneralSudsPlugin marshalled function.
         """
 
         pass
@@ -295,9 +318,14 @@ class FedexBaseService(object):
         # Check the response for general Fedex errors/failures that aren't
         # specific to any given WSDL/request.
         self.__check_response_for_fedex_error()
+
         # Check the response for errors specific to the particular request.
-        # This is handled by an overridden method on the child object.
+        # This method can be overridden by a method on the child class object.
         self._check_response_for_request_errors()
+
+        # Check the response for errors specific to the particular request.
+        # This method can be overridden by a method on the child class object.
+        self._check_response_for_request_warnings()
 
         # Debug output.
         self.logger.debug("== FEDEX QUERY RESULT ==")
