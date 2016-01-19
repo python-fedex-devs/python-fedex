@@ -54,7 +54,7 @@ class FedexTrackRequest(FedexBaseService):
 
         # Call the parent FedexBaseService class for basic setup work.
         super(FedexTrackRequest, self).__init__(
-            self._config_obj, 'TrackService_v10.wsdl', *args, **kwargs)
+                self._config_obj, 'TrackService_v10.wsdl', *args, **kwargs)
         self.IncludeDetailedScans = False
 
     def _prepare_wsdl_objects(self):
@@ -85,7 +85,7 @@ class FedexTrackRequest(FedexBaseService):
                 if notification.Severity == "ERROR":
                     if "Invalid tracking number" in notification.Message:
                         raise FedexInvalidTrackingNumber(
-                            notification.Code, notification.Message)
+                                notification.Code, notification.Message)
                     else:
                         raise FedexError(notification.Code, notification.Message)
 
@@ -100,9 +100,9 @@ class FedexTrackRequest(FedexBaseService):
         client = self.client
         # Fire off the query.
         return client.service.track(
-            WebAuthenticationDetail=self.WebAuthenticationDetail,
-            ClientDetail=self.ClientDetail,
-            TransactionDetail=self.TransactionDetail,
-            Version=self.VersionId,
-            SelectionDetails=self.SelectionDetails,
-            ProcessingOptions=self.ProcessingOptions)
+                WebAuthenticationDetail=self.WebAuthenticationDetail,
+                ClientDetail=self.ClientDetail,
+                TransactionDetail=self.TransactionDetail,
+                Version=self.VersionId,
+                SelectionDetails=self.SelectionDetails,
+                ProcessingOptions=self.ProcessingOptions)

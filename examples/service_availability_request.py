@@ -7,13 +7,14 @@ You will need to fill out the required values or risk seeing a SchemaValidationE
 exception thrown by suds.
 """
 import logging
+import sys
 import datetime
+
 from example_config import CONFIG_OBJ
 from fedex.services.availability_commitment_service import FedexAvailabilityCommitmentRequest
 
-# Set this to the INFO level to see the response from Fedex printed in stdout.
-logging.basicConfig(level=logging.INFO)
-
+# Un-comment to see the response from Fedex printed in stdout.
+logging.basicConfig(stream=sys.stdout, level=logging.INFO)
 
 # This is the object that will be handling our service availability request.
 # We're using the FedexConfig object from example_config.py in this dir.
@@ -32,7 +33,7 @@ avc_request.Destination.CountryCode = 'US'
 # avc_request.Packaging = 'FEDEX_ENVELOPE'
 
 # Can be set to the expected date. Defaults to today if not set.
-# avc_request.ShipDate = datetime.date.today().isoformat()
+avc_request.ShipDate = datetime.date.today().isoformat()
 
 # Can be set to PRIORITY_OVERNIGHT, FEDEX_2_DAY, STANDARD_OVERNIGHT etc.. Defaults to showing all options if not set.
 # avc_request.Service = 'FEDEX_2_DAY'
@@ -55,7 +56,16 @@ print(avc_request.client)
 # This will show the reply to your avc_request being sent. You can access the
 # attributes through the response attribute on the request object. This is
 # good to un-comment to see the variables returned by the FedEx reply.
-print(avc_request.response)
+# print(avc_request.response)
+
+# This will convert the response to a python dict object. To
+# make it easier to work with.
+# from fedex.tools.conversion import basic_sobject_to_dict
+# print(basic_sobject_to_dict(avc_request.response))
+
+# This will dump the response data dict to json.
+# from fedex.tools.conversion import sobject_to_json
+# print(basic_sobject_to_dict(avc_request.response))
 
 # Here is the overall end result of the query.
 print("HighestSeverity: {}".format(avc_request.response.HighestSeverity))

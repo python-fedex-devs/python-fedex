@@ -37,7 +37,7 @@ class FedexAddressValidationRequest(FedexBaseService):
         """@ivar: Holds the AddressToValidate WSDL object."""
         # Call the parent FedexBaseService class for basic setup work.
         super(FedexAddressValidationRequest, self).__init__(
-            self._config_obj, 'AddressValidationService_v4.wsdl', *args, **kwargs)
+                self._config_obj, 'AddressValidationService_v4.wsdl', *args, **kwargs)
 
     def _prepare_wsdl_objects(self):
         """
@@ -63,12 +63,12 @@ class FedexAddressValidationRequest(FedexBaseService):
         self.logger.debug(self.VersionId)
         # Fire off the query.
         return self.client.service.addressValidation(
-            WebAuthenticationDetail=self.WebAuthenticationDetail,
-            ClientDetail=self.ClientDetail,
-            TransactionDetail=self.TransactionDetail,
-            Version=self.VersionId,
-            InEffectAsOfTimestamp=datetime.datetime.now(),
-            AddressesToValidate=self.AddressesToValidate)
+                WebAuthenticationDetail=self.WebAuthenticationDetail,
+                ClientDetail=self.ClientDetail,
+                TransactionDetail=self.TransactionDetail,
+                Version=self.VersionId,
+                InEffectAsOfTimestamp=datetime.datetime.now(),
+                AddressesToValidate=self.AddressesToValidate)
 
     def add_address(self, address_item):
         """

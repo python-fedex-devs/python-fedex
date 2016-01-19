@@ -4,14 +4,16 @@ This example shows how to validate addresses. Note that the validation
 class can handle up to 100 addresses for validation.
 """
 import logging
+import sys
+
 from example_config import CONFIG_OBJ
 from fedex.services.address_validation_service import FedexAddressValidationRequest
 
 # NOTE: TO USE ADDRESS VALIDATION SERVICES, YOU NEED TO REQUEST FEDEX TO ENABLE THIS SERVICE FOR YOUR ACCOUNT.
 # BY DEFAULT, THE SERVICE IS DISABLED AND YOU WILL RECEIVE AUTHENTICATION FAILED, 1000 RESPONSE.
 
-# Set this to the INFO level to see the response from Fedex printed in stdout.
-logging.basicConfig(level=logging.INFO)
+# Un-comment to see the response from Fedex printed in stdout.
+logging.basicConfig(stream=sys.stdout, level=logging.INFO)
 
 # This is the object that will be handling our avs request.
 # We're using the FedexConfig object from example_config.py in this dir.
@@ -47,7 +49,6 @@ address2.Address.PostalCode = 92075
 address2.Address.CountryCode = 'US'
 avs_request.add_address(address2)
 
-
 # If you'd like to see some documentation on the ship service WSDL, un-comment
 # this line. (Spammy).
 # print(avs_request.client)
@@ -63,7 +64,16 @@ avs_request.add_address(address2)
 avs_request.send_request()
 
 # good to un-comment to see the variables returned by the Fedex reply.
-print(avs_request.response)
+# print(avs_request.response)
+
+# This will convert the response to a python dict object. To
+# make it easier to work with.
+# from fedex.tools.response_tools import basic_sobject_to_dict
+# print(basic_sobject_to_dict(avs_request.response))
+
+# This will dump the response data dict to json.
+# from fedex.tools.response_tools import sobject_to_json
+# print(sobject_to_json(avs_request.response))
 
 # Overall end result of the query
 for i in range(len(avs_request.response.AddressResults)):

@@ -3,11 +3,13 @@
 This example shows how to track shipments.
 """
 import logging
+import sys
+
 from example_config import CONFIG_OBJ
 from fedex.services.track_service import FedexTrackRequest
 
-# Set this to the INFO level to see the response from Fedex printed in stdout.
-logging.basicConfig(level=logging.INFO)
+# Un-comment to see the response from Fedex printed in stdout.
+logging.basicConfig(stream=sys.stdout, level=logging.INFO)
 
 # NOTE: TRACKING IS VERY ERRATIC ON THE TEST SERVERS. YOU MAY NEED TO USE
 # PRODUCTION KEYS/PASSWORDS/ACCOUNT #. THE TEST SERVERS OFTEN RETURN A NOT FOUND ERROR.
@@ -48,6 +50,15 @@ track.send_request()
 # good to un-comment to see the variables returned by the FedEx reply.
 print(track.response)
 
+# This will convert the response to a python dict object. To
+# make it easier to work with.
+# from fedex.tools.conversion import basic_sobject_to_dict
+# print(basic_sobject_to_dict(track.response))
+
+# This will dump the response data dict to json.
+# from fedex.tools.conversion import sobject_to_json
+# print(basic_sobject_to_dict(track.response))
+
 # Look through the matches (there should only be one for a tracking number
 # query), and show a few details about each shipment.
 print("== Results ==")
@@ -59,7 +70,8 @@ for match in track.response.CompletedTrackDetails[0].TrackDetails:
         print("Status Description: {}".format(match.StatusDetail.Description))
     if hasattr(match, 'StatusDetail.AncillaryDetails'):
         print("Status AncillaryDetails Reason: {}".format(match.StatusDetail.AncillaryDetails[-1].Reason))
-        print("Status AncillaryDetails Description: {}".format(match.StatusDetail.AncillaryDetails[-1].ReasonDescription))
+        print("Status AncillaryDetails Description: {}"
+              "".format(match.StatusDetail.AncillaryDetails[-1].ReasonDescription))
     if hasattr(match, 'ServiceCommitMessage'):
         print("Commit Message: {}".format(match.ServiceCommitMessage))
     if hasattr(match, 'Notification'):

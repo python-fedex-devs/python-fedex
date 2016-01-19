@@ -9,12 +9,14 @@ TIP: Near the bottom of the module, see how to check the if the destination
      is Out of Delivery Area (ODA).
 """
 import logging
+import sys
+
 from example_config import CONFIG_OBJ
 from fedex.services.rate_service import FedexRateServiceRequest
+from fedex.tools.conversion import sobject_to_dict
 
-# Set this to the INFO level to see the response from Fedex printed in stdout.
-logging.basicConfig(level=logging.INFO)
-
+# Un-comment to see the response from Fedex printed in stdout.
+logging.basicConfig(stream=sys.stdout, level=logging.INFO)
 
 # This is the object that will be handling our request.
 # We're using the FedexConfig object from example_config.py in this dir.
@@ -97,17 +99,32 @@ rate_request.send_request()
 # good to un-comment to see the variables returned by the FedEx reply.
 # print(rate_request.response)
 
+# This will convert the response to a python dict object. To
+# make it easier to work with.
+# from fedex.tools.conversion import basic_sobject_to_dict
+# print(basic_sobject_to_dict(rate_request.response))
+
+# This will dump the response data dict to json.
+# from fedex.tools.conversion import sobject_to_json
+# print(sobject_to_json(rate_request.response))
+
 # Here is the overall end result of the query.
-print("HighestSeverity:", rate_request.response.HighestSeverity)
+print("HighestSeverity: {}".format(rate_request.response.HighestSeverity))
 
 # RateReplyDetails can contain rates for multiple ServiceTypes if ServiceType was set to None
 for service in rate_request.response.RateReplyDetails:
     for detail in service.RatedShipmentDetails:
         for surcharge in detail.ShipmentRateDetail.Surcharges:
             if surcharge.SurchargeType == 'OUT_OF_DELIVERY_AREA':
-                print("%s: ODA rate_request charge %s" % (service.ServiceType, surcharge.Amount.Amount))
+                print("{}: ODA rate_request charge {}".format(service.ServiceType, surcharge.Amount.Amount))
 
     for rate_detail in service.RatedShipmentDetails:
-        print("%s: Net FedEx Charge %s %s" % (service.ServiceType,
-                                              rate_detail.ShipmentRateDetail.TotalNetFedExCharge.Currency,
-                                              rate_detail.ShipmentRateDetail.TotalNetFedExCharge.Amount))
+        print("{}: Net FedEx Charge {} {}".format(service.ServiceType,
+                                                  rate_detail.ShipmentRateDetail.TotalNetFedExCharge.Currency,
+                                                  rate_detail.ShipmentRateDetail.TotalNetFedExCharge.Amount))
+
+# Check for warnings, this is also logged by the base class.
+if rate_request.response.HighestSeverity == 'NOTE':
+    for notification in rate_request.response.Notifications:
+        if notification.Severity == 'NOTE':
+            print(sobject_to_dict(notification))

@@ -58,7 +58,7 @@ class FedexAvailabilityCommitmentRequest(FedexBaseService):
         # Exception: binding 'ns:ValidationAvailabilityAndCommitmentServiceSoapBinding', not-found
 
         super(FedexAvailabilityCommitmentRequest, self).__init__(
-            self._config_obj, 'AvailabilityAndCommitmentService_v4.wsdl', *args, **kwargs)
+                self._config_obj, 'AvailabilityAndCommitmentService_v4.wsdl', *args, **kwargs)
 
     def _prepare_wsdl_objects(self):
         """
@@ -88,13 +88,13 @@ class FedexAvailabilityCommitmentRequest(FedexBaseService):
         self.logger.debug(self.VersionId)
         # Fire off the query.
         return self.client.service.serviceAvailability(
-            WebAuthenticationDetail=self.WebAuthenticationDetail,
-            ClientDetail=self.ClientDetail,
-            TransactionDetail=self.TransactionDetail,
-            Version=self.VersionId,
-            Origin=self.Origin,
-            Destination=self.Destination,
-            ShipDate=self.ShipDate,
-            CarrierCode=self.CarrierCode,
-            Service=self.Service,
-            Packaging=self.Packaging)
+                WebAuthenticationDetail=self.WebAuthenticationDetail,
+                ClientDetail=self.ClientDetail,
+                TransactionDetail=self.TransactionDetail,
+                Version=self.VersionId,
+                Origin=self.Origin,
+                Destination=self.Destination,
+                ShipDate=self.ShipDate,
+                CarrierCode=self.CarrierCode,
+                Service=self.Service,
+                Packaging=self.Packaging)

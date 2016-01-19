@@ -39,7 +39,7 @@ class FedexProcessShipmentRequest(FedexBaseService):
         """@ivar: Holds the RequestedShipment WSDL object."""
         # Call the parent FedexBaseService class for basic setup work.
         super(FedexProcessShipmentRequest, self).__init__(
-            self._config_obj, 'ShipService_v17.wsdl', *args, **kwargs)
+                self._config_obj, 'ShipService_v17.wsdl', *args, **kwargs)
 
     def _prepare_wsdl_objects(self):
         """
@@ -124,11 +124,11 @@ class FedexProcessShipmentRequest(FedexBaseService):
 
         # Fire off the query.
         return self.client.service.validateShipment(
-            WebAuthenticationDetail=self.WebAuthenticationDetail,
-            ClientDetail=self.ClientDetail,
-            TransactionDetail=self.TransactionDetail,
-            Version=self.VersionId,
-            RequestedShipment=self.RequestedShipment)
+                WebAuthenticationDetail=self.WebAuthenticationDetail,
+                ClientDetail=self.ClientDetail,
+                TransactionDetail=self.TransactionDetail,
+                Version=self.VersionId,
+                RequestedShipment=self.RequestedShipment)
 
     def _assemble_and_send_request(self):
         """
@@ -140,11 +140,11 @@ class FedexProcessShipmentRequest(FedexBaseService):
 
         # Fire off the query.
         return self.client.service.processShipment(
-            WebAuthenticationDetail=self.WebAuthenticationDetail,
-            ClientDetail=self.ClientDetail,
-            TransactionDetail=self.TransactionDetail,
-            Version=self.VersionId,
-            RequestedShipment=self.RequestedShipment)
+                WebAuthenticationDetail=self.WebAuthenticationDetail,
+                ClientDetail=self.ClientDetail,
+                TransactionDetail=self.TransactionDetail,
+                Version=self.VersionId,
+                RequestedShipment=self.RequestedShipment)
 
     def add_package(self, package_item):
         """
@@ -208,10 +208,10 @@ class FedexDeleteShipmentRequest(FedexBaseService):
         client = self.client
         # Fire off the query.
         return client.service.deleteShipment(
-            WebAuthenticationDetail=self.WebAuthenticationDetail,
-            ClientDetail=self.ClientDetail,
-            TransactionDetail=self.TransactionDetail,
-            Version=self.VersionId,
-            ShipTimestamp=datetime.datetime.now(),
-            TrackingId=self.TrackingId,
-            DeletionControl=self.DeletionControlType)
+                WebAuthenticationDetail=self.WebAuthenticationDetail,
+                ClientDetail=self.ClientDetail,
+                TransactionDetail=self.TransactionDetail,
+                Version=self.VersionId,
+                ShipTimestamp=datetime.datetime.now(),
+                TrackingId=self.TrackingId,
+                DeletionControl=self.DeletionControlType)

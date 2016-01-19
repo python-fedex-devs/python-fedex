@@ -36,7 +36,7 @@ class FedexRateServiceRequest(FedexBaseService):
         """@ivar: Holds the RequestedShipment WSDL object including the shipper, recipient and shipt time."""
         # Call the parent FedexBaseService class for basic setup work.
         super(FedexRateServiceRequest, self).__init__(
-            self._config_obj, 'RateService_v18.wsdl', *args, **kwargs)
+                self._config_obj, 'RateService_v18.wsdl', *args, **kwargs)
         self.ClientDetail.Region = config_obj.express_region_code
         """@ivar: Holds the express region code from the config object."""
 
@@ -100,12 +100,12 @@ class FedexRateServiceRequest(FedexBaseService):
 
         # Fire off the query.
         return self.client.service.getRates(
-            WebAuthenticationDetail=self.WebAuthenticationDetail,
-            ClientDetail=self.ClientDetail,
-            TransactionDetail=self.TransactionDetail,
-            Version=self.VersionId,
-            RequestedShipment=self.RequestedShipment,
-            ReturnTransitAndCommit=self.ReturnTransitAndCommit)
+                WebAuthenticationDetail=self.WebAuthenticationDetail,
+                ClientDetail=self.ClientDetail,
+                TransactionDetail=self.TransactionDetail,
+                Version=self.VersionId,
+                RequestedShipment=self.RequestedShipment,
+                ReturnTransitAndCommit=self.ReturnTransitAndCommit)
 
     def add_package(self, package_item):
         """

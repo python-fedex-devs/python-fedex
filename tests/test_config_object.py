@@ -3,7 +3,7 @@ Test module for the Fedex Config Object.
 """
 
 import unittest
-
+import logging
 import sys
 
 sys.path.insert(0, '..')
@@ -35,4 +35,5 @@ class FedexConfigObjectTests(unittest.TestCase):
 
 
 if __name__ == "__main__":
+    logging.basicConfig(stream=sys.stdout, level=logging.INFO)
     unittest.main()
