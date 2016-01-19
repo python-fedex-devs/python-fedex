@@ -1,7 +1,7 @@
 Python FedEx SOAP API Module
 ============================
 
-:Author: Greg Taylor
+:Author: Python FedEx Developers
 :License: BSD
 :Status: Stable
 
@@ -22,7 +22,7 @@ The easiest way is via pip or easy_install::
 Quick Start
 -----------
 
-Edit the example_config.py file in examples with your fedex credentials
+Edit the `example_config.py` file in `examples/` with your fedex credentials
 and run any of the provided examples.
 
 Documentation
@@ -37,10 +37,10 @@ Support
 -------
 
 Head over to https://github.com/gtaylor/python-fedex/issues
-and submit an issue if you have any problems or questions. Due to this 
-package's quasi-maintained state, most problems are going to require
-investigation or a submitted pull request by someone other than
-Greg Taylor.
+and submit an issue if you have any problems or questions. 
+Most problems are going to require investigation or a submitted 
+pull request by someone from the Python FedEx Developers organization.
+To contribute a new feature or service, feel free to create a pull request.
 
 Fedex Support and Documentation
 -------------------------------
@@ -48,10 +48,17 @@ Fedex Support and Documentation
 Fedex Support Email: websupport@fedex.com
 Developer Portal: http://www.fedex.com/us/developer/
 
+Todos
+-----
+ * Read the docs documentation
+ * Travis test integration
+ * Increase validation
+ * Remove deprecated services
+
 Legal
 -----
 
-Copyright (C) 2015 Gregory Taylor
+Copyright (C) 2016 Python FedEx Developers
 
 This software is licensed under the BSD License.
 
