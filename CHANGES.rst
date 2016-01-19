@@ -1,6 +1,15 @@
 Change Log
 ==========
 
+Next release
+------------
+
+* Added Location Service using v3 WSDL. (radzhome)
+* Added examples and unit tests for Location Service. (radzhome)
+* Updated certification process. (radzhome)
+* Added warning logging for requests that come back with warning notes. (radzhome)
+
+
 2.2.0
 -----
 
