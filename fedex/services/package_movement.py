@@ -4,7 +4,8 @@ Package Movement Information Service
 This package contains classes to check service availability, route, and postal
 codes. Defined by the PackageMovementInformationService WSDL file. 
 """
-import logging
+import warnings
+
 from ..base_service import FedexBaseService, FedexError
 
 
@@ -41,10 +42,21 @@ class PostalCodeInquiryRequest(FedexBaseService):
         self._config_obj = config_obj
 
         # Holds version info for the VersionId SOAP object.
-        self._version_info = {'service_id': 'pmis', 'major': '4',
-                              'intermediate': '0', 'minor': '0'}
+        self._version_info = {'service_id': 'pmis',
+                              'major': '4',
+                              'intermediate': '0',
+                              'minor': '0'}
+
         self.PostalCode = postal_code
         self.CountryCode = country_code
+
+        warnings.warn(
+            "DeprecationWarning: Package Movement Service has been deprecated; "
+            "please use Country Service for postal code validation requests or "
+            "Availability and Commitment Service for service availability "
+            "requests instead.",
+            DeprecationWarning
+        )
 
         # Call the parent FedexBaseService class for basic setup work.
         super(PostalCodeInquiryRequest, self).__init__(self._config_obj,
@@ -84,6 +96,7 @@ class PostalCodeInquiryRequest(FedexBaseService):
         @warning: NEVER CALL THIS METHOD DIRECTLY. CALL send_request(), WHICH RESIDES
             ON FedexBaseService AND IS INHERITED.
         """
+
         client = self.client
 
         # We get an exception like this when specifying an IntegratorId:
