@@ -5,6 +5,9 @@ Python FedEx SOAP API Module
 :License: BSD
 :Status: Stable
 
+.. image:: https://travis-ci.org/python-fedex-devs/python-fedex.svg?branch=master
+    :target: https://travis-ci.org/python-fedex-devs/python-fedex
+    
 What is it?
 -----------
 
