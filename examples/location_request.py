@@ -1,8 +1,10 @@
 #!/usr/bin/env python
 """
 This example shows how to use the FedEx Location service.
-The variables populated below represents the minimum required values.
-You will need to fill all of these, or risk seeing a SchemaValidationError
+The variables populated below represents minimum required values as
+well as those that are optional. Read comments for details.
+You will need to specify all required fields, or risk
+seeing a SchemaValidationError
 exception thrown by suds.
 
 """
@@ -21,18 +23,49 @@ logging.basicConfig(stream=sys.stdout, level=logging.INFO)
 customer_transaction_id = "*** LocationService Request v3 using Python ***"  # Optional transaction_id
 location_request = FedexSearchLocationRequest(CONFIG_OBJ, customer_transaction_id=customer_transaction_id)
 
-# Specify the type of search and search criteria.
-location_request.LocationsSearchCriterion = 'PHONE_NUMBER'
-location_request.PhoneNumber = '4169297819'
-location_request.MultipleMatchesAction = 'RETURN_ALL'
+# Un-comment to specify the type of search and search criteria.
+# Can be ADDRESS (default), GEOGRAPHIC_COORDINATES, or PHONE_NUMBER
+# location_request.LocationsSearchCriterion = 'PHONE_NUMBER'
 
-# Set constraints, see SearchLocationConstraints definition.
-# For LocationTypesToInclude, see FedExLocationType definition.
-location_request.Constraints.LocationTypesToInclude = ['FEDEX_SELF_SERVICE_LOCATION',
-                                                       'FEDEX_AUTHORIZED_SHIP_CENTER']
+# Un-comment when using PHONE_NUMBER search criterion.
+# location_request.PhoneNumber = '4169297819'
 
-location_request.Address.PostalCode = '38119'
-location_request.Address.CountryCode = 'US'
+# Un-comment when using GEOGRAPHIC_COORDINATES search criterion.
+# location_request.GeographicCoordinates = '43.6357-79.5373'
+
+# Un-comment to specify how to handle multiple matches.
+# Can be set to RETURN_ALL (default), RETURN_ERROR, or RETURN_FIRST
+# location_request.MultipleMatchesAction = 'RETURN_FIRST'
+
+
+# Un-comment to specify FedExLocationType constraint, see FedExLocationType definition.
+# Can be set to FEDEX_AUTHORIZED_SHIP_CENTER, FEDEX_EXPRESS_STATION, FEDEX_FREIGHT_SERVICE_CENTER,
+# FEDEX_GROUND_TERMINAL, FEDEX_HOME_DELIVERY_STATION, FEDEX_OFFICE, FEDEX_SELF_SERVICE_LOCATION,
+# FEDEX_SHIPSITE, or FEDEX_SMART_POST_HUB
+# location_request.Constraints.LocationTypesToInclude = ['FEDEX_SELF_SERVICE_LOCATION',
+#                                                        'FEDEX_AUTHORIZED_SHIP_CENTER']
+
+# Un-comment to to set a maximum radius for location query.
+# This really can narrow down the location results but is not required.
+location_request.Constraints.RadiusDistance.Value = 1.5
+location_request.Constraints.RadiusDistance.Units = "KM"  # KM or MI
+
+# Un-comment to specify supported redirect to hold services. Only
+# supported by certain countries,from testing only US is supported.
+# Can be FEDEX_EXPRESS, FEDEX_GROUND, or FEDEX_GROUND_HOME_DELIVERY
+# location_request.Constraints.SupportedRedirectToHoldServices = "FEDEX_GROUND"
+
+# Required even if using phone number search
+location_request.Address.PostalCode = 'M5V 1Z0'
+location_request.Address.CountryCode = 'CA'
+
+# Un-comment to set sort criteria. By default Matching locations sorted by
+# DISTANCE and LOWEST_TO_HIGHEST if no sort criteria is specified.
+# Crieterion can be LATEST_EXPRESS_DROPOFF_TIME, LATEST_GROUND_DROPOFF_TIME,
+# LOCATION_TYPE or DISTANCE (default)
+# Order can be LOWEST_TO_HIGHEST (default) or HIGHEST_TO_LOWEST
+# location_request.SortDetail.Criterion = 'LATEST_GROUND_DROPOFF_TIME'
+# location_request.SortDetail.Order = 'LOWEST_TO_HIGHEST'
 
 # If you'd like to see some documentation on the ship service WSDL, un-comment
 # this line. (Spammy).
@@ -66,12 +99,11 @@ print("TotalResultsAvailable: {}".format(location_request.response.TotalResultsA
 print("ResultsReturned: {}".format(location_request.response.ResultsReturned))
 
 result = location_request.response.AddressToLocationRelationships[0]
-print("MatchedAddress: {}, {} Residential: {}".format(result.MatchedAddress.PostalCode,
-                                                      result.MatchedAddress.CountryCode,
-                                                      result.MatchedAddress.Residential))
+print("MatchedAddress: {}, {} Residential: {}".format(getattr(result.MatchedAddress, 'PostalCode', ''),
+                                                      getattr(result.MatchedAddress, 'CountryCode', ''),
+                                                      getattr(result.MatchedAddress, 'Residential', '')))
 print("MatchedAddressGeographicCoordinates: {}".format(result.MatchedAddressGeographicCoordinates.strip("/")))
 
-# Locations sorted by closest found to furthest.
 locations = result.DistanceAndLocationDetails
 for location in locations:
     print("Distance: {}{}".format(location.Distance.Value, location.Distance.Units))
@@ -85,14 +117,14 @@ for location in locations:
         contact_and_address = sobject_to_dict(contact_and_address)
         print("LocationContactAndAddress Dict: {}".format(contact_and_address))
 
-    print("GeographicCoordinates {}".format(getattr(location_detail, 'GeographicCoordinates')))
-    print("LocationType {}".format(getattr(location_detail, 'LocationType')))
+    print("GeographicCoordinates {}".format(getattr(location_detail, 'GeographicCoordinates', '')))
+    print("LocationType {}".format(getattr(location_detail, 'LocationType', '')))
 
     if hasattr(location_detail, 'Attributes'):
         for attribute in location_detail.Attributes:
             print("Attribute: {}".format(attribute))
 
-    print("MapUrl {}".format(getattr(location_detail, 'MapUrl')))
+    print("MapUrl {}".format(getattr(location_detail, 'MapUrl', '')))
 
     if hasattr(location_detail, 'NormalHours'):
         for open_time in location_detail.NormalHours:
