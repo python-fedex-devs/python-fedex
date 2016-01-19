@@ -14,13 +14,13 @@ CLASSIFIERS = [
     'Topic :: Software Development :: Libraries :: Python Modules'
 ]
 
-KEYWORDS = 'fedex soap suds wrapper'
+KEYWORDS = 'fedex soap suds wrapper rate location ship service'
 
 setup(name='fedex',
       version=fedex.VERSION,
       description='Fedex Web Services API wrapper.',
       long_description=LONG_DESCRIPTION,
-      author='Gregory Taylor',
+      author='Python Fedex Developers',
       author_email='gtaylor@gc-taylor.com',
       url='https://github.com/python-fedex-devs/python-fedex',
       download_url='http://pypi.python.org/pypi/fedex/',
