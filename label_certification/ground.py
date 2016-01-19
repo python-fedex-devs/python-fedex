@@ -16,7 +16,6 @@ shipment = FedexProcessShipmentRequest(CONFIG_OBJ)
 shipment.RequestedShipment.DropoffType = 'REGULAR_PICKUP'
 shipment.RequestedShipment.ServiceType = 'FEDEX_GROUND'
 shipment.RequestedShipment.PackagingType = 'YOUR_PACKAGING'
-shipment.RequestedShipment.PackageDetail = 'INDIVIDUAL_PACKAGES'
 
 # Shipper contact info.
 transfer_config_dict(shipment.RequestedShipment.Shipper.Contact,
@@ -39,6 +38,9 @@ shipment.RequestedShipment.Recipient.Address.PostalCode = '20171'
 shipment.RequestedShipment.Recipient.Address.CountryCode = 'US'
 
 shipment.RequestedShipment.ShippingChargesPayment.PaymentType = 'SENDER'
+
+# Senders account information
+shipment.RequestedShipment.ShippingChargesPayment.Payor.ResponsibleParty.AccountNumber = CONFIG_OBJ.account_number
 
 # Label config.
 transfer_config_dict(shipment.RequestedShipment.LabelSpecification,
