@@ -1,13 +1,20 @@
 Python FedEx SOAP API Module
 ============================
 
+.. image:: https://badge.fury.io/py/fedex.svg
+    :target: https://badge.fury.io/py/fedex
+    
+.. image:: https://travis-ci.org/python-fedex-devs/python-fedex.svg?branch=master
+    :target: https://travis-ci.org/python-fedex-devs/python-fedex
+
+.. image:: https://requires.io/github/python-fedex-devs/python-fedex/requirements.svg?branch=master
+     :target: https://requires.io/github/python-fedex-devs/python-fedex/requirements/?branch=master
+     :alt: Requirements Status
+     
 :Author: Python FedEx Developers
 :License: BSD
 :Status: Stable
 
-.. image:: https://travis-ci.org/python-fedex-devs/python-fedex.svg?branch=master
-    :target: https://travis-ci.org/python-fedex-devs/python-fedex
-    
 What is it?
 -----------
 
