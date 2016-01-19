@@ -1,6 +1,6 @@
 """
 Location Service Module
-=================================
+
 This package contains the shipping methods defined by Fedex's 
 LocationService WSDL file. Each is encapsulated in a class for
 easy access. For more details on each, refer to the respective class's 
@@ -13,8 +13,9 @@ from ..base_service import FedexBaseService
 class FedexSearchLocationRequest(FedexBaseService):
     """
     This class allows you to figure out a FedEx location closest
-    to a specified location, based on location type. The response includes
-    location details like operating times, directions and a map link.
+    to a specified location criteria, based on location type.
+    The response includes location details like operating times,
+    directions and a map link and more.
     """
 
     def __init__(self, config_obj, *args, **kwargs):
@@ -32,14 +33,24 @@ class FedexSearchLocationRequest(FedexBaseService):
             'minor': '0'
         }
 
-        """@ivar: set default objects."""
+        # Set default objects.
         self.Address = None
-        self.PhoneNumber = None
-        self.MultipleMatchesAction = None
-        self.Constraints = []
-        self.LocationsSearchCriterion = None
+        """@ivar: Holds the Address WSDL object."""
 
-        """@ivar: Holds the WSDL object."""
+        self.PhoneNumber = None
+        """@ivar: Holds the PhoneNumber string object."""
+
+        self.MultipleMatchesAction = None
+        """@ivar: Holds the MultipleMatchesActionType WSDL object."""
+
+        self.Constraints = []
+        """@ivar: Holds a list of SearchLocationConstraints WSDL objects."""
+
+        self.LocationsSearchCriterion = None
+        """@ivar: Holds the LocationsSearchCriteriaType WSDL object."""
+
+        self.SortDetail = None
+        """@ivar: Holds the LocationSortDetail WSDL object."""
 
         super(FedexSearchLocationRequest, self).__init__(
             self._config_obj, 'LocationsService_v3.wsdl', *args, **kwargs)
@@ -48,9 +59,13 @@ class FedexSearchLocationRequest(FedexBaseService):
         """
         Create the data structure and get it ready for the WSDL request.
         """
+
+        # Service defaults for objects that are required.
         self.MultipleMatchesAction = 'RETURN_ALL'
         self.Constraints = self.create_wsdl_object_of_type('SearchLocationConstraints')
         self.Address = self.create_wsdl_object_of_type('Address')
+        self.LocationsSearchCriterion = 'ADDRESS'
+        self.SortDetail = self.create_wsdl_object_of_type('LocationSortDetail')
 
     def _assemble_and_send_request(self):
         """
@@ -78,4 +93,5 @@ class FedexSearchLocationRequest(FedexBaseService):
             PhoneNumber=self.PhoneNumber,
             MultipleMatchesAction=self.MultipleMatchesAction,
             Constraints=self.Constraints,
-            Address=self.Address)
+            Address=self.Address,
+            SortDetail=self.SortDetail)
