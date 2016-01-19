@@ -70,7 +70,8 @@ for match in track.response.CompletedTrackDetails[0].TrackDetails:
         print("Status Description: {}".format(match.StatusDetail.Description))
     if hasattr(match, 'StatusDetail.AncillaryDetails'):
         print("Status AncillaryDetails Reason: {}".format(match.StatusDetail.AncillaryDetails[-1].Reason))
-        print("Status AncillaryDetails Description: {}".format(match.StatusDetail.AncillaryDetails[-1].ReasonDescription))
+        print("Status AncillaryDetails Description: {}"
+              "".format(match.StatusDetail.AncillaryDetails[-1].ReasonDescription))
     if hasattr(match, 'ServiceCommitMessage'):
         print("Commit Message: {}".format(match.ServiceCommitMessage))
     if hasattr(match, 'Notification'):

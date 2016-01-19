@@ -5,6 +5,9 @@ Test module for the Fedex PackageMovementInformationService WSDL.
 import unittest
 import logging
 import sys
+import warnings
+
+warnings.simplefilter('always', DeprecationWarning)  # Show deprecation on this module in py2.7.
 
 sys.path.insert(0, '../')
 from fedex.services.package_movement import PostalCodeInquiryRequest

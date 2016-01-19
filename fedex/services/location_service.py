@@ -53,7 +53,7 @@ class FedexSearchLocationRequest(FedexBaseService):
         """@ivar: Holds the LocationSortDetail WSDL object."""
 
         super(FedexSearchLocationRequest, self).__init__(
-            self._config_obj, 'LocationsService_v3.wsdl', *args, **kwargs)
+                self._config_obj, 'LocationsService_v3.wsdl', *args, **kwargs)
 
     def _prepare_wsdl_objects(self):
         """
@@ -85,13 +85,13 @@ class FedexSearchLocationRequest(FedexBaseService):
         self.logger.debug(self.VersionId)
         # Fire off the query.
         return self.client.service.searchLocations(
-            WebAuthenticationDetail=self.WebAuthenticationDetail,
-            ClientDetail=self.ClientDetail,
-            TransactionDetail=self.TransactionDetail,
-            Version=self.VersionId,
-            LocationsSearchCriterion=self.LocationsSearchCriterion,
-            PhoneNumber=self.PhoneNumber,
-            MultipleMatchesAction=self.MultipleMatchesAction,
-            Constraints=self.Constraints,
-            Address=self.Address,
-            SortDetail=self.SortDetail)
+                WebAuthenticationDetail=self.WebAuthenticationDetail,
+                ClientDetail=self.ClientDetail,
+                TransactionDetail=self.TransactionDetail,
+                Version=self.VersionId,
+                LocationsSearchCriterion=self.LocationsSearchCriterion,
+                PhoneNumber=self.PhoneNumber,
+                MultipleMatchesAction=self.MultipleMatchesAction,
+                Constraints=self.Constraints,
+                Address=self.Address,
+                SortDetail=self.SortDetail)

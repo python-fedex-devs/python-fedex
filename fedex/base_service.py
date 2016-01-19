@@ -17,7 +17,6 @@ from suds.plugin import MessagePlugin
 
 class GeneralSudsPlugin(MessagePlugin):
     def __init__(self, **kwargs):
-        
         self.request_logger = logging.getLogger('fedex.request')
         self.response_logger = logging.getLogger('fedex.response')
         self.kwargs = kwargs

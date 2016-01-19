@@ -51,11 +51,11 @@ class PostalCodeInquiryRequest(FedexBaseService):
         self.CountryCode = country_code
 
         warnings.warn(
-            "DeprecationWarning: Package Movement Service has been deprecated; "
-            "please use Country Service for postal code validation requests or "
-            "Availability and Commitment Service for service availability "
-            "requests instead.",
-            DeprecationWarning
+                "Package Movement Service has been deprecated; "
+                "please use Country Service for postal code validation requests or "
+                "Availability and Commitment Service for service availability "
+                "requests instead.",
+                DeprecationWarning
         )
 
         # Call the parent FedexBaseService class for basic setup work.

@@ -48,7 +48,7 @@ class FedexValidatePostalRequest(FedexBaseService):
         """@ivar: Holds the CheckForMismatch boolean objects."""
 
         super(FedexValidatePostalRequest, self).__init__(
-            self._config_obj, 'CountryService_v4.wsdl', *args, **kwargs)
+                self._config_obj, 'CountryService_v4.wsdl', *args, **kwargs)
 
     def _prepare_wsdl_objects(self):
         """
@@ -77,12 +77,12 @@ class FedexValidatePostalRequest(FedexBaseService):
         self.logger.debug(self.VersionId)
         # Fire off the query.
         return self.client.service.validatePostal(
-            WebAuthenticationDetail=self.WebAuthenticationDetail,
-            ClientDetail=self.ClientDetail,
-            TransactionDetail=self.TransactionDetail,
-            Version=self.VersionId,
-            Address=self.Address,
-            ShipDateTime=self.ShipDateTime,
-            CarrierCode=self.CarrierCode,
-            CheckForMismatch=self.CheckForMismatch,
-            RoutingCode=self.RoutingCode)
+                WebAuthenticationDetail=self.WebAuthenticationDetail,
+                ClientDetail=self.ClientDetail,
+                TransactionDetail=self.TransactionDetail,
+                Version=self.VersionId,
+                Address=self.Address,
+                ShipDateTime=self.ShipDateTime,
+                CarrierCode=self.CarrierCode,
+                CheckForMismatch=self.CheckForMismatch,
+                RoutingCode=self.RoutingCode)

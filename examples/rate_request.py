@@ -123,11 +123,7 @@ for service in rate_request.response.RateReplyDetails:
                                                   rate_detail.ShipmentRateDetail.TotalNetFedExCharge.Currency,
                                                   rate_detail.ShipmentRateDetail.TotalNetFedExCharge.Amount))
 
-# Not sure if 'NOTE' checking should be put in base class.
-# For now can check notifications manually.
-# if notification.Severity == 'NOTE':
-#     self.logger.warning(FedexFailure(notification.Code,
-#                                      notification.Message))
+# Check for warnings, this is also logged by the base class.
 if rate_request.response.HighestSeverity == 'NOTE':
     for notification in rate_request.response.Notifications:
         if notification.Severity == 'NOTE':

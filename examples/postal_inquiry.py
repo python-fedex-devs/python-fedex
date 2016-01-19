@@ -1,24 +1,25 @@
 #!/usr/bin/env python
 """
-PostalCodeInquiryRequest classes are used to validate and receive additional
+ValidatePostalRequest classes are used to validate and receive additional
 information about postal codes.
 """
 import logging
-import sys
-
 from example_config import CONFIG_OBJ
-from fedex.services.package_movement import PostalCodeInquiryRequest
-from fedex.tools.conversion import sobject_to_dict
+from fedex.services.country_service import FedexValidatePostalRequest
 
-# Un-comment to see the response from Fedex printed in stdout.
-logging.basicConfig(stream=sys.stdout, level=logging.INFO)
+# Set this to the INFO level to see the response from Fedex printed in stdout.
+logging.basicConfig(level=logging.INFO)
 
 # We're using the FedexConfig object from example_config.py in this dir.
-inquiry = PostalCodeInquiryRequest(CONFIG_OBJ)
-inquiry.PostalCode = '29631'
-inquiry.CountryCode = 'US'
+customer_transaction_id = "*** ValidatePostal Request v4 using Python ***"  # Optional transaction_id
+inquiry = FedexValidatePostalRequest(CONFIG_OBJ, customer_transaction_id=customer_transaction_id)
+inquiry.Address.PostalCode = '29631'
+inquiry.Address.CountryCode = 'US'
+inquiry.Address.StreetLines = ['104 Knox Road']
+inquiry.Address.City = 'Clemson'
+inquiry.Address.StateOrProvinceCode = 'SC'
 
-# If you'd like to see some documentation on the ship service WSDL, un-comment
+# If you'd like to see some documentation on the country service WSDL, un-comment
 # this line. (Spammy).
 # print(inquiry.client)
 
@@ -26,25 +27,30 @@ inquiry.CountryCode = 'US'
 # before it is actually sent. This is useful for seeing what values you can
 # change.
 # print(inquiry.CarrierCode)
-# print(inquiry.ClientDetail)
-# print(inquiry.TransactionDetail)
+# print(inquiry.Address)
+# print(inquiry.ShipDateTime)
+# print(inquiry.CheckForMismatch)
+# print(inquiry.RoutingCode)
 
 # Fires off the request, sets the 'response' attribute on the object.
 inquiry.send_request()
 
 # See the response printed out.
-# print(inquiry.response)
-
-# This will convert the response to a python dict object. To
-# make it easier to work with.
-# from fedex.tools.conversion import basic_sobject_to_dict
-# print(basic_sobject_to_dict(inquiry.response))
-
-# This will dump the response data dict to json.
-# from fedex.tools.conversion import sobject_to_json
-# print(sobject_to_json(inquiry.response))
+print(inquiry.response)
 
 # Here is the overall end result of the query.
 print("HighestSeverity: {}".format(inquiry.response.HighestSeverity))
-print("ExpressFreightContractorDeliveryArea: {}".format(sobject_to_dict(inquiry.response.ExpressDescription)))
-print("ExpressDescription: {}".format(sobject_to_dict(inquiry.response.ExpressFreightDescription)))
+print("")
+
+print("State/Province: {}".format(inquiry.response.PostalDetail.StateOrProvinceCode))
+print("City First Initial: {}".format(inquiry.response.PostalDetail.CityFirstInitials))
+print("Clean Postal Code: {}".format(inquiry.response.PostalDetail.CleanedPostalCode))
+
+for loc_description in inquiry.response.PostalDetail.LocationDescriptions:
+    print("Location ID: {}".format(loc_description.LocationId))
+    print("Location No.: {}".format(loc_description.LocationNumber))
+    print("Country Code: {}".format(loc_description.CountryCode))
+    print("Postal Code: {}".format(loc_description.PostalCode))
+    print("Service Area: {}".format(loc_description.ServiceArea))
+    print("Airport ID: {}".format(loc_description.AirportId))
+    print("FedEx Europe First Origin: {}".format(loc_description.FedExEuropeFirstOrigin))
