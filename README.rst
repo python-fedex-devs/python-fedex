@@ -11,7 +11,8 @@ Python FedEx SOAP API Module
      :target: https://requires.io/github/python-fedex-devs/python-fedex/requirements/?branch=master
      :alt: Requirements Status
      
-:Author: Python FedEx Developers
+:Author: Greg Taylor
+:Maintainer: Python FedEx Developers
 :License: BSD
 :Status: Stable
 
@@ -68,6 +69,7 @@ Todos
 Legal
 -----
 
+Copyright (C) 2008-2015 Greg Taylor
 Copyright (C) 2016 Python FedEx Developers
 
 This software is licensed under the BSD License.
