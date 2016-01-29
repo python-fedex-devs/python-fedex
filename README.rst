@@ -33,13 +33,16 @@ The easiest way is via pip or easy_install::
 Quick Start
 -----------
 
-Edit the `example_config.py` file in `examples/` with your fedex credentials
+- Clone this repository.
+
+- Edit the `example_config.py` file in See `examples/ <examples/>`_ with your fedex credentials
 and run any of the provided examples.
 
 Documentation
 -------------
 
-Refer to the documentation_ for more details on the project.
+Refer to the documentation_ for more details on the project. Latest doc builds
+are found in docs_ and doc build scripts in doc_source_.
     
 There are also a lot of useful examples under the examples directory within
 this directory.
@@ -47,30 +50,32 @@ this directory.
 Support
 -------
 
-Head over to https://github.com/gtaylor/python-fedex/issues
-and submit an issue if you have any problems or questions. 
+Issues & Questions: https://github.com/gtaylor/python-fedex/issues
+
 Most problems are going to require investigation or a submitted 
 pull request by someone from the Python FedEx Developers organization.
 To contribute a new feature or service, feel free to create a pull request.
+We are always looking for new contributors to help maintain the project.
 
 Fedex Support and Documentation
 -------------------------------
 
 Fedex Support Email: websupport@fedex.com
 Developer Portal: http://www.fedex.com/us/developer/
+Updates To Services: https://www.fedex.com/us/developer/web-services/process.html (FedEx Web Services Announcements)
 
 Todos
 -----
- * Read the docs documentation
- * Travis test integration
- * Increase validation
- * Remove deprecated services
+
+- Read the docs documentation
+- Increase service specific request validation
+- Remove deprecated services (package movement service)
 
 Legal
 -----
 
 Copyright (C) 2008-2015 Greg Taylor
-Copyright (C) 2016 Python FedEx Developers
+Copyright (C) 2015-2016 Python FedEx Developers
 
 This software is licensed under the BSD License.
 
@@ -78,3 +83,5 @@ python-fedex is not authored by, endorsed by, or in any way affiliated with
 FedEx.
 
 .. _documentation: https://pythonhosted.org/fedex/
+.. _docs: docs/
+.. _doc_source: doc_source/

@@ -1,14 +1,18 @@
 Change Log
 ==========
 
-Next release
-------------
+2.3.0
+-----
 
 * Added Location Service using v3 WSDL. (radzhome)
 * Added examples and unit tests for Location Service. (radzhome)
-* Updated certification process. (radzhome)
+* Updated certification process scripts to work with latest WSDLs. (radzhome)
 * Added warning logging for requests that come back with warning notes. (radzhome)
-
+* Added PyPI, Travis, requires.io integration/badges. (radzhome)
+* Organization change from gtaylor to python-fedex-devs. (gtaylor)
+* Added deprecation message for movement service. (radzhome)
+* Added conversion tools to convert suds xml object into python dict. (radzhome)
+* Redirect logging to stdout for examples and tests when not ran via nose. (radzhome)
 
 2.2.0
 -----
