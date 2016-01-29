@@ -1,0 +1,741 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>fedex.base_service.FedexBaseService</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="fedex-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="fedex-module.html">Package&nbsp;fedex</a> ::
+        <a href="fedex.base_service-module.html">Module&nbsp;base_service</a> ::
+        Class&nbsp;FedexBaseService
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="fedex.base_service.FedexBaseService-class.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- ==================== CLASS DESCRIPTION ==================== -->
+<h1 class="epydoc">Class FedexBaseService</h1><p class="nomargin-top"><span class="codelink"><a href="fedex.base_service-pysrc.html#FedexBaseService">source&nbsp;code</a></span></p>
+<pre class="base-tree">
+object --+
+         |
+        <strong class="uidshort">FedexBaseService</strong>
+</pre>
+
+<dl><dt>Known Subclasses:</dt>
+<dd>
+      <ul class="subclass-list">
+<li><a href="fedex.services.location_service.FedexSearchLocationRequest-class.html">services.location_service.FedexSearchLocationRequest</a></li><li>, <a href="fedex.services.package_movement.PostalCodeInquiryRequest-class.html">services.package_movement.PostalCodeInquiryRequest</a></li><li>, <a href="fedex.services.availability_commitment_service.FedexAvailabilityCommitmentRequest-class.html">services.availability_commitment_service.FedexAvailabilityCommitmentRequest</a></li><li>, <a href="fedex.services.address_validation_service.FedexAddressValidationRequest-class.html">services.address_validation_service.FedexAddressValidationRequest</a></li><li>, <a href="fedex.services.country_service.FedexValidatePostalRequest-class.html">services.country_service.FedexValidatePostalRequest</a></li><li>, <a href="fedex.services.track_service.FedexTrackRequest-class.html">services.track_service.FedexTrackRequest</a></li><li>, <a href="fedex.services.ship_service.FedexDeleteShipmentRequest-class.html">services.ship_service.FedexDeleteShipmentRequest</a></li><li>, <a href="fedex.services.ship_service.FedexProcessShipmentRequest-class.html">services.ship_service.FedexProcessShipmentRequest</a></li><li>, <a href="fedex.services.rate_service.FedexRateServiceRequest-class.html">services.rate_service.FedexRateServiceRequest</a></li>  </ul>
+</dd></dl>
+
+<hr />
+<p>This class is the master class for all Fedex request objects. It gets 
+  all of the common SOAP objects created via suds and populates them with 
+  values from a <a href="fedex.config.FedexConfig-class.html" 
+  class="link">FedexConfig</a> object, along with keyword arguments via <a 
+  href="fedex.base_service.FedexBaseService-class.html#__init__" 
+  class="link">__init__</a>.</p>
+
+<hr />
+<div class="fields">      <p><strong>Note:</strong>
+        This object should never be used directly, use one of the included 
+        sub-classes.
+      </p>
+</div><!-- ==================== INSTANCE METHODS ==================== -->
+<a name="section-InstanceMethods"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Instance Methods</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-InstanceMethods"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="fedex.base_service.FedexBaseService-class.html#__init__" class="summary-sig-name">__init__</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">config_obj</span>,
+        <span class="summary-sig-arg">wsdl_name</span>,
+        <span class="summary-sig-arg">*args</span>,
+        <span class="summary-sig-arg">**kwargs</span>)</span><br />
+      This constructor should only be called by children of the class.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fedex.base_service-pysrc.html#FedexBaseService.__init__">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="fedex.base_service.FedexBaseService-class.html#__set_web_authentication_detail" class="summary-sig-name" onclick="show_private();">__set_web_authentication_detail</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      Sets up the WebAuthenticationDetail node.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fedex.base_service-pysrc.html#FedexBaseService.__set_web_authentication_detail">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="__set_client_detail"></a><span class="summary-sig-name">__set_client_detail</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">*args</span>,
+        <span class="summary-sig-arg">**kwargs</span>)</span><br />
+      Sets up the ClientDetail node, which is required for all shipping 
+      related requests.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fedex.base_service-pysrc.html#FedexBaseService.__set_client_detail">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="__set_transaction_detail"></a><span class="summary-sig-name">__set_transaction_detail</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">*args</span>,
+        <span class="summary-sig-arg">**kwargs</span>)</span><br />
+      Checks kwargs for 'customer_transaction_id' and sets it if present.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fedex.base_service-pysrc.html#FedexBaseService.__set_transaction_detail">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="__set_version_id"></a><span class="summary-sig-name">__set_version_id</span>(<span class="summary-sig-arg">self</span>)</span><br />
+      Pulles the versioning info for the request from the child request.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fedex.base_service-pysrc.html#FedexBaseService.__set_version_id">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="fedex.base_service.FedexBaseService-class.html#_prepare_wsdl_objects" class="summary-sig-name" onclick="show_private();">_prepare_wsdl_objects</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      This method should be over-ridden on each sub-class.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fedex.base_service-pysrc.html#FedexBaseService._prepare_wsdl_objects">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="__check_response_for_fedex_error"></a><span class="summary-sig-name">__check_response_for_fedex_error</span>(<span class="summary-sig-arg">self</span>)</span><br />
+      This checks the response for general Fedex errors that aren't related
+      to any one WSDL.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fedex.base_service-pysrc.html#FedexBaseService.__check_response_for_fedex_error">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="fedex.base_service.FedexBaseService-class.html#_check_response_for_request_errors" class="summary-sig-name" onclick="show_private();">_check_response_for_request_errors</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      Override this in each service module to check for errors that are 
+      specific to that module.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fedex.base_service-pysrc.html#FedexBaseService._check_response_for_request_errors">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="fedex.base_service.FedexBaseService-class.html#create_wsdl_object_of_type" class="summary-sig-name">create_wsdl_object_of_type</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">type_name</span>)</span><br />
+      Creates and returns a WSDL object of the specified type.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fedex.base_service-pysrc.html#FedexBaseService.create_wsdl_object_of_type">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="fedex.base_service.FedexBaseService-class.html#_assemble_and_send_request" class="summary-sig-name" onclick="show_private();">_assemble_and_send_request</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      This method should be over-ridden on each sub-class.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fedex.base_service-pysrc.html#FedexBaseService._assemble_and_send_request">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="fedex.base_service.FedexBaseService-class.html#send_request" class="summary-sig-name">send_request</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">send_function</span>=<span class="summary-sig-default">None</span>)</span><br />
+      Sends the assembled request on the child object.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fedex.base_service-pysrc.html#FedexBaseService.send_request">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="fedex.base_service.FedexBaseService-class.html#_check_response_for_request_warnings" class="summary-sig-name" onclick="show_private();">_check_response_for_request_warnings</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      Override this in a service module to check for errors that are 
+      specific to that module.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fedex.base_service-pysrc.html#FedexBaseService._check_response_for_request_warnings">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code>object</code></b>:
+      <code>__delattr__</code>,
+      <code>__format__</code>,
+      <code>__getattribute__</code>,
+      <code>__hash__</code>,
+      <code>__new__</code>,
+      <code>__reduce__</code>,
+      <code>__reduce_ex__</code>,
+      <code>__repr__</code>,
+      <code>__setattr__</code>,
+      <code>__sizeof__</code>,
+      <code>__str__</code>,
+      <code>__subclasshook__</code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== INSTANCE VARIABLES ==================== -->
+<a name="section-InstanceVariables"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Instance Variables</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-InstanceVariables"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="logger"></a><span class="summary-name">logger</span><br />
+      Python logger instance with name 'fedex'.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="config_obj"></a><span class="summary-name">config_obj</span><br />
+      The FedexConfig object to pull auth info from.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="VersionId"></a><span class="summary-name">VersionId</span><br />
+      Holds details on the version numbers of the WSDL.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="WebAuthenticationDetail"></a><span class="summary-name">WebAuthenticationDetail</span><br />
+      WSDL object that holds authentication info.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="ClientDetail"></a><span class="summary-name">ClientDetail</span><br />
+      WSDL object that holds client account details.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="fedex.base_service.FedexBaseService-class.html#response" class="summary-name">response</a><br />
+      The response from Fedex.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="TransactionDetail"></a><span class="summary-name">TransactionDetail</span><br />
+      Holds customer-specified transaction IDs.
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="fedex.base_service.FedexBaseService-class.html#_version_info" class="summary-name" onclick="show_private();">_version_info</a><br />
+      #ivar: Set in each service class.
+    </td>
+  </tr>
+</table>
+<!-- ==================== PROPERTIES ==================== -->
+<a name="section-Properties"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Properties</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-Properties"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code>object</code></b>:
+      <code>__class__</code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== METHOD DETAILS ==================== -->
+<a name="section-MethodDetails"></a>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Method Details</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-MethodDetails"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+</table>
+<a name="__init__"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">__init__</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">config_obj</span>,
+        <span class="sig-arg">wsdl_name</span>,
+        <span class="sig-arg">*args</span>,
+        <span class="sig-arg">**kwargs</span>)</span>
+    <br /><em class="fname">(Constructor)</em>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="fedex.base_service-pysrc.html#FedexBaseService.__init__">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>This constructor should only be called by children of the class. As is
+  such, only the optional keyword arguments caught by <code>**kwargs</code>
+  will be documented.</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>customer_transaction_id</code></strong> (<code class="link">str</code>) - A user-specified identifier to differentiate this transaction 
+          from others. This value will be returned with the response from 
+          Fedex.</li>
+    </ul></dd>
+    <dt>Overrides:
+        object.__init__
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="__set_web_authentication_detail"></a>
+<div class="private">
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">__set_web_authentication_detail</span>(<span class="sig-arg">self</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="fedex.base_service-pysrc.html#FedexBaseService.__set_web_authentication_detail">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Sets up the WebAuthenticationDetail node. This is required for all 
+  requests.</p>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="_prepare_wsdl_objects"></a>
+<div class="private">
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">_prepare_wsdl_objects</span>(<span class="sig-arg">self</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="fedex.base_service-pysrc.html#FedexBaseService._prepare_wsdl_objects">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>This method should be over-ridden on each sub-class. It instantiates 
+  any of the required WSDL objects so the user can just print their 
+  __str__() methods and see what they need to fill in.</p>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="_check_response_for_request_errors"></a>
+<div class="private">
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">_check_response_for_request_errors</span>(<span class="sig-arg">self</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="fedex.base_service-pysrc.html#FedexBaseService._check_response_for_request_errors">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Override this in each service module to check for errors that are 
+  specific to that module. For example, invalid tracking numbers in a 
+  Tracking request.</p>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="create_wsdl_object_of_type"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">create_wsdl_object_of_type</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">type_name</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="fedex.base_service-pysrc.html#FedexBaseService.create_wsdl_object_of_type">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Creates and returns a WSDL object of the specified type. :param 
+  type_name: specifies the object's type name from WSDL.</p>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="_assemble_and_send_request"></a>
+<div class="private">
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">_assemble_and_send_request</span>(<span class="sig-arg">self</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="fedex.base_service-pysrc.html#FedexBaseService._assemble_and_send_request">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>This method should be over-ridden on each sub-class. It assembles all 
+  required objects into the specific request object and calls send_request.
+  Objects that are not set will be pruned before sending via 
+  GeneralSudsPlugin marshalled function.</p>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="send_request"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">send_request</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">send_function</span>=<span class="sig-default">None</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="fedex.base_service-pysrc.html#FedexBaseService.send_request">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Sends the assembled request on the child object.</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>send_function</code></strong> (function reference) - A function reference (passed without the parenthesis) to a 
+          function that will send the request. This allows for overriding 
+          the default function in cases such as validation requests.</li>
+    </ul></dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="_check_response_for_request_warnings"></a>
+<div class="private">
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">_check_response_for_request_warnings</span>(<span class="sig-arg">self</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="fedex.base_service-pysrc.html#FedexBaseService._check_response_for_request_warnings">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Override this in a service module to check for errors that are 
+  specific to that module. For example, changing state/province based on 
+  postal code in a Rate Service request.</p>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<br />
+<!-- ==================== INSTANCE VARIABLE DETAILS ==================== -->
+<a name="section-InstanceVariableDetails"></a>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Instance Variable Details</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-InstanceVariableDetails"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+</table>
+<a name="response"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">response</h3>
+  The response from Fedex. You will want to pick what you want out here 
+  here. This object does have a __str__() method, you'll want to print or 
+  log it to see what possible values you can pull.
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="_version_info"></a>
+<div class="private">
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">_version_info</h3>
+  <p>#ivar: Set in each service class. Holds version info for the VersionId
+  SOAP object.</p>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="fedex-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Fri Jan 29 14:18:05 2016
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

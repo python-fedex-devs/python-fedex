@@ -1,0 +1,440 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>fedex.services.track_service.FedexTrackRequest</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="fedex-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="fedex-module.html">Package&nbsp;fedex</a> ::
+        <a href="fedex.services-module.html">Package&nbsp;services</a> ::
+        <a href="fedex.services.track_service-module.html">Module&nbsp;track_service</a> ::
+        Class&nbsp;FedexTrackRequest
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="fedex.services.track_service.FedexTrackRequest-class.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- ==================== CLASS DESCRIPTION ==================== -->
+<h1 class="epydoc">Class FedexTrackRequest</h1><p class="nomargin-top"><span class="codelink"><a href="fedex.services.track_service-pysrc.html#FedexTrackRequest">source&nbsp;code</a></span></p>
+<pre class="base-tree">
+                   object --+    
+                            |    
+<a href="fedex.base_service.FedexBaseService-class.html">base_service.FedexBaseService</a> --+
+                                |
+                               <strong class="uidshort">FedexTrackRequest</strong>
+</pre>
+
+<hr />
+<p>This class allows you to track shipments by providing a tracking 
+  number or other identifying features. By default, you can simply pass a 
+  tracking number to the constructor. If you would like to query shipments 
+  based on something other than tracking number, you will want to read the 
+  documentation for the <a 
+  href="fedex.services.track_service.FedexTrackRequest-class.html#__init__"
+  class="link">__init__</a> method. Particularly, the tracking_value and 
+  package_identifier arguments.</p>
+
+<!-- ==================== INSTANCE METHODS ==================== -->
+<a name="section-InstanceMethods"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Instance Methods</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-InstanceMethods"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="fedex.services.track_service.FedexTrackRequest-class.html#__init__" class="summary-sig-name">__init__</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">config_obj</span>,
+        <span class="summary-sig-arg">*args</span>,
+        <span class="summary-sig-arg">**kwargs</span>)</span><br />
+      Sends a shipment tracking request.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fedex.services.track_service-pysrc.html#FedexTrackRequest.__init__">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="fedex.services.track_service.FedexTrackRequest-class.html#_prepare_wsdl_objects" class="summary-sig-name" onclick="show_private();">_prepare_wsdl_objects</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      This sets the package identifier information.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fedex.services.track_service-pysrc.html#FedexTrackRequest._prepare_wsdl_objects">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="fedex.services.track_service.FedexTrackRequest-class.html#_check_response_for_request_errors" class="summary-sig-name" onclick="show_private();">_check_response_for_request_errors</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      Checks the response to see if there were any errors specific to this 
+      WSDL.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fedex.services.track_service-pysrc.html#FedexTrackRequest._check_response_for_request_errors">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="fedex.services.track_service.FedexTrackRequest-class.html#_assemble_and_send_request" class="summary-sig-name" onclick="show_private();">_assemble_and_send_request</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      Fires off the Fedex request.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fedex.services.track_service-pysrc.html#FedexTrackRequest._assemble_and_send_request">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="fedex.base_service.FedexBaseService-class.html">base_service.FedexBaseService</a></code></b>:
+      <code><a href="fedex.base_service.FedexBaseService-class.html#create_wsdl_object_of_type">create_wsdl_object_of_type</a></code>,
+      <code><a href="fedex.base_service.FedexBaseService-class.html#send_request">send_request</a></code>
+      </p>
+    <div class="private">    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="fedex.base_service.FedexBaseService-class.html">base_service.FedexBaseService</a></code></b> (private):
+      <code><a href="fedex.base_service.FedexBaseService-class.html#_check_response_for_request_warnings" onclick="show_private();">_check_response_for_request_warnings</a></code>
+      </p></div>
+    <p class="indent-wrapped-lines"><b>Inherited from <code>object</code></b>:
+      <code>__delattr__</code>,
+      <code>__format__</code>,
+      <code>__getattribute__</code>,
+      <code>__hash__</code>,
+      <code>__new__</code>,
+      <code>__reduce__</code>,
+      <code>__reduce_ex__</code>,
+      <code>__repr__</code>,
+      <code>__setattr__</code>,
+      <code>__sizeof__</code>,
+      <code>__str__</code>,
+      <code>__subclasshook__</code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== INSTANCE VARIABLES ==================== -->
+<a name="section-InstanceVariables"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Instance Variables</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-InstanceVariables"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="SelectionDetails"></a><span class="summary-name">SelectionDetails</span><br />
+      Holds the SelectionDetails WSDL object that includes tracking type 
+      and value.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="ProcessingOptions"></a><span class="summary-name">ProcessingOptions</span><br />
+      Holds the TrackRequestProcessingOptionType WSDL object that defaults 
+      no None.
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="fedex.base_service.FedexBaseService-class.html">base_service.FedexBaseService</a></code></b>:
+      <code><a href="fedex.base_service.FedexBaseService-class.html#ClientDetail">ClientDetail</a></code>,
+      <code><a href="fedex.base_service.FedexBaseService-class.html#TransactionDetail">TransactionDetail</a></code>,
+      <code><a href="fedex.base_service.FedexBaseService-class.html#VersionId">VersionId</a></code>,
+      <code><a href="fedex.base_service.FedexBaseService-class.html#WebAuthenticationDetail">WebAuthenticationDetail</a></code>,
+      <code><a href="fedex.base_service.FedexBaseService-class.html#config_obj">config_obj</a></code>,
+      <code><a href="fedex.base_service.FedexBaseService-class.html#logger">logger</a></code>,
+      <code><a href="fedex.base_service.FedexBaseService-class.html#response">response</a></code>
+      </p>
+    <div class="private">    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="fedex.base_service.FedexBaseService-class.html">base_service.FedexBaseService</a></code></b> (private):
+      <code><a href="fedex.base_service.FedexBaseService-class.html#_version_info" onclick="show_private();">_version_info</a></code>
+      </p></div>
+    </td>
+  </tr>
+</table>
+<!-- ==================== PROPERTIES ==================== -->
+<a name="section-Properties"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Properties</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-Properties"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code>object</code></b>:
+      <code>__class__</code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== METHOD DETAILS ==================== -->
+<a name="section-MethodDetails"></a>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Method Details</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-MethodDetails"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+</table>
+<a name="__init__"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">__init__</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">config_obj</span>,
+        <span class="sig-arg">*args</span>,
+        <span class="sig-arg">**kwargs</span>)</span>
+    <br /><em class="fname">(Constructor)</em>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="fedex.services.track_service-pysrc.html#FedexTrackRequest.__init__">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Sends a shipment tracking request. The optional keyword args detailed 
+  on <a href="fedex.base_service.FedexBaseService-class.html" 
+  class="link">FedexBaseService</a> apply here as well.</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>config_obj</code></strong> (<a href="fedex.config.FedexConfig-class.html" 
+          class="link">FedexConfig</a>) - A valid FedexConfig object.</li>
+    </ul></dd>
+    <dt>Overrides:
+        object.__init__
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="_prepare_wsdl_objects"></a>
+<div class="private">
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">_prepare_wsdl_objects</span>(<span class="sig-arg">self</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="fedex.services.track_service-pysrc.html#FedexTrackRequest._prepare_wsdl_objects">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>This sets the package identifier information. This may be a tracking 
+  number or a few different things as per the Fedex spec.</p>
+  <dl class="fields">
+    <dt>Overrides:
+        <a href="fedex.base_service.FedexBaseService-class.html#_prepare_wsdl_objects" onclick="show_private();">base_service.FedexBaseService._prepare_wsdl_objects</a>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="_check_response_for_request_errors"></a>
+<div class="private">
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">_check_response_for_request_errors</span>(<span class="sig-arg">self</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="fedex.services.track_service-pysrc.html#FedexTrackRequest._check_response_for_request_errors">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Checks the response to see if there were any errors specific to this 
+  WSDL.</p>
+  <dl class="fields">
+    <dt>Overrides:
+        <a href="fedex.base_service.FedexBaseService-class.html#_check_response_for_request_errors" onclick="show_private();">base_service.FedexBaseService._check_response_for_request_errors</a>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="_assemble_and_send_request"></a>
+<div class="private">
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">_assemble_and_send_request</span>(<span class="sig-arg">self</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="fedex.services.track_service-pysrc.html#FedexTrackRequest._assemble_and_send_request">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Fires off the Fedex request.</p>
+  <dl class="fields">
+    <dt>Overrides:
+        <a href="fedex.base_service.FedexBaseService-class.html#_assemble_and_send_request" onclick="show_private();">base_service.FedexBaseService._assemble_and_send_request</a>
+    </dt>
+  </dl>
+<div class="fields">      <p><strong>Warning:</strong>
+        NEVER CALL THIS METHOD DIRECTLY. CALL send_request(), WHICH RESIDES
+        ON FedexBaseService AND IS INHERITED.
+      </p>
+</div></td></tr></table>
+</div>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="fedex-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Fri Jan 29 14:18:05 2016
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

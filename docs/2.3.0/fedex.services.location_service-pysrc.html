@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>fedex.services.location_service</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="fedex-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="fedex-module.html">Package&nbsp;fedex</a> ::
+        <a href="fedex.services-module.html">Package&nbsp;services</a> ::
+        Module&nbsp;location_service
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="fedex.services.location_service-pysrc.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<h1 class="epydoc">Source Code for <a href="fedex.services.location_service-module.html">Module fedex.services.location_service</a></h1>
+<pre class="py-src">
+<a name="L1"></a><tt class="py-lineno"> 1</tt>  <tt class="py-line"><tt class="py-docstring">"""</tt> </tt>
+<a name="L2"></a><tt class="py-lineno"> 2</tt>  <tt class="py-line"><tt class="py-docstring">Location Service Module</tt> </tt>
+<a name="L3"></a><tt class="py-lineno"> 3</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L4"></a><tt class="py-lineno"> 4</tt>  <tt class="py-line"><tt class="py-docstring">This package contains the shipping methods defined by Fedex's </tt> </tt>
+<a name="L5"></a><tt class="py-lineno"> 5</tt>  <tt class="py-line"><tt class="py-docstring">LocationService WSDL file. Each is encapsulated in a class for</tt> </tt>
+<a name="L6"></a><tt class="py-lineno"> 6</tt>  <tt class="py-line"><tt class="py-docstring">easy access. For more details on each, refer to the respective class's </tt> </tt>
+<a name="L7"></a><tt class="py-lineno"> 7</tt>  <tt class="py-line"><tt class="py-docstring">documentation.</tt> </tt>
+<a name="L8"></a><tt class="py-lineno"> 8</tt>  <tt class="py-line"><tt class="py-docstring">"""</tt> </tt>
+<a name="L9"></a><tt class="py-lineno"> 9</tt>  <tt class="py-line"> </tt>
+<a name="L10"></a><tt class="py-lineno">10</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-op">.</tt><tt class="py-op">.</tt><tt id="link-0" class="py-name" targets="Module fedex.base_service=fedex.base_service-module.html"><a title="fedex.base_service" class="py-name" href="#" onclick="return doclink('link-0', 'base_service', 'link-0');">base_service</a></tt> <tt class="py-keyword">import</tt> <tt id="link-1" class="py-name" targets="Class fedex.base_service.FedexBaseService=fedex.base_service.FedexBaseService-class.html"><a title="fedex.base_service.FedexBaseService" class="py-name" href="#" onclick="return doclink('link-1', 'FedexBaseService', 'link-1');">FedexBaseService</a></tt> </tt>
+<a name="L11"></a><tt class="py-lineno">11</tt>  <tt class="py-line"> </tt>
+<a name="L12"></a><tt class="py-lineno">12</tt>  <tt class="py-line"> </tt>
+<a name="FedexSearchLocationRequest"></a><div id="FedexSearchLocationRequest-def"><a name="L13"></a><tt class="py-lineno">13</tt> <a class="py-toggle" href="#" id="FedexSearchLocationRequest-toggle" onclick="return toggle('FedexSearchLocationRequest');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="fedex.services.location_service.FedexSearchLocationRequest-class.html">FedexSearchLocationRequest</a><tt class="py-op">(</tt><tt class="py-base-class">FedexBaseService</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="FedexSearchLocationRequest-collapsed" style="display:none;" pad="++" indent="++++"></div><div id="FedexSearchLocationRequest-expanded"><a name="L14"></a><tt class="py-lineno">14</tt>  <tt class="py-line">    <tt class="py-docstring">"""</tt> </tt>
+<a name="L15"></a><tt class="py-lineno">15</tt>  <tt class="py-line"><tt class="py-docstring">    This class allows you to figure out a FedEx location closest</tt> </tt>
+<a name="L16"></a><tt class="py-lineno">16</tt>  <tt class="py-line"><tt class="py-docstring">    to a specified location criteria, based on location type.</tt> </tt>
+<a name="L17"></a><tt class="py-lineno">17</tt>  <tt class="py-line"><tt class="py-docstring">    The response includes location details like operating times,</tt> </tt>
+<a name="L18"></a><tt class="py-lineno">18</tt>  <tt class="py-line"><tt class="py-docstring">    directions and a map link and more.</tt> </tt>
+<a name="L19"></a><tt class="py-lineno">19</tt>  <tt class="py-line"><tt class="py-docstring">    """</tt> </tt>
+<a name="L20"></a><tt class="py-lineno">20</tt>  <tt class="py-line"> </tt>
+<a name="FedexSearchLocationRequest.__init__"></a><div id="FedexSearchLocationRequest.__init__-def"><a name="L21"></a><tt class="py-lineno">21</tt> <a class="py-toggle" href="#" id="FedexSearchLocationRequest.__init__-toggle" onclick="return toggle('FedexSearchLocationRequest.__init__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="fedex.services.location_service.FedexSearchLocationRequest-class.html#__init__">__init__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">config_obj</tt><tt class="py-op">,</tt> <tt class="py-op">*</tt><tt class="py-param">args</tt><tt class="py-op">,</tt> <tt class="py-op">**</tt><tt class="py-param">kwargs</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="FedexSearchLocationRequest.__init__-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="FedexSearchLocationRequest.__init__-expanded"><a name="L22"></a><tt class="py-lineno">22</tt>  <tt class="py-line">        <tt class="py-docstring">"""</tt> </tt>
+<a name="L23"></a><tt class="py-lineno">23</tt>  <tt class="py-line"><tt class="py-docstring">        @type config_obj: L{FedexConfig}</tt> </tt>
+<a name="L24"></a><tt class="py-lineno">24</tt>  <tt class="py-line"><tt class="py-docstring">        @param config_obj: A valid FedexConfig object.        </tt> </tt>
+<a name="L25"></a><tt class="py-lineno">25</tt>  <tt class="py-line"><tt class="py-docstring">        """</tt> </tt>
+<a name="L26"></a><tt class="py-lineno">26</tt>  <tt class="py-line"> </tt>
+<a name="L27"></a><tt class="py-lineno">27</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_config_obj</tt> <tt class="py-op">=</tt> <tt class="py-name">config_obj</tt> </tt>
+<a name="L28"></a><tt class="py-lineno">28</tt>  <tt class="py-line">        <tt class="py-comment"># Holds version info for the VersionId SOAP object.</tt> </tt>
+<a name="L29"></a><tt class="py-lineno">29</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_version_info</tt> <tt class="py-op">=</tt> <tt class="py-op">{</tt> </tt>
+<a name="L30"></a><tt class="py-lineno">30</tt>  <tt class="py-line">            <tt class="py-string">'service_id'</tt><tt class="py-op">:</tt> <tt class="py-string">'locs'</tt><tt class="py-op">,</tt> </tt>
+<a name="L31"></a><tt class="py-lineno">31</tt>  <tt class="py-line">            <tt class="py-string">'major'</tt><tt class="py-op">:</tt> <tt class="py-string">'3'</tt><tt class="py-op">,</tt> </tt>
+<a name="L32"></a><tt class="py-lineno">32</tt>  <tt class="py-line">            <tt class="py-string">'intermediate'</tt><tt class="py-op">:</tt> <tt class="py-string">'0'</tt><tt class="py-op">,</tt> </tt>
+<a name="L33"></a><tt class="py-lineno">33</tt>  <tt class="py-line">            <tt class="py-string">'minor'</tt><tt class="py-op">:</tt> <tt class="py-string">'0'</tt> </tt>
+<a name="L34"></a><tt class="py-lineno">34</tt>  <tt class="py-line">        <tt class="py-op">}</tt> </tt>
+<a name="L35"></a><tt class="py-lineno">35</tt>  <tt class="py-line"> </tt>
+<a name="L36"></a><tt class="py-lineno">36</tt>  <tt class="py-line">        <tt class="py-comment"># Set default objects.</tt> </tt>
+<a name="L37"></a><tt class="py-lineno">37</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">Address</tt> <tt class="py-op">=</tt> <tt class="py-name">None</tt> </tt>
+<a name="L38"></a><tt class="py-lineno">38</tt>  <tt class="py-line">        <tt class="py-string">"""@ivar: Holds the Address WSDL object."""</tt> </tt>
+<a name="L39"></a><tt class="py-lineno">39</tt>  <tt class="py-line"> </tt>
+<a name="L40"></a><tt class="py-lineno">40</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">PhoneNumber</tt> <tt class="py-op">=</tt> <tt class="py-name">None</tt> </tt>
+<a name="L41"></a><tt class="py-lineno">41</tt>  <tt class="py-line">        <tt class="py-string">"""@ivar: Holds the PhoneNumber string object."""</tt> </tt>
+<a name="L42"></a><tt class="py-lineno">42</tt>  <tt class="py-line"> </tt>
+<a name="L43"></a><tt class="py-lineno">43</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">MultipleMatchesAction</tt> <tt class="py-op">=</tt> <tt class="py-name">None</tt> </tt>
+<a name="L44"></a><tt class="py-lineno">44</tt>  <tt class="py-line">        <tt class="py-string">"""@ivar: Holds the MultipleMatchesActionType WSDL object."""</tt> </tt>
+<a name="L45"></a><tt class="py-lineno">45</tt>  <tt class="py-line"> </tt>
+<a name="L46"></a><tt class="py-lineno">46</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">Constraints</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-op">]</tt> </tt>
+<a name="L47"></a><tt class="py-lineno">47</tt>  <tt class="py-line">        <tt class="py-string">"""@ivar: Holds a list of SearchLocationConstraints WSDL objects."""</tt> </tt>
+<a name="L48"></a><tt class="py-lineno">48</tt>  <tt class="py-line"> </tt>
+<a name="L49"></a><tt class="py-lineno">49</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">LocationsSearchCriterion</tt> <tt class="py-op">=</tt> <tt class="py-name">None</tt> </tt>
+<a name="L50"></a><tt class="py-lineno">50</tt>  <tt class="py-line">        <tt class="py-string">"""@ivar: Holds the LocationsSearchCriteriaType WSDL object."""</tt> </tt>
+<a name="L51"></a><tt class="py-lineno">51</tt>  <tt class="py-line"> </tt>
+<a name="L52"></a><tt class="py-lineno">52</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">SortDetail</tt> <tt class="py-op">=</tt> <tt class="py-name">None</tt> </tt>
+<a name="L53"></a><tt class="py-lineno">53</tt>  <tt class="py-line">        <tt class="py-string">"""@ivar: Holds the LocationSortDetail WSDL object."""</tt> </tt>
+<a name="L54"></a><tt class="py-lineno">54</tt>  <tt class="py-line"> </tt>
+<a name="L55"></a><tt class="py-lineno">55</tt>  <tt class="py-line">        <tt class="py-name">super</tt><tt class="py-op">(</tt><tt id="link-2" class="py-name" targets="Class fedex.services.location_service.FedexSearchLocationRequest=fedex.services.location_service.FedexSearchLocationRequest-class.html"><a title="fedex.services.location_service.FedexSearchLocationRequest" class="py-name" href="#" onclick="return doclink('link-2', 'FedexSearchLocationRequest', 'link-2');">FedexSearchLocationRequest</a></tt><tt class="py-op">,</tt> <tt class="py-name">self</tt><tt class="py-op">)</tt><tt class="py-op">.</tt><tt id="link-3" class="py-name" targets="Method fedex.base_service.FedexBaseService.__init__()=fedex.base_service.FedexBaseService-class.html#__init__,Method fedex.base_service.FedexBaseServiceException.__init__()=fedex.base_service.FedexBaseServiceException-class.html#__init__,Method fedex.base_service.GeneralSudsPlugin.__init__()=fedex.base_service.GeneralSudsPlugin-class.html#__init__,Method fedex.base_service.SchemaValidationError.__init__()=fedex.base_service.SchemaValidationError-class.html#__init__,Method fedex.config.FedexConfig.__init__()=fedex.config.FedexConfig-class.html#__init__,Method fedex.printers.unix.DirectDevicePrinter.__init__()=fedex.printers.unix.DirectDevicePrinter-class.html#__init__,Method fedex.services.address_validation_service.FedexAddressValidationRequest.__init__()=fedex.services.address_validation_service.FedexAddressValidationRequest-class.html#__init__,Method fedex.services.availability_commitment_service.FedexAvailabilityCommitmentRequest.__init__()=fedex.services.availability_commitment_service.FedexAvailabilityCommitmentRequest-class.html#__init__,Method fedex.services.country_service.FedexValidatePostalRequest.__init__()=fedex.services.country_service.FedexValidatePostalRequest-class.html#__init__,Method fedex.services.location_service.FedexSearchLocationRequest.__init__()=fedex.services.location_service.FedexSearchLocationRequest-class.html#__init__,Method fedex.services.package_movement.PostalCodeInquiryRequest.__init__()=fedex.services.package_movement.PostalCodeInquiryRequest-class.html#__init__,Method fedex.services.rate_service.FedexRateServiceRequest.__init__()=fedex.services.rate_service.FedexRateServiceRequest-class.html#__init__,Method fedex.services.ship_service.FedexDeleteShipmentRequest.__init__()=fedex.services.ship_service.FedexDeleteShipmentRequest-class.html#__init__,Method fedex.services.ship_service.FedexProcessShipmentRequest.__init__()=fedex.services.ship_service.FedexProcessShipmentRequest-class.html#__init__,Method fedex.services.track_service.FedexTrackRequest.__init__()=fedex.services.track_service.FedexTrackRequest-class.html#__init__"><a title="fedex.base_service.FedexBaseService.__init__
+fedex.base_service.FedexBaseServiceException.__init__
+fedex.base_service.GeneralSudsPlugin.__init__
+fedex.base_service.SchemaValidationError.__init__
+fedex.config.FedexConfig.__init__
+fedex.printers.unix.DirectDevicePrinter.__init__
+fedex.services.address_validation_service.FedexAddressValidationRequest.__init__
+fedex.services.availability_commitment_service.FedexAvailabilityCommitmentRequest.__init__
+fedex.services.country_service.FedexValidatePostalRequest.__init__
+fedex.services.location_service.FedexSearchLocationRequest.__init__
+fedex.services.package_movement.PostalCodeInquiryRequest.__init__
+fedex.services.rate_service.FedexRateServiceRequest.__init__
+fedex.services.ship_service.FedexDeleteShipmentRequest.__init__
+fedex.services.ship_service.FedexProcessShipmentRequest.__init__
+fedex.services.track_service.FedexTrackRequest.__init__" class="py-name" href="#" onclick="return doclink('link-3', '__init__', 'link-3');">__init__</a></tt><tt class="py-op">(</tt> </tt>
+<a name="L56"></a><tt class="py-lineno">56</tt>  <tt class="py-line">                <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_config_obj</tt><tt class="py-op">,</tt> <tt class="py-string">'LocationsService_v3.wsdl'</tt><tt class="py-op">,</tt> <tt class="py-op">*</tt><tt class="py-name">args</tt><tt class="py-op">,</tt> <tt class="py-op">**</tt><tt class="py-name">kwargs</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L57"></a><tt class="py-lineno">57</tt>  <tt class="py-line"> </tt>
+<a name="FedexSearchLocationRequest._prepare_wsdl_objects"></a><div id="FedexSearchLocationRequest._prepare_wsdl_objects-def"><a name="L58"></a><tt class="py-lineno">58</tt> <a class="py-toggle" href="#" id="FedexSearchLocationRequest._prepare_wsdl_objects-toggle" onclick="return toggle('FedexSearchLocationRequest._prepare_wsdl_objects');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="fedex.services.location_service.FedexSearchLocationRequest-class.html#_prepare_wsdl_objects">_prepare_wsdl_objects</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="FedexSearchLocationRequest._prepare_wsdl_objects-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="FedexSearchLocationRequest._prepare_wsdl_objects-expanded"><a name="L59"></a><tt class="py-lineno">59</tt>  <tt class="py-line">        <tt class="py-docstring">"""</tt> </tt>
+<a name="L60"></a><tt class="py-lineno">60</tt>  <tt class="py-line"><tt class="py-docstring">        Create the data structure and get it ready for the WSDL request.</tt> </tt>
+<a name="L61"></a><tt class="py-lineno">61</tt>  <tt class="py-line"><tt class="py-docstring">        """</tt> </tt>
+<a name="L62"></a><tt class="py-lineno">62</tt>  <tt class="py-line"> </tt>
+<a name="L63"></a><tt class="py-lineno">63</tt>  <tt class="py-line">        <tt class="py-comment"># Service defaults for objects that are required.</tt> </tt>
+<a name="L64"></a><tt class="py-lineno">64</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">MultipleMatchesAction</tt> <tt class="py-op">=</tt> <tt class="py-string">'RETURN_ALL'</tt> </tt>
+<a name="L65"></a><tt class="py-lineno">65</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">Constraints</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-4" class="py-name" targets="Method fedex.base_service.FedexBaseService.create_wsdl_object_of_type()=fedex.base_service.FedexBaseService-class.html#create_wsdl_object_of_type"><a title="fedex.base_service.FedexBaseService.create_wsdl_object_of_type" class="py-name" href="#" onclick="return doclink('link-4', 'create_wsdl_object_of_type', 'link-4');">create_wsdl_object_of_type</a></tt><tt class="py-op">(</tt><tt class="py-string">'SearchLocationConstraints'</tt><tt class="py-op">)</tt> </tt>
+<a name="L66"></a><tt class="py-lineno">66</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">Address</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-5" class="py-name"><a title="fedex.base_service.FedexBaseService.create_wsdl_object_of_type" class="py-name" href="#" onclick="return doclink('link-5', 'create_wsdl_object_of_type', 'link-4');">create_wsdl_object_of_type</a></tt><tt class="py-op">(</tt><tt class="py-string">'Address'</tt><tt class="py-op">)</tt> </tt>
+<a name="L67"></a><tt class="py-lineno">67</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">LocationsSearchCriterion</tt> <tt class="py-op">=</tt> <tt class="py-string">'ADDRESS'</tt> </tt>
+<a name="L68"></a><tt class="py-lineno">68</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">SortDetail</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-6" class="py-name"><a title="fedex.base_service.FedexBaseService.create_wsdl_object_of_type" class="py-name" href="#" onclick="return doclink('link-6', 'create_wsdl_object_of_type', 'link-4');">create_wsdl_object_of_type</a></tt><tt class="py-op">(</tt><tt class="py-string">'LocationSortDetail'</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L69"></a><tt class="py-lineno">69</tt>  <tt class="py-line"> </tt>
+<a name="FedexSearchLocationRequest._assemble_and_send_request"></a><div id="FedexSearchLocationRequest._assemble_and_send_request-def"><a name="L70"></a><tt class="py-lineno">70</tt> <a class="py-toggle" href="#" id="FedexSearchLocationRequest._assemble_and_send_request-toggle" onclick="return toggle('FedexSearchLocationRequest._assemble_and_send_request');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="fedex.services.location_service.FedexSearchLocationRequest-class.html#_assemble_and_send_request">_assemble_and_send_request</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="FedexSearchLocationRequest._assemble_and_send_request-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="FedexSearchLocationRequest._assemble_and_send_request-expanded"><a name="L71"></a><tt class="py-lineno">71</tt>  <tt class="py-line">        <tt class="py-docstring">"""</tt> </tt>
+<a name="L72"></a><tt class="py-lineno">72</tt>  <tt class="py-line"><tt class="py-docstring">        Fires off the Fedex request.</tt> </tt>
+<a name="L73"></a><tt class="py-lineno">73</tt>  <tt class="py-line"><tt class="py-docstring">        </tt> </tt>
+<a name="L74"></a><tt class="py-lineno">74</tt>  <tt class="py-line"><tt class="py-docstring">        @warning: NEVER CALL THIS METHOD DIRECTLY. CALL send_request(), </tt> </tt>
+<a name="L75"></a><tt class="py-lineno">75</tt>  <tt class="py-line"><tt class="py-docstring">            WHICH RESIDES ON FedexBaseService AND IS INHERITED.</tt> </tt>
+<a name="L76"></a><tt class="py-lineno">76</tt>  <tt class="py-line"><tt class="py-docstring">        """</tt> </tt>
+<a name="L77"></a><tt class="py-lineno">77</tt>  <tt class="py-line"> </tt>
+<a name="L78"></a><tt class="py-lineno">78</tt>  <tt class="py-line">        <tt class="py-comment"># We get an exception like this when specifying an IntegratorId:</tt> </tt>
+<a name="L79"></a><tt class="py-lineno">79</tt>  <tt class="py-line">        <tt class="py-comment"># suds.TypeNotFound: Type not found: 'IntegratorId'</tt> </tt>
+<a name="L80"></a><tt class="py-lineno">80</tt>  <tt class="py-line">        <tt class="py-comment"># Setting it to None does not seem to appease it.</tt> </tt>
+<a name="L81"></a><tt class="py-lineno">81</tt>  <tt class="py-line">        <tt class="py-keyword">del</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">ClientDetail</tt><tt class="py-op">.</tt><tt class="py-name">IntegratorId</tt> </tt>
+<a name="L82"></a><tt class="py-lineno">82</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">logger</tt><tt class="py-op">.</tt><tt class="py-name">debug</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">WebAuthenticationDetail</tt><tt class="py-op">)</tt> </tt>
+<a name="L83"></a><tt class="py-lineno">83</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">logger</tt><tt class="py-op">.</tt><tt class="py-name">debug</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">ClientDetail</tt><tt class="py-op">)</tt> </tt>
+<a name="L84"></a><tt class="py-lineno">84</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">logger</tt><tt class="py-op">.</tt><tt class="py-name">debug</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">TransactionDetail</tt><tt class="py-op">)</tt> </tt>
+<a name="L85"></a><tt class="py-lineno">85</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">logger</tt><tt class="py-op">.</tt><tt class="py-name">debug</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">VersionId</tt><tt class="py-op">)</tt> </tt>
+<a name="L86"></a><tt class="py-lineno">86</tt>  <tt class="py-line">        <tt class="py-comment"># Fire off the query.</tt> </tt>
+<a name="L87"></a><tt class="py-lineno">87</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">client</tt><tt class="py-op">.</tt><tt class="py-name">service</tt><tt class="py-op">.</tt><tt class="py-name">searchLocations</tt><tt class="py-op">(</tt> </tt>
+<a name="L88"></a><tt class="py-lineno">88</tt>  <tt class="py-line">                <tt class="py-name">WebAuthenticationDetail</tt><tt class="py-op">=</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">WebAuthenticationDetail</tt><tt class="py-op">,</tt> </tt>
+<a name="L89"></a><tt class="py-lineno">89</tt>  <tt class="py-line">                <tt class="py-name">ClientDetail</tt><tt class="py-op">=</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">ClientDetail</tt><tt class="py-op">,</tt> </tt>
+<a name="L90"></a><tt class="py-lineno">90</tt>  <tt class="py-line">                <tt class="py-name">TransactionDetail</tt><tt class="py-op">=</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">TransactionDetail</tt><tt class="py-op">,</tt> </tt>
+<a name="L91"></a><tt class="py-lineno">91</tt>  <tt class="py-line">                <tt class="py-name">Version</tt><tt class="py-op">=</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">VersionId</tt><tt class="py-op">,</tt> </tt>
+<a name="L92"></a><tt class="py-lineno">92</tt>  <tt class="py-line">                <tt class="py-name">LocationsSearchCriterion</tt><tt class="py-op">=</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">LocationsSearchCriterion</tt><tt class="py-op">,</tt> </tt>
+<a name="L93"></a><tt class="py-lineno">93</tt>  <tt class="py-line">                <tt class="py-name">PhoneNumber</tt><tt class="py-op">=</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">PhoneNumber</tt><tt class="py-op">,</tt> </tt>
+<a name="L94"></a><tt class="py-lineno">94</tt>  <tt class="py-line">                <tt class="py-name">MultipleMatchesAction</tt><tt class="py-op">=</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">MultipleMatchesAction</tt><tt class="py-op">,</tt> </tt>
+<a name="L95"></a><tt class="py-lineno">95</tt>  <tt class="py-line">                <tt class="py-name">Constraints</tt><tt class="py-op">=</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">Constraints</tt><tt class="py-op">,</tt> </tt>
+<a name="L96"></a><tt class="py-lineno">96</tt>  <tt class="py-line">                <tt class="py-name">Address</tt><tt class="py-op">=</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">Address</tt><tt class="py-op">,</tt> </tt>
+<a name="L97"></a><tt class="py-lineno">97</tt>  <tt class="py-line">                <tt class="py-name">SortDetail</tt><tt class="py-op">=</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">SortDetail</tt><tt class="py-op">)</tt> </tt>
+</div></div><a name="L98"></a><tt class="py-lineno">98</tt>  <tt class="py-line"> </tt><script type="text/javascript">
+<!--
+expandto(location.href);
+// -->
+</script>
+</pre>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="fedex-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Fri Jan 29 14:18:06 2016
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>
