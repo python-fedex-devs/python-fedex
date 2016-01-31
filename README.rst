@@ -65,7 +65,9 @@ Fedex Support and Documentation
 -------------------------------
 
 Fedex Support Email: websupport@fedex.com
+
 Developer Portal: http://www.fedex.com/us/developer/
+
 Updates To Services: https://www.fedex.com/us/developer/web-services/process.html (FedEx Web Services Announcements)
 
 Todos
@@ -78,6 +80,7 @@ Legal
 -----
 
 Copyright (C) 2008-2015 Greg Taylor
+
 Copyright (C) 2015-2016 Python FedEx Developers
 
 This software is licensed under the BSD License.
