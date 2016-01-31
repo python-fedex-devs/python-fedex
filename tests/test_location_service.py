@@ -16,6 +16,7 @@ CONFIG_OBJ = get_fedex_config()
 
 logging.getLogger('suds').setLevel(logging.ERROR)
 
+
 @unittest.skipIf(not CONFIG_OBJ.account_number, "No credentials provided.")
 class SearchLocationServiceTests(unittest.TestCase):
     """
@@ -46,6 +47,7 @@ class SearchLocationServiceTests(unittest.TestCase):
         location_request = FedexSearchLocationRequest(CONFIG_OBJ)
         location_request.Address.PostalCode = '38119'
         location_request.Address.CountryCode = 'US'
+
 
 if __name__ == "__main__":
     logging.basicConfig(stream=sys.stdout, level=logging.INFO)

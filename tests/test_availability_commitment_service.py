@@ -15,6 +15,7 @@ from tests.common import get_fedex_config
 CONFIG_OBJ = get_fedex_config()
 
 logging.getLogger('suds').setLevel(logging.ERROR)
+logging.getLogger('fedex').setLevel(logging.INFO)
 
 
 @unittest.skipIf(not CONFIG_OBJ.account_number, "No credentials provided.")
@@ -32,8 +33,8 @@ class AvailabilityCommitmentServiceTests(unittest.TestCase):
         avc_request.Origin.PostalCode = 'M5V 3A4'
         avc_request.Origin.CountryCode = 'CA'
 
-        avc_request.Origin.PostalCode = '27577'  # 29631
-        avc_request.Origin.CountryCode = 'US'
+        avc_request.Destination.PostalCode = '27577'  # 29631
+        avc_request.Destination.CountryCode = 'US'
 
         avc_request.send_request()
         assert avc_request.response

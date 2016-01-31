@@ -12,6 +12,9 @@ import fedex.config
 import fedex.services.ship_service as service  # Any request object will do.
 import fedex.tools.conversion
 
+logging.getLogger('suds').setLevel(logging.ERROR)
+logging.getLogger('fedex').setLevel(logging.INFO)
+
 
 class FedexToolsTests(unittest.TestCase):
     """
@@ -39,6 +42,7 @@ class FedexToolsTests(unittest.TestCase):
         # JSON string object test
         dict_obj = fedex.tools.conversion.sobject_to_json(obj)
         assert dict_obj, "Expecting a JSON string object."
+
 
 if __name__ == "__main__":
     logging.basicConfig(stream=sys.stdout, level=logging.INFO)
