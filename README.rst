@@ -10,7 +10,11 @@ Python FedEx SOAP API Module
 .. image:: https://requires.io/github/python-fedex-devs/python-fedex/requirements.svg?branch=master
      :target: https://requires.io/github/python-fedex-devs/python-fedex/requirements/?branch=master
      :alt: Requirements Status
-     
+
+.. image:: https://readthedocs.org/projects/python-fedex/badge/?version=latest
+     :target: http://python-fedex.readthedocs.org/en/latest/?badge=latest
+     :alt: Documentation Status
+
 :Author: Greg Taylor
 :Maintainer: Python FedEx Developers
 :License: BSD
@@ -42,7 +46,7 @@ Documentation
 -------------
 
 Refer to the documentation_ for more details on the project. Latest doc builds
-are found in docs_ and doc build scripts in doc_source_.
+are found in docs_ and doc build scripts in doc_source_. Sphinx documentation is in doc_src_.
     
 There are also a lot of useful examples under the examples directory within
 this directory.
@@ -67,7 +71,6 @@ Updates To Services: https://www.fedex.com/us/developer/web-services/process.htm
 Todos
 -----
 
-- Read the docs documentation
 - Increase service specific request validation
 - Remove deprecated services (package movement service)
 
@@ -82,6 +85,8 @@ This software is licensed under the BSD License.
 python-fedex is not authored by, endorsed by, or in any way affiliated with
 FedEx.
 
-.. _documentation: https://pythonhosted.org/fedex/
+.. _documentation: https://readthedocs.org/projects/python-fedex/
+.. _documentation2: https://pythonhosted.org/fedex/
 .. _docs: docs/
 .. _doc_source: doc_source/
+.. _doc_src: doc_src/

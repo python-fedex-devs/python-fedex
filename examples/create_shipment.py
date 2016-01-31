@@ -32,7 +32,8 @@ shipment = FedexProcessShipmentRequest(CONFIG_OBJ, customer_transaction_id=custo
 shipment.RequestedShipment.DropoffType = 'BUSINESS_SERVICE_CENTER'
 
 # See page 355 in WS_ShipService.pdf for a full list. Here are the common ones:
-# STANDARD_OVERNIGHT, PRIORITY_OVERNIGHT, FEDEX_GROUND, FEDEX_EXPRESS_SAVER
+# STANDARD_OVERNIGHT, PRIORITY_OVERNIGHT, FEDEX_GROUND, FEDEX_EXPRESS_SAVER,
+# FEDEX_2_DAY, INTERNATIONAL_PRIORITY, SAME_DAY, INTERNATIONAL_ECONOMY
 shipment.RequestedShipment.ServiceType = 'PRIORITY_OVERNIGHT'
 
 # What kind of package this will be shipped in.
