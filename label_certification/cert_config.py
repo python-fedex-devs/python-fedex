@@ -4,6 +4,7 @@ the values below to your account's TESTING meter number.
 """
 import os
 import sys
+
 # Use the fedex directory included in the downloaded package instead of
 # any globally installed versions.
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
@@ -12,11 +13,11 @@ from fedex.printers.unix import DirectDevicePrinter
 
 # Change these values to match your testing account/meter number.
 CONFIG_OBJ = FedexConfig(
-    key='xxxxxxxxxxxxxxxx',
-    password='xxxxxxxxxxxxxxxxxxxxxxxxx',
-    account_number='#########',
-    meter_number='#########',
-    use_test_server=True)
+        key='xxxxxxxxxxxxxxxx',
+        password='xxxxxxxxxxxxxxxxxxxxxxxxx',
+        account_number='#########',
+        meter_number='#########',
+        use_test_server=True)
 
 # Change this to whoever should be the contact person for shipments.
 SHIPPER_CONTACT_INFO = {
