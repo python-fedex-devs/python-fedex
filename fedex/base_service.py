@@ -16,19 +16,27 @@ from suds.plugin import MessagePlugin
 
 
 class GeneralSudsPlugin(MessagePlugin):
+    """
+    General Suds Plugin: Adds logging request and response functionality
+    and prunes empty WSDL objects before sending.
+    """
+
     def __init__(self, **kwargs):
+        """Initializes the request and response loggers."""
         self.request_logger = logging.getLogger('fedex.request')
         self.response_logger = logging.getLogger('fedex.response')
         self.kwargs = kwargs
 
     def marshalled(self, context):
-        # Removes the WSDL objects that do not have a value before sending.
+        """Removes the WSDL objects that do not have a value before sending."""
         context.envelope = context.envelope.prune()
 
     def sending(self, context):
+        """Logs the sent request."""
         self.request_logger.info("FedEx Request {}".format(context.envelope))
 
     def received(self, context):
+        """Logs the received response."""
         self.response_logger.info("FedEx Response {}".format(context.reply))
 
 
@@ -263,9 +271,9 @@ class FedexBaseService(object):
         on postal code in a Rate Service request.
         """
 
-        if self.response.HighestSeverity == "NOTE":
+        if self.response.HighestSeverity in ("NOTE", "WARNING"):
             for notification in self.response.Notifications:
-                if notification.Severity == "NOTE":
+                if notification.Severity in ("NOTE", "WARNING"):
                     self.logger.warning(FedexFailure(notification.Code,
                                                      notification.Message))
 
@@ -326,6 +334,6 @@ class FedexBaseService(object):
         # This method can be overridden by a method on the child class object.
         self._check_response_for_request_warnings()
 
-        # Debug output.
+        # Debug output. (See Request and Response output)
         self.logger.debug("== FEDEX QUERY RESULT ==")
         self.logger.debug(self.response)

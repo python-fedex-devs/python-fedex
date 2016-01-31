@@ -53,7 +53,7 @@ def basic_sobject_to_dict(obj):
 
 def sobject_to_dict(obj, key_to_lower=False, json_serialize=False):
     """
-    Converts a suds object to a dict.
+    Converts a suds object to a dict. Includes advanced features.
     :param json_serialize: If set, changes date and time types to iso string.
     :param key_to_lower: If set, changes index key name to lower case.
     :param obj: suds object
@@ -83,7 +83,7 @@ def sobject_to_dict(obj, key_to_lower=False, json_serialize=False):
 
 def sobject_to_json(obj, key_to_lower=False):
     """
-    Converts a suds object to json.
+    Converts a suds object to a JSON string.
     :param obj: suds object
     :param key_to_lower: If set, changes index key name to lower case.
     :return: json object
