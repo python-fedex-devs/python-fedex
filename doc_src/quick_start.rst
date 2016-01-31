@@ -1,4 +1,4 @@
-.. _config_object:
+.. _quick_start:
 
 .. include:: global.txt
 

@@ -1,4 +1,4 @@
-.. _exceptions:
+.. _suds_plugin:
 
 .. include:: global.txt
 
