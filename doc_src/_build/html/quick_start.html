@@ -1,0 +1,334 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Quick Start &mdash; python-fedex 2.3.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '2.3.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="python-fedex 2.3.0 documentation" href="index.html" />
+    <link rel="next" title="Implemented Services" href="services.html" />
+    <link rel="prev" title="Installation" href="installation.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="services.html" title="Implemented Services"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="installation.html" title="Installation"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">python-fedex 2.3.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="quick-start">
+<h1>Quick Start<a class="headerlink" href="#quick-start" title="Permalink to this headline">¶</a></h1>
+<p>To get you started, a comprehensive set of examples and tests is included in
+the examples and tests directory respectively. The examples below are
+come from the included unit tests.</p>
+<div class="section" id="initialize-config-object">
+<h2>Initialize Config Object<a class="headerlink" href="#initialize-config-object" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">fedex.config</span> <span class="kn">import</span> <span class="n">FedexConfig</span>
+<span class="n">CONFIG_OBJ</span> <span class="o">=</span> <span class="n">FedexConfig</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="s">&#39;&lt;key&gt;&#39;</span><span class="p">,</span>
+                         <span class="n">password</span><span class="o">=</span><span class="s">&#39;&lt;pass&gt;&#39;</span><span class="p">,</span>
+                         <span class="n">account_number</span><span class="o">=</span><span class="s">&#39;&lt;account_no&gt;&#39;</span><span class="p">,</span>
+                         <span class="n">meter_number</span><span class="o">=</span><span class="s">&#39;&lt;meter_no&gt;&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="create-and-delete-a-shipment">
+<h2>Create and Delete a Shipment<a class="headerlink" href="#create-and-delete-a-shipment" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">shipment</span> <span class="o">=</span> <span class="n">FedexProcessShipmentRequest</span><span class="p">(</span><span class="n">CONFIG_OBJ</span><span class="p">)</span>
+
+<span class="n">shipment</span><span class="o">.</span><span class="n">RequestedShipment</span><span class="o">.</span><span class="n">DropoffType</span> <span class="o">=</span> <span class="s">&#39;REGULAR_PICKUP&#39;</span>
+<span class="n">shipment</span><span class="o">.</span><span class="n">RequestedShipment</span><span class="o">.</span><span class="n">ServiceType</span> <span class="o">=</span> <span class="s">&#39;FEDEX_GROUND&#39;</span>
+<span class="n">shipment</span><span class="o">.</span><span class="n">RequestedShipment</span><span class="o">.</span><span class="n">PackagingType</span> <span class="o">=</span> <span class="s">&#39;YOUR_PACKAGING&#39;</span>
+
+<span class="n">shipment</span><span class="o">.</span><span class="n">RequestedShipment</span><span class="o">.</span><span class="n">Shipper</span><span class="o">.</span><span class="n">Contact</span><span class="o">.</span><span class="n">PersonName</span> <span class="o">=</span> <span class="s">&#39;Sender Name&#39;</span>
+<span class="n">shipment</span><span class="o">.</span><span class="n">RequestedShipment</span><span class="o">.</span><span class="n">Shipper</span><span class="o">.</span><span class="n">Contact</span><span class="o">.</span><span class="n">PhoneNumber</span> <span class="o">=</span> <span class="s">&#39;9012638716&#39;</span>
+
+<span class="n">shipment</span><span class="o">.</span><span class="n">RequestedShipment</span><span class="o">.</span><span class="n">Shipper</span><span class="o">.</span><span class="n">Address</span><span class="o">.</span><span class="n">StreetLines</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;Address Line 1&#39;</span><span class="p">]</span>
+<span class="n">shipment</span><span class="o">.</span><span class="n">RequestedShipment</span><span class="o">.</span><span class="n">Shipper</span><span class="o">.</span><span class="n">Address</span><span class="o">.</span><span class="n">City</span> <span class="o">=</span> <span class="n">convert_to_utf8</span><span class="p">(</span><span class="s">&#39;Herndon&#39;</span><span class="p">)</span>
+<span class="n">shipment</span><span class="o">.</span><span class="n">RequestedShipment</span><span class="o">.</span><span class="n">Shipper</span><span class="o">.</span><span class="n">Address</span><span class="o">.</span><span class="n">StateOrProvinceCode</span> <span class="o">=</span> <span class="s">&#39;VA&#39;</span>
+<span class="n">shipment</span><span class="o">.</span><span class="n">RequestedShipment</span><span class="o">.</span><span class="n">Shipper</span><span class="o">.</span><span class="n">Address</span><span class="o">.</span><span class="n">PostalCode</span> <span class="o">=</span> <span class="s">&#39;20171&#39;</span>
+<span class="n">shipment</span><span class="o">.</span><span class="n">RequestedShipment</span><span class="o">.</span><span class="n">Shipper</span><span class="o">.</span><span class="n">Address</span><span class="o">.</span><span class="n">CountryCode</span> <span class="o">=</span> <span class="s">&#39;US&#39;</span>
+
+<span class="n">shipment</span><span class="o">.</span><span class="n">RequestedShipment</span><span class="o">.</span><span class="n">Recipient</span><span class="o">.</span><span class="n">Contact</span><span class="o">.</span><span class="n">PersonName</span> <span class="o">=</span> <span class="s">&#39;Recipient Name&#39;</span>
+<span class="n">shipment</span><span class="o">.</span><span class="n">RequestedShipment</span><span class="o">.</span><span class="n">Recipient</span><span class="o">.</span><span class="n">Contact</span><span class="o">.</span><span class="n">PhoneNumber</span> <span class="o">=</span> <span class="s">&#39;9012637906&#39;</span>
+
+<span class="n">shipment</span><span class="o">.</span><span class="n">RequestedShipment</span><span class="o">.</span><span class="n">Recipient</span><span class="o">.</span><span class="n">Address</span><span class="o">.</span><span class="n">StreetLines</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;Address Line 1&#39;</span><span class="p">]</span>
+<span class="n">shipment</span><span class="o">.</span><span class="n">RequestedShipment</span><span class="o">.</span><span class="n">Recipient</span><span class="o">.</span><span class="n">Address</span><span class="o">.</span><span class="n">City</span> <span class="o">=</span> <span class="n">convert_to_utf8</span><span class="p">(</span><span class="s">&#39;TorontoåæâèéHerndon&#39;</span><span class="p">)</span>
+<span class="n">shipment</span><span class="o">.</span><span class="n">RequestedShipment</span><span class="o">.</span><span class="n">Recipient</span><span class="o">.</span><span class="n">Address</span><span class="o">.</span><span class="n">StateOrProvinceCode</span> <span class="o">=</span> <span class="s">&#39;VA&#39;</span>
+<span class="n">shipment</span><span class="o">.</span><span class="n">RequestedShipment</span><span class="o">.</span><span class="n">Recipient</span><span class="o">.</span><span class="n">Address</span><span class="o">.</span><span class="n">PostalCode</span> <span class="o">=</span> <span class="s">&#39;20171&#39;</span>
+<span class="n">shipment</span><span class="o">.</span><span class="n">RequestedShipment</span><span class="o">.</span><span class="n">Recipient</span><span class="o">.</span><span class="n">Address</span><span class="o">.</span><span class="n">CountryCode</span> <span class="o">=</span> <span class="s">&#39;US&#39;</span>
+<span class="n">shipment</span><span class="o">.</span><span class="n">RequestedShipment</span><span class="o">.</span><span class="n">EdtRequestType</span> <span class="o">=</span> <span class="s">&#39;NONE&#39;</span>
+
+<span class="n">shipment</span><span class="o">.</span><span class="n">RequestedShipment</span><span class="o">.</span><span class="n">ShippingChargesPayment</span><span class="o">.</span><span class="n">Payor</span><span class="o">.</span><span class="n">ResponsibleParty</span><span class="o">.</span><span class="n">AccountNumber</span> \
+    <span class="o">=</span> <span class="n">CONFIG_OBJ</span><span class="o">.</span><span class="n">account_number</span>
+
+<span class="n">shipment</span><span class="o">.</span><span class="n">RequestedShipment</span><span class="o">.</span><span class="n">ShippingChargesPayment</span><span class="o">.</span><span class="n">PaymentType</span> <span class="o">=</span> <span class="s">&#39;SENDER&#39;</span>
+
+<span class="n">shipment</span><span class="o">.</span><span class="n">RequestedShipment</span><span class="o">.</span><span class="n">LabelSpecification</span><span class="o">.</span><span class="n">LabelFormatType</span> <span class="o">=</span> <span class="s">&#39;COMMON2D&#39;</span>
+<span class="n">shipment</span><span class="o">.</span><span class="n">RequestedShipment</span><span class="o">.</span><span class="n">LabelSpecification</span><span class="o">.</span><span class="n">ImageType</span> <span class="o">=</span> <span class="s">&#39;PNG&#39;</span>
+<span class="n">shipment</span><span class="o">.</span><span class="n">RequestedShipment</span><span class="o">.</span><span class="n">LabelSpecification</span><span class="o">.</span><span class="n">LabelStockType</span> <span class="o">=</span> <span class="s">&#39;PAPER_7X4.75&#39;</span>
+<span class="n">shipment</span><span class="o">.</span><span class="n">RequestedShipment</span><span class="o">.</span><span class="n">LabelSpecification</span><span class="o">.</span><span class="n">LabelPrintingOrientation</span> <span class="o">=</span> <span class="s">&#39;BOTTOM_EDGE_OF_TEXT_FIRST&#39;</span>
+
+<span class="c"># Use order if setting multiple labels or delete</span>
+<span class="k">del</span> <span class="n">shipment</span><span class="o">.</span><span class="n">RequestedShipment</span><span class="o">.</span><span class="n">LabelSpecification</span><span class="o">.</span><span class="n">LabelOrder</span>
+
+<span class="n">package1_weight</span> <span class="o">=</span> <span class="n">shipment</span><span class="o">.</span><span class="n">create_wsdl_object_of_type</span><span class="p">(</span><span class="s">&#39;Weight&#39;</span><span class="p">)</span>
+<span class="n">package1_weight</span><span class="o">.</span><span class="n">Value</span> <span class="o">=</span> <span class="mf">2.0</span>
+<span class="n">package1_weight</span><span class="o">.</span><span class="n">Units</span> <span class="o">=</span> <span class="s">&quot;LB&quot;</span>
+<span class="n">package1</span> <span class="o">=</span> <span class="n">shipment</span><span class="o">.</span><span class="n">create_wsdl_object_of_type</span><span class="p">(</span><span class="s">&#39;RequestedPackageLineItem&#39;</span><span class="p">)</span>
+<span class="n">package1</span><span class="o">.</span><span class="n">PhysicalPackaging</span> <span class="o">=</span> <span class="s">&#39;ENVELOPE&#39;</span>
+<span class="n">package1</span><span class="o">.</span><span class="n">Weight</span> <span class="o">=</span> <span class="n">package1_weight</span>
+<span class="n">shipment</span><span class="o">.</span><span class="n">add_package</span><span class="p">(</span><span class="n">package1</span><span class="p">)</span>
+
+<span class="n">shipment</span><span class="o">.</span><span class="n">send_validation_request</span><span class="p">()</span>
+<span class="n">shipment</span><span class="o">.</span><span class="n">send_request</span><span class="p">()</span>
+
+<span class="k">assert</span> <span class="n">shipment</span><span class="o">.</span><span class="n">response</span>
+<span class="k">assert</span> <span class="n">shipment</span><span class="o">.</span><span class="n">response</span><span class="o">.</span><span class="n">HighestSeverity</span> <span class="o">==</span> <span class="s">&#39;SUCCESS&#39;</span>
+<span class="n">track_id</span> <span class="o">=</span> <span class="n">shipment</span><span class="o">.</span><span class="n">response</span><span class="o">.</span><span class="n">CompletedShipmentDetail</span><span class="o">.</span><span class="n">CompletedPackageDetails</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">TrackingIds</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">TrackingNumber</span>
+<span class="k">assert</span> <span class="n">track_id</span>
+
+<span class="n">del_shipment</span> <span class="o">=</span> <span class="n">FedexDeleteShipmentRequest</span><span class="p">(</span><span class="n">CONFIG_OBJ</span><span class="p">)</span>
+<span class="n">del_shipment</span><span class="o">.</span><span class="n">DeletionControlType</span> <span class="o">=</span> <span class="s">&quot;DELETE_ALL_PACKAGES&quot;</span>
+<span class="n">del_shipment</span><span class="o">.</span><span class="n">TrackingId</span><span class="o">.</span><span class="n">TrackingNumber</span> <span class="o">=</span> <span class="n">track_id</span>
+<span class="n">del_shipment</span><span class="o">.</span><span class="n">TrackingId</span><span class="o">.</span><span class="n">TrackingIdType</span> <span class="o">=</span> <span class="s">&#39;EXPRESS&#39;</span>
+
+<span class="n">del_shipment</span><span class="o">.</span><span class="n">send_request</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="get-the-response">
+<h2>Get the Response<a class="headerlink" href="#get-the-response" title="Permalink to this headline">¶</a></h2>
+<p>Once you perform <cite>send_request()</cite>, you can access the <cite>response</cite> attribute
+of the service request object. To access the response from the
+above delete shipment example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">request_response</span> <span class="o">=</span> <span class="n">del_shipment</span><span class="o">.</span><span class="n">response</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="validate-an-address">
+<h2>Validate an Address<a class="headerlink" href="#validate-an-address" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">avs_request</span> <span class="o">=</span> <span class="n">FedexAddressValidationRequest</span><span class="p">(</span><span class="n">CONFIG_OBJ</span><span class="p">)</span>
+<span class="n">address1</span> <span class="o">=</span> <span class="n">avs_request</span><span class="o">.</span><span class="n">create_wsdl_object_of_type</span><span class="p">(</span><span class="s">&#39;AddressToValidate&#39;</span><span class="p">)</span>
+<span class="n">address1</span><span class="o">.</span><span class="n">Address</span><span class="o">.</span><span class="n">StreetLines</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;155 Old Greenville Hwy&#39;</span><span class="p">,</span> <span class="s">&#39;Suite 103&#39;</span><span class="p">]</span>
+<span class="n">address1</span><span class="o">.</span><span class="n">Address</span><span class="o">.</span><span class="n">City</span> <span class="o">=</span> <span class="s">&#39;Clemson&#39;</span>
+<span class="n">address1</span><span class="o">.</span><span class="n">Address</span><span class="o">.</span><span class="n">StateOrProvinceCode</span> <span class="o">=</span> <span class="s">&#39;SC&#39;</span>
+<span class="n">address1</span><span class="o">.</span><span class="n">Address</span><span class="o">.</span><span class="n">PostalCode</span> <span class="o">=</span> <span class="mi">29631</span>
+<span class="n">address1</span><span class="o">.</span><span class="n">Address</span><span class="o">.</span><span class="n">CountryCode</span> <span class="o">=</span> <span class="s">&#39;US&#39;</span>
+<span class="n">address1</span><span class="o">.</span><span class="n">Address</span><span class="o">.</span><span class="n">Residential</span> <span class="o">=</span> <span class="bp">False</span>
+<span class="n">avs_request</span><span class="o">.</span><span class="n">add_address</span><span class="p">(</span><span class="n">address1</span><span class="p">)</span>
+
+<span class="n">avs_request</span><span class="o">.</span><span class="n">send_request</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="estimate-delivery-time">
+<h2>Estimate Delivery Time<a class="headerlink" href="#estimate-delivery-time" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">avc_request</span> <span class="o">=</span> <span class="n">FedexAvailabilityCommitmentRequest</span><span class="p">(</span><span class="n">CONFIG_OBJ</span><span class="p">)</span>
+<span class="n">avc_request</span><span class="o">.</span><span class="n">Origin</span><span class="o">.</span><span class="n">PostalCode</span> <span class="o">=</span> <span class="s">&#39;M5V 3A4&#39;</span>
+<span class="n">avc_request</span><span class="o">.</span><span class="n">Origin</span><span class="o">.</span><span class="n">CountryCode</span> <span class="o">=</span> <span class="s">&#39;CA&#39;</span>
+<span class="n">avc_request</span><span class="o">.</span><span class="n">Destination</span><span class="o">.</span><span class="n">PostalCode</span> <span class="o">=</span> <span class="s">&#39;27577&#39;</span>  <span class="c"># 29631</span>
+<span class="n">avc_request</span><span class="o">.</span><span class="n">Destination</span><span class="o">.</span><span class="n">CountryCode</span> <span class="o">=</span> <span class="s">&#39;US&#39;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="validate-postal-code">
+<h2>Validate Postal Code<a class="headerlink" href="#validate-postal-code" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">inquiry</span> <span class="o">=</span> <span class="n">FedexValidatePostalRequest</span><span class="p">(</span><span class="n">CONFIG_OBJ</span><span class="p">)</span>
+<span class="n">inquiry</span><span class="o">.</span><span class="n">Address</span><span class="o">.</span><span class="n">PostalCode</span> <span class="o">=</span> <span class="s">&#39;29631&#39;</span>
+<span class="n">inquiry</span><span class="o">.</span><span class="n">Address</span><span class="o">.</span><span class="n">CountryCode</span> <span class="o">=</span> <span class="s">&#39;US&#39;</span>
+
+<span class="n">inquiry</span><span class="o">.</span><span class="n">send_request</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="fedex-store-search">
+<h2>FedEx Store Search<a class="headerlink" href="#fedex-store-search" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">location_request</span> <span class="o">=</span> <span class="n">FedexSearchLocationRequest</span><span class="p">(</span><span class="n">CONFIG_OBJ</span><span class="p">)</span>
+<span class="n">location_request</span><span class="o">.</span><span class="n">Address</span><span class="o">.</span><span class="n">PostalCode</span> <span class="o">=</span> <span class="s">&#39;38119&#39;</span>
+<span class="n">location_request</span><span class="o">.</span><span class="n">Address</span><span class="o">.</span><span class="n">CountryCode</span> <span class="o">=</span> <span class="s">&#39;US&#39;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="get-package-rate">
+<h2>Get Package Rate<a class="headerlink" href="#get-package-rate" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">rate</span> <span class="o">=</span> <span class="n">FedexRateServiceRequest</span><span class="p">(</span><span class="n">CONFIG_OBJ</span><span class="p">)</span>
+
+<span class="n">rate</span><span class="o">.</span><span class="n">RequestedShipment</span><span class="o">.</span><span class="n">DropoffType</span> <span class="o">=</span> <span class="s">&#39;REGULAR_PICKUP&#39;</span>
+<span class="n">rate</span><span class="o">.</span><span class="n">RequestedShipment</span><span class="o">.</span><span class="n">ServiceType</span> <span class="o">=</span> <span class="s">&#39;FEDEX_GROUND&#39;</span>
+<span class="n">rate</span><span class="o">.</span><span class="n">RequestedShipment</span><span class="o">.</span><span class="n">PackagingType</span> <span class="o">=</span> <span class="s">&#39;YOUR_PACKAGING&#39;</span>
+
+<span class="n">rate</span><span class="o">.</span><span class="n">RequestedShipment</span><span class="o">.</span><span class="n">Shipper</span><span class="o">.</span><span class="n">Address</span><span class="o">.</span><span class="n">StateOrProvinceCode</span> <span class="o">=</span> <span class="s">&#39;SC&#39;</span>
+<span class="n">rate</span><span class="o">.</span><span class="n">RequestedShipment</span><span class="o">.</span><span class="n">Shipper</span><span class="o">.</span><span class="n">Address</span><span class="o">.</span><span class="n">PostalCode</span> <span class="o">=</span> <span class="s">&#39;29631&#39;</span>
+<span class="n">rate</span><span class="o">.</span><span class="n">RequestedShipment</span><span class="o">.</span><span class="n">Shipper</span><span class="o">.</span><span class="n">Address</span><span class="o">.</span><span class="n">CountryCode</span> <span class="o">=</span> <span class="s">&#39;US&#39;</span>
+
+<span class="n">rate</span><span class="o">.</span><span class="n">RequestedShipment</span><span class="o">.</span><span class="n">Recipient</span><span class="o">.</span><span class="n">Address</span><span class="o">.</span><span class="n">StateOrProvinceCode</span> <span class="o">=</span> <span class="s">&#39;NC&#39;</span>
+<span class="n">rate</span><span class="o">.</span><span class="n">RequestedShipment</span><span class="o">.</span><span class="n">Recipient</span><span class="o">.</span><span class="n">Address</span><span class="o">.</span><span class="n">PostalCode</span> <span class="o">=</span> <span class="s">&#39;27577&#39;</span>
+<span class="n">rate</span><span class="o">.</span><span class="n">RequestedShipment</span><span class="o">.</span><span class="n">Recipient</span><span class="o">.</span><span class="n">Address</span><span class="o">.</span><span class="n">CountryCode</span> <span class="o">=</span> <span class="s">&#39;US&#39;</span>
+
+<span class="n">rate</span><span class="o">.</span><span class="n">RequestedShipment</span><span class="o">.</span><span class="n">EdtRequestType</span> <span class="o">=</span> <span class="s">&#39;NONE&#39;</span>
+<span class="n">rate</span><span class="o">.</span><span class="n">RequestedShipment</span><span class="o">.</span><span class="n">ShippingChargesPayment</span><span class="o">.</span><span class="n">PaymentType</span> <span class="o">=</span> <span class="s">&#39;SENDER&#39;</span>
+
+<span class="n">package1_weight</span> <span class="o">=</span> <span class="n">rate</span><span class="o">.</span><span class="n">create_wsdl_object_of_type</span><span class="p">(</span><span class="s">&#39;Weight&#39;</span><span class="p">)</span>
+<span class="n">package1_weight</span><span class="o">.</span><span class="n">Value</span> <span class="o">=</span> <span class="mf">1.0</span>
+<span class="n">package1_weight</span><span class="o">.</span><span class="n">Units</span> <span class="o">=</span> <span class="s">&quot;LB&quot;</span>
+<span class="n">package1</span> <span class="o">=</span> <span class="n">rate</span><span class="o">.</span><span class="n">create_wsdl_object_of_type</span><span class="p">(</span><span class="s">&#39;RequestedPackageLineItem&#39;</span><span class="p">)</span>
+<span class="n">package1</span><span class="o">.</span><span class="n">Weight</span> <span class="o">=</span> <span class="n">package1_weight</span>
+<span class="n">package1</span><span class="o">.</span><span class="n">PhysicalPackaging</span> <span class="o">=</span> <span class="s">&#39;BOX&#39;</span>
+<span class="n">package1</span><span class="o">.</span><span class="n">GroupPackageCount</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">rate</span><span class="o">.</span><span class="n">add_package</span><span class="p">(</span><span class="n">package1</span><span class="p">)</span>
+
+<span class="n">rate</span><span class="o">.</span><span class="n">send_request</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="track-a-package">
+<h2>Track a Package<a class="headerlink" href="#track-a-package" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">track</span> <span class="o">=</span> <span class="n">FedexTrackRequest</span><span class="p">(</span><span class="n">CONFIG_OBJ</span><span class="p">)</span>
+<span class="n">tracking_num</span> <span class="o">=</span> <span class="s">&#39;781820562774&#39;</span>
+<span class="n">track</span><span class="o">.</span><span class="n">SelectionDetails</span><span class="o">.</span><span class="n">PackageIdentifier</span><span class="o">.</span><span class="n">Type</span> <span class="o">=</span> <span class="s">&#39;TRACKING_NUMBER_OR_DOORTAG&#39;</span>
+<span class="n">track</span><span class="o">.</span><span class="n">SelectionDetails</span><span class="o">.</span><span class="n">PackageIdentifier</span><span class="o">.</span><span class="n">Value</span> <span class="o">=</span> <span class="n">tracking_num</span>
+<span class="n">track</span><span class="o">.</span><span class="n">send_request</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="get-json-and-dictionary-response">
+<h2>Get JSON and Dictionary Response<a class="headerlink" href="#get-json-and-dictionary-response" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">fedex.tools.response_tools</span> <span class="kn">import</span> <span class="n">sobject_to_dict</span>
+<span class="kn">from</span> <span class="nn">fedex.tools.response_tools</span> <span class="kn">import</span> <span class="n">sobject_to_json</span>
+<span class="n">response_dict</span> <span class="o">=</span> <span class="n">sobject_to_dict</span><span class="p">(</span><span class="n">shipment</span><span class="o">.</span><span class="n">response</span><span class="p">)</span>
+<span class="n">response_json</span> <span class="o">=</span> <span class="n">sobject_to_json</span><span class="p">(</span><span class="n">shipment</span><span class="o">.</span><span class="n">response</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="advanced-requests">
+<h2>Advanced Requests<a class="headerlink" href="#advanced-requests" title="Permalink to this headline">¶</a></h2>
+<p>Since this module is a suds wrapper, you can browse each service&#8217;s WSDL
+in <code class="docutils literal"><span class="pre">fedex/wsdls</span></code> and add any required objects to your request.</p>
+<p>For example, the <cite>Ship Service</cite> WSDL has a <cite>simpleType</cite> definition for <cite>ServiceType</cite>
+with the following options:</p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">'STANDARD_OVERNIGHT'</span></code></li>
+<li><code class="docutils literal"><span class="pre">'PRIORITY_OVERNIGHT'</span></code></li>
+<li><code class="docutils literal"><span class="pre">'FEDEX_GROUND'</span></code></li>
+<li><code class="docutils literal"><span class="pre">'FEDEX_EXPRESS_SAVER'</span></code></li>
+<li><code class="docutils literal"><span class="pre">'FEDEX_2_DAY'</span></code></li>
+<li><code class="docutils literal"><span class="pre">'INTERNATIONAL_PRIORITY'</span></code></li>
+<li><code class="docutils literal"><span class="pre">'SAME_DAY'</span></code></li>
+<li><code class="docutils literal"><span class="pre">'INTERNATIONAL_ECONOMY'</span></code></li>
+</ul>
+<p>You can see all what is available for a specific definition by
+browsing a service&#8217;s WSDL. It is possible to customize your request beyond what
+is included in the examples but still within the confines of
+this package. If it&#8217;s something common enough, please bring it
+forward so that it can be included along as an example.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Quick Start</a><ul>
+<li><a class="reference internal" href="#initialize-config-object">Initialize Config Object</a></li>
+<li><a class="reference internal" href="#create-and-delete-a-shipment">Create and Delete a Shipment</a></li>
+<li><a class="reference internal" href="#get-the-response">Get the Response</a></li>
+<li><a class="reference internal" href="#validate-an-address">Validate an Address</a></li>
+<li><a class="reference internal" href="#estimate-delivery-time">Estimate Delivery Time</a></li>
+<li><a class="reference internal" href="#validate-postal-code">Validate Postal Code</a></li>
+<li><a class="reference internal" href="#fedex-store-search">FedEx Store Search</a></li>
+<li><a class="reference internal" href="#get-package-rate">Get Package Rate</a></li>
+<li><a class="reference internal" href="#track-a-package">Track a Package</a></li>
+<li><a class="reference internal" href="#get-json-and-dictionary-response">Get JSON and Dictionary Response</a></li>
+<li><a class="reference internal" href="#advanced-requests">Advanced Requests</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="installation.html"
+                        title="previous chapter">Installation</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="services.html"
+                        title="next chapter">Implemented Services</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/quick_start.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="services.html" title="Implemented Services"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="installation.html" title="Installation"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">python-fedex 2.3.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2016, Python Fedex Devs.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.1.
+    </div>
+  </body>
+</html>

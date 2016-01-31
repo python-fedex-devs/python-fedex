@@ -1,0 +1,170 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>fedex.services.address_validation_service &mdash; python-fedex 2.3.0 documentation</title>
+    
+    <link rel="stylesheet" href="../../../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '2.3.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <link rel="top" title="python-fedex 2.3.0 documentation" href="../../../index.html" />
+    <link rel="up" title="Module code" href="../../index.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">python-fedex 2.3.0 documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="../../index.html" accesskey="U">Module code</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for fedex.services.address_validation_service</h1><div class="highlight"><pre>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Address Validation Service Module</span>
+
+<span class="sd">This package contains the shipping methods defined by Fedex&#39;s </span>
+<span class="sd">AddressValidationService WSDL file. Each is encapsulated in a class for </span>
+<span class="sd">easy access. For more details on each, refer to the respective class&#39;s </span>
+<span class="sd">documentation.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">datetime</span>
+<span class="kn">from</span> <span class="nn">..base_service</span> <span class="kn">import</span> <span class="n">FedexBaseService</span>
+
+
+<div class="viewcode-block" id="FedexAddressValidationRequest"><a class="viewcode-back" href="../../../services.html#fedex.services.address_validation_service.FedexAddressValidationRequest">[docs]</a><span class="k">class</span> <span class="nc">FedexAddressValidationRequest</span><span class="p">(</span><span class="n">FedexBaseService</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    This class allows you validate anywhere from one to a hundred addresses</span>
+<span class="sd">    in one go. Create AddressToValidate WSDL objects and add them to each</span>
+<span class="sd">    instance of this request using add_address().</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">config_obj</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        @type config_obj: L{FedexConfig}</span>
+<span class="sd">        @param config_obj: A valid FedexConfig object.        </span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_config_obj</span> <span class="o">=</span> <span class="n">config_obj</span>
+        <span class="c"># Holds version info for the VersionId SOAP object.</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_version_info</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s">&#39;service_id&#39;</span><span class="p">:</span> <span class="s">&#39;aval&#39;</span><span class="p">,</span>
+            <span class="s">&#39;major&#39;</span><span class="p">:</span> <span class="s">&#39;4&#39;</span><span class="p">,</span>
+            <span class="s">&#39;intermediate&#39;</span><span class="p">:</span> <span class="s">&#39;0&#39;</span><span class="p">,</span>
+            <span class="s">&#39;minor&#39;</span><span class="p">:</span> <span class="s">&#39;0&#39;</span>
+        <span class="p">}</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">AddressesToValidate</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="sd">&quot;&quot;&quot;@ivar: Holds the AddressToValidate WSDL object.&quot;&quot;&quot;</span>
+        <span class="c"># Call the parent FedexBaseService class for basic setup work.</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">FedexAddressValidationRequest</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_config_obj</span><span class="p">,</span> <span class="s">&#39;AddressValidationService_v4.wsdl&#39;</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_prepare_wsdl_objects</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Create the data structure and get it ready for the WSDL request.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span>
+
+    <span class="k">def</span> <span class="nf">_assemble_and_send_request</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Fires off the Fedex request.</span>
+<span class="sd">        </span>
+<span class="sd">        @warning: NEVER CALL THIS METHOD DIRECTLY. CALL send_request(), </span>
+<span class="sd">            WHICH RESIDES ON FedexBaseService AND IS INHERITED.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="c"># We get an exception like this when specifying an IntegratorId:</span>
+        <span class="c"># suds.TypeNotFound: Type not found: &#39;IntegratorId&#39;</span>
+        <span class="c"># Setting it to None does not seem to appease it.</span>
+        <span class="k">del</span> <span class="bp">self</span><span class="o">.</span><span class="n">ClientDetail</span><span class="o">.</span><span class="n">IntegratorId</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">WebAuthenticationDetail</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ClientDetail</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">TransactionDetail</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">VersionId</span><span class="p">)</span>
+        <span class="c"># Fire off the query.</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">service</span><span class="o">.</span><span class="n">addressValidation</span><span class="p">(</span>
+                <span class="n">WebAuthenticationDetail</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">WebAuthenticationDetail</span><span class="p">,</span>
+                <span class="n">ClientDetail</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">ClientDetail</span><span class="p">,</span>
+                <span class="n">TransactionDetail</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">TransactionDetail</span><span class="p">,</span>
+                <span class="n">Version</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">VersionId</span><span class="p">,</span>
+                <span class="n">InEffectAsOfTimestamp</span><span class="o">=</span><span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">(),</span>
+                <span class="n">AddressesToValidate</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">AddressesToValidate</span><span class="p">)</span>
+
+<div class="viewcode-block" id="FedexAddressValidationRequest.add_address"><a class="viewcode-back" href="../../../services.html#fedex.services.address_validation_service.FedexAddressValidationRequest.add_address">[docs]</a>    <span class="k">def</span> <span class="nf">add_address</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">address_item</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Adds an address to self.AddressesToValidate.</span>
+<span class="sd">        </span>
+<span class="sd">        @type address_item: WSDL object, type of AddressToValidate WSDL object.</span>
+<span class="sd">        @keyword address_item: A AddressToValidate, created by</span>
+<span class="sd">            calling create_wsdl_object_of_type(&#39;AddressToValidate&#39;) on</span>
+<span class="sd">            this FedexAddressValidationRequest object. </span>
+<span class="sd">            See examples/create_shipment.py for more details.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">AddressesToValidate</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">address_item</span><span class="p">)</span></div></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">python-fedex 2.3.0 documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2016, Python Fedex Devs.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.1.
+    </div>
+  </body>
+</html>

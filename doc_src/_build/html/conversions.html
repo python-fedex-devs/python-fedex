@@ -1,0 +1,177 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Color Conversions &mdash; python-fedex 2.3.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '2.3.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="python-fedex 2.3.0 documentation" href="index.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="nav-item nav-item-0"><a href="index.html">python-fedex 2.3.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="color-conversions">
+<h1>Color Conversions<a class="headerlink" href="#color-conversions" title="Permalink to this headline">¶</a></h1>
+<p>Converting between color spaces is very simple with python-colormath. To see
+a full list of supported color spaces, see <code class="xref doc docutils literal"><span class="pre">color_objects</span></code>.</p>
+<p>All conversions happen through the <code class="docutils literal"><span class="pre">convert_color</span></code> function shown below.
+The original Color instance is passed in as the first argument, and the
+desired Color class (not an instance) is passed in as the second argument.
+If the conversion can be made, a new Color instance will be returned.</p>
+<div class="section" id="example">
+<h2>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h2>
+<p>This is a simple example of a CIE Lab to CIE XYZ conversion. Refer to
+<code class="xref doc docutils literal"><span class="pre">color_objects</span></code> for a full list of different color spaces that can
+be instantiated and converted between.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">colormath.color_objects</span> <span class="kn">import</span> <span class="n">LabColor</span><span class="p">,</span> <span class="n">XYZColor</span>
+<span class="kn">from</span> <span class="nn">colormath.color_conversions</span> <span class="kn">import</span> <span class="n">convert_color</span>
+
+<span class="n">lab</span> <span class="o">=</span> <span class="n">LabColor</span><span class="p">(</span><span class="mf">0.903</span><span class="p">,</span> <span class="mf">16.296</span><span class="p">,</span> <span class="o">-</span><span class="mf">2.22</span><span class="p">)</span>
+<span class="n">xyz</span> <span class="o">=</span> <span class="n">convert_color</span><span class="p">(</span><span class="n">lab</span><span class="p">,</span> <span class="n">XYZColor</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Some color spaces require a trip through RGB during conversion. For example,
+to get from XYZ to HSL, we have to convert XYZ-&gt;RGB-&gt;HSL. The same could
+be said for XYZ to CMYK (XYZ-&gt;RGB-&gt;CMY-&gt;CMYK). Different RGB color spaces
+have different gamut sizes and capabilities, which can affect your
+converted color values.</p>
+<p>sRGB is the default RGB color space due to its ubiquity. If you would like
+to use a different RGB space for a conversion, you can do something like this:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">colormath.color_objects</span> <span class="kn">import</span> <span class="n">XYZColor</span><span class="p">,</span> <span class="n">HSLColor</span><span class="p">,</span> <span class="n">AdobeRGBColor</span>
+<span class="kn">from</span> <span class="nn">colormath.color_conversions</span> <span class="kn">import</span> <span class="n">convert_color</span>
+
+<span class="n">xyz</span> <span class="o">=</span> <span class="n">XYZColor</span><span class="p">(</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">)</span>
+<span class="n">hsl</span> <span class="o">=</span> <span class="n">convert_color</span><span class="p">(</span><span class="n">xyz</span><span class="p">,</span> <span class="n">HSLColor</span><span class="p">,</span> <span class="n">through_rgb_type</span><span class="o">=</span><span class="n">AdobeRGBColor</span><span class="p">)</span>
+<span class="c"># If you are going to convert back to XYZ, make sure you use the same</span>
+<span class="c"># RGB color space on the way back.</span>
+<span class="n">xyz2</span> <span class="o">=</span> <span class="n">convert_color</span><span class="p">(</span><span class="n">hsl</span><span class="p">,</span> <span class="n">XYZColor</span><span class="p">,</span> <span class="n">through_rgb_type</span><span class="o">=</span><span class="n">AdobeRGBColor</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="rgb-conversions-and-native-illuminants">
+<h2>RGB conversions and native illuminants<a class="headerlink" href="#rgb-conversions-and-native-illuminants" title="Permalink to this headline">¶</a></h2>
+<p>When converting RGB colors to any of the CIE spaces, we have to pass through
+the XYZ color space. This serves as a crossroads for conversions to basically
+all of the reflective color spaces (CIE Lab, LCH, Luv, etc). The RGB spaces
+are reflective, where the illumination is provided. In the case of a reflective
+space like XYZ, the illuminant must be supplied by a light source.</p>
+<p>Each RGB space has its own native illuminant, which can vary from space
+to space. To see some of these for yourself, check out
+Bruce Lindbloom&#8217;s <a class="reference external" href="http://www.brucelindbloom.com/Eqn_RGB_XYZ_Matrix.html">XYZ to RGB matrices</a>.</p>
+<p>To cite the most commonly used RGB color space as an example, sRGB has a
+native illuminant of D65. When we convert RGB to XYZ, that native illuminant
+carries over unless explicitly overridden. If you aren&#8217;t expecting this behavior,
+you&#8217;ll end up with variations in your converted color&#8217;s numbers.</p>
+<p>To explicitly request a specific illuminant, provide the <code class="docutils literal"><span class="pre">target_illuminant</span></code>
+keyword when using <code class="xref py py-func docutils literal"><span class="pre">colormath.color_conversions.convert_color()</span></code>.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">colormath.color_objects</span> <span class="kn">import</span> <span class="n">XYZColor</span><span class="p">,</span> <span class="n">sRGBColor</span>
+<span class="kn">from</span> <span class="nn">colormath.color_conversions</span> <span class="kn">import</span> <span class="n">convert_color</span>
+
+<span class="n">rgb</span> <span class="o">=</span> <span class="n">RGBColor</span><span class="p">(</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">)</span>
+<span class="n">xyz</span> <span class="o">=</span> <span class="n">convert_color</span><span class="p">(</span><span class="n">rgb</span><span class="p">,</span> <span class="n">XYZColor</span><span class="p">,</span> <span class="n">target_illuminant</span><span class="o">=</span><span class="s">&#39;d50&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="rgb-conversions-and-out-of-gamut-coordinates">
+<h2>RGB conversions and out-of-gamut coordinates<a class="headerlink" href="#rgb-conversions-and-out-of-gamut-coordinates" title="Permalink to this headline">¶</a></h2>
+<p>RGB spaces tend to have a smaller gamut than some of the CIE color spaces.
+When converting to RGB, this can cause some of the coordinates to end up
+being out of the acceptable range (0.0-1.0 or 1-255, depending on whether
+your RGB color is upscaled).</p>
+<p>Rather than clamp these for you, we leave them as-is. This allows for more
+accurate conversions back to the CIE color spaces. If you require the clamped
+(0.0-1.0 or 1-255) values, use the following properties on any RGB color:</p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">clamped_rgb_r</span></code></li>
+<li><code class="docutils literal"><span class="pre">clamped_rgb_g</span></code></li>
+<li><code class="docutils literal"><span class="pre">clamped_rgb_b</span></code></li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Color Conversions</a><ul>
+<li><a class="reference internal" href="#example">Example</a></li>
+<li><a class="reference internal" href="#rgb-conversions-and-native-illuminants">RGB conversions and native illuminants</a></li>
+<li><a class="reference internal" href="#rgb-conversions-and-out-of-gamut-coordinates">RGB conversions and out-of-gamut coordinates</a></li>
+</ul>
+</li>
+</ul>
+
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/conversions.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="nav-item nav-item-0"><a href="index.html">python-fedex 2.3.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2016, Python Fedex Devs.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.1.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,139 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Delta E Equations &mdash; python-fedex 2.3.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '2.3.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="python-fedex 2.3.0 documentation" href="index.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="nav-item nav-item-0"><a href="index.html">python-fedex 2.3.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="delta-e-equations">
+<h1>Delta E Equations<a class="headerlink" href="#delta-e-equations" title="Permalink to this headline">¶</a></h1>
+<p>Delta E equations are used to put a number on the visual difference between two
+<code class="xref py py-class docutils literal"><span class="pre">LabColor</span></code> instances. While
+different lighting conditions, substrates, and physical condition can all
+introduce unexpected variables, these equations are a good rough starting point
+for comparing colors.</p>
+<p>Each of the following Delta E functions has different characteristics. Some may
+be more suitable for certain applications than others. While it&#8217;s outside the
+scope of this module&#8217;s documentation to go into much detail, we link to
+relevant material when possible.</p>
+<div class="section" id="example">
+<h2>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">colormath.color_objects</span> <span class="kn">import</span> <span class="n">LabColor</span>
+<span class="kn">from</span> <span class="nn">colormath.color_diff</span> <span class="kn">import</span> <span class="n">delta_e_cie1976</span>
+
+<span class="c"># Reference color.</span>
+<span class="n">color1</span> <span class="o">=</span> <span class="n">LabColor</span><span class="p">(</span><span class="n">lab_l</span><span class="o">=</span><span class="mf">0.9</span><span class="p">,</span> <span class="n">lab_a</span><span class="o">=</span><span class="mf">16.3</span><span class="p">,</span> <span class="n">lab_b</span><span class="o">=-</span><span class="mf">2.22</span><span class="p">)</span>
+<span class="c"># Color to be compared to the reference.</span>
+<span class="n">color2</span> <span class="o">=</span> <span class="n">LabColor</span><span class="p">(</span><span class="n">lab_l</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span> <span class="n">lab_a</span><span class="o">=</span><span class="mf">14.2</span><span class="p">,</span> <span class="n">lab_b</span><span class="o">=-</span><span class="mf">1.80</span><span class="p">)</span>
+<span class="c"># This is your delta E value as a float.</span>
+<span class="n">delta_e</span> <span class="o">=</span> <span class="n">delta_e_cie1976</span><span class="p">(</span><span class="n">color1</span><span class="p">,</span> <span class="n">color2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="delta-e-cie-1976">
+<h2>Delta E CIE 1976<a class="headerlink" href="#delta-e-cie-1976" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="delta-e-cie-1994">
+<h2>Delta E CIE 1994<a class="headerlink" href="#delta-e-cie-1994" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="delta-e-cie-2000">
+<h2>Delta E CIE 2000<a class="headerlink" href="#delta-e-cie-2000" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="delta-e-cmc">
+<h2>Delta E CMC<a class="headerlink" href="#delta-e-cmc" title="Permalink to this headline">¶</a></h2>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Delta E Equations</a><ul>
+<li><a class="reference internal" href="#example">Example</a></li>
+<li><a class="reference internal" href="#delta-e-cie-1976">Delta E CIE 1976</a></li>
+<li><a class="reference internal" href="#delta-e-cie-1994">Delta E CIE 1994</a></li>
+<li><a class="reference internal" href="#delta-e-cie-2000">Delta E CIE 2000</a></li>
+<li><a class="reference internal" href="#delta-e-cmc">Delta E CMC</a></li>
+</ul>
+</li>
+</ul>
+
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/delta_e.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="nav-item nav-item-0"><a href="index.html">python-fedex 2.3.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2016, Python Fedex Devs.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.1.
+    </div>
+  </body>
+</html>

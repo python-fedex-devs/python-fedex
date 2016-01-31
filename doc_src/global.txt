@@ -1,0 +1,10 @@
+.. _GitHub project: https://github.com/python-fedex-devs/python-fedex
+.. _issue tracker: https://github.com/python-fedex-devs/python-fedex/issues
+.. _suds_jurko: https://bitbucket.org/jurko/suds
+
+.. _FedEx Web Services: http://www.fedex.com/us/developer/web-services/
+
+.. _Python: http://python.org
+.. _GitHub: https://github.com/
+
+.. _BSD License: http://opensource.org/licenses/bsd-license.php

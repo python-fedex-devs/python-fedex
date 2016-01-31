@@ -1,0 +1,268 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Change Log &mdash; python-fedex 2.3.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '2.3.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="python-fedex 2.3.0 documentation" href="index.html" />
+    <link rel="prev" title="Exception Classes" href="exceptions.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="exceptions.html" title="Exception Classes"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">python-fedex 2.3.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="change-log">
+<h1>Change Log<a class="headerlink" href="#change-log" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="id1">
+<h2>2.3.0<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Added Location Service using v3 WSDL. (radzhome)</li>
+<li>Added examples and unit tests for Location Service. (radzhome)</li>
+<li>Updated certification process scripts to work with latest WSDLs. (radzhome)</li>
+<li>Added warning logging for requests that come back with warning notes. (radzhome)</li>
+<li>Added PyPI, Travis, requires.io integration/badges. (radzhome)</li>
+<li>Organization change from gtaylor to python-fedex-devs. (gtaylor)</li>
+<li>Added deprecation message for movement service. (radzhome)</li>
+<li>Added conversion tools to convert suds xml object into python dict. (radzhome)</li>
+<li>Redirect logging to stdout for examples and tests when not ran via nose. (radzhome)</li>
+</ul>
+</div>
+<div class="section" id="id2">
+<h2>2.2.0<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Added Country Service / Postal Code Validation service. (radzhome)</li>
+<li>Added CountryService_v4.wsdl for Postal Code Validation. (radzhome)</li>
+<li>Added unit tests and examples for Country service. (radzhome)</li>
+<li>Added Signature Option to ship example. (radzhome)</li>
+<li>Fix base service logging request and response. (radzhome)</li>
+</ul>
+</div>
+<div class="section" id="id3">
+<h2>2.1.0<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Added Validation, Availability and Commitment (AVC) service. (radzhome)</li>
+<li>Added [Validation]AvailabilityAndCommitmentService_v4.wsdl for AVC service. (radzhome)</li>
+<li>Added examples and unit tests for AVC service.</li>
+<li>Refactored examples and documentation. (radzhome)</li>
+<li>A quick PEP8 pass using pycharm on most of the codebase (radzhome)</li>
+<li>Add travis yml (radzhome)</li>
+</ul>
+</div>
+<div class="section" id="id4">
+<h2>2.0.0<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Bump ShipService WSDL to v17 for create and delete shipment. (radzhome)</li>
+<li>Bump AddressValidation WSDL to v4. (radzhome)</li>
+<li>Bump RateService WSDL to v18. (radzhome)</li>
+<li>Bump TrackService WSDL to v10. (radzhome)</li>
+<li>General improvements to base class. (radzhome)</li>
+<li>Refactoring and updates to examples. (radzhome)</li>
+<li>Added test classes. (radzhome)</li>
+<li>Remove old and unused WSDLs. (radzhome)</li>
+<li>Change dependency to suds-jurko to include python 3 support. (radzhome)</li>
+</ul>
+</div>
+<div class="section" id="id5">
+<h2>1.1.1<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Made RateService_v16.wsdl point at ws.fedex.com instead of
+wsbeta.fedex.com. Fixes issues in production. (ikks)</li>
+</ul>
+</div>
+<div class="section" id="id6">
+<h2>1.1.0<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>A quick PEP8 pass on most of the codebase. Yucky. (gtaylor)</li>
+<li>Changing recommended install method to use pip + PyPi. (radzhome)</li>
+<li>Updated rate_request and freight_rate_request examples for WSDL v16
+compatibility. (foxxyz)</li>
+<li>Updated rate service WSDL from v8 to v16. (foxxyz)</li>
+<li>Added a freight rate request example (mwcbrent)</li>
+<li>Bump ShipService WSDL to v13. (mwcbrent)</li>
+<li>Update rate example to show multiple ServiceTypes. (danielatdattrixdotcom)</li>
+</ul>
+</div>
+<div class="section" id="id7">
+<h2>1.0.14<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Re-licensed under BSD.</li>
+</ul>
+</div>
+<div class="section" id="and-1-0-13">
+<h2>1.0.12 and 1.0.13<a class="headerlink" href="#and-1-0-13" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Forget that these ever existed.</li>
+</ul>
+</div>
+<div class="section" id="id8">
+<h2>1.0.11<a class="headerlink" href="#id8" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Bug fix of a bug fix for regions config. (jcartmell)</li>
+</ul>
+</div>
+<div class="section" id="id9">
+<h2>1.0.10<a class="headerlink" href="#id9" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Bug fix regarding regions and when they are sent. (jcartmell)</li>
+</ul>
+</div>
+<div class="section" id="id10">
+<h2>1.0.9<a class="headerlink" href="#id10" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Various fixes to RateRequest() FedEx API call. (jcartmell)</li>
+<li>Added this changelog. (gtaylor)</li>
+</ul>
+</div>
+<div class="section" id="id11">
+<h2>1.0.8<a class="headerlink" href="#id11" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Fixed some problems with the unit tests. (gtaylor)</li>
+</ul>
+</div>
+<div class="section" id="id12">
+<h2>1.0.7<a class="headerlink" href="#id12" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Fixed a bug with international rate request example. (gtaylor)</li>
+</ul>
+</div>
+<div class="section" id="id13">
+<h2>1.0.6<a class="headerlink" href="#id13" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Lots of documentation improvements. (gtaylor)</li>
+<li>FedEx RateRequest call implemented. (yahtib)</li>
+<li>FedEx Postal Inquiry call implemented. (yahtib)</li>
+</ul>
+</div>
+<div class="section" id="id14">
+<h2>1.0.4<a class="headerlink" href="#id14" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Removal of unecessary files. (gtaylor)</li>
+<li>Documentation improvements. (gtaylor)</li>
+</ul>
+</div>
+<div class="section" id="id15">
+<h2>1.0.3<a class="headerlink" href="#id15" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Wrote some label certification modules that can help
+with the label certification process. (gtaylor)</li>
+</ul>
+<div class="section" id="initial">
+<h3>initial<a class="headerlink" href="#initial" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>1.0</li>
+</ul>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Change Log</a><ul>
+<li><a class="reference internal" href="#id1">2.3.0</a></li>
+<li><a class="reference internal" href="#id2">2.2.0</a></li>
+<li><a class="reference internal" href="#id3">2.1.0</a></li>
+<li><a class="reference internal" href="#id4">2.0.0</a></li>
+<li><a class="reference internal" href="#id5">1.1.1</a></li>
+<li><a class="reference internal" href="#id6">1.1.0</a></li>
+<li><a class="reference internal" href="#id7">1.0.14</a></li>
+<li><a class="reference internal" href="#and-1-0-13">1.0.12 and 1.0.13</a></li>
+<li><a class="reference internal" href="#id8">1.0.11</a></li>
+<li><a class="reference internal" href="#id9">1.0.10</a></li>
+<li><a class="reference internal" href="#id10">1.0.9</a></li>
+<li><a class="reference internal" href="#id11">1.0.8</a></li>
+<li><a class="reference internal" href="#id12">1.0.7</a></li>
+<li><a class="reference internal" href="#id13">1.0.6</a></li>
+<li><a class="reference internal" href="#id14">1.0.4</a></li>
+<li><a class="reference internal" href="#id15">1.0.3</a><ul>
+<li><a class="reference internal" href="#initial">initial</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="exceptions.html"
+                        title="previous chapter">Exception Classes</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/release_notes.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="exceptions.html" title="Exception Classes"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">python-fedex 2.3.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2016, Python Fedex Devs.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.1.
+    </div>
+  </body>
+</html>

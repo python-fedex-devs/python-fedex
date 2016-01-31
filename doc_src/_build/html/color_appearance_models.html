@@ -1,0 +1,162 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Color Appearance Models &mdash; python-fedex 2.3.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '2.3.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="python-fedex 2.3.0 documentation" href="index.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="nav-item nav-item-0"><a href="index.html">python-fedex 2.3.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="id1">
+<h1>Color Appearance Models<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h1>
+<p>Color appearance models allow the prediction of perceptual correlates (e.g., lightness, chroma or hue) of a given
+surface color under certain viewing conditions (e.g., a certain illuminant, surround or background). The complexity of
+color appearance models can range from very low, e.g., CIELAB can technically be considered a color appearance model,
+to very complex models that take into account a large number color appearance phenomena.</p>
+<p>Each of the classes in this module represents a specific model and its computation, yielding the predicted perceptual
+correlates as instance attributes.
+Discussing the details of each model go beyond this documentation, but we provide references to the relevant
+literature for each model and would advice familiarising yourself with it, before using a given models.</p>
+<div class="section" id="example">
+<h2>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><div class="highlight"><pre><span class="c"># Color stimulus</span>
+<span class="n">color</span> <span class="o">=</span> <span class="n">XYZColor</span><span class="p">(</span><span class="mf">19.01</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mf">21.78</span><span class="p">)</span>
+
+<span class="c"># The two illuminants that will be compared.</span>
+<span class="n">illuminant_d65</span> <span class="o">=</span> <span class="n">XYZColor</span><span class="p">(</span><span class="mf">95.05</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mf">108.88</span><span class="p">)</span>
+<span class="n">illuminant_a</span> <span class="o">=</span> <span class="n">XYZColor</span><span class="p">(</span><span class="mf">109.85</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mf">35.58</span><span class="p">)</span>
+
+<span class="c"># Background relative luminance</span>
+<span class="n">y_b</span> <span class="o">=</span> <span class="mi">20</span>
+
+<span class="c"># Adapting luminance</span>
+<span class="n">l_a</span> <span class="o">=</span> <span class="mf">328.31</span>
+
+<span class="c"># Surround condition assumed to be average (see CIECAM02 documentation for values)</span>
+<span class="n">c</span> <span class="o">=</span> <span class="mf">0.69</span>
+<span class="n">n_c</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">f</span> <span class="o">=</span> <span class="mi">1</span>
+
+<span class="n">model</span> <span class="o">=</span> <span class="n">CIECAM02</span><span class="p">(</span><span class="n">color</span><span class="o">.</span><span class="n">xyz_x</span><span class="p">,</span> <span class="n">color</span><span class="o">.</span><span class="n">xyz_y</span><span class="p">,</span> <span class="n">color</span><span class="o">.</span><span class="n">xyz_z</span><span class="p">,</span>
+                 <span class="n">illuminant_d65</span><span class="o">.</span><span class="n">xyz_x</span><span class="p">,</span> <span class="n">illuminant_d65</span><span class="o">.</span><span class="n">xyz_y</span><span class="p">,</span> <span class="n">illuminant_d65</span><span class="o">.</span><span class="n">xyz_z</span><span class="p">,</span>
+                 <span class="n">y_b</span><span class="p">,</span> <span class="n">l_a</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">n_c</span><span class="p">,</span> <span class="n">f</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="nayatani95-et-al-model">
+<h2>Nayatani95 et al. Model<a class="headerlink" href="#nayatani95-et-al-model" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="hunt-model">
+<h2>Hunt Model<a class="headerlink" href="#hunt-model" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="rlab-model">
+<h2>RLAB Model<a class="headerlink" href="#rlab-model" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="atd95-model">
+<h2>ATD95 Model<a class="headerlink" href="#atd95-model" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="llab-model">
+<h2>LLAB Model<a class="headerlink" href="#llab-model" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="ciecam02-model">
+<h2>CIECAM02 Model<a class="headerlink" href="#ciecam02-model" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="ciecam02-m1-model">
+<h2>CIECAM02-m1 Model<a class="headerlink" href="#ciecam02-m1-model" title="Permalink to this headline">¶</a></h2>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Color Appearance Models</a><ul>
+<li><a class="reference internal" href="#example">Example</a></li>
+<li><a class="reference internal" href="#nayatani95-et-al-model">Nayatani95 et al. Model</a></li>
+<li><a class="reference internal" href="#hunt-model">Hunt Model</a></li>
+<li><a class="reference internal" href="#rlab-model">RLAB Model</a></li>
+<li><a class="reference internal" href="#atd95-model">ATD95 Model</a></li>
+<li><a class="reference internal" href="#llab-model">LLAB Model</a></li>
+<li><a class="reference internal" href="#ciecam02-model">CIECAM02 Model</a></li>
+<li><a class="reference internal" href="#ciecam02-m1-model">CIECAM02-m1 Model</a></li>
+</ul>
+</li>
+</ul>
+
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/color_appearance_models.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="nav-item nav-item-0"><a href="index.html">python-fedex 2.3.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2016, Python Fedex Devs.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.1.
+    </div>
+  </body>
+</html>

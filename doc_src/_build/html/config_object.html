@@ -1,0 +1,185 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Config Object &mdash; python-fedex 2.3.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '2.3.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="python-fedex 2.3.0 documentation" href="index.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="nav-item nav-item-0"><a href="index.html">python-fedex 2.3.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="id1">
+<h1>Config Object<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h1>
+<p>A standardized configuration container object used
+by python-fedex.</p>
+<dl class="class">
+<dt id="fedex.config.FedexConfig">
+<em class="property">class </em><code class="descclassname">fedex.config.</code><code class="descname">FedexConfig</code><span class="sig-paren">(</span><em>key</em>, <em>password</em>, <em>account_number=None</em>, <em>meter_number=None</em>, <em>freight_account_number=None</em>, <em>integrator_id=None</em>, <em>wsdl_path=None</em>, <em>express_region_code=None</em>, <em>use_test_server=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fedex/config.html#FedexConfig"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fedex.config.FedexConfig" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="http://docs.python.org/library/functions.html#object" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">object</span></code></a></p>
+<p>Base configuration class that is used for the different Fedex SOAP calls.
+These are generally passed to the Fedex request classes as arguments.
+You may instantiate a L{FedexConfig} object with the minimal C{key} and
+C{password} arguments and set the instance variables documented below
+at a later time if you must.</p>
+<p>&#64;type key: L{str}
+&#64;param key: Developer test key.
+&#64;type password: L{str}
+&#64;param password: The Fedex-generated password for your Web Systems</p>
+<blockquote>
+<div>account. This is generally emailed to you after registration.</div></blockquote>
+<p>&#64;type account_number: L{str}
+&#64;keyword account_number: The account number sent to you by Fedex after</p>
+<blockquote>
+<div>registering for Web Services.</div></blockquote>
+<p>&#64;type meter_number: L{str}
+&#64;keyword meter_number: The meter number sent to you by Fedex after</p>
+<blockquote>
+<div>registering for Web Services.</div></blockquote>
+<p>&#64;type freight_account_number: L{str}
+&#64;keyword freight_account_number: The freight account number sent to you</p>
+<blockquote>
+<div>by Fedex after registering for Web Services.</div></blockquote>
+<p>&#64;type integrator_id: L{str}
+&#64;keyword integrator_id: The integrator string sent to you by Fedex after</p>
+<blockquote>
+<div>registering for Web Services.</div></blockquote>
+<p>&#64;type wsdl_path: L{str}
+&#64;keyword wsdl_path: In the event that you want to override the path to</p>
+<blockquote>
+<div>your WSDL directory, do so with this argument.</div></blockquote>
+<p>&#64;type use_test_server: L{bool}
+&#64;keyword use_test_server: When this is True, test server WSDLs are used</p>
+<blockquote>
+<div>instead of the production server. You will also need to make sure
+that your L{FedexConfig} object has a production account number,
+meter number, authentication key, and password.</div></blockquote>
+<dl class="attribute">
+<dt id="fedex.config.FedexConfig.account_number">
+<code class="descname">account_number</code><em class="property"> = None</em><a class="headerlink" href="#fedex.config.FedexConfig.account_number" title="Permalink to this definition">¶</a></dt>
+<dd><p>&#64;ivar: Web Services account number.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="fedex.config.FedexConfig.express_region_code">
+<code class="descname">express_region_code</code><em class="property"> = None</em><a class="headerlink" href="#fedex.config.FedexConfig.express_region_code" title="Permalink to this definition">¶</a></dt>
+<dd><p>&#64;ivar: Web services ExpressRegionCode</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="fedex.config.FedexConfig.freight_account_number">
+<code class="descname">freight_account_number</code><em class="property"> = None</em><a class="headerlink" href="#fedex.config.FedexConfig.freight_account_number" title="Permalink to this definition">¶</a></dt>
+<dd><p>&#64;ivar: Web Services freight accountnumber.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="fedex.config.FedexConfig.integrator_id">
+<code class="descname">integrator_id</code><em class="property"> = None</em><a class="headerlink" href="#fedex.config.FedexConfig.integrator_id" title="Permalink to this definition">¶</a></dt>
+<dd><p>&#64;ivar: Web services integrator ID.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="fedex.config.FedexConfig.key">
+<code class="descname">key</code><em class="property"> = None</em><a class="headerlink" href="#fedex.config.FedexConfig.key" title="Permalink to this definition">¶</a></dt>
+<dd><p>&#64;ivar: Developer test key.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="fedex.config.FedexConfig.meter_number">
+<code class="descname">meter_number</code><em class="property"> = None</em><a class="headerlink" href="#fedex.config.FedexConfig.meter_number" title="Permalink to this definition">¶</a></dt>
+<dd><p>&#64;ivar: Web services meter number.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="fedex.config.FedexConfig.password">
+<code class="descname">password</code><em class="property"> = None</em><a class="headerlink" href="#fedex.config.FedexConfig.password" title="Permalink to this definition">¶</a></dt>
+<dd><p>&#64;ivar: Fedex Web Services password.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="fedex.config.FedexConfig.use_test_server">
+<code class="descname">use_test_server</code><em class="property"> = None</em><a class="headerlink" href="#fedex.config.FedexConfig.use_test_server" title="Permalink to this definition">¶</a></dt>
+<dd><p>&#64;ivar: When True, point to the test server.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/config_object.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="nav-item nav-item-0"><a href="index.html">python-fedex 2.3.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2016, Python Fedex Devs.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.1.
+    </div>
+  </body>
+</html>
