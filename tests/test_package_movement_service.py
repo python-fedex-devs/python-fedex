@@ -18,6 +18,7 @@ from tests.common import get_fedex_config
 CONFIG_OBJ = get_fedex_config()
 
 logging.getLogger('suds').setLevel(logging.ERROR)
+logging.getLogger('fedex').setLevel(logging.INFO)
 
 
 @unittest.skipIf(not CONFIG_OBJ.account_number, "No credentials provided.")

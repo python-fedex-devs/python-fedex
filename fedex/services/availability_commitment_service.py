@@ -32,7 +32,7 @@ class FedexAvailabilityCommitmentRequest(FedexBaseService):
         }
 
         self.CarrierCode = None
-        """ivar: Carrier Code Default to Fedex (FDXE), or can bbe FDXG."""
+        """@ivar: Carrier Code Default to Fedex (FDXE), or can bbe FDXG."""
 
         self.Origin = None
         """@ivar: Holds Origin Address WSDL object."""
@@ -65,7 +65,8 @@ class FedexAvailabilityCommitmentRequest(FedexBaseService):
         Create the data structure and get it ready for the WSDL request.
         """
         self.CarrierCode = 'FDXE'
-        self.Origin = self.Destination = self.client.factory.create('Address')
+        self.Origin = self.client.factory.create('Address')
+        self.Destination = self.client.factory.create('Address')
         self.ShipDate = datetime.date.today().isoformat()
         self.Service = None
         self.Packaging = 'YOUR_PACKAGING'

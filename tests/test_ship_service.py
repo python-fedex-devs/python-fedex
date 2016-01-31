@@ -16,6 +16,7 @@ from tests.common import get_fedex_config
 CONFIG_OBJ = get_fedex_config()
 
 logging.getLogger('suds').setLevel(logging.ERROR)
+logging.getLogger('fedex').setLevel(logging.INFO)
 
 
 @unittest.skipIf(not CONFIG_OBJ.account_number, "No credentials provided.")
@@ -75,7 +76,7 @@ class ShipServiceTests(unittest.TestCase):
         shipment.send_request()
 
         assert shipment.response
-        assert shipment.response.HighestSeverity == 'SUCCESS'
+        assert shipment.response.HighestSeverity in ['SUCCESS', 'WARNING']
         track_id = shipment.response.CompletedShipmentDetail.CompletedPackageDetails[0].TrackingIds[0].TrackingNumber
         assert track_id
 

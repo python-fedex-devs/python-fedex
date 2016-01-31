@@ -1,13 +1,9 @@
+.. _release_notes:
+
+.. include:: global.txt
+
 Change Log
 ==========
-
-2.3.1
------
-
-* Set fedex logging to INFO for tests. (radzhome)
-* Sphinx documentation (hosted on read the docs). (radzhome)
-* Update Ship Service test to allow warnings. (radzhome)
-* Added log warning for requests that yield a WARNING. (radzhome)
 
 2.3.0
 -----
@@ -127,3 +123,10 @@ Change Log
 
 * Wrote some label certification modules that can help
   with the label certification process. (gtaylor)
+
+
+initial
+^^^^^^^
+
+* 1.0
+

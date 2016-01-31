@@ -33,10 +33,10 @@ class FedexValidatePostalRequest(FedexBaseService):
         }
 
         self.CarrierCode = None
-        """ivar: Carrier Code Default to Fedex (FDXE), or can bbe FDXG."""
+        """@ivar: Carrier Code Default to Fedex (FDXE), or can bbe FDXG."""
 
         self.RoutingCode = None
-        """ivar: Routing Code Default to FDSD."""
+        """@ivar: Routing Code Default to FDSD."""
 
         self.Address = None
         """@ivar: Holds Address WSDL objects."""
