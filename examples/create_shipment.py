@@ -107,11 +107,20 @@ package1_weight = shipment.create_wsdl_object_of_type('Weight')
 package1_weight.Value = 1.0
 package1_weight.Units = "LB"
 
+# Insured Value
+# package1_insure = shipment.create_wsdl_object_of_type('Money')
+# package1_insure.Currency = 'USD'
+# package1_insure.Amount = 1.0
+
 # Create PackageLineItem
 package1 = shipment.create_wsdl_object_of_type('RequestedPackageLineItem')
 # BAG, BARREL, BASKET, BOX, BUCKET, BUNDLE, CARTON, CASE, CONTAINER, ENVELOPE etc..
 package1.PhysicalPackaging = 'ENVELOPE'
 package1.Weight = package1_weight
+
+# Add Insured and Total Insured values.
+# package1.InsuredValue = package1_insure
+# shipment.RequestedShipment.TotalInsuredValue = package1_insure
 
 # Add a signature option for the package using SpecialServicesRequested or comment out.
 # SpecialServiceTypes can be APPOINTMENT_DELIVERY, COD, DANGEROUS_GOODS, DRY_ICE, SIGNATURE_OPTION etc..
