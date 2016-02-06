@@ -122,6 +122,24 @@ package1.Weight = package1_weight
 # package1.InsuredValue = package1_insure
 # shipment.RequestedShipment.TotalInsuredValue = package1_insure
 
+# Add customer reference
+# customer_reference = shipment.create_wsdl_object_of_type('CustomerReference')
+# customer_reference.CustomerReferenceType="CUSTOMER_REFERENCE"
+# customer_reference.Value = "your customer reference number"
+# package1.CustomerReferences.append(customer_reference)
+
+# Add department number
+# department_number = shipment.create_wsdl_object_of_type('CustomerReference')
+# department_number.CustomerReferenceType="DEPARTMENT_NUMBER"
+# department_number.Value = "your department number"
+# package1.CustomerReferences.append(department_number)
+
+# Add invoice number
+# invoice_number = shipment.create_wsdl_object_of_type('CustomerReference')
+# invoice_number.CustomerReferenceType="INVOICE_NUMBER"
+# invoice_number.Value = "your invoice number"
+# package1.CustomerReferences.append(invoice_number)
+
 # Add a signature option for the package using SpecialServicesRequested or comment out.
 # SpecialServiceTypes can be APPOINTMENT_DELIVERY, COD, DANGEROUS_GOODS, DRY_ICE, SIGNATURE_OPTION etc..
 package1.SpecialServicesRequested.SpecialServiceTypes = 'SIGNATURE_OPTION'
