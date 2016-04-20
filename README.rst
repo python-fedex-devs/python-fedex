@@ -75,6 +75,7 @@ Todos
 
 - Increase service specific request validation
 - Remove deprecated services (package movement service)
+- Pickup service unit tests
 
 Legal
 -----
