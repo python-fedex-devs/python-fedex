@@ -70,6 +70,12 @@ Developer Portal: http://www.fedex.com/us/developer/
 
 Updates To Services: https://www.fedex.com/us/developer/web-services/process.html (FedEx Web Services Announcements)
 
+
+Related Projects
+----------------
+
+- FedEx Commercial Invoice Generation, see https://github.com/radzhome/fedex-commercial-invoice
+
 Todos
 -----
 
