@@ -1,6 +1,11 @@
 Change Log
 ==========
 
+2.4.0
+-----
+* Pickup Service usingv11 WSDL (hornedbull)
+* TODO: Added examples, documentation and unit tests for Pickup Service.
+
 2.3.1
 -----
 
