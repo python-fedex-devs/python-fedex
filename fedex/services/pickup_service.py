@@ -20,6 +20,7 @@ class FedexCreatePickupRequest(FedexBaseService):
         self.Remarks = None
         self.CommodityDescription = None
         self.CountryRelationship = None
+        self.PickupServiceCategory = None
         super(FedexCreatePickupRequest, self).__init__(self._config_obj, 'PickupService_v11.wsdl', *args, **kwargs)
 
     def _prepare_wsdl_objects(self):
@@ -28,9 +29,8 @@ class FedexCreatePickupRequest(FedexBaseService):
         self.OriginDetail.PickupLocation = self.client.factory.create('ContactAndAddress')
         self.OriginDetail.PickupLocation.Contact = self.client.factory.create('Contact')
         self.OriginDetail.PickupLocation.Address = self.client.factory.create('Address')
-
-        self.OriginDetail.PackageLocation = self.client.factory.create('PickupBuildingLocationType')
-        self.OriginDetail.BuildingPart = self.client.factory.create('BuildingPartCode')
+        self.OriginDetail.PackageLocation = None
+        self.OriginDetail.BuildingPart = None
 
         self.TotalWeight = self.client.factory.create('Weight')
 
@@ -55,6 +55,7 @@ class FedexCreatePickupRequest(FedexBaseService):
             TransactionDetail=self.TransactionDetail,
             Version=self.VersionId,
             OriginDetail=self.OriginDetail,
+            PickupServiceCategory=self.PickupServiceCategory,
             PackageCount=self.PackageCount,
             TotalWeight=self.TotalWeight,
             CarrierCode=self.CarrierCode,
@@ -63,3 +64,4 @@ class FedexCreatePickupRequest(FedexBaseService):
             CommodityDescription=self.CommodityDescription,
             CountryRelationship=self.CountryRelationship
         )
+
