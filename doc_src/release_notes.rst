@@ -5,6 +5,13 @@
 Change Log
 ==========
 
+2.4.0
+-----
+
+* Pickup Service usingv11 WSDL (hornedbull)
+* Added documentation and unit tests for Pickup Service. (radzhome)
+* Update package data to include tools (noodlebreak)
+
 2.3.0
 -----
 

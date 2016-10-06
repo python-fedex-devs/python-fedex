@@ -22,11 +22,17 @@ logging.getLogger('fedex').setLevel(logging.INFO)
 @unittest.skipIf(not CONFIG_OBJ.account_number, "No credentials provided.")
 class FedexCreatePickupRequestTests(unittest.TestCase):
     """
-    These tests verify that the rate service WSDL is in good shape.
+    These tests verify that the pikckup service WSDL is in good shape.
     """
 
-    def test_rate(self):
-        pickup_service = FedexCreatePickupRequest(CONFIG_OBJ)
+    def setUp(self):
+        self.config_obj = get_fedex_config()
+
+    def tearDown(self):
+        pass
+
+    def test_pickup_request(self):
+        pickup_service = FedexCreatePickupRequest(self.config_obj)
 
         pickup_service.OriginDetail.PickupLocation.Contact.PersonName = 'Sender Name'
         pickup_service.OriginDetail.PickupLocation.Contact.EMailAddress = 'test@user.com'

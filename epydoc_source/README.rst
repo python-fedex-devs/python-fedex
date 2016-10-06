@@ -8,4 +8,8 @@ using epydoc 3.0.1. The following was used to generate doc:
     epydoc -v -o 2.X.X ../fedex/
 
 The epydoc documentation is hosted at https://pythonhosted.org/fedex/.
-Latest documentation is now generated using Sphinx.
+
+Latest documentation is now generated using Sphinx. Updates can be made to the
+*.rst files in doc_src:
+
+   cd python-fedex/doc_src

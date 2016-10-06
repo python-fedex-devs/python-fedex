@@ -65,6 +65,14 @@ Validates the postal codes for a given address.
 .. autoclass:: fedex.services.country_service.FedexValidatePostalRequest
 
 
+Pickup Service
+--------------
+
+Creates a fedex pickup request.
+
+.. autoclass:: fedex.services.pickup_service.FedexCreatePickupRequest
+
+
 Package Movement Service
 ------------------------
 

@@ -14,7 +14,7 @@ CLASSIFIERS = [
     'Topic :: Software Development :: Libraries :: Python Modules'
 ]
 
-KEYWORDS = 'fedex soap suds wrapper rate location ship service'
+KEYWORDS = 'fedex soap suds wrapper rate track avs location ship pickup country availability commitment package service'
 
 setup(name='fedex',
       version=fedex.VERSION,
@@ -27,7 +27,7 @@ setup(name='fedex',
       download_url='http://pypi.python.org/pypi/fedex/',
       packages=['fedex', 'fedex.services', 'fedex.printers'],
       package_dir={'fedex': 'fedex'},
-      package_data={'fedex': ['wsdl/*.wsdl', 'wsdl/test_server_wsdl/*.wsdl', 'tools/*.py']},
+      package_data={'fedex': ['wsdl/*.wsdl', 'wsdl/test_server_wsdl/*.wsdl', 'tools/*']},
       platforms=['Platform Independent'],
       license='BSD',
       classifiers=CLASSIFIERS,
