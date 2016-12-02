@@ -262,7 +262,6 @@ class FedexProcessInternationalShipmentRequest(FedexBaseService):
         #  Start with no commodities, user must add them.
         customs_clearance_detail.Commodities = []
 
-
         self.RequestedShipment.CustomsClearanceDetail = customs_clearance_detail
 
         # NONE, PREFERRED or LIST

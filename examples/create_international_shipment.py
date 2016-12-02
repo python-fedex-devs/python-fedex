@@ -135,6 +135,8 @@ commodity.UnitPrice.Amount = 10
 commodity.CustomsValue.Currency = "USD"
 commodity.CustomsValue.Amount = quantity * commodity.UnitPrice.Amount
 
+# if you have more then one commodity in your shipment, CustomsClearanceDetail.CustomsValue.Amount
+# shall be equal to the sum of commodity.CustomsValue.Amount for all commodities
 shipment.RequestedShipment.CustomsClearanceDetail.CustomsValue.Amount = commodity.CustomsValue.Amount
 shipment.RequestedShipment.CustomsClearanceDetail.CustomsValue.Currency = commodity.CustomsValue.Currency
 
