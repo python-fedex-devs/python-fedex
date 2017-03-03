@@ -196,8 +196,8 @@ Get JSON and Dictionary Response
 
 .. code-block:: python
 
-    from fedex.tools.response_tools import sobject_to_dict
-    from fedex.tools.response_tools import sobject_to_json
+    from fedex.tools.conversion import sobject_to_dict
+    from fedex.tools.conversion import sobject_to_json
     response_dict = sobject_to_dict(shipment.response)
     response_json = sobject_to_json(shipment.response)
 

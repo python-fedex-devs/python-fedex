@@ -86,11 +86,11 @@ location_request.send_request()
 
 # This will convert the response to a python dict object. To
 # make it easier to work with.
-# from fedex.tools.response_tools import basic_sobject_to_dict
+# from fedex.tools.conversion import basic_sobject_to_dict
 # print(basic_sobject_to_dict(location_request.response))
 
 # This will dump the response data dict to json.
-# from fedex.tools.response_tools import sobject_to_json
+# from fedex.tools.conversion import sobject_to_json
 # print(sobject_to_json(location_request.response))
 
 # Here is the overall end result of the query.
