@@ -25,8 +25,9 @@ avc_request = FedexAvailabilityCommitmentRequest(CONFIG_OBJ, customer_transactio
 avc_request.Origin.PostalCode = '29631'
 avc_request.Origin.CountryCode = 'US'
 
+
 # Specify the destination postal code and country code. These fields are required.
-avc_request.Destination.PostalCode = '27577'
+avc_request.Destination.PostalCode = '20301'
 avc_request.Destination.CountryCode = 'US'
 
 # Can be set to FEDEX_TUBE, YOUR_PACKAGING, FEDEX_BOX etc.. Defaults to YOUR_PACKAGING if not set.
