@@ -132,7 +132,9 @@ class FedexBaseService(object):
             self.logger.info("Using production server.")
             self.wsdl_path = os.path.join(config_obj.wsdl_path, wsdl_name)
 
-        self.client = Client('file:///%s' % self.wsdl_path.lstrip('/'), plugins=[GeneralSudsPlugin()])
+        import suds_requests
+        self.client = Client('file:///%s' % self.wsdl_path.lstrip('/'), plugins=[GeneralSudsPlugin()],
+                transport=suds_requests.RequestsTransport())
         # self.client.options.cache.clear()  # Clear the cache, then re-init client when changing wsdl file.
 
         self.VersionId = None
