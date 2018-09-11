@@ -8,7 +8,7 @@ class FedexCreatePickupRequest(FedexBaseService):
         # Holds version info for the VersionId SOAP object.
         self._version_info = {
             'service_id': 'disp',
-            'major': '11',
+            'major': '17',
             'intermediate': '0',
             'minor': '0'
         }
@@ -21,7 +21,7 @@ class FedexCreatePickupRequest(FedexBaseService):
         self.CommodityDescription = None
         self.CountryRelationship = None
         self.PickupServiceCategory = None
-        super(FedexCreatePickupRequest, self).__init__(self._config_obj, 'PickupService_v11.wsdl', *args, **kwargs)
+        super(FedexCreatePickupRequest, self).__init__(self._config_obj, 'PickupService_v17.wsdl', *args, **kwargs)
 
     def _prepare_wsdl_objects(self):
         self.OriginDetail = self.client.factory.create('PickupOriginDetail')

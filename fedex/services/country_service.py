@@ -27,7 +27,7 @@ class FedexValidatePostalRequest(FedexBaseService):
         # Holds version info for the VersionId SOAP object.
         self._version_info = {
             'service_id': 'cnty',
-            'major': '4',
+            'major': '8',
             'intermediate': '0',
             'minor': '0'
         }
@@ -48,7 +48,7 @@ class FedexValidatePostalRequest(FedexBaseService):
         """@ivar: Holds the CheckForMismatch boolean objects."""
 
         super(FedexValidatePostalRequest, self).__init__(
-                self._config_obj, 'CountryService_v4.wsdl', *args, **kwargs)
+                self._config_obj, 'CountryService_v8.wsdl', *args, **kwargs)
 
     def _prepare_wsdl_objects(self):
         """

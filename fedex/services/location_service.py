@@ -28,7 +28,7 @@ class FedexSearchLocationRequest(FedexBaseService):
         # Holds version info for the VersionId SOAP object.
         self._version_info = {
             'service_id': 'locs',
-            'major': '3',
+            'major': '9',
             'intermediate': '0',
             'minor': '0'
         }
@@ -53,7 +53,7 @@ class FedexSearchLocationRequest(FedexBaseService):
         """@ivar: Holds the LocationSortDetail WSDL object."""
 
         super(FedexSearchLocationRequest, self).__init__(
-                self._config_obj, 'LocationsService_v3.wsdl', *args, **kwargs)
+                self._config_obj, 'LocationsService_v9.wsdl', *args, **kwargs)
 
     def _prepare_wsdl_objects(self):
         """
