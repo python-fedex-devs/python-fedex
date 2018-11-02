@@ -439,7 +439,7 @@
   </binding>
   <service name="CountryService">
     <port name="CountryServicePort" binding="ns:CountryServiceSoapBinding">
-      <s1:address location="https://beta.fedex.com:443/web-services/cnty"/>
+      <s1:address location="https://ws.fedex.com:443/web-services/cnty"/>
     </port>
   </service>
 </definitions>
