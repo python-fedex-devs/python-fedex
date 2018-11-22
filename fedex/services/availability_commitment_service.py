@@ -26,7 +26,7 @@ class FedexAvailabilityCommitmentRequest(FedexBaseService):
         # Holds version info for the VersionId SOAP object.
         self._version_info = {
             'service_id': 'vacs',
-            'major': '4',
+            'major': '8',
             'intermediate': '0',
             'minor': '0'
         }
@@ -58,7 +58,7 @@ class FedexAvailabilityCommitmentRequest(FedexBaseService):
         # Exception: binding 'ns:ValidationAvailabilityAndCommitmentServiceSoapBinding', not-found
 
         super(FedexAvailabilityCommitmentRequest, self).__init__(
-                self._config_obj, 'AvailabilityAndCommitmentService_v4.wsdl', *args, **kwargs)
+                self._config_obj, 'ValidationAvailabilityAndCommitmentService_v8.wsdl', *args, **kwargs)
 
     def _prepare_wsdl_objects(self):
         """

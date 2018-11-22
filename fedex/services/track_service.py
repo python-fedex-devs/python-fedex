@@ -41,7 +41,7 @@ class FedexTrackRequest(FedexBaseService):
         # Holds version info for the VersionId SOAP object.
         self._version_info = {
             'service_id': 'trck',
-            'major': '10',
+            'major': '16',
             'intermediate': '0',
             'minor': '0'
         }
@@ -54,7 +54,7 @@ class FedexTrackRequest(FedexBaseService):
 
         # Call the parent FedexBaseService class for basic setup work.
         super(FedexTrackRequest, self).__init__(
-                self._config_obj, 'TrackService_v10.wsdl', *args, **kwargs)
+                self._config_obj, 'TrackService_v16.wsdl', *args, **kwargs)
         self.IncludeDetailedScans = False
 
     def _prepare_wsdl_objects(self):

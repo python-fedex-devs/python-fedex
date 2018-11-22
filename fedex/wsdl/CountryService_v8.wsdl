@@ -1,6 +1,6 @@
-<definitions xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:ns="http://fedex.com/ws/cnty/v4" xmlns:s1="http://schemas.xmlsoap.org/wsdl/soap/" targetNamespace="http://fedex.com/ws/cnty/v4" name="CountryServiceDefinitions">
+<definitions xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:ns="http://fedex.com/ws/cnty/v8" xmlns:s1="http://schemas.xmlsoap.org/wsdl/soap/" targetNamespace="http://fedex.com/ws/cnty/v8" name="CountryServiceDefinitions">
   <types>
-    <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://fedex.com/ws/cnty/v4">
+    <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://fedex.com/ws/cnty/v8">
       <xs:element name="ValidatePostalReply" type="ns:ValidatePostalReply"/>
       <xs:element name="ValidatePostalRequest" type="ns:ValidatePostalRequest"/>
       <xs:complexType name="Address">
@@ -46,6 +46,11 @@
           <xs:element name="Residential" type="xs:boolean" minOccurs="0">
             <xs:annotation>
               <xs:documentation>Indicates whether this address residential (as opposed to commercial).</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name="GeographicCoordinates" type="xs:string" minOccurs="0">
+            <xs:annotation>
+              <xs:documentation>The geographic coordinates cooresponding to this address.</xs:documentation>
             </xs:annotation>
           </xs:element>
         </xs:sequence>
@@ -179,7 +184,7 @@
           </xs:element>
           <xs:element name="MessageParameters" type="ns:NotificationParameter" minOccurs="0" maxOccurs="unbounded">
             <xs:annotation>
-              <xs:documentation>A collection of name/value pairs that provide specific data to help the client determine the nature of an error (or warning, etc.) witout having to parse the message string.</xs:documentation>
+              <xs:documentation>A collection of name/value pairs that provide specific data to help the client determine the nature of an error (or warning, etc.) without having to parse the message string.</xs:documentation>
             </xs:annotation>
           </xs:element>
         </xs:sequence>
@@ -222,6 +227,7 @@
       </xs:simpleType>
       <xs:complexType name="PostalDetail">
         <xs:sequence>
+          <xs:element name="CountryCode" type="xs:string" minOccurs="0"/>
           <xs:element name="StateOrProvinceCode" type="xs:string" minOccurs="0"/>
           <xs:element name="CityFirstInitials" type="xs:string" minOccurs="0"/>
           <xs:element name="CleanedPostalCode" type="xs:string" minOccurs="0"/>
@@ -245,7 +251,8 @@
           <xs:enumeration value="DRY_ICE"/>
           <xs:enumeration value="EAST_COAST_SPECIAL"/>
           <xs:enumeration value="ELECTRONIC_TRADE_DOCUMENTS"/>
-          <xs:enumeration value="EMAIL_NOTIFICATION"/>
+          <xs:enumeration value="EVENT_NOTIFICATION"/>
+          <xs:enumeration value="EXCLUDE_FROM_CONSOLIDATION"/>
           <xs:enumeration value="EXCLUSIVE_USE"/>
           <xs:enumeration value="EXHIBITION_DELIVERY"/>
           <xs:enumeration value="EXHIBITION_PICKUP"/>
@@ -276,6 +283,7 @@
           <xs:enumeration value="LIMITED_ACCESS_PICKUP"/>
           <xs:enumeration value="MARKING_OR_TAGGING"/>
           <xs:enumeration value="NON_BUSINESS_TIME"/>
+          <xs:enumeration value="OVER_LENGTH"/>
           <xs:enumeration value="PALLETS_PROVIDED"/>
           <xs:enumeration value="PALLET_SHRINKWRAP"/>
           <xs:enumeration value="PALLET_WEIGHT_ALLOWANCE"/>
@@ -394,7 +402,7 @@
               <xs:documentation>Identifies a system or sub-system which performs an operation.</xs:documentation>
             </xs:annotation>
           </xs:element>
-          <xs:element name="Major" type="xs:int" fixed="4" minOccurs="1">
+          <xs:element name="Major" type="xs:int" fixed="8" minOccurs="1">
             <xs:annotation>
               <xs:documentation>Identifies the service business level.</xs:documentation>
             </xs:annotation>
@@ -428,7 +436,7 @@
   <binding name="CountryServiceSoapBinding" type="ns:CountryPortType">
     <s1:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
     <operation name="validatePostal">
-      <s1:operation soapAction="http://fedex.com/ws/cnty/v4/validatePostal" style="document"/>
+      <s1:operation soapAction="http://fedex.com/ws/cnty/v8/validatePostal" style="document"/>
       <input>
         <s1:body use="literal"/>
       </input>
@@ -439,7 +447,7 @@
   </binding>
   <service name="CountryService">
     <port name="CountryServicePort" binding="ns:CountryServiceSoapBinding">
-      <s1:address location="https://wsbeta.fedex.com:443/web-services/cnty"/>
+      <s1:address location="https://ws.fedex.com:443/web-services/cnty"/>
     </port>
   </service>
 </definitions>
