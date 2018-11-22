@@ -15,7 +15,7 @@ Python FedEx SOAP API Module
      :target: http://python-fedex.readthedocs.org/en/latest/?badge=latest
      :alt: Documentation Status
 
-:Author: Greg Taylor
+:Author: Greg Taylor, Radek Wojcik
 :Maintainer: Python FedEx Developers
 :License: BSD
 :Status: Stable
