@@ -8,7 +8,7 @@ import sys
 import datetime
 
 sys.path.insert(0, '..')
-from fedex.services.pickup_service import FedexCreatePickupRequest
+from fedex.services.pickup_service import FedexCreatePickupRequest, FedexPickupAvailabilityRequest
 
 # Common global config object for testing.
 from tests.common import get_fedex_config
@@ -76,6 +76,43 @@ class FedexCreatePickupRequestTests(unittest.TestCase):
         pickup_service.send_request()
 
         assert pickup_service.response.HighestSeverity == 'SUCCESS', pickup_service.response.Notifications[0].Message
+
+    def test_pickup_availability(self):
+        availability = FedexPickupAvailabilityRequest(self.config_obj)
+
+        availability.PickupType = 'ON_CALL'
+
+        availability.AccountNumber.Type = 'FEDEX_EXPRESS'
+        availability.AccountNumber.AccountNumber = self._get_config().account_number
+
+        availability.DispatchDate = datetime.datetime.now().strftime('%Y-%m-%d')
+        availability.PackageReadyTime = datetime.datetime.now().strftime('%H:%M:%S')
+        availability.CustomerCloseTime = '17:00:00'
+
+        availability.NumberOfBusinessDays = 2
+
+        availability.PickupAddress.PostalCode = 'M5V 3A4'
+        availability.PickupAddress.CountryCode = 'CA'
+        availability.PickupAddress.CountryName = 'Canada'
+
+        availability.PickupRequestType = 'SAME_DAY'
+
+        availability.ShipmentAttributes.ServiceType = 'PRIORITY_OVERNIGHT'
+        availability.ShipmentAttributes.PackagingType = 'YOUR_PACKAGING'
+
+        availability.ShipmentAttributes.Dimensions.Length = 12
+        availability.ShipmentAttributes.Dimensions.Width = 9
+        availability.ShipmentAttributes.Dimensions.Height = 1
+        availability.ShipmentAttributes.Dimensions.Units = 'IN'
+
+        availability.ShipmentAttributes.Weight.Units = 'KG'
+        availability.ShipmentAttributes.Weight.Value = 0.25
+
+        availability.send_request()
+
+        availability.send_request()
+
+        assert availability.response.HighestSeverity == 'SUCCESS', availability.response.Notifications[0].Message
 
 
 if __name__ == "__main__":
