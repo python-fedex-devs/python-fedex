@@ -12,7 +12,7 @@ import logging
 
 import suds
 from suds.client import Client
-from suds.plugin import MessagePlugin
+from suds.plugin import MessagePlugin 
 
 
 class GeneralSudsPlugin(MessagePlugin):
@@ -132,7 +132,7 @@ class FedexBaseService(object):
             self.logger.info("Using production server.")
             self.wsdl_path = os.path.join(config_obj.wsdl_path, wsdl_name)
 
-        self.client = Client('file:///%s' % self.wsdl_path.lstrip('/'), plugins=[GeneralSudsPlugin()])
+        self.client = Client('file:///%s' % self.wsdl_path.lstrip('/'), plugins=[GeneralSudsPlugin()], proxy=config_obj.proxy)
         # self.client.options.cache.clear()  # Clear the cache, then re-init client when changing wsdl file.
 
         self.VersionId = None
