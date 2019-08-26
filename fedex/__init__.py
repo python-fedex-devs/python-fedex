@@ -52,4 +52,4 @@ If you have any questions, problems, ideas, or patch submissions, please visit
 our U{Github project<http://github.com/gtaylor/python-fedex/>} and enter
 an issue in the U{Issue Tracker<http://github.com/gtaylor/python-fedex/issues>}.
 """
-VERSION = __version__ = '2.4.0'
+VERSION = __version__ = '2.4.1'
