@@ -9,7 +9,7 @@ logging.basicConfig(stream=sys.stdout, level=logging.INFO)
 
 avc_request = FedexAvailabilityCommitmentRequest(CONFIG_OBJ)
 
-# .StateOrProvinceCode availabile as well
+# .StateOrProvinceCode available as well
 avc_request.Origin.PostalCode = '60634'
 avc_request.Origin.CountryCode = 'US'
 avc_request.Destination.PostalCode = '19106'
