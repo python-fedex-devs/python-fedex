@@ -14,3 +14,4 @@ doc_src/_sources/*
 doc_src/_static/*
 doc_src/*.html
 doc_src/_build/*
+/venv
