@@ -143,3 +143,70 @@ class FedexPickupAvailabilityRequest(FedexBaseService):
             ShipmentAttributes=self.ShipmentAttributes,
             PackageDetails=self.PackageDetails
         )
+
+class FedexCancelPickupRequest(FedexBaseService):
+    """
+    This class allows you to cancel a pickup request, given a dispatch confirmation number.
+    """
+
+    def __init__(self, config_obj, *args, **kwargs):
+        """
+        Cancels a pickup request via a dispatch confirmation number.
+        """
+
+        self._config_obj = config_obj
+
+        # Holds version info for the VersionId SOAP object.
+        self._version_info = {'service_id': 'disp', 'major': '17',
+                              'intermediate': '0', 'minor': '0'}
+        self.CarrierCode = None
+        self.PickupConfirmationNumber = None
+        self.ScheduledDate = None
+        self.EndDate = None
+        self.Location = None
+        self.Remarks = None
+        self.ShippingChargesPayment = None
+        self.Reason = None
+        self.ContactName = None
+        self.PhoneNumber = None
+        self.PhoneExtension = None
+        # Call the parent FedexBaseService class for basic setup work.
+        super(FedexCancelPickupRequest, self).__init__(self._config_obj,
+                                                         'PickupService_v17.wsdl',
+                                                         *args, **kwargs)
+
+    def _prepare_wsdl_objects(self):
+        """
+        Preps the WSDL data structures for the user.
+        """
+
+        self.CarrierCode = self.client.factory.create('CarrierCodeType')
+        self.ShippingChargesPayment = self.client.factory.create('Payment')
+
+    def _assemble_and_send_request(self):
+        """
+        Fires off the Fedex request.
+        
+        @warning: NEVER CALL THIS METHOD DIRECTLY. CALL send_request(), WHICH RESIDES
+            ON FedexBaseService AND IS INHERITED.
+        """
+
+        # Fire off the query.
+        return self.client.service.cancelPickup(
+            WebAuthenticationDetail=self.WebAuthenticationDetail,
+            ClientDetail=self.ClientDetail,
+            TransactionDetail=self.TransactionDetail,
+            Version=self.VersionId,
+            CarrierCode=self.CarrierCode,
+            PickupConfirmationNumber=self.PickupConfirmationNumber,
+            ScheduledDate=self.ScheduledDate,
+            EndDate=self.EndDate,
+            Location=self.Location,
+            Remarks=self.Remarks,
+            ShippingChargesPayment=self.ShippingChargesPayment,
+            Reason=self.Reason,
+            ContactName=self.ContactName,
+            PhoneNumber=self.PhoneNumber,
+            PhoneExtension=self.PhoneExtension
+        )
+
