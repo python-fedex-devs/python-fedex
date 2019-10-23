@@ -11,7 +11,8 @@ def get_fedex_config():
     """
     # Test server (Enter your credentials here)
     return FedexConfig(key='',
-                       password='',
-                       account_number='',
-                       meter_number='',
-                       use_test_server=True)
+                         password='',
+                         account_number='',
+                         meter_number='',
+                         use_test_server=True,
+                         proxy = None)

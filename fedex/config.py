@@ -21,7 +21,7 @@ class FedexConfig(object):
     """
 
     def __init__(self, key, password, account_number=None, meter_number=None, freight_account_number=None,
-                 integrator_id=None, wsdl_path=None, express_region_code=None, use_test_server=False):
+                 integrator_id=None, wsdl_path=None, express_region_code=None, use_test_server=False, proxy=None):
         """
         @type key: L{str}
         @param key: Developer test key.
@@ -48,6 +48,10 @@ class FedexConfig(object):
             instead of the production server. You will also need to make sure
             that your L{FedexConfig} object has a production account number,
             meter number, authentication key, and password.
+        @type proxy: L{str}
+        @keyword proxy: Enter your list of proxy servers int the format 
+            proxy = {'http': "http://......:8080", 'https': "http://.......:8080", }
+            if needed.
         """
         self.key = key
         """@ivar: Developer test key."""
@@ -65,6 +69,8 @@ class FedexConfig(object):
         """@ivar: Web services ExpressRegionCode"""
         self.use_test_server = use_test_server
         """@ivar: When True, point to the test server."""
+        self.proxy = proxy
+        """@ivar: A list of proxy servers."""
 
         # Allow overriding of the WDSL path.
         if wsdl_path is None:
