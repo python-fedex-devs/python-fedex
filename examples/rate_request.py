@@ -41,11 +41,13 @@ rate_request.RequestedShipment.ServiceType = 'FEDEX_GROUND'
 rate_request.RequestedShipment.PackagingType = 'YOUR_PACKAGING'
 
 # Shipper's address
+rate_request.RequestedShipment.Shipper.Address.StateOrProvinceCode = 'SC'
 rate_request.RequestedShipment.Shipper.Address.PostalCode = '29631'
 rate_request.RequestedShipment.Shipper.Address.CountryCode = 'US'
 rate_request.RequestedShipment.Shipper.Address.Residential = False
 
 # Recipient address
+rate_request.RequestedShipment.Recipient.Address.StateOrProvinceCode = 'NC'
 rate_request.RequestedShipment.Recipient.Address.PostalCode = '27577'
 rate_request.RequestedShipment.Recipient.Address.CountryCode = 'US'
 # This is needed to ensure an accurate rate quote with the response.
