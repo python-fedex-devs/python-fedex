@@ -88,13 +88,12 @@ shipment.RequestedShipment.LabelSpecification.ImageType = GENERATE_IMAGE_TYPE
 # See documentation for paper types, there quite a few.
 shipment.RequestedShipment.LabelSpecification.LabelStockType = 'PAPER_7X4.75'
 
-# This indicates if the top or bottom of the label comes out of the 
-# printer first.
-# BOTTOM_EDGE_OF_TEXT_FIRST or TOP_EDGE_OF_TEXT_FIRST
 # Timestamp in YYYY-MM-DDThh:mm:ss format, e.g. 2002-05-30T09:00:00
 shipment.RequestedShipment.ShipTimestamp = datetime.datetime.now().replace(microsecond=0).isoformat()
 
-# BOTTOM_EDGE_OF_TEXT_FIRST, TOP_EDGE_OF_TEXT_FIRST
+# This indicates if the top or bottom of the label comes out of the
+# printer first.
+# BOTTOM_EDGE_OF_TEXT_FIRST or TOP_EDGE_OF_TEXT_FIRST
 shipment.RequestedShipment.LabelSpecification.LabelPrintingOrientation = 'TOP_EDGE_OF_TEXT_FIRST'
 
 # Delete the flags we don't want.
