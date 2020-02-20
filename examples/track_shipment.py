@@ -57,7 +57,7 @@ print(track.response)
 
 # This will dump the response data dict to json.
 # from fedex.tools.conversion import sobject_to_json
-# print(basic_sobject_to_dict(track.response))
+# print(sobject_to_json(track.response))
 
 # Look through the matches (there should only be one for a tracking number
 # query), and show a few details about each shipment.
@@ -66,12 +66,13 @@ for match in track.response.CompletedTrackDetails[0].TrackDetails:
     print("Tracking #: {}".format(match.TrackingNumber))
     if hasattr(match, 'TrackingNumberUniqueIdentifier'):
         print("Tracking # UniqueID: {}".format(match.TrackingNumberUniqueIdentifier))
-    if hasattr(match, 'StatusDetail.Description'):
-        print("Status Description: {}".format(match.StatusDetail.Description))
-    if hasattr(match, 'StatusDetail.AncillaryDetails'):
-        print("Status AncillaryDetails Reason: {}".format(match.StatusDetail.AncillaryDetails[-1].Reason))
-        print("Status AncillaryDetails Description: {}"
-              "".format(match.StatusDetail.AncillaryDetails[-1].ReasonDescription))
+    if hasattr(match, 'StatusDetail'):
+        if hasattr(getattr(match, 'StatusDetail'), 'Description'):
+            print("Status Description: {}".format(match.StatusDetail.Description))
+        if hasattr(getattr(match, 'StatusDetail'), 'AncillaryDetails'):
+            print("Status AncillaryDetails Reason: {}".format(match.StatusDetail.AncillaryDetails[-1].Reason))
+            print("Status AncillaryDetails Description: {}"
+                  "".format(match.StatusDetail.AncillaryDetails[-1].ReasonDescription))
     if hasattr(match, 'ServiceCommitMessage'):
         print("Commit Message: {}".format(match.ServiceCommitMessage))
     if hasattr(match, 'Notification'):
