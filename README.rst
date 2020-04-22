@@ -39,8 +39,7 @@ Quick Start
 
 - Clone this repository.
 
-- Edit the `example_config.py` file in See `examples/ <examples/>`_ with your fedex credentials
-and run any of the provided examples.
+- Edit the `example_config.py` file in See `examples/ <examples/>`_ with your fedex credentials and run any of the provided examples.
 
 Documentation
 -------------
