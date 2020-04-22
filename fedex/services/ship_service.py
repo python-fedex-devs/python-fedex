@@ -180,7 +180,7 @@ class FedexDeleteShipmentRequest(FedexBaseService):
         self._version_info = {'service_id': 'ship', 'major': '23',
                               'intermediate': '0', 'minor': '0'}
         self.DeletionControlType = None
-        """@ivar: Holds the DeletrionControlType WSDL object."""
+        """@ivar: Holds the DeletionControlType WSDL object."""
         self.TrackingId = None
         """@ivar: Holds the TrackingId WSDL object."""
         # Call the parent FedexBaseService class for basic setup work.
