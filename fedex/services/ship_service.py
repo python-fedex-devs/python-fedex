@@ -83,7 +83,7 @@ class FedexProcessShipmentRequest(FedexBaseService):
         # Assume US.
         payor.ResponsibleParty.Address.CountryCode = 'US'
         # Grab the account number from the FedexConfig object by default.
-        payor.ResponsibleParty.AccountNumber - self._config_obj.account_number
+        payor.ResponsibleParty.AccountNumber = self._config_obj.account_number
         
         # ShippingChargesPayment WSDL object default values.
         shipping_charges_payment = self.client.factory.create('Payment')
