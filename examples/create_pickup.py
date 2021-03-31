@@ -54,8 +54,8 @@ pickup_service.PackageCount = '1'
 pickup_service.send_request()
 
 print('Pickup request sent:')
-print pickup_service.response.HighestSeverity == 'SUCCESS'
-print pickup_service.response.Notifications[0].Message
+print(pickup_service.response.HighestSeverity == 'SUCCESS')
+print(pickup_service.response.Notifications[0].Message)
 
 # Cancel the pickup request that we just got confirmation for
 cancel_pickup = FedexCancelPickupRequest(CONFIG_OBJ)

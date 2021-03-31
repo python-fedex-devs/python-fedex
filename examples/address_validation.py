@@ -102,7 +102,7 @@ for i in range(len(avs_request.response.AddressResults)):
             print("Supported Country: {}".format(cur_attribute.Value == 'true'))
         if cur_attribute.Name == "SuiteRequiredButMissing":
             print("Missing Suite: {}".format(cur_attribute.Value == 'true'))
-        if cur_attribute.Name == "CountrySupported":
+        if cur_attribute.Name == "InvalidSuiteNumber":
             print("Invalid Suite: {}".format(cur_attribute.Value == 'true'))
         if cur_attribute.Name == "MultipleMatches":
             print("Multiple Matches: {}".format(cur_attribute.Value == 'true'))
