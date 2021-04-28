@@ -224,16 +224,8 @@ class FedexLabelHelper:
     # ----------------------------------------------------
     # add information on duties
     def setDutiesPaymentInfo(self):
-        mParty = self.shipment.create_wsdl_object_of_type("Party")
-        mParty.AccountNumber = self.CONFIG_OBJ.account_number
-        mParty.Address = self.shipment.RequestedShipment.Recipient.Address
-
-        mPayor = self.shipment.create_wsdl_object_of_type("Payor")
-        mPayor.ResponsibleParty = mParty
-
         mPayment = self.shipment.create_wsdl_object_of_type("Payment")
         mPayment.PaymentType = "RECIPIENT"  # change if sender should pay duties
-        mPayment.Payor = mPayor
 
         mCustomsValue = self.shipment.create_wsdl_object_of_type("Money")
         mCustomsValue.Amount = self.invoice_info["Value"]
