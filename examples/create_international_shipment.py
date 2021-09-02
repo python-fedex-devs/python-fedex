@@ -100,21 +100,21 @@ class FedexLabelHelper:
             prefix = "product_description_"
 
         uploadRequest = FedexDocumentServiceRequest(self.CONFIG_OBJ)
-        uploadRequest.OriginCountryCode = "DK"
-        uploadRequest.DestinationCountryCode = self.shipment.RequestedShipment.Recipient.Address.CountryCode
-        uploadRequest.Usage = "ELECTRONIC_TRADE_DOCUMENTS"
+        uploadRequest.UploadDocumentsRequest.OriginCountryCode = "DK"
+        uploadRequest.UploadDocumentsRequest.DestinationCountryCode = self.shipment.RequestedShipment.Recipient.Address.CountryCode
+        uploadRequest.UploadDocumentsRequest.Usage = "ELECTRONIC_TRADE_DOCUMENTS"
 
         clientdetails = uploadRequest.create_wsdl_object_of_type("ClientDetail")
         clientdetails.AccountNumber = self.CONFIG_OBJ.account_number
         clientdetails.MeterNumber = self.CONFIG_OBJ.meter_number
-        uploadRequest.ClientDetail = clientdetails
+        uploadRequest.UploadDocumentsRequest.ClientDetail = clientdetails
 
         webAuthDetails = uploadRequest.create_wsdl_object_of_type("WebAuthenticationDetail")
         webAuthDetails.ParentCredential.Key = self.CONFIG_OBJ.key
         webAuthDetails.ParentCredential.Password = self.CONFIG_OBJ.password
         webAuthDetails.UserCredential.Key = self.CONFIG_OBJ.key
         webAuthDetails.UserCredential.Password = self.CONFIG_OBJ.password
-        uploadRequest.WebAuthenticationDetail = webAuthDetails
+        uploadRequest.UploadDocumentsRequest.WebAuthenticationDetail = webAuthDetails
 
         docdetails = uploadRequest.create_wsdl_object_of_type("UploadDocumentDetail")
         docdetails.LineNumber = 1
@@ -123,7 +123,7 @@ class FedexLabelHelper:
         fileContent = open(path, "rb").read()
         fileBase64 = binascii.b2a_base64(fileContent)
         docdetails.DocumentContent = fileBase64.decode("cp1250")
-        uploadRequest.Documents = docdetails
+        uploadRequest.UploadDocumentsRequest.Documents = docdetails
 
         uploadRequest.send_request()
 
