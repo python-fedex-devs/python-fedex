@@ -52,6 +52,9 @@ class FedexSearchLocationRequest(FedexBaseService):
         self.SortDetail = None
         """@ivar: Holds the LocationSortDetail WSDL object."""
 
+        self.GeographicCoordinates = None
+        """@ivar: Holds the LocationSortDetail WSDL object."""
+
         super(FedexSearchLocationRequest, self).__init__(
                 self._config_obj, 'LocationsService_v9.wsdl', *args, **kwargs)
 
@@ -65,6 +68,7 @@ class FedexSearchLocationRequest(FedexBaseService):
         self.Constraints = self.create_wsdl_object_of_type('SearchLocationConstraints')
         self.Address = self.create_wsdl_object_of_type('Address')
         self.LocationsSearchCriterion = 'ADDRESS'
+        self.GeographicCoordinates = None
         self.SortDetail = self.create_wsdl_object_of_type('LocationSortDetail')
 
     def _assemble_and_send_request(self):
@@ -94,4 +98,5 @@ class FedexSearchLocationRequest(FedexBaseService):
                 MultipleMatchesAction=self.MultipleMatchesAction,
                 Constraints=self.Constraints,
                 Address=self.Address,
-                SortDetail=self.SortDetail)
+                SortDetail=self.SortDetail,
+                GeographicCoordinates=self.GeographicCoordinates)
