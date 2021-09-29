@@ -53,7 +53,7 @@ class FedexSearchLocationRequest(FedexBaseService):
         """@ivar: Holds the LocationSortDetail WSDL object."""
 
         self.GeographicCoordinates = None
-        """@ivar: Holds the LocationSortDetail WSDL object."""
+        """@ivar: Holds the GeographicCoordinates WSDL object."""
 
         super(FedexSearchLocationRequest, self).__init__(
                 self._config_obj, 'LocationsService_v9.wsdl', *args, **kwargs)
