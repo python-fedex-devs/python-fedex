@@ -49,6 +49,8 @@ class SearchLocationServiceTests(unittest.TestCase):
         location_request.Address.CountryCode = 'US'
         
     def test_location_coordinates_search(self):
+        # Test search by geo coordinates
+        # https://www.fedex.com/us/developer/webhelp/ws/2020/US/FedEx_WebServices_2020_Developer_Guide.htm#t=wsdvg%2FLocation_Request_Coding_Details.htm
         
         location_request = FedexSearchLocationRequest(CONFIG_OBJ)
         location_request.LocationsSearchCriterion = 'GEOGRAPHIC_COORDINATES'
