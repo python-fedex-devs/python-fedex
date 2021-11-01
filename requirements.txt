@@ -1,1 +1,1 @@
-suds-jurko
+suds-community
