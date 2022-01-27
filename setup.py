@@ -34,5 +34,5 @@ setup(name='fedex',
       classifiers=CLASSIFIERS,
       keywords=KEYWORDS,
       requires=['suds'],
-      install_requires=['suds-jurko'],
+      install_requires=['suds-community'],
       )

@@ -1,1 +1,1 @@
-suds-jurko
+suds-community==1.0.0
