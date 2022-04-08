@@ -47,7 +47,18 @@ class SearchLocationServiceTests(unittest.TestCase):
         location_request = FedexSearchLocationRequest(CONFIG_OBJ)
         location_request.Address.PostalCode = '38119'
         location_request.Address.CountryCode = 'US'
+        
+    def test_location_coordinates_search(self):
+        # Test search by geo coordinates
+        # https://www.fedex.com/us/developer/webhelp/ws/2020/US/FedEx_WebServices_2020_Developer_Guide.htm#t=wsdvg%2FLocation_Request_Coding_Details.htm
+        
+        location_request = FedexSearchLocationRequest(CONFIG_OBJ)
+        location_request.LocationsSearchCriterion = 'GEOGRAPHIC_COORDINATES'
+        location_request.Address.CountryCode = 'US'
+        location_request.GeographicCoordinates = '34.074866096127096-118.40365442768258/'
 
+        location_request.send_request()
+        assert location_request.response.HighestSeverity == 'SUCCESS'
 
 if __name__ == "__main__":
     logging.basicConfig(stream=sys.stdout, level=logging.INFO)
