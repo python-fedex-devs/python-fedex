@@ -1,4 +1,6 @@
-<definitions xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:ns="http://fedex.com/ws/uploaddocument/v19" xmlns:s1="http://schemas.xmlsoap.org/wsdl/soap/" targetNamespace="http://fedex.com/ws/uploaddocument/v19" name="UploadDocumentServiceDefinitions">
+<definitions xmlns="http://schemas.xmlsoap.org/wsdl/"
+  xmlns:ns="http://fedex.com/ws/uploaddocument/v19"
+  xmlns:s1="http://schemas.xmlsoap.org/wsdl/soap/" targetNamespace="http://fedex.com/ws/uploaddocument/v19" name="UploadDocumentServiceDefinitions">
   <types>
     <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://fedex.com/ws/uploaddocument/v19">
       <xs:element name="UploadDocumentsReply" type="ns:UploadDocumentsReply"/>
@@ -7185,7 +7187,7 @@
   </binding>
   <service name="UploadDocumentService">
     <port name="UploadDocumentServicePort" binding="ns:UploadDocumentServiceSoapBinding_v19_Ext">
-      <s1:address location="https://wsbeta.fedex.com:443/web-services/uploaddocument"/>
+      <s1:address location="https://ws.fedex.com/web-services/uploaddocument"/>
     </port>
   </service>
 </definitions>
